@@ -1,0 +1,297 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="purchaseInvoiceForm" id="purchaseInvoiceFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+
+                  <!-- start tabs -->
+                  <nav ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'purchase-invoices.purchase-invoice-info' | translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 ">
+                            <div class=" ">
+                              <label for="date" class="label-name">{{'general.invoice-date'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <app-full-date name="date" [selectedDate]="date"
+                                  (OnDateSelect)="getInvoiceDate($event)">
+                                </app-full-date>
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="purchassOrderId"
+                                class="label-name">{{'purchase-orders.purchase-order-number'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="purchaseOrderId" style="width:100%"
+                                  (ngModelChange)="getMaintenanceOffer(purchaseInvoiceForm.value.purchaseOrderId);">
+                                  <ng-option *ngFor="let purchaseOrder of purchaseOrders" [value]="purchaseOrder.id">
+                                    {{purchaseOrder.id}}
+                                  </ng-option>
+                                </ng-select>
+                                <div
+                                  *ngIf="(pr['purchaseOrderId'].touched || pr['purchaseOrderId'].dirty ) && pr['purchaseOrderId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="pr['purchaseOrderId'].errors && pr['purchaseOrderId'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="id" class="label-name">
+                                {{'general.price-offer-number'|translate}} :
+
+                              </label> {{maintenanceOfferId}}
+                            </div>
+                            <div class="">
+                              <label for="warehouseId" class="label-name">{{'warehouses.warehouse'|translate}}
+                                <!-- <span class="text-danger">*</span> -->
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="warehouseId" style="width:100%">
+                                  <ng-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+                                    {{lang=='ar'? warehouse.warehouseNameAr:warehouse.warehouseNameEn}}
+                                  </ng-option>
+                                </ng-select>
+                                <!-- <div *ngIf="(pr['warehouseId'].touched || pr['warehouseId'].dirty ) && pr['warehouseId'].invalid"
+                                                                    class="alert alert-danger">
+                                                                    <i class="fa fa-close "></i>
+                                                                    <span
+                                                                        *ngIf="pr['warehouseId'].errors && pr['warehouseId'].errors['required']">
+                                                                        {{'general.required'|translate}}</span>
+                                                                </div> -->
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="supplierId" class="label-name">{{'suppliers.supplier'|translate}}
+                                <!-- <span class="text-danger">*</span> -->
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="supplierId" style="width:100%">
+                                  <ng-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+                                    {{lang=='ar'? supplier.supplierNameAr:supplier.supplierNameEn}}
+                                  </ng-option>
+                                </ng-select>
+                                <!-- <div *ngIf="(pr['supplierId'].touched || pr['supplierId'].dirty ) && pr['supplierId'].invalid"
+                                                                    class="alert alert-danger">
+                                                                    <i class="fa fa-close "></i>
+                                                                    <span
+                                                                        *ngIf="pr['supplierId'].errors && pr['supplierId'].errors['required']">
+                                                                        {{'general.required'|translate}}</span>
+                                                                </div> -->
+                              </div>
+                            </div>
+
+                            <div class=" ">
+                              <label for="supplierBillNo" class="label-name">
+                                {{'purchase-invoices.supplier-bill-no'|translate}}
+
+                              </label>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="supplierBillNo"
+                                  formControlName="supplierBillNo">
+
+                              </div>
+                            </div>
+
+                            <div class=" ">
+                              <label for="handling" class="label-name">
+                                {{'general.handling'|translate}}
+
+                              </label>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="handling" formControlName="handling">
+
+                              </div>
+                            </div>
+
+                            <div class=" ">
+                              <label for="notes" class="label-name">
+                                {{'general.description'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <textarea type="text" class="form-control" name="notes"
+                                  formControlName="notes"></textarea>
+
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="purchaseAccountId" class="label-name">{{'general.purchase-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="purchaseAccountId" style="width:100%">
+                                  <ng-option *ngFor="let purchaseAccount of purchaseAccounts"
+                                    [value]="purchaseAccount.id">
+                                    {{lang=='ar'? purchaseAccount.accArName:purchaseAccount.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="taxAccountId" class="label-name">{{'general.tax-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="valueAddedTaxAccountId" style="width:100%">
+                                  <ng-option *ngFor="let taxAccount of taxAccounts" [value]="taxAccount.id">
+                                    {{lang=='ar'? taxAccount.accArName:taxAccount.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="supplierAccountId" class="label-name">{{'general.supplier-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="supplierAccountId" style="width:100%">
+                                  <ng-option *ngFor="let supplierAccount of supplierAccounts"
+                                    [value]="supplierAccount.id">
+                                    {{lang=='ar'? supplierAccount.accArName:supplierAccount.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'purchase-invoices.purchase-invoice-details'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <!-- <div class="row"> -->
+                        <form id="maintenanceofferFormSubmit">
+                          <div class="table-responsive">
+                            <table class="table table-bordered table-responsive0 text-center"
+                              style="overflow-y: scroll !important;height: 200px;">
+                              <thead>
+                                <tr>
+
+                                  <th scope="col" style="width: 150px;">
+                                    {{'general.product'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.quantity'|translate}}
+
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.price'|translate}}
+                                  </th>
+
+                                  <th scope="col">
+                                    {{'general.value-before-tax'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.tax-ratio'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.tax-value'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.value-after-tax'|translate}}
+                                  </th>
+                                  <th>
+
+                                  </th>
+
+
+
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                <tr *ngFor="let item of selectedProducts; let i= index">
+                                  <td>{{item.productNameEn}}</td>
+                                  <td>{{item.quantity}}</td>
+                                  <td>{{item.price}}</td>
+                                  <td>{{item.valueBeforeTax}}</td>
+                                  <td>{{item.taxRatio}}</td>
+                                  <td>{{item.taxValue}}</td>
+                                  <td>{{item.valueAfterTax}}</td>
+                                  <td>
+                                    <div class="form-check">
+                                      <div class="checkbox inlineblock m-r-20">
+                                        <input type="checkbox" name="{{ 'checkbox' + i }}" id="{{ 'checkbox' + i }}"
+                                          (change)="onChange(item, $event)" [checked]="item.billed">
+                                        <label class="form-check-label" for="{{ 'checkbox' + i }}">
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </td>
+
+
+
+                                </tr>
+                                <tr>
+                                  <td colspan="9" rowspan="9"></td>
+
+                                  <!-- <td></td> -->
+
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div class="bg-total d-flex flex-column gap-2 p-3">
+
+                            <div class="col-12 col-md-6 offset-md-6">
+                              <label for="totalBeforeTax" class="label-name">{{'general.total-before-tax'|translate}}
+                                :
+                              </label>
+                              <label>{{totalBeforeTax}}</label>
+
+                            </div>
+
+                            <div class="col-12 col-md-6 offset-md-6">
+                              <label for="totalTax" class="label-name">{{'general.total-tax'|translate}} :
+                              </label>
+                              <label>{{totalTax}}</label>
+
+
+                            </div>
+
+                            <div class="col-12 col-md-6 offset-md-6">
+                              <label for="totalAfterTax" class="label-name">{{'general.total-after-tax'|translate}}
+                                :
+                              </label>
+                              <label>{{totalAfterTax}}</label>
+                            </div>
+                          </div>
+                        </form>
+
+
+                        <!-- </div> -->
+                      </ng-template>
+                    </li>
+
+
+
+                  </nav>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

@@ -1,0 +1,364 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="groundsForm" id="groundsFormSubmit" class="tabs-form">
+
+                            <div class="main-ground">
+                                <div class="wrapper-title">
+                                    <!-- Ground information -->
+                                    <h3>{{'ground.ground-information'|translate}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3  ">
+
+                                            <div class=" ">
+                                                <label for="groundNameAr"
+                                                    class="label-name">{{'ground.name-arabic'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group popup">
+
+                                                    <input type="text" class="form-control icon-user"
+                                                        name="groundNameAr" formControlName="groundNameAr">
+                                                    <div *ngIf="(f['groundNameAr'].touched || f['groundNameAr'].dirty ) && f['groundNameAr'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['groundNameAr'].errors && f['groundNameAr'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="groundNameEn"
+                                                    class="label-name">{{'ground.name-latin'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group popup">
+
+                                                    <input type="text" class="form-control icon-user"
+                                                        name="groundNameEn" formControlName="groundNameEn">
+
+                                                    <div *ngIf="(f['groundNameEn'].touched || f['groundNameEn'].dirty ) && f['groundNameEn'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['groundNameEn'].errors && f['groundNameEn'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="">
+                                                <label for="purposeType"
+                                                    class="label-name">{{'ground.purpose-type'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group popup select-st">
+
+
+
+                                                    <ng-select class="custom" formControlName="purposeType"
+                                                        [items]="purposeTypes" bindLabel="name" bindValue="id"
+                                                        style="width:100%">
+                                                    </ng-select>
+                                                    <div *ngIf="(f['purposeType'].touched || f['purposeType'].dirty ) && f['purposeType'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['purposeType'].errors && f['purposeType'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class=" ">
+                                                <label for="areaSize"
+                                                    class="label-name">{{'ground.area-size'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group popup">
+
+                                                    <input type="text" class="form-control icon-user" name="areaSize"
+                                                        formControlName="areaSize">
+
+                                                    <div *ngIf="(f['areaSize'].touched || f['areaSize'].dirty ) && f['areaSize'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['areaSize'].errors && f['areaSize'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class=" ">
+                                                <label for="borderEast"
+                                                    class="label-name">{{'ground.border-east'|translate}}</label>
+
+
+                                                <input type="text" class="form-control icon-user" name="borderEast"
+                                                    formControlName="borderEast">
+
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="borderWest"
+                                                    class="label-name">{{'ground.border-west'|translate}}</label>
+
+
+                                                <input type="text" class="form-control icon-user" name="borderWest"
+                                                    formControlName="borderWest">
+
+                                            </div>
+                                            <div class=" ">
+                                                <label for="borderNorth"
+                                                    class="label-name">{{'ground.border-north'|translate}}</label>
+
+
+                                                <input type="text" class="form-control icon-user" name="borderNorth"
+                                                    formControlName="borderNorth">
+
+                                            </div>
+                                            <div class=" ">
+                                                <label for="borderSouth"
+                                                    class="label-name">{{'ground.border-south'|translate}}</label>
+
+
+                                                <input type="text" class="form-control icon-user" name="borderSouth"
+                                                    formControlName="borderSouth">
+
+                                            </div>
+                                            <div class="">
+                                                <label for="country"
+                                                    class="label-name">{{'page-form.country'|translate}}</label>
+                                                <div class="input-group  popup">
+
+                                                    <ng-select formControlName="countryId" style="width:100%" (change)="onChangeCountry(groundsForm.value.countryId)">
+                                                        <ng-option *ngFor="let country of countries" [value]="country.id">
+                                                            {{lang=='ar'? country.countryNameAr:country.countryNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="region"
+                                                    class="label-name">{{'page-form.region'|translate}}</label>
+                                                <div class="input-group  popup">
+
+                                                    <ng-select formControlName="regionId" style="width:100%" (change)="onChangeRegion(groundsForm.value.regionId)">
+                                                        <ng-option *ngFor="let region of regions" [value]="region.id">{{lang=='ar'? region.regionNameAr:region.regionNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="city"
+                                                    class="label-name">{{'page-form.city'|translate}}</label>
+                                                <div class="input-group  popup">
+                                                    <ng-select formControlName="cityId" style="width:100%" (change)="onChangeCity(groundsForm.value.cityId)">
+                                                        <ng-option *ngFor="let city of cities" [value]="city.id">{{lang=='ar'? city.cityNameAr:city.cityNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="district"
+                                                    class="label-name">{{'page-form.district'|translate}}</label>
+                                                <div class="input-group  popup">
+                                                    <ng-select formControlName="districtId" style="width:100%">
+                                                        <ng-option *ngFor="let district of districts" [value]="district.id">
+                                                            {{lang=='ar'? district.districtNameAr:district.districtNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="addressInDetails"
+                                                    class="label-name">{{'ground.address-details'|translate}}</label>
+
+                                                <textarea class="form-control icon-user" name="addressInDetails"
+                                                    formControlName="addressInDetails">
+
+                        </textarea>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                    <!-- Ground information -->
+                                    <ul ngbNav #nav="ngbNav" class="nav-tabs  mt-3">
+
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'ground.owner-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-3 ">
+
+                                                        <div>
+                                                            <label for="owner-name"
+                                                                class="label-name">{{'ground.owner'|translate}}<span
+                                                                    class="text-danger">*</span></label>
+                                                            <div class="input-group popup">
+                                                                <ng-select formControlName="ownerId" style="width:100%">
+
+                                                                    <ng-option *ngFor="let owner of owners" [value]="owner.id">{{lang=='ar'? owner.nameAr:owner.nameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+
+                                                                <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid"
+                                                                    class="alert alert-danger">
+                                                                    <i class="fa fa-close "></i>
+                                                                    <span
+                                                                        *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                                                                        {{'validation-messages.required-field'|translate}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="previousOwnerNameAr"
+                                                                class="label-name">{{'ground.previous-owner-name-ar'|translate}}
+                                                            </label>
+
+
+                                                            <input type="text" class="form-control icon-user"
+                                                                name="previousOwnerNameAr"
+                                                                formControlName="previousOwnerNameAr">
+
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="previousOwnerNameEn"
+                                                                class="label-name">{{'ground.previous-owner-name-en'|translate}}
+                                                            </label>
+
+
+                                                            <input type="text" class="form-control icon-user"
+                                                                name="previousOwnerNameEn"
+                                                                formControlName="previousOwnerNameEn">
+
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="propertyInstrument"
+                                                                class="label-name">{{'ground.property-instrument'|translate}}
+                                                            </label>
+
+
+                                                            <input type="text" class="form-control icon-user"
+                                                                name="propertyInstrument"
+                                                                formControlName="propertyInstrument">
+
+                                                        </div>
+
+
+                                                        <div class="">
+                                                            <label for="noPlanned"
+                                                                class="label-name">{{'ground.no-planned'|translate}}</label>
+                                                            <input type="text" class="form-control icon-user"
+                                                                name="no-planned" formControlName="noPlanned">
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <li *ngIf="groundsForm.value.purposeType==sellPurposeType" ngbNavItem>
+                                            <a ngbNavLink>{{'ground.sell-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div>
+                                                    <input type="checkbox" name="readyForSale"
+                                                        formControlName="readyForSale">
+                                                    <label for="readyForSale"
+                                                        class="label-name m-1">{{'ground.ready-for-sale'|translate}}
+                                                    </label>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+
+                                                    <div
+                                                        class="align-items-center col gap-2 grid grid-cols-3  justify-content-center">
+
+                                                        <div class="">
+                                                            <label for="meterPrice"
+                                                                class="label-name">{{'ground.meter-price'|translate}}</label>
+
+
+                                                            <input type="number" class="form-control icon-user"
+                                                                name="meterPrice" formControlName="meterPrice"
+                                                                [(ngModel)]="meterPrice" (change)="getSellPrice()">
+
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="sellSpace"
+                                                                class="label-name">{{'ground.sell-space'|translate}}</label>
+
+
+                                                            <input type="number" class="form-control icon-user"
+                                                                name="sellSpace" formControlName="sellSpace"
+                                                                [(ngModel)]="sellSpace" (change)="getSellPrice()">
+
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="sellPrice"
+                                                                class="label-name">{{'ground.sell-price'|translate}}</label>
+
+
+                                                            <input type="number" class="form-control icon-user"
+                                                                [disabled]="true" [(ngModel)]="sellPrice"
+                                                                name="sellPrice" formControlName="sellPrice">
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </ng-template>
+                                        </li>
+
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'ground.additional-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-12 col-xl-12 ">
+                                                        <label for="notes"
+                                                            class="label-name">{{'ground.notes'|translate}}</label>
+                                                        <div class="form-group">
+                                                            <textarea class="form-control icon-user" name="notes"
+                                                                formControlName="notes"></textarea>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                    </ul>
+
+                                    <div [ngbNavOutlet]="nav" class="mt"></div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

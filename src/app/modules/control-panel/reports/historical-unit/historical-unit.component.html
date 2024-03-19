@@ -1,0 +1,28 @@
+<section class="inner-page-wrapper inner-page-wrapper-report">
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <h1 class="lease-header-title-report">Historical Movement Of Units</h1>
+
+            </div>
+        </div> -->
+        <div class="row">
+            <!-- <div class="col-md-12">
+
+                <button class="btn btn-primary btn-sm br-5 py-2 mx-2" (click)="gotoViewer()"><i
+                        class="fas fa-cogs"></i>&nbsp;
+                    View</button>
+                <button (click)="cancelDefaultReportStatus()" type="button" class="btn btn-secondary">Cancel Default
+                    Report</button>
+
+            </div> -->
+            <div class="col-md-12">
+                <div class="main-report">
+                    <div class="wrapper-title">
+                        <app-filters [ShowOptions]="ShowOptions" (OnFilter)="OnFilter($event)"></app-filters>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

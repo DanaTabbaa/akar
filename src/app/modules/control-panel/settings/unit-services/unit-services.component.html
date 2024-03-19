@@ -1,0 +1,65 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="unitServicesForm" id="unitServicesSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'page-form.unit-services-information'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2 ">
+                      <div class=" ">
+                        <label for="unitServiceArName" class="label-name">
+                          {{'page-form.name-arabic'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="unitServiceArName"
+                            formControlName="unitServiceArName">
+                          <div
+                            *ngIf="(f['unitServiceArName'].touched || f['unitServiceArName'].dirty ) && f['unitServiceArName'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['unitServiceArName'].errors && f['unitServiceArName'].errors['required']">
+                              {{'general.required' | translate}} </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="unitServiceEnName" class="label-name">
+                          {{'page-form.name-latin'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="unitServiceEnName"
+                            formControlName="unitServiceEnName">
+                          <div
+                            *ngIf="(f['unitServiceEnName'].touched || f['unitServiceEnName'].dirty ) && f['unitServiceEnName'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['unitServiceEnName'].errors && f['unitServiceEnName'].errors['required']">
+                              {{'general.required' | translate}} </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="list list-container-add">
+  <app-unit-services-list [changeUnitServicesFlag]="changeUnitServicesFlag"></app-unit-services-list>
+</div>

@@ -1,0 +1,30 @@
+export class Vendors {
+    id: any;
+    vendorNumber!: string;
+    nameEn!: string;
+    nameAr!: string;
+    phone!: string;
+    mobile!: string;
+    fax!: string;
+    email!: string;
+    identityNo!: string;
+    productionDateIdentity!: Date;
+    productionPlaceOfIdenity!: string;
+    expireDateOfNationalIdNumber!: Date;
+    nationalityId!: bigint;
+    jobTitle!: string;
+    addressCityId!: bigint;
+    addressApartmentNumber!: bigint;
+    addressBlockNumber!: string;
+    addressPostalCode!: string;
+    addressAdditionalCode!: string;
+    address!: string;
+    parentId!: bigint;
+    ownerId: any;
+    addressCountryId:any;
+    addressRegionId:any;
+    addressDistrictId:any;
+    countryId!:bigint;
+    regionId!:bigint;
+    cityId!:bigint;
+}

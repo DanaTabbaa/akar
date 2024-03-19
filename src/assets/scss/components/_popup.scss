@@ -1,0 +1,77 @@
+.country-pop{
+
+    background: $white 0% 0% no-repeat padding-box;
+      box-shadow: 0px 0px 20px #0000001A;
+      border-radius: 5px;
+      opacity: 1;
+      padding: 20px;
+      position: absolute;
+      z-index: 9;
+      right: -25px;
+      bottom: 18px;
+  
+      .close{
+        position: absolute;
+        right: 12px;
+        top: 5px;
+        font-weight: 500;
+        cursor: pointer;
+        
+      }
+  }
+  .city-popup{
+      @extend .country-pop;
+      bottom: 101px;
+  }
+
+  .district-popup{
+    @extend .country-pop;
+    bottom: 14px;
+    right: 232px;
+  }
+  .owner-popup{
+    @extend .country-pop;
+    bottom: -397px;
+    right: 232px;
+  }
+ .tenant-popup{
+    @extend .country-pop;
+    bottom: -397px;
+    right: 50px;
+  }
+  .delegate-popup{
+    @extend .owner-popup;
+   
+  }
+  .commission-popup{
+    @extend .owner-popup;
+    right: -23px;
+  }
+  .com-tenant-popup{
+    @extend .owner-popup;
+    right: 49px;
+  }
+
+
+
+  /****************placeholder css**********************/
+::-webkit-input-placeholder { /* Edge */
+    color:#868686;
+    font-size: 0.875rem;
+    line-height: 17px;
+    font-weight: 400;
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:#868686;
+    font-size: 0.875rem;
+    line-height: 17px;
+    font-weight: 400;
+  }
+  
+  ::placeholder {
+    color:#868686;
+    font-size:0.875rem;
+    line-height: 17px;
+    font-weight: 400;
+  }

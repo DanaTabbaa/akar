@@ -1,0 +1,12 @@
+
+<section class=""  *ngIf="showUnderContractRentalUnits==true">
+  <h3 style="text-align: center;">{{'dashboard.show-under-contract-rental-units'|translate}}</h3>
+  <div class="container">
+      <app-tabulator [idColName]="'id'" [childRowData]="underContractRentalUnits" [parentColName]="'groupId'"
+          [divId]="'UnderContractUnits'" [columnSettings]="columnNames" [componentName]="'underContractRentalUnits'"
+           [refreshGrid]="isListEmpty" [direction]="direction" [sortByList]="sortByCols"
+          [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" [showExport]="false"
+          (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'UnderContractRentalUnits'">
+      </app-tabulator>
+  </div>
+</section>

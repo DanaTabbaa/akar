@@ -1,0 +1,115 @@
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="warehouseForm" id="WarehouseFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>
+                    {{'warehouses.warehouse-info'|translate}}
+                  </h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-3 ">
+                      <div class=" ">
+                        <label for="warehouseNameAr" class="label-name">
+                          {{'warehouses.warehouse-name-ar'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+
+                          <input type="text" class="form-control" name="warehouseNameAr"
+                            formControlName="warehouseNameAr">
+                          <div
+                            *ngIf="(f['warehouseNameAr'].touched || f['warehouseNameAr'].dirty ) && f['warehouseNameAr'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['warehouseNameAr'].errors && f['warehouseNameAr'].errors['required']">
+                              {{'warehouses.warehouse-name-ar-required'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+
+                        <label for="warehouseNameEn" class="label-name">
+                          {{'warehouses.warehouse-name-en'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+
+                          <input type="text" class="form-control" name="warehouseNameEn"
+                            formControlName="warehouseNameEn">
+                          <div
+                            *ngIf="(f['warehouseNameEn'].touched || f['warehouseNameEn'].dirty ) && f['warehouseNameEn'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['warehouseNameEn'].errors && f['warehouseNameEn'].errors['required']">
+                              {{'warehouses.warehouse-name-en-required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class=" ">
+                        <label for="ownerId" class="label-name">
+                          {{'general.owner'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select style="width:100%" placeholder="{{'general.owner'|translate}}"
+                            formControlName="ownerId" name='ownerId' class="" id="ownerId">
+                            <ng-option *ngFor="let owner of ownersList" [value]="owner.id">
+                              {{lang=='ar'?owner.nameAr:owner.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                              {{'general.owner-required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class=" ">
+
+                        <label for="warehouseGuardNameAr" class="label-name">
+                          {{'warehouses.warehouse-guard-name-ar'|translate}}
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="text" class="form-control" name="warehouseGuardNameAr"
+                            formControlName="warehouseGuardNameAr">
+                        </div>
+
+                      </div>
+                      <div class=" ">
+
+                        <label for="warehouseGuardNameEn" class="label-name">
+                          {{'warehouses.warehouse-guard-name-en'|translate}}
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="text" class="form-control" name="warehouseGuardNameEn"
+                            formControlName="warehouseGuardNameEn">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="list list-container-add">
+  <app-warehouses-list [changeWarehousesFlag]="changeWarehousesFlag"></app-warehouses-list>
+</div>

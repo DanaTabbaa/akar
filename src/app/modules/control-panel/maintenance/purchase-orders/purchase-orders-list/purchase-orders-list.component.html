@@ -1,0 +1,9 @@
+
+
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="purchaseOrders" [parentColName]="'groupId'" [divId]="'PurchaseOrders'" [columnSettings]="columnNames" [componentName]="'PurchaseOrders'" (onAddItem)="openPurchaseOrders()" (onMenuActionSelected)="onMenuActionSelected($event)"
+            [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'purchaseOrders'"></app-tabulator>
+    </div>
+  </section>
+  

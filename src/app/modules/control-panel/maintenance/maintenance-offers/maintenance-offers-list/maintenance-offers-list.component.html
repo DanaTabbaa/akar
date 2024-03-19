@@ -1,0 +1,6 @@
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="maintenanceOffers" [parentColName]="'groupId'" [divId]="'MaintenanceOffers'" [columnSettings]="columnNames" [componentName]="'maintenanceOffers'" (onAddItem)="openAddMaintenanceOffers()" (onMenuActionSelected)="onMenuActionSelected($event)"
+            [showMenuOptions]="menuOptions"  [refreshGrid]="isListEmpty" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'MaintenanceOffers'"></app-tabulator>
+    </div>
+  </section>

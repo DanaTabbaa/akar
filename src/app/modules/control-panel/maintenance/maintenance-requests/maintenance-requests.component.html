@@ -1,0 +1,270 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="maintenanceRequestForm" id="maintenanceRequestFormSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <h3>{{'maintenance-requests.maintenance-request.info' | translate}}</h3>
+                                    <div class="row">
+
+                                        <div class="col gap-2 grid grid-cols-3 ">
+
+                                            <div class=" ">
+                                                <label for="ownerId" class="label-name">
+                                                    {{'general.owner'|translate}}
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select style="width:100%" placeholder="owner"
+                                                        formControlName="ownerId" name='ownerId' class="" id="ownerId"
+                                                        (change)="getTenants(maintenanceRequestForm.value.ownerId)">
+                                                        <ng-option *ngFor="let owner of ownersList" [value]="owner.id">
+                                                            {{lang=='ar'?owner.nameAr:owner.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="tenantId" class="label-name">
+                                                    {{'general.tenant'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select style="width:100%" placeholder="tenant"
+                                                        formControlName="tenantId" name='tenantId' class=""
+                                                        id="tenantId">
+                                                        <ng-option *ngFor="let tenant of tenantsList"
+                                                            [value]="tenant.id">
+                                                            {{lang=='ar'?tenant.nameAr:tenant.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['tenantId'].touched || f['tenantId'].dirty ) && f['tenantId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['tenantId'].errors && f['tenantId'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="unitId" class="label-name">
+                                                    {{'general.unit'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select style="width:100%" placeholder="unit"
+                                                        formControlName="unitId" name='unitId' class="" id="unitId">
+                                                        <ng-option *ngFor="let unit of unitsList" [value]="unit.id">
+                                                            {{lang=='ar'?unit.unitNameAr:unit.unitNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['unitId'].touched || f['unitId'].dirty ) && f['unitId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['unitId'].errors && f['unitId'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class=" ">
+                                                <label for="requestType" class="label-name">
+                                                    {{'maintenance-requests.request-type'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group mb-3 popup">
+                                                    <ng-select class="custom" formControlName="requestType"
+                                                        [items]="requestTypes" bindLabel="name" bindValue="id"
+                                                        style="width:100%" placeholder="request-types">
+                                                    </ng-select>
+                                                    <div *ngIf="(f['requestType'].touched || f['requestType'].dirty ) && f['requestType'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['requestType'].errors && f['requestType'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="maintenanceServiceId" class="label-name">
+                                                    {{'general.maintenance-service'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select style="width:100%" placeholder="maintenance-service"
+                                                        (change)="getTechniciansByMaintenanceServiceId()"
+                                                        formControlName="maintenanceServiceId"
+                                                        name='maintenanceServiceId' class="" id="maintenanceServiceId">
+                                                        <ng-option
+                                                            *ngFor="let maintenanceService of maintenanceServicesList"
+                                                            [value]="maintenanceService.id">
+                                                            {{lang=='ar'?maintenanceService.serviceNameAr:maintenanceService.serviceNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['maintenanceServiceId'].touched || f['maintenanceServiceId'].dirty ) && f['maintenanceServiceId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['maintenanceServiceId'].errors && f['maintenanceServiceId'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="technicianId" class="label-name">
+                                                    {{'general.technician'|translate}}
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select style="width:100%"
+                                                        placeholder="{{'general.technician'|translate}}"
+                                                        formControlName="technicianId" name='technicianId' class=""
+                                                        id="technicianId">
+                                                        <ng-option *ngFor="let technician of techniciansList"
+                                                            [value]="technician.technicianId">
+                                                            {{lang=='ar'? technician.technicianNameAr:technician.technicianNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="commentTxt" class="label-name">
+                                                    {{'general.description'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <textarea type="text" class="form-control" name="commentTxt"
+                                                        formControlName="commentTxt"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="ratingValueByTenant" class="label-name">
+                                                    {{'maintenance-requests.rating-value-by-tenant'|translate}}
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <input type="text" maxlength="3" class="form-control"
+                                                        name="ratingValueByTenant"
+                                                        formControlName="ratingValueByTenant">/10
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="ratingTxtByTenant" class="label-name">
+                                                    {{'maintenance-requests.rating-text-by-tenant'|translate}}
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <textarea type="text" class="form-control" name="ratingTxtByTenant"
+                                                        formControlName="ratingTxtByTenant"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" "
+                                                *ngIf="maintenanceRequestForm.value.requestStatus==1 || maintenanceRequestForm.value.requestStatus==2 || maintenanceRequestForm.value.requestStatus==3">
+                                                <label for="requirementReport" class="label-name">
+                                                    {{'maintenance-requests.requirement-report'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <textarea type="text" class="form-control" name="requirementReport"
+                                                        formControlName="requirementReport"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="ratingValueByTechnician" class="label-name">
+                                                    {{'maintenance-requests.rating-value-by-technician'|translate}}
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <input type="text" maxlength="3" class="form-control"
+                                                        name="ratingValueByTechnician"
+                                                        formControlName="ratingValueByTechnician">/10
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="ratingTxtByTechnician" class="label-name">
+                                                    {{'maintenance-requests.rating-text-by-technician'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <textarea type="text" class="form-control"
+                                                        name="ratingTxtByTechnician"
+                                                        formControlName="ratingTxtByTechnician"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" "
+                                                *ngIf="maintenanceRequestForm.value.requestStatus==3 || maintenanceRequestForm.value.requestStatus==4 || maintenanceRequestForm.value.requestStatus==6">
+                                                <label for="accomplishmentReport" class="label-name">
+                                                    {{'maintenance-requests.accomplishment-report'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <textarea type="text" class="form-control"
+                                                        name="accomplishmentReport"
+                                                        formControlName="accomplishmentReport"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="ratingValueByResponsibleForMaintenance" class="label-name">
+                                                    {{'maintenance-requests.rating-value-by-maintenance-manager'|translate}}
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <input type="text" maxlength="3" class="form-control"
+                                                        name="ratingValueByResponsibleForMaintenance"
+                                                        formControlName="ratingValueByResponsibleForMaintenance">/10
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="ratingTxtByResponsibleForMaintenance" class="label-name">
+                                                    {{'maintenance-requests.rating-text-by-maintenance-manager'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <textarea type="text" class="form-control"
+                                                        name="ratingTxtByResponsibleForMaintenance"
+                                                        formControlName="ratingTxtByResponsibleForMaintenance"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section  -->

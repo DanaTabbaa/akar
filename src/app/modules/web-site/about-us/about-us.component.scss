@@ -1,0 +1,28 @@
+.contant-page{
+    height: 800px;
+}
+@media (max-width:1000px){
+    .mobile-height{
+        height: 80rem;
+    }
+    .item-re{
+        flex-direction: column-reverse;
+    }
+    .main-content .banner-top-common__page-heading .about-info-title .text-style-about h1{
+        font-size: 20px;
+    }
+    .main-content .banner-top-common__page-heading .about-info-title .text-style-about .contact-section{
+        font-size: 12px;
+    }
+    .main-content .banner-top-common__page-heading .about-info-title .text-style-about p{
+        font-size: 14px;
+    }
+  }
+  @media (min-width:1000px){
+    .mobile-height{
+        height: 80rem;
+    }
+    .text-style-about{
+        padding-top: 2rem !important;
+    }
+  }

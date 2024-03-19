@@ -1,0 +1,45 @@
+.footer-caption-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    line-height: 40px;
+    color: #ffffff;
+    font-size: 16px;
+    @include breakpoint(mobile-max) {
+        font-size: 20px;
+    }
+}
+
+.footer-caption-subtitle {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    line-height: 40px;
+    color: #ffffff;
+    font-size: 24px;
+    @include breakpoint(desktop-max) {
+        font-size: 14px;
+    }
+    @include breakpoint(mobile-max) {
+        font-size: 16px;
+    }
+}
+
+.footer-common-title {
+    color: #ffffff;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    margin-bottom: 35px;
+    font-size: 18px;
+}
+
+//margin for header
+.margin-top-mobile {
+    @include breakpoint(mobile-max) {
+        margin-top: 95px;
+    }
+}
+
+.margin-top-aboveipad {
+    margin-top: 100px;
+}
+
+// ico

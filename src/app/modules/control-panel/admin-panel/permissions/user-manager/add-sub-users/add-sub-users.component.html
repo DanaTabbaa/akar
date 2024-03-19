@@ -1,0 +1,210 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}</p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form id="NotManagementFormSubmit" class="tabs-form">
+              <div class="main-unit">
+                <div class="wrapper-title">
+                  <h3>{{'user-manager.users-management'|translate}}</h3>
+                  <hr>
+                  <!-- <hr> -->
+                  <!-- start tabs -->
+                  <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs mt-3 vvv">
+                    <li [ngbNavItem]="1">
+                      <a ngbNavLink>
+
+                        <ng-container *ngIf="(isUpdateClicked); else elseAdd">
+                          {{'user-manager.update-user'|translate}}
+                        </ng-container>
+                        <ng-template #elseAdd>
+                          {{'user-manager.add-user'|translate}}
+                        </ng-template>
+                      </a>
+                      <ng-template ngbNavContent>
+                        <!-- <div class="row"> -->
+                        <form [formGroup]="userForm" id="User">
+                          <div class="col gap-2 grid grid-cols-3 p-0">
+
+                            <div class=" ">
+                              <label for="registerType" class="label-name">
+                                {{'user-manager.name-arabic'|translate}}</label>
+                              <div class="input-group form-group">
+                                <div class="input-group">
+                                  <input type="text" class="form-control icon-user tenant-icon"
+                                    formControlName="firstNameAr">
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="firstNameEn" class="label-name"><span class="text-danger">*</span>
+                                {{'user-manager.name-latin'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" class="form-control icon-user " formControlName="firstNameEn">
+                              </div>
+                              <div
+                                *ngIf="(f['firstNameEn'].touched || f['firstNameEn'].dirty ) && f['firstNameEn'].invalid"
+                                class="validation alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['firstNameEn'].errors && f['firstNameEn'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                                <span *ngIf="f['firstNameEn'].errors && f['firstNameEn'].errors['minlength']">
+                                  {{'validation-messages.min-name-char'|translate}}</span>
+                              </div>
+
+                            </div>
+                            <div class=" ">
+                              <label for="userName" class="label-name"><span class="text-danger">*</span>
+                                {{'user-manager.user-name'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" class="form-control icon-user"
+                                  (ngModelChange)="checkExistingUserName(userForm.value.userName)"
+                                  formControlName="userName">
+                              </div>
+
+                              <div *ngIf="(f['userName'].touched || f['userName'].dirty ) && f['userName'].invalid"
+                                class="validation alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['userName'].errors && f['userName'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}
+                                </span>
+                                <span *ngIf="f['userName'].errors && f['userName'].errors['minlength']">
+                                  {{'validation-messages.min-name-char'|translate}}
+                                </span>
+                              </div>
+                              <div class="validation alert-danger" *ngIf="checkUserNameResult?.isUserNameExist">
+                                <i class="fa fa-close "></i> {{responseMessageUserName}}
+                              </div>
+                              <div
+                                *ngIf="f['userName'].touched && f['userName'].valid &&checkUserNameResult?.isUserNameAvailbe"
+                                class="validation alert-success">
+                                <i class="fa fa-check"></i> {{'validation-messages.valid-user-name'|translate}}
+                              </div>
+
+                            </div>
+
+                            <div class=" ">
+                              <label for="email" class="label-name"><span
+                                  class="text-danger">*</span>{{'user-manager.user-email'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" class="form-control icon-user"
+                                  (ngModelChange)="checkExistingEmail(userForm.value.email)" formControlName="email">
+
+                              </div>
+                              <div class="validtion alert-danger  validation-alert"
+                                *ngIf="f['email'].touched && f['email'].errors && f['email'].errors['required']">
+                                <i class="fa fa-close "></i> {{'validation-messages.required-email'|translate}}
+                              </div>
+                              <!-- <div class="validtion alert-danger  validation-alert"
+                                *ngIf="(f['email'].touched && f['email'].dirty) && f['email'].invalid">
+                                <i class="fa fa-close "></i> {{'validation-messages.invalid-data'|translate}}
+                              </div> -->
+                              <div class="validtion alert-danger"
+                                *ngIf="(f['email'].touched && f['email'].dirty) && f['email'].invalid">
+                                <i class="fa fa-close "></i> {{'validation-messages.invalid-email'|translate}}
+                              </div>
+
+                              <div class="validtion alert-danger"
+                                *ngIf="(f['email'].touched && f['email'].dirty) &&checkEmailResult?.isEmailExist">
+                                <i class="fa fa-close "></i> {{responseMessageEmail}}
+                              </div>
+
+                              <div *ngIf="f['email'].touched && f['email'].valid && checkEmailResult?.isEmailAvailbe"
+                                class="validtion alert-success">
+                                <i class="fa fa-check"></i> {{'validation-messages.valid-email'|translate}}
+                              </div>
+
+                            </div>
+                            <div class=" ">
+                              <label for="mobile" class="label-name"><span
+                                  class="text-danger">*</span>{{'user-manager.user-mobile'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" maxLength="20" class="form-control icon-padlock"
+                                  (ngModelChange)="checkExistingMobile(userForm.value.phoneNumber)"
+                                  formControlName="phoneNumber">
+                              </div>
+                              <div *ngIf="f['phoneNumber'].touched && f['phoneNumber'].invalid"
+                                class="validation alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['phoneNumber'].errors && f['phoneNumber'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                                <span *ngIf="f['phoneNumber'].errors && f['phoneNumber'].errors['pattern']">
+                                  {{'validation-messages.phone-pattern'|translate}}</span>
+                              </div>
+                              <div class="validtion alert-danger"
+                                *ngIf="(f['phoneNumber'].touched && f['phoneNumber'].dirty) &&checkMobileResult?.isUserMobileExist">
+                                <i class="fa fa-close "></i> {{responseMessageMobile}}
+                              </div>
+                              <div
+                                *ngIf="f['phoneNumber'].touched && f['phoneNumber'].valid && checkMobileResult?.isUserMobileAvailbe"
+                                class="validation alert-success">
+                                <i class="fa fa-check"></i> {{'validation-messages.valid-mobile'|translate}}
+                              </div>
+
+                             
+
+                            </div>
+                            <div class=" ">
+                              <label for="roles" class="label-name"><span
+                                  class="text-danger">*</span>{{'permissions.role'|translate}}</label>
+                              <div class="form-group">
+                                <div class="input-form">
+                                  <ng-select class="custom" formControlName="roleId">
+                                    <ng-option *ngFor="let role of roles" [value]="role.id">
+
+                                      <ng-container *ngIf="lang=='ar'; else en">
+                                        {{role.roleNameAr}}
+                                      </ng-container>
+                                      <ng-template #en>
+                                        {{role.roleNameEn}}
+                                      </ng-template>
+                                    </ng-option>
+                                  </ng-select>
+                                  <div *ngIf="(f['roleId'].touched || f['roleId'].dirty ) && f['roleId'].invalid"
+                                    class="validation alert-danger">
+                                    <i class="fa fa-close "></i>
+                                    <span *ngIf="f['roleId'].errors && f['roleId'].errors['required']">
+                                      {{'validation-messages.required-field'|translate}}
+                                    </span>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <mat-slide-toggle
+                              formControlName="isActive">{{"login.is-active"|translate}}</mat-slide-toggle>
+
+
+                            <div *ngIf="!userForm.valid  && submited" class="alert alert-danger">
+                              <i class="fa fa-close "></i> {{errorMessage}}
+                            </div>
+                          </div>
+                        </form>
+                        <!-- </div> -->
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+
+
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                  <!-- end tabs -->
+                </div>
+              </div>
+            </form>
+            <p class="alert-success validation mt-2 p-1 ">{{'user-manager.defualt-user-data'|translate}} </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

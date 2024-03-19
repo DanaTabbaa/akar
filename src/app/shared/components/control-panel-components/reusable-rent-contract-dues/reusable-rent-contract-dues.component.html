@@ -1,0 +1,103 @@
+<!--First Table For Current Contract-->
+
+<!-- <div class="container">
+    <div class="row"> -->
+<div class="table-responsive first-child-sm">
+  <table class="table table-bordered text-center ">
+    <thead>
+      <td>#</td>
+      <th>{{'page-form.contract-number'|translate}}</th>
+      <th>{{'rent-contracts.due-name'|translate}}</th>
+      <th>{{'rent-contracts.due-start-date'|translate}}</th>
+      <th>{{'rent-contracts.due-end-date'|translate}}</th>
+      <th>{{'rent-contracts.due-period'|translate}}</th>
+      <th>{{'rent-contracts.due-amount'|translate}}</th>
+      <th>{{'rent-contracts.settlement-period'|translate}}</th>
+      <th>{{'rent-contracts.discount-not-due-amount'|translate}}</th>
+      <th>{{'rent-contracts.settlement-amount'|translate}}</th>
+      <th>{{'rent-contracts.additions'|translate}}</th>
+      <th>{{'rent-contracts.disounts'|translate}}</th>
+      <th>{{'rent-contracts.paid'|translate}}</th>
+      <th>{{'rent-contracts.remain'|translate}}</th>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of settelmentList;let i=index;">
+        <td>{{i+1}}</td>
+        <td>{{item.contractNumber}}</td>
+        <td *ngIf="lang=='en'">{{item.dueNameEn}}</td>
+        <td *ngIf="lang=='ar'">{{item.dueNameAr}}</td>
+
+        <td>{{item.dueStartDate}}</td>
+        <td>{{item.dueEndDate}}</td>
+        <td>{{item.duePeriod}}</td>
+        <td>{{item.totalAmount | number }}</td>
+        <td>{{item.toSettelmentPeriod}}</td>
+        <!-- <td *ngIf="isMonthlySettlement == true">{{item.month}} شهر {{item.day}} يوم</td> -->
+        <td>{{(item.totalAmount-item.settelmentForPeriod) | number}}</td>
+        <td>{{item.settelmentForPeriod | number }}</td>
+        <td>{{item.totalAddedValue | number }}</td>
+        <td>{{item.totalDiscountValue | number }}</td>
+        <td>{{item.totalPaid | number }}</td>
+        <td>{{item.settelmentRemainValue | number}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <section class="">
+  <div class="container">
+      <app-tabulator [idColName]="'id'" [childRowData]="settelmentList" [parentColName]="'groupId'" [divId]="'SettelmentList'" [columnSettings]="columnNames" [componentName]="'settelmentList'"  [showExport]="false"
+           [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'SettelmentList'"></app-tabulator>
+  </div>
+</section> -->
+
+<!-- </div> -->
+<!-- <form [formGroup]="contractSettelmentTotals"  id="BuildingFormSubmit"> -->
+
+<div class="col gap-2 grid grid-cols-3 p-3 bg-total">
+
+  <div class="">
+    <div class="form-group">
+      <label>{{'rent-contracts.total-dues-on-tenant'|translate}}</label>
+      <input type="text" disabled class="form-control" [(ngModel)]="contractSettelmentTotals.totalDueAmount">
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-group">
+      <label>{{'rent-contracts.total-discount-for-not-due-period'|translate}}</label>
+      <input type="text" disabled class="form-control" [(ngModel)]="contractSettelmentTotals.totalSettelmentDiscount">
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-group">
+      <label> {{'rent-contracts.total-additions'|translate}}</label>
+      <input type="text" disabled class="form-control" [(ngModel)]="contractSettelmentTotals.totalAddedValue">
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-group">
+      <label>{{'rent-contracts.total-disounts'|translate}}</label>
+      <input type="text" disabled class="form-control" [(ngModel)]="contractSettelmentTotals.totalDiscountValue">
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-group">
+      <label>{{'rent-contracts.total-paid'|translate}}</label>
+      <input type="text" disabled class="form-control" [(ngModel)]="contractSettelmentTotals.totalPaidValue">
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-group">
+      <label>{{'rent-contracts.total-remain'|translate}}</label>
+      <input type="text" disabled class="form-control" [(ngModel)]="contractSettelmentTotals.totalRemainValue">
+    </div>
+  </div>
+</div>
+<!-- </form>    -->
+<!-- </div> -->

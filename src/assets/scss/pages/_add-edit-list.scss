@@ -1,0 +1,291 @@
+.inner-page-wrapper {
+    #breadcrumbs {
+      margin-left: 7px;
+    }
+    .lease-header-title {
+      margin-left: 0px;
+    }
+    .settings-wrapper {
+      background-color: $snow;
+      padding: 30px;
+      .main-screen {
+        background: $white 0% 0% no-repeat padding-box;
+        border: 1px solid #E9E9E9;
+        border-radius: 5px;
+        opacity: 1;
+        padding: 20px;
+        margin-top: 10px;
+        .main-section-info {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: baseline;
+          .list-section {
+            font-size: 1.25rem;
+            color: $gray20;
+            font-weight: 500;
+            line-height: 24px;
+            text-align: left;
+          }
+        }
+        .main-upper-section {
+          .subtitle-info {
+            font-size: 1.125rem;
+            color: $gray30;
+            line-height: 22px;
+            text-align: left;
+            font-weight: 600;
+          }
+        }
+      }
+      /*section*/
+      .main-auction {
+        hr {
+          margin-top: 1.3rem;
+        }
+        .wrapper-title {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+          flex-wrap: wrap;
+          .section-name {
+            font-size: 1.5rem;
+            color: $gray30;
+            line-height: 22px;
+            text-align: left;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+    .settings-section {
+      .building-info {
+        font-size: 1.125rem;
+        color: $gray30;
+        line-height: 22px;
+        text-align: left;
+        font-weight: 500;
+      }
+      .subtitle-desc {
+        font-size: 18px;
+        color: $gray30;
+        font-weight: 500;
+        line-height: 22px;
+        margin-top: 20px;
+      }
+      .btn-measure {
+        padding: 10px 58px 11px 58px;
+        margin-top: 30px;
+      }
+      .nav-pills {
+        li {
+          margin: 0px 10px 0px 0px;
+        }
+        .top-page {
+          background: #FAFAFA;
+          border: 1px solid #E9E9E9;
+          border-radius: 5px;
+          opacity: 1;
+          padding: 11px 20px 12px 20px;
+          font-size: 0.875rem;
+          color: $gray30;
+          cursor: pointer;
+          font-weight: 400;
+          &:active {
+            background: $purple;
+            color: $white;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  
+  
+  /***********************settings__add-edit-list Media queries********************************/
+  
+  @media only screen and (min-width:1367px) and (max-width:1920px) {}
+  
+  @include bp(large-desktop) {}
+  
+  @media only screen and (min-width:1200px) and (max-width:1366px) {}
+  
+  @include bp(desktop) {}
+  
+  @media only screen and (min-width:1025px) and (max-width:1199px) {}
+  
+  @include bp(laptop) {
+    .inner-page-wrapper {
+      .settings-wrapper {
+        .main-screen {
+          .main-upper-section {
+            .subtitle-info {
+              font-size: 1.125rem;
+            }
+          }
+          .main-section-info {
+            .list-section {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @include bp(ipad-pro) {
+    .inner-page-wrapper {
+      .settings-wrapper {
+        .main-screen {
+          .main-upper-section {
+            .subtitle-info {
+              font-size: 1.125rem;
+            }
+          }
+          .main-section-info {
+            .list-section {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @include bp(ipad) {
+    .inner-page-wrapper {
+      .settings-section {
+        .nav-pills {
+          li {
+            display: inline;
+            .btn-custom {
+              width: 100%;
+            }
+          }
+        }
+        .btn-highlight {
+          width: 100%;
+        }
+        .btn-custom {
+          width: 100%;
+        }
+      }
+      .settings-wrapper {
+        .btn-custom {
+          width: 100%;
+          display: block;
+        }
+        .main-screen {
+          .main-upper-section {
+            .subtitle-info {
+              font-size: 1.125rem;
+            }
+          }
+          .main-section-info {
+            .list-section {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      .settings-save-btn {
+        width: 100%;
+      }
+    }
+  }
+  
+  @include bp(mobile) {
+    .inner-page-wrapper {
+      #breadcrumbs {
+        white-space: nowrap;
+      }
+      .settings-section {
+        .upload-info {
+          margin: 0px -7px;
+          padding: 0 9px;
+        }
+      }
+      .lease-header-title {
+        font-size: 1.3rem;
+      }
+      .lease-header-title {
+        margin-left: 0px !important;
+      }
+      .settings-section {
+        padding: 10px !important;
+        .settings-title {
+          font-size: 1rem !important;
+        }
+        .nav-pills {
+          li {
+            display: contents;
+            .btn-custom {
+              width: 100%;
+              margin: 10px 0;
+            }
+          }
+        }
+        .btn-custom {
+          width: 100%;
+        }
+        .btn-highlight {
+          width: 100%;
+        }
+      }
+      .settings-wrapper {
+        padding: 10px !important;
+        .main-screen {
+          .main-upper-section {
+            .subtitle-info {
+              font-size: 1rem;
+            }
+          }
+          .main-section-info {
+            .list-section {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @include bp(iphone5) {
+    .inner-page-wrapper {
+      #breadcrumbs {
+        white-space: nowrap;
+      }
+      .settings-section {
+        .nav-pills {
+          li {
+            display: contents;
+            .btn-custom {
+              width: 100%;
+              margin: 10px 0;
+            }
+          }
+        }
+        .btn-highlight {
+          width: 100%;
+        }
+      }
+      .settings-wrapper {
+        .btn-custom {
+          width: 100%;
+        }
+        .main-screen {
+          .main-upper-section {
+            .subtitle-info {
+              font-size: 1rem;
+            }
+          }
+          .main-section-info {
+            .list-section {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }

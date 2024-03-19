@@ -1,0 +1,111 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}</p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form id="NotManagementFormSubmit" class="tabs-form">
+              <div class="main-unit">
+                <div class="wrapper-title">
+                  <h3>{{'component-names.list-floors'|translate}}</h3>
+                  <hr>
+                  <!-- <hr> -->
+                  <!-- start tabs -->
+                  <ul ngbNav #nav="ngbNav"  class="nav-tabs mt-3">
+                    <li [ngbNavItem]>
+                      <a  ngbNavLink>
+
+                          {{'component-names.add-floor'|translate}}
+
+                      </a>
+                      <ng-template ngbNavContent>
+                        <!-- <div class="row"> -->
+                        <form [formGroup]="floorFrom" id="Floor">
+                          <div class="col gap-2 grid grid-cols-3 p-0">
+
+                            <div class=" ">
+                              <label for="floorNameAr" class="label-name">
+                                {{'page-form.name-arabic'|translate}}</label>
+                              <div class="input-group form-group">
+                                <div class="input-group">
+                                  <input type="text" class="form-control icon-user tenant-icon"
+                                    formControlName="floorNameAr">
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="registerType"
+                                class="label-name">{{'user-manager.name-latin'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" class="form-control icon-user " formControlName="floorNameEn">
+                                <div
+                                  *ngIf="(f['floorNameEn'].touched || f['floorNameEn'].dirty ) && f['floorNameEn'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="f['floorNameEn'].errors && f['floorNameEn'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                  <span *ngIf="f['floorNameEn'].errors && f['floorNameEn'].errors['minlength']">
+                                    {{'validation-messages.min-name-char'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div *ngIf="!floorFrom.valid  && submited" class="alert alert-danger">
+                              <i class="fa fa-close "></i> {{errorMessage}}
+                            </div>
+                          </div>
+                        </form>
+                        <!-- </div> -->
+                      </ng-template>
+                    </li>
+                    <!-- <li [ngbNavItem]="2">
+                      <a (click)="onSelcetList()" [class.disabled]="isUpdateClicked"
+                        [ngClass]="{'bg-secondary':isUpdateClicked}" ngbNavLink>
+                        {{'component-names.list-floors'|translate}} </a>
+                      <ng-template ngbNavContent>
+
+                        <div class="container0">
+                          <app-tabulator [idColName]="'id'" [childRowData]="floors" [parentColName]="'groupId'"
+                            [divId]="'Floors'" [columnSettings]="columnNames" [componentName]="'Floors'"
+                            (onAddItem)="openFloors()" (onMenuActionSelected)="onMenuActionSelected($event)"
+                            [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols"
+                            [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters"
+                            (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'Floors'">
+                          </app-tabulator>
+
+                        </div>
+
+
+
+
+                      </ng-template>
+
+                    </li> -->
+
+
+                    <!-- <li [ngbNavItem]="3">
+                      <a ngbNavLink>{{'user-manager.users-permissions'|translate}} </a>
+                      <ng-template ngbNavContent>
+                      </ng-template>
+                    </li> -->
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                  <!-- end tabs -->
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

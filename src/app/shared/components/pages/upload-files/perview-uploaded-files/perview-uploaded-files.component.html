@@ -1,0 +1,360 @@
+<!-- <div class="col-md-12" *ngIf="id>0">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-booking-tab" data-toggle="tab" href="#Images" role="tab"
+        aria-controls="nav-booking" aria-selected="true">
+        {{'unit.Images'|translate}}</a>
+      <a class="nav-item nav-link" id="PDF-tab" data-toggle="tab" href="#PDF" role="tab" aria-controls="PDF"
+        aria-selected="false">{{'unit.PDF'|translate}}</a>
+      <a class="nav-item nav-link" id="nav-purchasing-tab" data-toggle="tab" href="#Videos" role="tab"
+        aria-controls="nav-purchasing" aria-selected="false">{{'unit.Videos'|translate}}</a>
+    </div>
+  </nav>
+</div>
+<div class="col-md-12 tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="Images" role="tabpanel" aria-labelledby="nav-booking-tab">
+    <div class="container-fluid">
+      <div class="row clearfix">
+        <div class="col-md-12">
+          <div class="card-header headercard font-weight-bold mb-1">
+            <strong>{{'upload-files.attachments'|translate}}</strong>
+          </div>
+          <div class="body table-responsive table_units_2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>{{'upload-files.file-no'|translate}}</th>
+                  <th>{{'upload-files.file-name'|translate}}</th>
+                  <th>{{'upload-files.record-no'|translate}}</th>
+                  <th>{{'upload-files.file'|translate}}</th>
+                  <th>{{'upload-files.file-type'|translate}}</th>
+                  <th>{{'upload-files.download'|translate}}</th>
+                  <th>{{'general.actions'|translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of attachments;let i=index">
+                  <td>{{i+1}}</td>
+
+                  <td>{{item.originalFileName}}</td>
+                  <td>{{item.recordId}}</td>
+
+                  <td>
+                    <img [src]="getpath(item.fileName)" alt="" class="rounded-circle float-right" height="30">
+
+                  </td>
+                  <td>{{item.fileType}}</td>
+                  <td>
+                    <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                        aria-hidden="true"></i></a>
+                  </td>
+                  <td>
+                    <a (click)="deleteFile(item.id)" class="del_btn">
+                      <i class="fas fa-times"></i>
+                      {{'upload-files.delete-file'|translate}}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="PDF" role="tabpanel" aria-labelledby="nav-purchasing-tab">
+    <div class="container-fluid">
+      <div class="row clearfix">
+        <div class="col-md-12" *ngIf="id>0">
+          <div class="card-header headercard font-weight-bold mb-1">
+            <strong>{{'unit.uploadedfiles'|translate}}</strong>
+          </div>
+          <div class="body table-responsive table_units_2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>{{'unit.fileno'|translate}}</th>
+                  <th>{{'unit.filename'|translate}}</th>
+                  <th>{{'maintainance.download'|translate}}</th>
+                  <th>{{'unit.Delete'|translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of attachments;let i=index">
+                  <td>{{i+1}}</td>
+                  <td>
+                    <p>{{item.fileName}}</p>
+                  </td>
+                  <td>
+                    <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                        aria-hidden="true"></i></a>
+                  </td>
+                  <td>
+                    <a (click)="deleteFile(item.id)" class="del_btn">
+                      <i class="fas fa-times"></i>
+                      {{'unit.Delete'|translate}}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="Videos" role="tabpanel" aria-labelledby="nav-purchasing-tab">
+    <div class="container-fluid">
+      <div class="row clearfix">
+        <div class="col-md-12" *ngIf="id>0">
+          <div class="card-header headercard font-weight-bold mb-1">
+            <strong>{{'unit.uploadedfiles'|translate}}</strong>
+          </div>
+          <div class="body table-responsive table_units_2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>{{'unit.fileno'|translate}}</th>
+                  <th>{{'unit.filename'|translate}}</th>
+                  <th>{{'maintainance.download'|translate}}</th>
+                  <th>{{'unit.Delete'|translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of attachments;let i=index">
+                  <td>{{i+1}}</td>
+                  <td>
+                    <p>{{item.fileName}}</p>
+                  </td>
+                  <td>
+                    <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                        aria-hidden="true"></i></a>
+                  </td>
+                  <td>
+                    <a (click)="deleteFile(item.id)" class="del_btn">
+                      <i class="fas fa-times"></i>
+                      {{'unit.Delete'|translate}}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card m-0 mb-5">
+      <div class="card-body">
+        <form id="NotManagementFormSubmit" class="tabs-form">
+          <div class="main-unit">
+            <div class="wrapper-title">
+              <h3>{{'upload-files.attachments'|translate}}</h3>
+
+
+              <!-- start tabs -->
+              <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs mt-3">
+                <li [ngbNavItem]="1">
+                  <a   ngbNavLink> {{'upload-files.images'|translate}}</a>
+                  <ng-template ngbNavContent>
+                    <div class="col-md-12 tab-content" id="nav-tabContent">
+                      <div class="tab-pane fade show active" id="Images" role="tabpanel" aria-labelledby="nav-booking-tab">
+                        <div class="container-fluid">
+                          <div class="row clearfix">
+                            <div class="col-md-12">
+                              <div class="card-header headercard font-weight-bold mb-1">
+                                <strong> {{'upload-files.images'|translate}}</strong>
+                              </div>
+                              <div class="body table-responsive table_units_2">
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th>{{'upload-files.file-no'|translate}}</th>
+                                      <th>{{'upload-files.file-name'|translate}}</th>
+                                      <th>{{'upload-files.record-no'|translate}}</th>
+                                      <th>{{'upload-files.file'|translate}}</th>
+                                      <th>{{'upload-files.file-type'|translate}}</th>
+                                      <th>{{'upload-files.download'|translate}}</th>
+                                      <th>{{'general.actions'|translate}}</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let item of imagesAttachments;let i=index">
+                                      <td>{{i+1}}</td>
+
+                                      <td>{{item.originalFileName}}</td>
+                                      <td>{{item.recordId}}</td>
+
+                                      <td>
+                                        <img [src]="getpath(item.fileName)" alt="" class="rounded-circle float-right" height="30">
+
+                                      </td>
+                                      <td>{{item.fileType}}</td>
+                                      <td>
+                                        <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                                            aria-hidden="true"></i></a>
+                                      </td>
+                                      <td>
+                                        <a (click)="deleteFile(item.id)" class="del_btn">
+                                          <i class="fas fa-times"></i>
+                                          {{'upload-files.delete-file'|translate}}
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                  <a  ngbNavLink>
+                    {{'upload-files.pdf-files'|translate}}</a>
+                    <ng-template ngbNavContent>
+                      <div class="col-md-12 tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="PDF" role="tabpanel" aria-labelledby="nav-booking-tab">
+                          <div class="container-fluid">
+                            <div class="row clearfix">
+                              <div class="col-md-12">
+                                <div class="card-header headercard font-weight-bold mb-1">
+                                  <strong> {{'upload-files.pdf-files'|translate}}</strong>
+                                </div>
+                                <div class="body table-responsive table_units_2">
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th>{{'upload-files.file-no'|translate}}</th>
+                                        <th>{{'upload-files.file-name'|translate}}</th>
+                                        <th>{{'upload-files.record-no'|translate}}</th>
+                                        <!-- <th>{{'upload-files.file'|translate}}</th> -->
+                                        <!-- <th>{{'upload-files.file-type'|translate}}</th> -->
+                                        <th>{{'upload-files.download'|translate}}</th>
+                                        <th>{{'general.actions'|translate}}</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let item of pdfAttachments;let i=index">
+                                        <td>{{i+1}}</td>
+
+                                        <td>{{item.originalFileName}}</td>
+                                        <td>{{item.recordId}}</td>
+
+                                        <!-- <td *ngIf="">
+                                          <img [src]="getpath(item.fileName)" alt="" class="rounded-circle float-right" height="30">
+
+                                        </td> -->
+                                        <!-- <td>{{item.fileType}}</td> -->
+                                        <td>
+                                          <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                                              aria-hidden="true"></i></a>
+                                        </td>
+                                        <td>
+                                          <a (click)="deleteFile(item.id)" class="del_btn">
+                                            <i class="fas fa-times"></i>
+                                            {{'upload-files.delete-file'|translate}}
+                                          </a>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+
+                </li>
+                <li [ngbNavItem]="3">
+                  <a  ngbNavLink>
+                    {{'upload-files.other-files'|translate}} </a>
+                    <ng-template ngbNavContent>
+                      <div class="col-md-12 tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="otherFiles" role="tabpanel" aria-labelledby="nav-booking-tab">
+                          <div class="container-fluid">
+                            <div class="row clearfix">
+                              <div class="col-md-12">
+                                <div class="card-header headercard font-weight-bold mb-1">
+                                  <strong> {{'upload-files.other-files'|translate}}</strong>
+                                </div>
+                                <div class="body table-responsive table_units_2">
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th>{{'upload-files.file-no'|translate}}</th>
+                                        <th>{{'upload-files.file-name'|translate}}</th>
+                                        <th>{{'upload-files.record-no'|translate}}</th>
+                                        <!-- <th>{{'upload-files.file'|translate}}</th> -->
+                                        <th>{{'upload-files.file-type'|translate}}</th>
+                                        <th>{{'upload-files.download'|translate}}</th>
+                                        <th>{{'general.actions'|translate}}</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let item of otherAttachments;let i=index">
+                                        <td>{{i+1}}</td>
+
+                                        <td>{{item.originalFileName}}</td>
+                                        <td>{{item.recordId}}</td>
+
+                                        <!-- <td>
+                                          <img [src]="getpath(item.fileName)" alt="" class="rounded-circle float-right" height="30">
+
+                                        </td> -->
+                                        <td>{{item.fileType}}</td>
+                                        <td>
+                                          <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                                              aria-hidden="true"></i></a>
+                                        </td>
+                                        <td>
+                                          <a (click)="deleteFile(item.id)" class="del_btn">
+                                            <i class="fas fa-times"></i>
+                                            {{'upload-files.delete-file'|translate}}
+                                          </a>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+
+                </li>
+
+
+                <!-- <li [ngbNavItem]="3">
+                  <a ngbNavLink>{{'user-manager.users-permissions'|translate}} </a>
+                  <ng-template ngbNavContent>
+                  </ng-template>
+                </li> -->
+              </ul>
+              <div [ngbNavOutlet]="nav" class=""></div>
+              <!-- end tabs -->
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{'buttons.close'|translate}}</button>
+  <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+</mat-dialog-actions>

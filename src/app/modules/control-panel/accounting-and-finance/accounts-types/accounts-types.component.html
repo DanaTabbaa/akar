@@ -1,0 +1,60 @@
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-units">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="lease-header-title-building">Accounts Types</h1>
+                   
+                </div>
+                <br />
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="AccountTypeForm" id="AccountTypeSubmit">
+                    <div class="main-country">
+                        <div class="wrapper-title">
+                            <p class="subtitle">Add an account type</p>
+                            <p class="country-info">Account type information</p>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-3 col-xl-3 ">
+                                    <label for="accountTypeArName" class="label-name">Account Type In Arabic</label>
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control icon-user" name="accountTypeArName"
+                                            formControlName="accountTypeArName">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-3 col-xl-3 ">
+                                    <label for="accountTypeEnName" class="label-name">Account Type In English</label>
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control icon-user" name="accountTypeEnName"
+                                            formControlName="accountTypeEnName">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                    
+                                <div class="col-md-2" >
+                                    <div class="report-button">
+            
+                                        <button class="btn btn-highlight btn-lg" (click)="saveAccountType()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            
+                           
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</section>

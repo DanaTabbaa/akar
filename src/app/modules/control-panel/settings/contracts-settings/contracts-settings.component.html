@@ -1,0 +1,465 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-units">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="contractsSettingsForm" id="ContractsSettingSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'page-form.contract-settings-information'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+
+                      <div class=" ">
+                        <label for="contractArName"
+                          class="label-name">{{'page-form.arabic-contract-name'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="contractArName"
+                            formControlName="contractArName">
+                          <div
+                            *ngIf="(f['contractArName'].touched || f['contractArName'].dirty ) && f['contractArName'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['contractArName'].errors && f['contractArName'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="contractEnName"
+                          class="label-name">{{'page-form.latin-contract-name'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="contractEnName"
+                            formControlName="contractEnName">
+                          <div
+                            *ngIf="(f['contractEnName'].touched || f['contractEnName'].dirty ) && f['contractEnName'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['contractEnName'].errors && f['contractEnName'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+
+                        </div>
+                      </div>
+
+
+
+                      <div class="">
+                        <label for="contractTypeId" class="label-name">{{'page-form.contract-type'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="contractTypeId" [items]="contractTypes"
+                            bindLabel="name" bindValue="id" style="width:100%">
+                          </ng-select>
+                          <div
+                            *ngIf="(f['contractTypeId'].touched || f['contractTypeId'].dirty ) && f['contractTypeId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['contractTypeId'].errors && f['contractTypeId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div *ngIf="contractsSettingsForm.value.contractTypeId">
+
+                    <hr>
+                    <div class="wrapper-title">
+                      <h3 *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                        {{'page-form.rent-contract-settings'|translate}}</h3>
+                      <h3 *ngIf="contractsSettingsForm.value.contractTypeId==4">
+                        {{'general.maintenance-contract-settings'|translate}}</h3>
+                      <h3 *ngIf="contractsSettingsForm.value.contractTypeId==2">
+                        {{'page-form.sell-contract-settings'|translate}}</h3>
+
+                      <h3 *ngIf="contractsSettingsForm.value.contractTypeId==3">
+                        {{'page-form.purchase-contract-settings'|translate}}</h3>
+                    </div>
+
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="gfg">
+                      <div class="col gap-2 grid grid-cols-2  py-3 container-collapse">
+                     
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==3
+                        || contractsSettingsForm.value.contractTypeId==2" >
+                          <div class="form-group d-flex align-items-center gap-1 popup">
+                            <input type="checkbox" formControlName="isGenerateEntryWithCreateContract">
+                            <label for="isGenerateEntryWithCreateContract" class="label-name m-0">
+                              {{'page-form.generate-entry-with-create-contract'|translate}} </label>
+                          </div>
+                        </div>
+
+                        <div class="d-flex align-items-center" >
+                          <div class="form-group d-flex align-items-center gap-1 popup">
+
+                            <input type="checkbox" formControlName="isGenerateEntryByDue">
+                            <label for="isGenerateEntryByDue" class="label-name m-0">
+                              {{'page-form.generate-entry-due'|translate}} </label>
+
+
+                          </div>
+
+                          
+                        </div>
+
+                        <div class="d-flex align-items-center"  *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup">
+
+                            <input type="checkbox" formControlName="isGenerateEntryWithAccrudDefferAcc">
+                            <label for="isGenerateEntryByDue" class="label-name m-0">
+                              {{'page-form.generate-entry-on-deffer-acc'|translate}} </label>
+
+
+                          </div>
+
+                          
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup ">
+
+                            <input type="checkbox" formControlName="isTaxIncludedInDivision">
+                            <label for="isTaxIncludedInDivision" class="label-name m-0">
+                              {{'page-form.include-taxes-distribution'|translate}}
+                            </label>
+
+
+                          </div>
+
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup  ">
+                            <input type="checkbox" formControlName="isDivisionByUnit">
+                            <label for="isDivisionByUnit" class="label-name  m-0">
+                              {{'page-form.distribution-dues-units'|translate}}
+                            </label>
+
+
+                          </div>
+
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup  ">
+                            <input type="checkbox" formControlName="isCalacAmountOnDuePeriod">
+                            <label for="isCalacAmountOnDuePeriod" class="label-name m-0">
+                              {{'page-form.calculate-amount-due-period'|translate}}
+                            </label>
+
+
+                          </div>
+
+                        </div>
+
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup  ">
+                            <input type="checkbox" formControlName="isCalcServiceDependOnMonthlyRent">
+                            <label for="isCalcServiceDependOnMonthlyRent" class="label-name m-0">
+                              {{'page-form.calculate-service-percentage-depend-monthly-rent'|translate}}
+                            </label>
+
+
+                          </div>
+
+                        </div>
+
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup  ">
+                            <input type="checkbox" formControlName="isDivideServiceTax">
+                            <label for="isDivideServiceTax" class="label-name m-0">
+                              {{'page-form.distribute-services-tax'|translate}}
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup  ">
+                            <input type="checkbox" formControlName="isDivideAnnualSrvsDependOnContractTerms">
+                            <label for="isDivideAnnualSrvsDependOnContractTerms" class="label-name m-0">
+                              {{'page-form.distribution-annual-services-depend-contract-terms'|translate}}</label>
+
+
+                          </div>
+
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="contractsSettingsForm.value.contractTypeId==1">
+                          <div class="form-group d-flex align-items-center gap-1 popup  ">
+                            <input type="checkbox" formControlName="showMaintenance">
+                            <label for="showMaintenance"
+                              class="label-name m-0">{{'page-form.show-maintenance'|translate}}
+                            </label>
+
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- <button type="button"
+                        class="mt-3 btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                        (click)="collapse2.toggle()" [attr.aria-expanded]="!gfg2" aria-controls="collapseExample7">
+                        {{'page-form.additional-properties'|translate}}
+                      </button>
+                      <div #collapse2="ngbCollapse" [(ngbCollapse)]="gfg2">
+                        <div class="col gap-2 grid grid-cols-2 py-4 container-collapse">
+
+
+                          <div class="">
+                            <label for="tenantRepresentativeId" class="label-name">
+                              {{'page-form.tenant-representative'|translate}} </label>
+                            <div class="input-group  popup">
+                              <ng-select class="custom" formControlName="tenantRepresentativeId"
+                                [items]="tenantRepresentative" bindLabel="name" bindValue="id" style="width:100%">
+                              </ng-select>
+                            </div>
+                          </div>
+                          <div class="">
+                            <label for="Sublease" class="label-name">{{'page-form.sub-leasing'|translate}}</label>
+                            <div class="input-group  popup">
+                              <ng-select class="custom" formControlName="sublease" [items]="subLeasing" bindLabel="name"
+                                bindValue="id" style="width:100%">
+                              </ng-select>
+                            </div>
+                          </div>
+                          <div class=" ">
+                            <label for="penaltyClauseEvacuation"
+                              class="label-name">{{'page-form.penalty-clause-evacuation'|translate}}</label>
+                            <div class="form-group">
+                              <input type="number" step="0.01" class="form-control" name="penaltyClauseEvacuation"
+                                formControlName="penaltyClauseEvacuation">
+                            </div>
+                          </div>
+
+                          <div class="">
+                            <label for="notes" class="label-name">{{'page-form.note'|translate}}</label>
+                            <div class="form-group">
+                              <textarea class="form-control" name="notes" formControlName="notes"></textarea>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div> -->
+
+                  </div>
+
+                  <!-- <div *ngIf="contractsSettingsForm.value.contractTypeId==4">
+                    <form [formGroup]="maintenanceContractsSettingsDetailsForm" id="RentContractsSettingsDetails">
+                      <hr>
+                      <div class="wrapper-title">
+                        <h3>{{'general.maintenance-contract-settings'|translate}}</h3>
+                      </div>
+                       <button type="button"
+                        class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                        (click)="collapse.toggle()" [attr.aria-expanded]="!gfg" aria-controls="collapseExample6">
+                        {{'general.maintenance-contract-settings'|translate}}
+                      </button> 
+                      <div #collapse="ngbCollapse" [(ngbCollapse)]="gfg">
+                        <div class="col gap-2 grid grid-cols-2  py-3 container-collapse">
+
+                          <div class="d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center gap-1 popup">
+
+                              <input type="checkbox" formControlName="isGenerateEntryByDue">
+                              <label for="isGenerateEntryByDue" class="label-name m-0">
+                                {{'page-form.generate-entry-due'|translate}}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div> -->
+
+                  <!-- <div
+                    *ngIf="contractsSettingsForm.value.contractTypeId==2">
+                    <form [formGroup]="sellBuyContractsSettingsDetailsForm" id="SellBuyContractsSettingsDetails">
+                      <hr>
+                      <div class="wrapper-title">
+                        <h3> {{'page-form.sell-contract-settings'|translate}}</h3>
+                      </div>
+
+                      <div #collapse="ngbCollapse" [(ngbCollapse)]="gfg">
+                        <div class="col gap-2 grid grid-cols-2  py-4 container-collapse">
+                          <div class="d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center gap-1 popup">
+                              <input type="checkbox" formControlName="isGenerateEntryWithCreateContract">
+                              <label for="isGenerateEntryWithCreateContract" class="label-name m-0">
+                                {{'page-form.generate-entry-with-create-contract'|translate}} </label>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center gap-1 popup">
+
+                              <input type="checkbox" formControlName="isGenerateEntryByDue">
+                              <label for="isGenerateEntryByDue" class="label-name m-0">
+                                {{'page-form.generate-entry-due'|translate}} </label>
+
+
+                            </div>
+                          </div>
+
+                          <div class="d-flex align-items-center" *ngIf="false">
+                            <div class="form-group d-flex align-items-center gap-1 popup  ">
+
+                              <input type="checkbox" formControlName="isTaxIncludedInDivision">
+                              <label for="isTaxIncludedInDivision" class="label-name m-0">
+                                {{'page-form.include-taxes-distribution'|translate}}
+                              </label>
+
+
+                            </div>
+
+                          </div>
+                          <div class="d-flex align-items-center" *ngIf="false">
+                            <div class="form-group d-flex align-items-center gap-1 popup  ">
+                              <input type="checkbox" formControlName="isDivisionByUnit">
+                              <label for="isDivisionByUnit" class="label-name  m-0">
+                                {{'page-form.distribution-dues-units'|translate}}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div> -->
+
+
+                  <!-- <div
+                    *ngIf="contractsSettingsForm.value.contractTypeId==3">
+                    <form [formGroup]="sellBuyContractsSettingsDetailsForm" id="SellBuyContractsSettingsDetails">
+                      <hr>
+                      <div class="wrapper-title">
+                        <h3> {{'page-form.purchase-contract-settings'|translate}}</h3>
+                      </div>
+
+                      <div #collapse="ngbCollapse" [(ngbCollapse)]="gfg">
+                        <div class="col gap-2 grid grid-cols-2  py-4 container-collapse">
+                          <div class="d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center gap-1 popup">
+                              <input type="checkbox" formControlName="isGenerateEntryWithCreateContract">
+                              <label for="isGenerateEntryWithCreateContract" class="label-name m-0">
+                                {{'page-form.generate-entry-with-create-contract'|translate}} </label>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center gap-1 popup">
+
+                              <input type="checkbox" formControlName="isGenerateEntryByDue">
+                              <label for="isGenerateEntryByDue" class="label-name m-0">
+                                {{'page-form.generate-entry-due'|translate}} </label>
+
+
+                            </div>
+                          </div>
+
+                          <div class="d-flex align-items-center" *ngIf="false">
+                            <div class="form-group d-flex align-items-center gap-1 popup  ">
+
+                              <input type="checkbox" formControlName="isTaxIncludedInDivision">
+                              <label for="isTaxIncludedInDivision" class="label-name m-0">
+                                {{'page-form.include-taxes-distribution'|translate}}
+                              </label>
+
+
+                            </div>
+
+                          </div>
+                          <div class="d-flex align-items-center" *ngIf="false">
+                            <div class="form-group d-flex align-items-center gap-1 popup  ">
+                              <input type="checkbox" formControlName="isDivisionByUnit">
+                              <label for="isDivisionByUnit" class="label-name  m-0">
+                                {{'page-form.distribution-dues-units'|translate}}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div> -->
+                  <!-- <hr> -->
+                  <div class="page-permissions">
+                    <!-- <div class="wrapper-title">
+                      <h3> {{'permissions.contractTypeUserPermissions'|translate}} </h3>
+                    </div> -->
+
+
+                    <hr>
+
+                    <!-- //#collapse="ngbCollapse" [(ngbCollapse)]="collapse1" -->
+                    <!-- <div class="row">
+                      <div class="col-md-3 col">
+
+                        <div>
+                          <input type="checkbox" (change)="onSelectAllChecked($event)"
+                            [ngModelOptions]="{standalone: true}" [(ngModel)]="checkAllPermissions" id="checkbox">
+                          <label for=""></label>
+                          <span class="mx-1">{{'general.check-all'|translate}} </span>
+                        </div>
+                      </div>
+                    </div>
+                    <hr> -->
+                    <div class="row contract-settings">
+                      <!-- <div class="col-md-3 col-6 ">
+                        <div *ngFor="let user of subUsers; let i= index;" class="userscontract">
+                          <div>
+                            <input type="checkbox" [ngModelOptions]="{standalone: true}"
+                              [(ngModel)]="user.isUserChecked" (change)="onCheckUserChange($event,user.userId)"
+                              [attr.checked]="user.isUserChecked ? 'checked' : null" id="{{user.userId}}_checkbox">
+
+                            <label for="{{user.userName}}"></label>
+                            <span> {{user.userName|lowercase}}</span>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-9 col-6">
+                        <div *ngFor="let userItem of subUsersList; let i= index;" class="permission-users">
+                          <div class="d-inline-flex px-2"
+                            *ngFor=" let permission of userItem?.permissionJson | keyvalue">
+                            <input type="checkbox" [attr.checked]="permission.value ? 'checked' : null"
+                              (change)="onCheckboxChange($event,userItem?.permissionJson,permission.key,userItem.userId)"
+                              id="{{permission+'_'+userItem.userId}}" value="{{permission.value}}">
+                            <label for="{{permission.key}}"></label>
+                            <span class="mx-1 font-14"> {{('pagePermission.'+permission.key)|translate}}</span>
+
+                          </div>
+
+                        </div>
+                      </div> -->
+                      <hr>
+
+
+
+                    </div>
+
+
+
+
+                  </div>
+                </div>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- hgfd -->

@@ -1,0 +1,826 @@
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-contracts">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="contractForm" id="ContractFormSubmit" class="tabs-form">
+              <div class="main-contract">
+                <div class="wrapper-title">
+                  <h3>{{contractData}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-3 ">
+                      <div class=" ">
+                        <label for="code" class="label-name">{{'page-form.contract-number'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control" name="code" formControlName="code">
+                          <div *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['code'].errors && f['code'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="calendarType" class="label-name">{{'page-form.calendar-type'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="calendarType" [items]="calendarTypes"
+                            bindLabel="name" bindValue="id" style="width:100%" (change)="onDateTypeChange()">
+                          </ng-select>
+                          <div
+                            *ngIf="(f['calendarType'].touched || f['calendarType'].dirty ) && f['calendarType'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['calendarType'].errors && f['calendarType'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="">
+                        <label for="contractDate" class="label-name">{{'page-form.contract-date'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div>
+                          <div class="input-group ">
+                            <app-full-date  [selectedDate]="contractDate"
+                              (OnDateSelect)="getContractDate($event)" [dateType]="dateType" name="contractDate"
+                              formControlName="contractDate" ngDefaultControl></app-full-date>
+
+                          </div>
+                          <div
+                            *ngIf="(f['contractDate'].touched || f['contractDate'].dirty ) && f['contractDate'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['contractDate'].errors && f['contractDate'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="">
+                        <label for="startContractDate" class="label-name">{{'page-form.start-contract-date'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div>
+                          <div class="input-group ">
+
+                            <app-full-date  [selectedDate]="startContractDate"
+                              (OnDateSelect)="getStartContractDate($event)" [dateType]="dateType"
+                              name="startContractDate" formControlName="startContractDate" ngDefaultControl>
+                            </app-full-date>
+
+                            <div
+                              *ngIf="(f['startContractDate'].touched || f['startContractDate'].dirty ) && f['startContractDate'].invalid"
+                              class="alert alert-danger">
+                              <i class="fa fa-close "></i>
+                              <span *ngIf="f['startContractDate'].errors && f['startContractDate'].errors['required']">
+                                {{'validation-messages.required-field'|translate}}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                      <!-- <div class="">
+                        <label for="endContractDate" class="label-name">{{'page-form.end-contract-date'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div>
+                          <div class="input-group ">
+                            <app-full-date  [selectedDate]="endContractDate"
+                              (OnDateSelect)="getEndContractDate($event)" [dateType]="dateType" name="endContractDate"
+                              formControlName="endContractDate" ngDefaultControl></app-full-date>
+                            <div
+                              *ngIf="(f['endContractDate'].touched || f['endContractDate'].dirty ) && f['endContractDate'].invalid"
+                              class="alert alert-danger">
+                              <i class="fa fa-close "></i>
+                              <span *ngIf="f['endContractDate'].errors && f['endContractDate'].errors['required']">
+                                {{'validation-messages.required-field'|translate}}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                      <!------------------------------------------------------>
+                      <div class="">
+                        <label for="office-name" class="label-name">
+                          {{'contract.office'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="officeId" style="width:100%"
+                            (change)="onChangeOwner(contractForm.value.officeId)">
+                            <ng-option *ngFor="let office of offices" [value]="office.id">
+                              {{lang=='ar'?office.nameAr:office.nameEn}}
+
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                              {{typeId == 2 ?('contract.seller-required'|translate):
+                              ('contract.buyer-required'|translate)}}</span>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <!------------------------------------------------------>
+
+                      <div class="">
+                        <label for="owner-name" class="label-name">
+                          {{'contract.owner'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="ownerId" style="width:100%"
+                            (change)="onChangeOwner(contractForm.value.ownerId)">
+                            <ng-option *ngFor="let owner of owners" [value]="owner.id">
+                              {{lang=='ar'?owner.nameAr:owner.nameEn}}
+
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                              {{typeId == 2 ?('contract.seller-required'|translate):
+                              ('contract.buyer-required'|translate)}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+
+                      <div class="" *ngIf="contractSetting?.contractTypeId == 3">
+                        <label for="seller-name" class="label-name">
+                          {{ 'contract.seller'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="sellerId" style="width:100%"
+                            >
+                            <ng-option *ngFor="let seller of sellers" [value]="seller.id">
+                              {{lang=='ar'?seller.nameAr:seller.nameEn}}
+
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['sellerId'].touched || f['sellerId'].dirty ) && f['sellerId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['sellerId'].errors && f['sellerId'].errors['required']">
+                              {{'contract.seller-required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="" *ngIf="contractSetting?.contractTypeId == 2">
+                        <label for="buyer-name" class="label-name">
+                          {{ 'contract.buyer'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="buyerId" style="width:100%"
+                            >
+                            <ng-option *ngFor="let buyer of buyers" [value]="buyer.id">
+                              {{lang=='ar'?buyer.nameAr:buyer.nameEn}}
+
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['buyerId'].touched || f['buyerId'].dirty ) && f['buyerId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['buyerId'].errors && f['buyerId'].errors['required']">
+                              {{'contract.buyer-required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="">
+                        <label for="purchaser-name" class="label-name"> {{typeId == 3 ?('contract.seller'|translate):
+                          ('contract.buyer'|translate)}} <span class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="purchaserId" style="width:100%">
+                            <ng-option *ngFor="let purchaser of purchasers" [value]="purchaser.id">
+                              {{lang=='ar'?purchaser.nameAr:purchaser.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['purchaserId'].touched || f['purchaserId'].dirty ) && f['purchaserId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['purchaserId'].errors && f['purchaserId'].errors['required']">
+                              {{typeId == 3 ?('contract.seller-required'|translate):
+                              ('contract.buyer-required'|translate)}}</span>
+                          </div>
+                        </div>
+                      </div> -->
+                      <div class="">
+                        <label for="realestate-group-name" class="label-name">{{'general.realestate'|translate}}</label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="realestateId"
+                            (change)="onChangeRealestate(contractForm.value.realestateId)" style="width:100%">
+                            <ng-option *ngFor="let realestate of realestates" [value]="realestate.id">
+                              {{lang=='ar'?realestate.realestateNameAr:realestate.realestateNameEn}}
+                            </ng-option>
+                          </ng-select>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="building-name" class="label-name">{{'general.building'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="buildingId" style="width:100%"
+                            (change)="onChangeBuilding(contractForm.value.buildingId)">
+                            <ng-option *ngFor="let building of buildings" [value]="building.id">
+                              {{lang=='ar'?building.buildingNameAr:building.buildingNameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['buildingId'].touched || f['buildingId'].dirty ) && f['buildingId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['buildingId'].errors && f['buildingId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="owner-account" class="label-name">
+                          {{'general.owner-account'|translate}}
+                          <!-- <span
+                            class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="ownerAccountId" style="width:100%">
+                            <ng-option *ngFor="let acc of ownerAccounts " [value]="acc.id">
+                              {{lang=='ar'?acc.accArName:acc.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div
+                            *ngIf="(f['ownerAccountId'].touched || f['ownerAccountId'].dirty ) && f['ownerAccountId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['ownerAccountId'].errors && f['ownerAccountId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="opposite-name" class="label-name">
+                          {{'general.opposite-account'|translate}}
+                          <!-- <span
+                            class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="oppositeAccountId" style="width:100%">
+                            <ng-option *ngFor="let acc of oppositeAccounts " [value]="acc.id">
+                              {{lang=='ar'?acc.accArName:acc.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div
+                            *ngIf="(f['purchaserAccountId'].touched || f['purchaserAccountId'].dirty ) && f['purchaserAccountId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['purchaserAccountId'].errors && f['purchaserAccountId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="building-name" class="label-name">
+                          {{'general.tax-account'|translate}}
+                          <!-- <span
+                            class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="taxAccountId" style="width:100%">
+                            <ng-option *ngFor="let acc of taxAccounts" [value]="acc.id">
+                              {{lang=='ar'?acc.accArName:acc.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div
+                            *ngIf="(f['taxAccountId'].touched || f['taxAccountId'].dirty ) && f['taxAccountId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['taxAccountId'].errors && f['taxAccountId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div> -->
+                        </div>
+                      </div>
+                      <div class="" hidden>
+                        <label for="deferred-revenue-account-name" class="label-name">
+                          {{'general.deferred-revenue-account'|translate}}
+                          <!-- <span
+                            class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="deferredRevenueAccountId" style="width:100%">
+                            <ng-option *ngFor="let acc of deferredRevenueAccounts" [value]="acc.id">
+                              {{lang=='ar'?acc.accArName:acc.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div
+                            *ngIf="(f['deferredRevenueAccountId'].touched || f['deferredRevenueAccountId'].dirty ) && f['deferredRevenueAccountId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['deferredRevenueAccountId'].errors && f['deferredRevenueAccountId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div> -->
+                        </div>
+                      </div>
+                      <div class="" hidden>
+                        <label for="accured-revenue-account-name" class="label-name">
+                          {{'general.accured-revenue-account'|translate}}
+                          <!-- <span
+                            class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="accuredRevenueAccountId" style="width:100%">
+                            <ng-option *ngFor="let acc of accuredRevenueAccounts" [value]="acc.id">
+                              {{lang=='ar'?acc.accArName:acc.accEnName}}
+                            </ng-option>
+                          </ng-select>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <hr>
+                  <!-- start tabs -->
+                  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li ngbNavItem [destroyOnHide]="false">
+                      <a ngbNavLink> {{'general.realestate'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <!-- <app-contract-unit-details [buildingId]="contract.buildingId" [id]="id"
+                          [ownerId]="contractForm.value.ownerId"
+                          ></app-contract-unit-details>
+
+                          (onContractUnitDetailsChange)="onContractUnitChange($event)"
+                     
+                        <form [formGroup]="contractUnitsTotalForm" id="ContractUnitsTotalFormSubmit">
+
+                          <div class="col gap-2 grid grid-cols-3 p-3" style="background-color:#a98d4d1f ;">
+                            <div class=" ">
+                              <label for="totalArea" class="label-name">{{'page-form.total-area'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="totalArea"
+                                  [(ngModel)]="contract.totalArea" formControlName="totalArea">
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="averagePriceOfMeter"
+                                class="label-name">{{'page-form.average-price-meter'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="averagePriceOfMeter"
+                                  formControlName="averagePriceOfMeter" [(ngModel)]="averagePriceOfMeter">
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="totalBeforeTax"
+                                class="label-name">{{'general.total-before-tax'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="totalBeforeTax"
+                                  formControlName="totalBeforeTax" [(ngModel)]="totalBeforeTax">
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="totalInsurance" class="label-name">{{'general.total-tax'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="totalTaxes" formControlName="totalTaxes"
+                                  [(ngModel)]="totalTaxes">
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="totalWithTax"
+                                class="label-name">{{'general.total-after-tax'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="totalWithTax"
+                                  formControlName="totalWithTax" [(ngModel)]="totalWithTax">
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </form> -->
+
+                        <div class="table-responsive">
+                          <table class="table table-bordered text-center ">
+                            <thead>
+                              <tr>
+                                <th scope="col">
+                                  {{'page-form.unit-name'|translate}}<span class="text-danger">*</span></th>
+                                <th scope="col">{{'page-form.area-size'|translate}}<span class="text-danger">*</span>
+                                </th>
+                                <th scope="col">{{'page-form.meter-price'|translate}}
+                                  <span class="text-danger">*</span>
+                                </th>
+                                <th scope="col">{{'page-form.total'|translate}}
+                                </th>
+                                <th scope="col">{{'page-form.tax-ratio'|translate}}</th>
+                                <th scope="col">
+                                  {{'page-form.tax-value'|translate}}</th>
+                                  <th scope="col">
+                                    {{'page-form.total-with-taxes'|translate}}</th>
+
+                                <th scope="col" colspan="1">
+                                  {{'page-form.actions'|translate}}</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of selectedSalesBuyContractUnits;let i= index;">
+
+                                <td>
+
+                                  <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                    [ngModelOptions]="{standalone: true}" (keydown.Enter)="openUnitSearchDialog(i)"
+                                    [(ngModel)]="selectedSalesBuyContractUnits[i].unitNameAr">
+
+
+                                </td>
+                                <td>
+
+                                  <input type="number" step="0.01" min="0" class="form-control" name="areaSize"
+                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="item.areaSize"
+                                    (change)="calculateUnitTotals(item)">
+                                </td>
+                                <td>
+                                  <div class="form-group m-0">
+                                    <input type="number" step="0.01" min="0" class="form-control" name="pricePerMeter"
+                                      [ngModelOptions]="{standalone: true}" [(ngModel)]="item.pricePerMeter"
+                                      (change)="calculateUnitTotals(item)">
+
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group m-0">
+                                    <input type="number" step="0.01" min="0" class="form-control" name="total"
+                                      [ngModelOptions]="{standalone: true}" [(ngModel)]="item.total"
+                                      (change)="onChangeTotal(item)">
+                                  </div>
+                                </td>
+
+
+
+                                <td>
+                                  <div class="form-group m-0">
+                                    <input type="number" step="0.01" min="0" class="form-control" name="taxRatio"
+                                      [(ngModel)]="item.taxRatio" [ngModelOptions]="{standalone: true}"
+                                      (change)="onChangeTaxRatio(item)">
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group m-0">
+                                    <input type="number" step="0.01" min="0" class="form-control" name="taxesAmount"
+                                      [ngModelOptions]="{standalone: true}" [(ngModel)]="item.taxesAmount" readonly
+                                      disabled>
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div class="form-group m-0">
+                                    <input type="number" step="0.01" min="0" class="form-control" name="totalWithTax"
+                                      [ngModelOptions]="{standalone: true}" [(ngModel)]="item.totalWithTax" readonly
+                                      disabled>
+                                  </div>
+                                </td>
+                                <td class="align-items-center d-flex justify-content-center gap-1">
+
+                                  <button class="btn btn-danger px-3" (click)="showConfirmDeleteUnitAddedMessage(item)"
+                                    type="button">
+                                    <i class="las la-trash-alt"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+
+
+                                <td>
+                                  <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                    (keydown.Enter)="openUnitSearchDialog(-1)" [ngModelOptions]="{standalone:true}"
+                                    [(ngModel)]="selectedSearchSalesBuyContractUnit.unitNameAr" />
+
+
+
+
+                                </td>
+                                <td>
+                                  <div class="form-group input-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="areaSize"
+                                      [(ngModel)]="selectedSearchSalesBuyContractUnit.areaSize"
+                                      [ngModelOptions]="{standalone:true}"
+                                      (change)="calculateUnitTotals(selectedSearchSalesBuyContractUnit)">
+
+
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group input-group">
+                                    <input type="number" step="0.01" class="form-control" name="pricePerMeter"
+                                      [ngModelOptions]="{standalone:true}"
+                                      [(ngModel)]="selectedSearchSalesBuyContractUnit.pricePerMeter"
+                                      (change)="calculateUnitTotals(selectedSearchSalesBuyContractUnit)">
+
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="annualRent"
+                                      [(ngModel)]="selectedSearchSalesBuyContractUnit.total"
+                                      [ngModelOptions]="{standalone:true}"
+                                      (change)="onChangeTotal(selectedSearchSalesBuyContractUnit)">
+                                  </div>
+                                </td>
+
+
+
+
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="taxRatio"
+                                      [(ngModel)]="selectedSearchSalesBuyContractUnit.taxRatio"
+                                      [ngModelOptions]="{standalone:true}"
+                                      (change)="calculateUnitTotals(selectedSearchSalesBuyContractUnit)">
+                                    <!-- (change)="getUnitDetails()" -->
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="taxesAmount"
+                                      [(ngModel)]="selectedSearchSalesBuyContractUnit.taxesAmount"
+                                      [ngModelOptions]="{standalone:true}" readonly disabled>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="totalWithTax"
+                                      [(ngModel)]="selectedSearchSalesBuyContractUnit.totalWithTax"
+                                      [ngModelOptions]="{standalone:true}" readonly disabled>
+                                  </div>
+                                </td>
+                               
+                                <td>
+                                  <button type="button" class="btn btn-primary px-3 " (click)="addContractUnit()"><i
+                                      class="las la-plus"></i></button>
+                                  &nbsp;
+                                  <button class="btn btn-danger px-3" (click)="clearSelectedUnit()" type="button">
+                                    <i class="las la-trash-alt"></i></button>
+
+
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col gap-2 grid grid-cols-3 p-3" style="background-color:#a98d4d1f ;">
+
+                          <div class=" ">
+                            <label for="totalArea" class="label-name">{{'page-form.total-area'|translate}}</label>
+                            <div class="form-group">
+
+                              <input type="number" class="form-control" name="totalArea" formControlName="totalArea"
+                                readonly>
+                            </div>
+                          </div>
+                          <div class=" ">
+                            <label for="averagePriceOfMeter" class="label-name">
+                              {{'page-form.average-price-meter'|translate}}</label>
+
+                            <div class="form-group">
+
+                              <input type="number" class="form-control" name="averagePriceOfMeter"
+                                formControlName="averagePriceOfMeter" readonly>
+                            </div>
+                          </div>                          
+                          <div class=" ">
+                            <label for="totalBeforeTax" class="label-name">
+                              {{'page-form.total-before-taxes'|translate}}</label>
+                            <div class="form-group">
+
+                              <input type="number" class="form-control" name="totalBeforeTax"
+                                formControlName="totalBeforeTax" readonly>
+                            </div>
+                          </div>
+                          <div class=" ">
+                            <label for="taxes" class="label-name">
+                              {{'page-form.taxes'|translate}}</label>
+                            <div class="form-group">
+
+                              <input type="number" class="form-control" name="taxes" readonly
+                                formControlName="totalTaxes">
+                            </div>
+                          </div>
+                          <div class=" ">
+                            <label for="totalWithTax"
+                              class="label-name">{{'page-form.total-with-taxes'|translate}}
+                            </label>
+                            <div class="form-group">
+
+                              <input type="number" class="form-control" name="totalWithTax"
+                                formControlName="totalWithTax" readonly>
+                            </div>
+                          </div>
+                        </div>
+
+                      </ng-template>
+                    </li>
+                    <li ngbNavItem [destroyOnHide]="false">
+                      <a ngbNavLink>{{'general.payment-terms'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 align-items-end">
+                            <!-- <div class="">
+                              <label for="totalAmount"
+                                class="label-name">{{'general.contract-total-amount'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="totalWithTax" [(ngModel)]="totalWithTax"
+                                  [ngModelOptions]="{standalone: true}" (change)="calculateContractDues()">
+                              </div>
+                            </div> -->
+                            <div class=" ">
+                              <label for="totalBeforeTax" class="label-name">
+                                {{'page-form.total-before-taxes'|translate}}</label>
+                              <div class="form-group">
+  
+                                <input type="number" class="form-control" name="totalBeforeTax"
+                                  formControlName="totalBeforeTax" readonly>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="taxes" class="label-name">
+                                {{'page-form.taxes'|translate}}</label>
+                              <div class="form-group">
+  
+                                <input type="number" class="form-control" name="taxes" readonly
+                                  formControlName="totalTaxes">
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="totalWithTax"
+                                class="label-name">{{'page-form.total-with-taxes'|translate}}
+                              </label>
+                              <div class="form-group">
+  
+                                <input type="number" class="form-control" name="totalWithTax"
+                                  formControlName="totalWithTax" readonly>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="prepaidAmount"
+                                class="label-name">{{'general.pre-paid-amount'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="prepaidAmount"
+                                   formControlName="prepaidAmount"
+                                  (change)="calculateContractDues()">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="firstPaymentAmount"
+                                class="label-name">{{'general.first-payment-amount'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="firstPaymentAmount"
+                                   formControlName="firstPaymentAmount"
+                                  (change)="onCahngeFirstOrLastPayment()">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="firstDueDate"
+                                class="label-name">{{'general.first-due-date'|translate}}</label>
+                              <div class="form-group">
+                                <app-full-date  [selectedDate]="firstDueDate"
+                                  (OnDateSelect)="getFirstDueDateDate($event)" [dateType]="dateType" name="firstDueDate"
+                                  formControlName="firstDueDate" ngDefaultControl></app-full-date>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="lastPaymentAmount"
+                                class="label-name">{{'general.final-payment-amount'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="lastPaymentAmount"
+                                  formControlName="lastPaymentAmount"
+                                  (change)="onCahngeFirstOrLastPayment()">
+                                  <!-- [(ngModel)]="lastPaymentAmount" [ngModelOptions]="{standalone: true}" -->
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="amountPerTime"
+                                class="label-name">{{'general.amount-per-time'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="amountPerTime"
+                                  formControlName="amountPerTime" 
+                                  (change)="calculateCountOfPayments()">
+                              </div>
+                            </div>
+                           
+                            
+                            <div class="">
+                              <label for="numberOfPayments"
+                                class="label-name">{{'page-form.number-payments'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="numberOfPayments" step="1"
+                                  formControlName="numberOfPayments" 
+                                  (change)="calculateAmountPerTime()">
+                                  <!-- [(ngModel)]="numberOfPayments" [ngModelOptions]="{standalone: true}" -->
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="periodBetweenAmountPerMonth"
+                                class="label-name">{{'general.period-between-amount-per-month'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="periodBetweenAmountPerMonth"
+                                  formControlName="periodBetweenAmountPerMonth" min="1"
+                                  (change)="onCahngeFirstOrLastPayment()">
+                                  <!-- [(ngModel)]="periodBetweenAmountPerMonth" [ngModelOptions]="{standalone: true}" -->
+                              </div>
+                            </div>
+                            <!-- <div class="">
+                              <label for="paymentPerTime"
+                                class="label-name">{{'general.per-time-payment'|translate}}</label>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="paymentPerTime"
+                                  formControlName="paymentPerTime"
+                                  (change)="calculateContractDues()">
+                                  
+                              </div>
+                            </div> -->
+
+                            <div class="">
+
+                              <button class="btn btn-secondary"
+                                (click)="calculateContractDues()">{{'general.calculate'|translate}}</button>
+                            </div>
+
+                          </div>
+                        </div>
+                        <br>
+                        <!-- <div class="row"> -->
+                        <div class="table-responsive">
+                          <table class="table table-bordered text-center">
+                            <thead>
+                              <th>#</th>
+                              <th>{{'general.due-date'|translate}}</th>
+                              <th>{{'general.amount'|translate}}</th>
+                              <!-- <th></th> -->
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let d of salesBuyContractDues; let i = index;">
+                                <td>{{i+1}}</td>
+                                <td>{{d.dueStartDate|date:'yyyy-MM-dd'}}</td>
+                                <td>{{d.dueAmount}}</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+
+                        </div>
+                      </ng-template>
+                    </li>
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="inner-page-wrapper inner-page-wrapper-contracts">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="report-button">
+          <!-- <button *ngIf="showSave==true && renewContract==0" class="btn btn-highlight btn-lg"
+            (click)="save()">
+            Save
+          </button>
+          <button *ngIf="renewContract==1" class="btn btn-highlight btn-lg" (click)="saveRentContract()">
+            Renew
+          </button>
+          <button *ngIf="showIssue" class="btn btn-highlight btn-lg" (click)="ContractIssued()">
+            Issue
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

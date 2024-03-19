@@ -1,0 +1,167 @@
+/* placeholder */
+
+@mixin input-placeholder {
+    &.placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+$breakpoints: ( 'custom-small-mobile-max': (max-width: 359px), 'portrait-mobile-max': (max-width: 575px), 'mobile-min': (min-width: 576px), 'mobile-max': (max-width: 767px), 'ipad-min': (min-width: 768px), 'ipad-max': (max-width: 991px), 'desktop-min': (min-width: 992px), 'desktop-max': (max-width: 1199px), 'large-desktop-min': (min-width: 1200px), 'medium-large-desktop-min': (min-width: 1366px), 'medium-large-desktop-max': (max-width: 1400px), );
+@mixin breakpoint($name) {
+    @if map-has-key($breakpoints, $name) {
+        @media #{inspect(map-get($breakpoints, $name))} {
+            @content;
+        }
+    }
+    @else {
+        @warn "Couldn't find a breakpoint named `#{$name}`.";
+    }
+}
+
+// Opacity
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// Transition
+@mixin transition($what: all, $time: 0.5s, $how: ease-in-out) {
+    transition: $what $time $how;
+}
+
+// rgba Border
+@mixin border-rgba ($color, $opacity) {
+    border: 1px solid rgba(red($color), green($color), blue($color), $opacity);
+}
+
+// Background Color rgba
+@mixin background-color-rgba($color, $opacity) {
+    background-color: rgba($color, $opacity);
+}
+
+// Color rgba
+@mixin color-rgba($color, $opacity) {
+    color: rgba($color, $opacity);
+}
+
+// Horizontal and Center Align using Transform
+@mixin horizontal-center-transform {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin vertical-center-transform {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin horizontal-vertical-center-transform {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Center Block
+@mixin center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin h4_heading {
+    font-family: $primary-font;
+    font-size: 25px;
+    color: #A5A5A5;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    width: 100%;
+    @include breakpoint(mobile-max) {
+        text-align: center;
+    }
+}
+
+@mixin h1_heading {
+    font-family: $primary-font;
+    font-size: 40px;
+    color: #444444;
+    padding-bottom: 25px;
+    font-weight: 500;
+    line-height: 45px;
+    position: relative;
+    margin-bottom: 25px;
+    width: 100%;
+    @include breakpoint(mobile-max) {
+        text-align: center;
+    }
+}
+
+@mixin heading_border {
+    position: absolute;
+    border-bottom: 7px solid $base-color2;
+    content: "";
+    width: 80px;
+    left: 0;
+    bottom: 0;
+    @include breakpoint(mobile-max) {
+        right: 0;
+        margin: auto;
+    }
+}
+
+@mixin read_more_btn {
+    color: #767676;
+    font-family: $primary-font;
+    font-size: 25px;
+    font-weight: 300;
+    position: relative;
+    margin-bottom: 40px;
+    padding-right: 60px;
+}
+
+@mixin read_more_btn_img {
+    position: absolute;
+    background-image: url(../images/read_more_btn.png);
+    content: "";
+    width: 49px;
+    height: 46px;
+    right: 0;
+    bottom: 0;
+    top: -10px;
+}
+
+// mixin for form-control
+@mixin form-control-footer {
+    background-color: #ffffff !important;
+    color: #000 !important;
+    border: none !important;
+    padding: 12px 0px 12px 0px !important;
+    font-size: 14px;
+    margin-bottom: 29px;
+    border-radius: 5px !important;
+    @include input-placeholder {
+        // color: #0000 !important;
+    }
+}

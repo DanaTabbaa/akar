@@ -1,0 +1,119 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="vendorCommissionsForm" id="VendorCommissionsFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+
+                  <h3>{{'page-form.vendor-commission-information'|translate}} </h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2 ">
+                      <div class=" ">
+                        <label for="nameAr" class="label-name"><span
+                            class="text-danger ">*</span>{{'page-form.name-arabic'|translate}}</label>
+                        <div class="form-group input-group">
+
+                          <input type="text" class="form-control icon-user" name="nameAr" formControlName="nameAr">
+
+                          <div *ngIf="(f['nameAr'].touched || f['nameAr'].dirty ) && f['nameAr'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['nameAr'].errors && f['nameAr'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="nameEn" class="label-name"><span
+                            class="text-danger">*</span>{{'page-form.name-latin'|translate}}</label>
+                        <div class="form-group input-group">
+
+                          <input type="text" class="form-control icon-user" name="nameEn" formControlName="nameEn">
+
+                          <div *ngIf="(f['nameEn'].touched || f['nameEn'].dirty ) && f['nameEn'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['nameEn'].errors && f['nameEn'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="commission-type" class="label-name"><span
+                            class="text-danger ">*</span>{{'page-form.commission-type'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" name="commissionType" formControlName="commissionType"
+                            [items]="commissionTypes" bindLabel="name" bindValue="id" style="width:100%"
+                            (change)="selectCommissionType()">
+                          </ng-select>
+
+                          <div
+                            *ngIf="(f['commissionType'].touched || f['commissionType'].dirty ) && f['commissionType'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['commissionType'].errors && f['commissionType'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class=" " *ngIf="showValue  ">
+                        <label for="value" class="label-name">{{'page-form.value'|translate}}</label>
+                        <div class="form-group input-group">
+
+                          <input type="number" class="form-control icon-user" name="value" formControlName="value">
+
+
+                        </div>
+                      </div>
+                      <div class=" " *ngIf="showRatio ">
+                        <label for="ratio" class="label-name">{{'page-form.ratio'|translate}}</label>
+                        <div class="form-group input-group">
+
+                          <input type="number" class="form-control icon-user" name="ratio" formControlName="ratio">
+
+                        </div>
+                      </div>
+                      <!-- <div class="">
+                        <label for="marketing-real-estate" class="label-name"><span
+                            class="text-danger ">*</span>{{'page-form.vendor'|translate}}</label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="vendorId" style="width:100%">
+                            <ng-option *ngFor="let vendor of vendors" [value]="vendor.id">{{lang=='ar'?
+                              vendor.nameAr:vendor.nameEn}}</ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['vendorId'].touched || f['vendorId'].dirty ) && f['vendorId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['vendorId'].errors && f['vendorId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

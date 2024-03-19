@@ -1,0 +1,41 @@
+import { SalesBuyContractDuesEnum } from "../constants/enumrators/enums";
+import { SalesBuyContractsDuesModel } from "../stores/store.model.ts/salesbuycontractsdues.store.model";
+import { SalesBuyContractDue } from "./sales-buy-contract-due";
+import { SalesBuyContractUnit } from "./sales-buy-contract-unit";
+
+export class SalesBuyContracts {
+    id!: number;
+    contractSettingId!: number;
+    code!: string;
+    contractStatus!: number;
+    contractDate: any;
+    ownerId!: number;
+    sellerId!: number;
+    buyerId!: number;
+    ownerAccountId!: number;
+    oppositeAccountId!: number;
+    taxAccountId!: number;
+    startContractDate: any;
+    endContractDate: any;
+    realestateId!: number;
+    buildingId!: number;
+    totalTaxes!: number;
+    calendarType: any;
+    firstPaymentAmount!: number;
+    lastPaymentAmount!: number;
+    //paymentPerTime! :number;
+    notes!: string;
+    firstDueDate: any;
+    totalArea!: number;
+    averagePriceOfMeter!: number;
+    totalWithTax!: number;
+    amountPerTime!: number;
+    periodBetweenAmountPerMonth!: number;
+    numberOfPayments!: number;
+    deferredRevenueAccountId!: number;
+    accuredRevenueAccountId!: number;
+    regId!: number;
+    officeId!: number;
+    salesBuyContractsDues: SalesBuyContractDue[] = [];
+    salesBuyContractsUnits: SalesBuyContractUnit[] = [];
+}

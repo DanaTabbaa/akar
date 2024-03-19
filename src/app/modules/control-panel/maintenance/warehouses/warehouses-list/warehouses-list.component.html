@@ -1,0 +1,12 @@
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+      <app-tabulator [idColName]="'id'" [childRowData]="maintenanceWarehouses" [parentColName]="'groupId'"
+        [divId]="'MaintenanceWarehouses'" [columnSettings]="columnNames" [componentName]="'MaintenanceWarehouses'"
+         (onAddItem)="openAddMaintenanceWarehouse()" (onMenuActionSelected)="onMenuActionSelected($event)"
+        [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols"
+        [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters"
+        (onSearchTextChange)="onSearchTextChange($event)" [refreshGrid]="isListEmpty" [groupType]="1" [path]="'MaintenanceWarehouses'">
+    </app-tabulator>
+    </div>
+
+  </section>

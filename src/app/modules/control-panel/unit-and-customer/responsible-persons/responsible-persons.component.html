@@ -1,0 +1,218 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+<section class="">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div class="col-md-120"> -->
+      <div class="card m-0 mb-5">
+        <div class="card-body">
+          <form [formGroup]="responsiblePersonsForm" id="responsiblePersonsForm" class="tabs-form vvv">
+            <div class="main-customer">
+              <div class="wrapper-title">
+                <h3>{{'page-form.isAdd-person-authorized'|translate}}</h3>
+                <div class="row">
+                  <div class="col gap-2 grid grid-cols-3 align-items-end">
+                    <div class=" ">
+                      <label for="nameAr" class="label-name"><span
+                          class="text-danger">*</span>{{'page-form.name-arabic'|translate}}
+                      </label>
+                      <div class="form-group input-group">
+                        <input type="text" class="form-control" name="nameAr" formControlName="nameAr">
+                        <div *ngIf="(f['nameAr'].touched || f['nameAr'].dirty ) && f['nameAr'].invalid"
+                          class="validation alert-danger">
+                          <i class="fa fa-close "></i>
+                          <span *ngIf="f['nameAr'].errors && f['nameAr'].errors['required']">
+                            {{'validation-messages.required-field'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="nameEn" class="label-name"><span
+                          class="text-danger">*</span>{{'page-form.name-latin'|translate}}
+                      </label>
+                      <div class="form-group input-group">
+                        <input type="text" class="form-control" name="nameEn" formControlName="nameEn">
+                        <div *ngIf="(f['nameEn'].touched || f['nameEn'].dirty ) && f['nameEn'].invalid"
+                          class="alert alert-danger">
+                          <i class="fa fa-close "></i>
+                          <span *ngIf="f['nameEn'].errors && f['nameEn'].errors['required']">
+                            {{'validation-messages.required-field'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="mobileNumber" class="label-name">{{'page-form.mobile-number'|translate}}</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" [maxlength]="15" name="mobileNumber"
+                          formControlName="mobileNumber">
+                        <div *ngIf="f['mobileNumber'].touched && f['mobileNumber'].invalid"
+                          class=" alert-danger validtion">
+                          <div *ngIf="f['mobileNumber'].errors && f['mobileNumber'].invalid">
+                            <i class="fa fa-close "></i> {{'validation-messages.invalid-mobile'|translate}}
+                          </div>
+                          <div *ngIf="f['mobileNumber'].errors && f['mobileNumber'].errors['pattern']">
+                            <i class="fa fa-close "></i> {{'general.numbers-only'|translate}}
+                          </div>
+                        </div>
+                        <div class="validation alert-success"
+                          *ngIf="f['mobileNumber'].touched && f['mobileNumber'].valid && f['mobileNumber'].dirty">
+                          <i class="fa fa-check"></i> {{'validation-messages.valid-mobile'|translate}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="identityNo" class="label-name"><span
+                          class="text-danger">*</span>{{'page-form.identity-number'|translate}}</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" [maxLength]="identityNoDigits" name="identityNo"
+                          formControlName="identityNo">
+
+                        <div *ngIf="(f['identityNo'].touched || f['identityNo'].dirty ) && f['identityNo'].invalid"
+                          class="validation alert-danger">
+                          <i class="fa fa-close "></i>
+                          <span *ngIf="f['identityNo'].errors && f['identityNo'].errors['required']">
+                            {{'validation-messages.required-field'|translate}}</span>
+                          <span *ngIf="f['identityNo'].errors && f['identityNo'].errors['pattern']">
+                            {{'general.numbers-only'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="" class="label-name">{{'page-form.identity-date'|translate}}
+                      </label>
+                      <div class="form-group">
+                        <app-full-date name="identityIssuerDate" ngDefaultControl formControlName="identityIssuerDate"
+                          [selectedDate]="identityIssuerDate" (OnDateSelect)="getIdentityIssuerDate($event)">
+                        </app-full-date>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="" class="label-name">{{'page-form.expiration-date-of-identity'|translate}}</label>
+                      <div class="form-group">
+                        <app-full-date name="identityExpireDate" [selectedDate]="respoIdentityExpireDate"
+                          (OnDateSelect)="getRespoIdentityExpireDate($event)">
+                        </app-full-date>
+                        <div class="validation alert-danger" *ngIf="isRespoIdentityExpireDateGreater">
+                          <i class="fa fa-close"></i> {{'validation-messages.max-expire-date'|translate}}
+                        </div>
+                        <div class="validation alert-success"
+                          *ngIf="isRespoIdentityExpireDateGreater==false && onSelectRespoIdentityExpireDate==true">
+                          <i class="fa fa-check"></i> {{'validation-messages.valid-date'|translate}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="identityIssuerPlace"
+                        class="label-name">{{'page-form.identity-issuer'|translate}}</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" [maxLength]="50" name="identityIssuerPlace"
+                          formControlName="identityIssuerPlace">
+                        <div
+                          *ngIf="(f['identityIssuerPlace'].touched || f['identityIssuerPlace'].dirty ) && f['identityIssuerPlace'].invalid"
+                          class="validation alert-danger">
+                          <i class="fa fa-close "></i>
+
+                          <span *ngIf="f['identityIssuerPlace'].errors && f['identityIssuerPlace'].errors['pattern']">
+                            {{'validation-messages.invalid-data'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="jobTitle" class="label-name">{{'page-form.job-title'|translate}}
+                      </label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" [maxLength]="50" name="jobTitle"
+                          formControlName="jobTitle">
+                        <div *ngIf="(f['jobTitle'].touched || f['jobTitle'].dirty ) && f['jobTitle'].invalid"
+                          class="validation alert-danger">
+                          <i class="fa fa-close "></i>
+
+                          <span *ngIf="f['jobTitle'].errors && f['jobTitle'].errors['pattern']">
+                            {{'validation-messages.invalid-data'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="delegationType" class="label-name">{{'page-form.delegation-type'|translate}}
+                      </label>
+                      <div class="input-group  popup">
+                        <ng-select class="custom" formControlName="delegationTypeId" [items]="delegationTypes"
+                          bindLabel="name" bindValue="id" style="width:100%"></ng-select>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="respoJob" class="label-name">
+                      </label>
+                      <div class="form-group">
+                        <button *ngIf="updateMode==false" (click)="addResponsiblePerson()"
+                          class="btn btn-primary">{{'buttons.save'|translate}}</button>
+                        <button *ngIf="updateMode" (click)="editResponsiblePerson(responsiblePersonsForm.value)"
+                          class="btn btn-primary">{{'buttons.edit'|translate}}</button>
+
+                        <button (click)="resetModalForm($event)"
+                          class="btn btn-primary">{{'buttons.new'|translate}}</button>
+
+                        <button (click)="onClose($event)" class="btn btn-danger">{{'buttons.close'|translate}}</button>
+                      </div>
+                    </div>
+                    <mat-slide-toggle formControlName="isActive">{{"permissions.is-active"|translate}}
+                    </mat-slide-toggle>
+
+                  </div>
+                </div>
+                <div class="row mt-5">
+                  <table class="table table-bordered table-responsive0 text-center"
+                    style="overflow-y: scroll !important;height:px;">
+                    <thead>
+                      <tr>
+                        <th id="index">#</th>
+                        <th>{{ 'page-form.name-ar' | translate }}</th>
+                        <th>{{ 'page-form.name-en' | translate }}</th>
+                        <th>{{ 'page-form.identity-no' | translate }}</th>
+                        <th>{{ 'page-form.identity-expire-date' | translate }}</th>
+                        <th>{{ 'page-form.delegation-type' | translate }}</th>
+                        <th>{{ 'page-form.mobile-number' | translate }}</th>
+                        <th>{{ 'page-form.is-active' | translate }}</th>
+                        <th>{{ 'page-form.action' | translate }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let responsiblePerson of responsiblePersons; let index = index">
+                        <td id="index">{{index+1}}</td>
+                        <td>{{ responsiblePerson.nameAr }}</td>
+                        <td>{{ responsiblePerson.nameEn }}</td>
+                        <td>{{ responsiblePerson.identityNo }}</td>
+                        <td>{{ responsiblePerson.identityExpireDate }}</td>
+                        <td>{{getDelegationTypesById(responsiblePerson.delegationTypeId)}}</td>
+                        <td>{{ responsiblePerson.mobileNumber }}</td>
+                        <td>{{getActiveStatus(responsiblePerson.isActive)}}</td>
+                        <td>
+                          <button
+                            (click)="deleteResponsiblePerson(index, $event)">{{'buttons.delete'|translate}}</button>
+                          &nbsp;
+                          <button (click)="getEditItem(responsiblePerson, $event)">{{'buttons.edit'|translate}}</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<section class="">
+  <!-- <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="responsiblePersons" [parentColName]="'groupId'" [divId]="'Owners'"
+      [columnSettings]="columnNames" [componentName]="'owners'" (onAddItem)="openResponsiblePersons()"
+      (onMenuActionSelected)="onMenuActionSelected($event)" [showMenuOptions]="menuOptions" [direction]="direction"
+      [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters"
+      (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'Owners'"></app-tabulator>
+  </div> -->
+</section>

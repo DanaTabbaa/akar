@@ -1,0 +1,1371 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}</p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-contracts">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="contractForm" id="ContractFormSubmit" class="tabs-form">
+              <div class="main-contract">
+                <div class="wrapper-title">
+
+                  <h3>{{contractData}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-3 ">
+
+                      <div class=" ">
+                        <label for="code" class="label-name">{{'page-form.contract-number'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control" name="code" formControlName="code">
+                          <div
+                            *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['code'].errors && f['code'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="calendarType" class="label-name">{{'page-form.calendar-type'|translate}}</label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="calendarType" 
+                            [items]="calendarTypes" bindLabel="name" bindValue="id" style="width:100%" (change)="updateContractEndDate()">
+                          </ng-select>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="contractDate" class="label-name">{{'page-form.contract-date'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div>
+                          <div class="input-group ">
+                            <app-full-date name="contractDate" formControlName="contractDate"
+                            ngDefaultControl [selectedDate]="contractDate" (OnDateSelect)="getContractDate($event)"
+                              [dateType]="contractForm.value.calendarType">
+                            </app-full-date>
+
+                          </div>
+                          <div
+                            *ngIf="(f['contractDate'].touched || f['contractDate'].dirty ) && f['contractDate'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['contractDate'].errors && f['contractDate'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="">
+                        <label for="startContractDate" class="label-name">{{'page-form.start-contract-date'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div>
+                          <div class="input-group ">
+
+                            <div class="w-100">
+                              <app-full-date 
+                                (OnDateSelect)="getStartContractDate($event)" 
+                                [selectedDate]="startContractDate" [dateType]="contractForm.value.calendarType"
+                                name="startContractDate" formControlName="startContractDate" ngDefaultControl>
+                              </app-full-date>
+                            </div>
+                            <div
+                              *ngIf="(f['startContractDate'].touched || f['startContractDate'].dirty ) && f['startContractDate'].invalid"
+                              class="alert alert-danger">
+                              <i class="fa fa-close "></i>
+                              <span *ngIf="f['startContractDate'].errors && f['startContractDate'].errors['required']">
+                                {{'validation-messages.required-field'|translate}}</span>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="">
+                        <label for="endContractDate" class="label-name">
+                          {{'page-form.end-contract-date'|translate}} <span class="text-danger">*</span></label>
+                        <div>
+                          <div class="input-group ">
+
+                            <app-full-date name="endContractDate" formControlName="endContractDate"
+                               ngDefaultControl [selectedDate]="endContractDate"
+                              [dateType]="contractForm.value.calendarType" (OnDateSelect)="getEndContractDate($event)">
+                            </app-full-date>
+
+                            <div
+                              *ngIf="(f['endContractDate'].touched || f['endContractDate'].dirty ) && f['endContractDate'].invalid"
+                              class="alert alert-danger">
+                              <i class="fa fa-close "></i>
+                              <span *ngIf="f['endContractDate'].errors && f['endContractDate'].errors['required']">
+                                {{'validation-messages.required-field'|translate}}</span>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="owner-name" class="label-name">{{'page-form.owner'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="ownerId" style="width:100%"
+                            (change)="onChangeOwner(contractForm.value.ownerId)">
+                            <ng-option *ngFor="let owner of owners" [value]="owner.id">
+                              {{lang=='ar'?owner.nameAr:owner.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="tenant-name" class="label-name">{{'page-form.tenant'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="tenantId" style="width:100%">
+                            <ng-option *ngFor="let tenant of tenants" [value]="tenant.id">
+                              {{lang=='ar'?tenant.nameAr:tenant.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['tenantId'].touched || f['tenantId'].dirty ) && f['tenantId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['tenantId'].errors && f['tenantId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="realestate-group-name"
+                          class="label-name">{{'page-form.main-realestate'|translate}}</label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="realestateId"  (change)="onChangeRealestate(contractForm.value.realestateId)"
+                            style="width:100%">
+                            <ng-option *ngFor="let realestate of realestates" [value]="realestate.id">
+                              {{lang=='ar'?realestate.realestateNameAr:realestate.realestateNameEn}}
+                            </ng-option>
+                          </ng-select>
+
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="building-name" class="label-name"><span
+                            class="text-danger">*</span>{{'page-form.building'|translate}}</label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="buildingId" style="width:100%" 
+                            (change)="onChangeBuilding(contractForm.value.buildingId)">
+                            <ng-option *ngFor="let building of buildings" [value]="building.id">
+                              {{lang=='ar'?building.buildingNameAr:building.buildingNameEn}}
+                            </ng-option>
+                          </ng-select>
+
+                          <div *ngIf="(f['buildingId'].touched || f['buildingId'].dirty ) && f['buildingId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['buildingId'].errors && f['buildingId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+
+                        </div>
+                      </div>
+                      
+                      <div class="d-flex align-items-center" *ngIf="false">
+                        <div class="form-group d-flex align-items-center gap-1" hidden>
+                          <input type="checkbox" formControlName="isArchivedContract" hidden>
+                          <label for="is-archieved-contract" class="label-name m-0" hidden>
+                            {{'page-form.archieved-contract'|translate}}</label>
+                        </div>
+
+                      </div>
+                      
+                      <!---------------------------------------------------------------->
+                      <div class="">
+                        <label for="period" class="label-name">{{'general.period'|translate}}</label>
+                        <div class="input-group  popup">
+                          <input type="number" step="0.01" class="form-control" name="period"
+                            formControlName="period"  (change)="getEndContractDateByPeriod()">
+
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="rentMethodType" class="label-name">{{'page-form.rent-period'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+
+
+
+                          <ng-select class="custom" formControlName="rentMethodType" [items]="rentMethodTypes"
+                            (change)="calculateContractDue()"
+                            bindLabel="name" bindValue="id" style="width:100%" >
+                          </ng-select>
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="paymentMethodType" class="label-name">
+                          {{'page-form.payment-method'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group  popup">
+
+                          <ng-select class="custom" formControlName="paymentMethodType"
+                            [items]="paymentMethodTypes"
+                            (change)="changePaymentMethodTypes(contractForm.value.paymentMethodType)"
+                            bindLabel="name" bindValue="id" style="width:100%">
+                          </ng-select>
+                          <div
+                            *ngIf="(f['paymentMethodType'].touched || f['paymentMethodType'].dirty ) && f['paymentMethodType'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span
+                              *ngIf="f['paymentMethodType'].errors && f['paymentMethodType'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showWhenTenentShouldPay">
+                        <label for="whenTenentShouldPay"
+                          class="label-name">{{'page-form.tenant-pay-every'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <input type="number" class="form-control" name="whenTenentShouldPay"
+                            formControlName="whenTenentShouldPay" 
+                            (change)="getAmountPerTime()">
+
+
+                        </div>
+                      </div>
+                      
+                      
+                      
+
+                      <!-- <div class="">
+                        <label for="annualRentAmount"
+                          class="label-name">{{'page-form.annual-rent-amount'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <input type="number" step="0.01" class="form-control" name="annualRentAmount"
+                            formControlName="annualRentAmount">
+                        </div>
+                      </div> -->
+                      
+                      <!-- <div *ngIf="showYear">
+                        <label *ngIf="showYear">{{'page-form.year'|translate}}</label>
+                        <label *ngIf="showMonth">{{'page-form.month'|translate}}</label>
+                        <label *ngIf="showDay">{{'page-form.day'|translate}}</label>
+
+
+                      </div> -->
+
+                     
+
+                      <div class="" *ngIf="showInstallments">
+                        <label for="periodBetweenInstallment"
+                          class="label-name">{{'page-form.period-between-installment'|translate}}</label>
+                        <div class="input-group  popup">
+                          <input type="number" class="form-control" name="periodBetweenInstallment"
+                            formControlName="periodBetweenInstallment"
+                            (change)="calculateCountOfInstallments()">
+
+
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showInstallments">
+                        <label for="periodBetweenInstallment"
+                          class="label-name">{{'page-form.period-between-installment-type'|translate}}</label>
+                        <div class="input-group  popup">
+
+                          <ng-select class="custom" formControlName="paymentTimeType"
+                             [items]="paymentTimeTypes" bindLabel="name"
+                            bindValue="id" style="width:100%" (change)="calculateCountOfInstallments()">
+                          </ng-select>
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showInstallments">
+                        <label for="countOfInstallments" class="label-name">
+                          {{'page-form.number-of-installments'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <input type="number" class="form-control" name="countOfInstallments"
+                             formControlName="countOfInstallments" readonly >
+                        </div>
+                      </div>
+
+                     
+
+                      <!-- <div class="">
+                        <label for="amountPerTime" class="label-name">
+                          {{'rent-contracts.payment-value'|translate}}</label>
+                        <div class="input-group  popup">
+                          <input type="number" step="0.01" class="form-control" name="amountPerTime"
+                            formControlName="amountPerTime" >
+
+
+                        </div>
+                      </div> -->
+                      <div class="" hidden>
+                        <label for="payOn" class="label-name">{{'rent-contracts.payment-date'|translate}}</label>
+                        <div
+                          class="px-2 align-items-center border border-right d-flex input-group justify-content-between p-1 popup rounded">
+                          <div *ngFor="let option of paymentDate">
+                            <input type="radio" name="payOn"  formControlName="payOn"
+                              value={{option.id}}>
+                            <span class="option-item mx-2">{{option.name}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="contractPurpose"
+                          class="label-name">{{'rent-contracts.contract-purpose'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <textarea class="form-control" name="contractPurpose" formControlName="contractPurpose">
+                                                      </textarea>
+                        </div>
+                      </div>
+                      <!------------------------------------------>
+                    </div>
+                  </div>
+                  <hr>
+                  
+                  <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+                    <li [ngbNavItem]="1">
+                      <a ngbNavLink>{{'page-form.unit-information'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        
+                          <div class="table-responsive">
+                            <table class="table table-bordered text-center ">
+                              <thead>
+                                <tr>
+                                  <!-- <th style="width:150px;">#</th> -->
+                                  <th scope="col">
+                                    {{'page-form.unit-name'|translate}}<span class="text-danger">*</span></th>
+                                  <th scope="col">{{'page-form.area-size'|translate}}<span class="text-danger">*</span>
+                                  </th>
+                                  <th scope="col">{{'page-form.meter-price'|translate}}
+                                    <span class="text-danger">*</span>
+                                  </th>
+                                  <th scope="col">{{'page-form.annual-rent'|translate}}
+                                  </th>
+                                  <th scope="col">{{'page-form.monthly-rent'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'page-form.insurance-ratio'|translate}}</th>
+                                  <th scope="col">
+                                    {{'page-form.insurance-value'|translate}}</th>
+                                  <th scope="col">{{'page-form.tax-ratio'|translate}}</th>
+                                  <th scope="col" >
+                                    {{'page-form.tax-value'|translate}}</th>
+
+                                  <th scope="col" colspan="1">
+                                    {{'page-form.actions'|translate}}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of selectedRentContractUnits;let i= index;">
+                                  
+                                  <td>
+                                    
+                                    <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                      [ngModelOptions]="{standalone: true}" (keydown.Enter)="openUnitSearchDialog(i)"
+                                      [(ngModel)]="selectedRentContractUnits[i].unitNameAr">
+                                      
+
+                                  </td>
+                                  <td>
+                                    
+                                    <input type="number" step="0.01" min="0" class="form-control" name="areaSize"
+                                      [ngModelOptions]="{standalone: true}" [(ngModel)]="item.areaSize"
+                                      (change)="calculateUnitTotals(item)">
+                                  </td>
+                                  <td>
+                                    <div class="form-group m-0">
+                                      <input type="number" step="0.01" min="0" class="form-control" name="pricePerMeter"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="item.pricePerMeter"
+                                        (change)="calculateUnitTotals(item)"
+                                        >
+                                        
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group m-0">
+                                      <input type="number" step="0.01" min="0" class="form-control" name="annualRent"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="item.annualRent" 
+                                        (change)="onChangeAnnualRent(item)">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group m-0">
+                                      <input type="number" step="0.01" min="0" class="form-control" name="monthlyRent"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="item.monthlyRent"
+                                        (change)="onChangeMonthlyRent(item)">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group m-0">
+                                      <input type="number" step="0.01" min="0" class="form-control"
+                                        name="insuranceRatio" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="item.insuranceRatio" 
+                                        (change)="calculateInsuranceAmount(item)">
+                                        
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group m-0">
+                                      <input type="number" step="0.01" min="0" class="form-control"
+                                        name="inssuranceAmount" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="item.inssuranceAmount"
+                                         (change)="calculateInsuranceRatio(item)">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group m-0">
+                                      <input type="number" step="0.01" min="0" class="form-control" name="taxRatio"
+                                        [(ngModel)]="item.taxRatio" [ngModelOptions]="{standalone: true}"
+                                        (change)="onChangeTaxRatio(item)">
+                                    </div>
+                                  </td>
+                                  <td >
+                                    <div class="form-group m-0">
+                                      <input type="number" step="0.01" min="0" class="form-control" name="taxesAmount"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="item.taxesAmount" readonly disabled>
+                                    </div>
+                                  </td>
+                                  <td class="align-items-center d-flex justify-content-center gap-1">
+                                    
+                                      <button class="btn btn-danger px-3"
+                                      (click)="showConfirmDeleteUnitAddedMessage(item)" type="button">
+                                      <i class="las la-trash-alt"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  
+
+                                  <td>
+                                    <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                      (keydown.Enter)="openUnitSearchDialog(-1)"
+                                      [ngModelOptions]="{standalone:true}"
+                                      [(ngModel)]="selectedSearchRentContractUnit.unitNameAr" 
+                                      />
+                                      
+
+                                    
+                                    
+                                  </td>
+                                  <td>
+                                    <div class="form-group input-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="areaSize"
+                                         [(ngModel)]="selectedSearchRentContractUnit.areaSize" [ngModelOptions]="{standalone:true}"
+                                        (change)="calculateUnitTotals(selectedSearchRentContractUnit)">
+ 
+                                     
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group input-group">
+                                      <input type="number" step="0.01" class="form-control" name="pricePerMeter"
+                                        [ngModelOptions]="{standalone:true}"
+                                        [(ngModel)]="selectedSearchRentContractUnit.pricePerMeter"
+                                        (change)="calculateUnitTotals(selectedSearchRentContractUnit)">
+                                      
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="annualRent"
+                                        [(ngModel)]="selectedSearchRentContractUnit.annualRent"
+                                        [ngModelOptions]="{standalone:true}"
+                                        (change)="onChangeAnnualRent(selectedSearchRentContractUnit)">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="monthlyRent"
+                                        [(ngModel)]="selectedSearchRentContractUnit.monthlyRent"
+                                        [ngModelOptions]="{standalone:true}"
+                                        (change)="onChangeMonthlyRent(selectedSearchRentContractUnit)">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="insuranceRatio"                                        
+                                        [(ngModel)]="selectedSearchRentContractUnit.insuranceRatio"
+                                        [ngModelOptions]="{standalone:true}"
+                                        (change)="calculateInsuranceAmount(selectedSearchRentContractUnit)">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="inssuranceAmount"                                        
+                                        [(ngModel)]="selectedSearchRentContractUnit.inssuranceAmount"
+                                        [ngModelOptions]="{standalone:true}"
+                                        (change)="calculateInsuranceRatio(selectedSearchRentContractUnit)">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="taxRatio"
+                                        [(ngModel)]="selectedSearchRentContractUnit.taxRatio"
+                                        [ngModelOptions]="{standalone:true}"
+                                        (change)="onChangeTaxRatio(selectedSearchRentContractUnit)"
+                                        >
+                                        <!-- (change)="getUnitDetails()" -->
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="taxesAmount"
+                                        [(ngModel)]="selectedSearchRentContractUnit.taxesAmount"
+                                        [ngModelOptions]="{standalone:true}" readonly disabled>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <button type="button" class="btn btn-primary px-3 " (click)="addContractUnit()" ><i
+                                        class="las la-plus"></i></button>
+                                        &nbsp;
+                                        <button class="btn btn-danger px-3"
+                                      (click)="clearSelectedUnit()" type="button">
+                                      <i class="las la-trash-alt"></i></button>
+
+
+                                  </td>
+                                </tr>                                
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col gap-2 grid grid-cols-3 p-3" style="background-color:#a98d4d1f ;">
+
+                            <div class=" ">
+                              <label for="totalArea" class="label-name">{{'page-form.total-area'|translate}}</label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="totalArea" 
+                                  formControlName="totalArea" readonly>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="averagePriceOfMeter" class="label-name">
+                                {{'page-form.average-price-meter'|translate}}</label>
+
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="averagePriceOfMeter"
+                                  formControlName="averagePriceOfMeter"  readonly>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="totalAmountOfRent" class="label-name">
+                                {{'page-form.total-rent-amount'|translate}}</label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="totalAmountOfRent"
+                                  formControlName="totalAmountOfRent" readonly>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="totalInsurance" class="label-name">
+                                {{'page-form.total-insurance'|translate}}</label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="totalInsurance"
+                                  formControlName="totalInsurance" readonly >
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="taxes" class="label-name">
+                                {{'page-form.taxes'|translate}}</label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="taxes" readonly
+                                formControlName="totalTaxes"
+                                 >
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="totalWithTaxesAndInsurrance"
+                                class="label-name">{{'page-form.total-taxes-and-insurrance'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="totalWithTaxesAndInsurrance"
+                                  formControlName="totalWithTaxesAndInsurrance" readonly>
+                              </div>
+                            </div>
+                          </div>
+                       
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2" >
+                      <a ngbNavLink> {{'page-form.unit-services'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        
+                          <div class="table-responsive">
+                            <table class="table table-bordered text-center  ">
+                              <thead>
+                                <tr>
+                                  <th scope="col" style="width: 150px;">
+                                    {{'page-form.unit-name'|translate}} <span class="text-danger">*</span></th>
+                                  <th scope="col">
+                                    {{'page-form.service-name'|translate}}<span class="text-danger">*</span></th>
+                                  <th scope="col">
+                                    {{'page-form.pay-on-time-in'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'page-form.calculate-method'|translate}}</th>
+                                  <th scope="col">{{'page-form.count'|translate}}</th>
+                                  <th scope="col">{{'page-form.ratio'|translate}}</th>
+                                  <th scope="col">{{'page-form.amount'|translate}}
+                                  </th>
+                                  <th scope="col">{{'page-form.tax'|translate}}%</th>
+                                  <th scope="col">
+                                    {{'page-form.amount-after-tax'|translate}}</th>
+                                  
+                                  <th scope="col" >
+                                    {{'page-form.from-account'|translate}}<span class="text-danger">*</span></th>
+                                  <th scope="col" >
+                                    {{'page-form.to-account'|translate}}<span class="text-danger">*</span></th>
+                                  <th scope="col" colspan="1">
+                                    {{'page-form.actions'|translate}}</th>
+                                </tr>
+                              </thead>
+                              <tr *ngFor="let item of selectedRentContractServices; let i= index">
+                                <td>{{lang=='ar'?item.unitNameAr:item.unitNameEn}}</td>
+                                <td>{{lang=='ar'?item.unitServiceNameAr: item.unitServiceNameEn}}
+                                </td>
+                                <td>{{item.payOnTimeName}}</td>
+                                <td>{{item.calcMethodTypeName}}</td>
+                                <td>{{item.countOfService}}</td>
+                                <td>{{item.ratio}}</td>
+                                <td>{{item.amount}}</td>
+                                <td>{{item.taxRatio}}</td>
+                                <td>{{item.amountWithTax}}</td>
+                                <td >{{item.fromAccountName}}</td>
+                                <td >{{item.toAccountName}}</td>
+
+                                <td>
+                                  <button (click)="deleteContractServices(item)" class="btn btn-danger px-3" type="button" >
+                                    <i class="las la-trash-alt"></i>
+
+                                  </button>
+                                </td>
+
+
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="input-group">
+                                    <ng-select style="width:100%" name="unitId" 
+                                    [(ngModel)]="selectedContrcatService.unitId"
+                                    [ngModelOptions]="{standalone:true}" name="unitId"
+                                    >
+                                      <ng-option *ngFor="let item of selectedRentContractUnitsServices"
+                                        [value]="item.id">
+                                        {{lang=='ar'?item.unitNameAr:item.unitNameEn}}
+                                      </ng-option>
+                                    </ng-select>                                    
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div class="input-group">
+                                    <ng-select  style="width:100%" name="serviceId" [(ngModel)]="selectedContrcatService.serviceId"
+                                    [ngModelOptions]="{standalone:true}">
+                                      <ng-option *ngFor="let service of unitServices" [value]="service.id" 
+                                      >
+                                        {{lang=='ar'?service.unitServiceArName:service.unitServiceEnName}}
+                                      </ng-option>
+                                    </ng-select>
+                                  </div>
+
+                                </td>
+                                <td>
+                                  <div class="form-group">
+                                    
+                                    <ng-select class="custom" [(ngModel)]="selectedContrcatService.payOnTimeId"
+                                    [ngModelOptions]="{standalone:true}"
+                                    name="payOn"
+                                      [items]="paymentsMethodsInRentContract" bindLabel="name" bindValue="id"
+                                      style="width:100%">
+                                    </ng-select>
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div class="form-group">
+                                    
+                                    <ng-select class="custom" 
+                                    name="methodType"
+                                      [items]="calculateMethodsInRentContract" bindLabel="name" bindValue="id"
+                                      style="width:100%" [(ngModel)]="selectedContrcatService.calcMethodType" 
+                                      [ngModelOptions]="{standalone: true}"
+                                      (ngModelChange)="onChangeCalcMethodType()"
+                                      >
+                                    </ng-select>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="countofservice"
+                                    [disabled]="selectedContrcatService.calcMethodType != 3"
+                                    [(ngModel)]="selectedContrcatService.countOfService" [ngModelOptions]="{standalone: true}"
+                                      >
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="serviceRatio"
+                                    [disabled]="selectedContrcatService.calcMethodType != 1"
+                                    [(ngModel)]="selectedContrcatService.ratio" [ngModelOptions]="{standalone: true}"
+                                    (change)="calaculateServiceAmountByRatio()"
+                                       >
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="amount"
+                                    [disabled]="selectedContrcatService.calcMethodType != 2"
+                                    [(ngModel)]="selectedContrcatService.amount" [ngModelOptions]="{standalone: true}"
+                                    (change)="calculateServiceTotalWithTax()">
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="totalTaxes"
+                                    [(ngModel)]="selectedContrcatService.taxRatio"  (change)="calculateServiceTotalWithTax()"
+                                    [ngModelOptions]="{standalone: true}">
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="amountWithTax"
+                                    [(ngModel)]="selectedContrcatService.amountWithTax" [ngModelOptions]="{standalone: true}"
+                                      >
+                                  </div>
+                                </td>
+                                <td >
+                                  <div class="form-group">
+
+                                    <ng-select class="custom"  [items]="fromServiceAccount"
+                                      bindLabel="name" bindValue="id" style="width:100%"
+                                      [(ngModel)]="selectedContrcatService.fromAccount" [ngModelOptions]="{standalone: true}"
+                                      >
+                                    </ng-select>
+                                  </div>
+                                </td>
+
+                                <td >
+                                  <div class="form-group">
+
+                                    <ng-select class="custom" [items]="toServiceAccount"
+                                    [(ngModel)]="selectedContrcatService.toAccount" [ngModelOptions]="{standalone: true}"
+                                      bindLabel="name" bindValue="id" style="width:100%">
+                                    </ng-select>
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <button type="button" class="btn btn-primary px-3" (click)="addContractServiceList()"
+                                   ><i class="las la-plus"></i> </button>
+
+                                </td>
+
+
+                              </tr>
+
+                              
+                            </table>
+                            <hr>
+                            <div class="col gap-2 grid grid-cols-3 p-3">
+                              <div class=" ">
+                                <label for="totalAmountOfService" class="label-name">
+                                  {{'page-form.total-amount-service'|translate}}</label>
+                                <div class="form-group">
+    
+                                  <input type="number" class="form-control" name="totalAmountOfService"
+                                   formControlName="totalAmountOfService">
+                                </div>
+                              </div>
+                              <div class=" ">
+                                <label for="totalServiceTaxes"
+                                  class="label-name">{{'page-form.total-services-taxes'|translate}}
+                                </label>
+                                <div class="form-group">
+    
+                                  <input type="number" class="form-control" name="totalServiceTaxes"
+                                     formControlName="totalServiceTaxes" >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        
+
+                        
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                      <a ngbNavLink> {{'page-form.contract-accounts'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 ">
+                            <div class="">
+                              <label for="owner-account" class="label-name">{{'page-form.owner-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="ownerAccountId" style="width:100%">
+                                  <ng-option *ngFor="let acc of ownerAccounts"
+                                    [value]="acc.id">{{lang=='ar'?acc.accArName:acc.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="tenant-account" class="label-name">{{'page-form.tenant-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="tenantAccountId" style="width:100%">
+                                  <ng-option *ngFor="let acc of tenantAccounts"
+                                    [value]="acc.id">{{lang=='ar'?acc.accArName:acc.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+
+                              </div>
+                            </div>
+
+                            
+                            <div class="">
+                              <label for="owner-insurrance-account"
+                                class="label-name">{{'rent-contracts.owner-insurrance-account'|translate}}</label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="ownerInsurranceAccountId" style="width:100%">
+                                  <ng-option *ngFor="let type of ownerInsurranceAccounts"
+                                    [value]="type.id">{{lang=='ar'?type.accArName:type.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="owner-tax-account"
+                                class="label-name">{{'rent-contracts.owner-tax-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="ownerTaxAccountId" style="width:100%">
+                                  <ng-option *ngFor="let type of ownerTaxAccounts"
+                                    [value]="type.id">{{lang=='ar'?type.accArName:type.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="owner-deferred-revenue-account"
+                                class="label-name">{{'rent-contracts.owner-deferred-revenue'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="ownerDefferRevenueAccId" style="width:100%">
+                                  <ng-option *ngFor="let type of ownerDeferredRevenueAccounts" [value]="type.id">
+                                    {{lang=='ar'?type.accArName:type.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+
+                              </div>
+                            </div>
+
+
+                            <!-- <div class="">
+                              <label for="owner-accurred-revenue-account"
+                                class="label-name">{{'rent-contracts.owner-accurred-revenue-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="ownerAccrudRevenueAccId" style="width:100%">
+                                  <ng-option *ngFor="let type of ownerAccurredRevenueAccounts" [value]="type.id">
+                                    {{lang=='ar'?type.accArName:type.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+
+                              </div>
+                            </div> -->
+                            <div class=" ">
+                              <label for="contractValueTotal"
+                                class="label-name">{{'rent-contracts.total-contract-value'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="contractValueTotal"
+                                  formControlName="contractValueTotal" >
+                              </div>
+                            </div>
+
+                            <div class=" ">
+                              <label for="paidAmount" class="label-name">{{'rent-contracts.paid-amount'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="paidAmount" formControlName="paidAmount"
+                                  (change)="getRemaingAmount()">
+                              </div>
+                            </div>
+
+
+                            <div class=" ">
+                              <label for="remainingAmount"
+                                class="label-name">{{'rent-contracts.remaining-amount'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="remainingAmount"
+                                  formControlName="remainingAmount" >
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="firstDueDate" class="label-name">{{'page-form.first-due-date'|translate}}
+                              </label>
+                              <div>
+                                <div class="input-group ">
+                                  <app-full-date name="firstDueDate" formControlName="firstDueDate"
+                                    ngDefaultControl [selectedDate]="firstDueDate"
+                                    [dateType]="contractForm.value.calendarType"
+                                    (OnDateSelect)="getFirstDueDate($event)">
+                                  </app-full-date>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="4">
+                      <a ngbNavLink>{{'page-form.realestate-developer'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 ">
+
+                            <div class="">
+                              <label for="contractMarketingType"
+                                class="label-name">{{'page-form.contract-marketing-type'|translate}}</label>
+                              <div class="input-group  popup">
+                                <ng-select class="custom" formControlName="contractMarketingType"
+                                  [items]="contractMarketingTypes" bindLabel="name" bindValue="id" style="width:100%"
+                                  (change)="getRealestateDeveloper(contractForm.value.contractMarketingType)">
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="" *ngIf="showRealestateDeveloper">
+                              <label for="realestate-developer"
+                                class="label-name">{{'page-form.realestate-developer-office'|translate}}</label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="officeId" style="width:100%">
+                                  <ng-option *ngFor="let office of offices"
+                                    [value]="office.id">{{lang=='ar'?office.nameAr:office.nameEn}}
+                                  </ng-option>
+                                </ng-select>
+
+
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="contractTypeId"
+                                class="label-name">{{'page-form.contract-type'|translate}}</label>
+                              <div class="input-group  popup">
+
+
+
+                                <ng-select class="custom" formControlName="contractTypeId" [items]="rentContractTypes"
+                                  bindLabel="name" bindValue="id" style="width:100%">
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="commissionTax" class="label-name">{{'page-form.commission-tax'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" step="0.01" class="form-control" name="commissionTax"
+                                  formControlName="commissionTax">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="officeAmountType"
+                                class="label-name">{{'rent-contracts.collection-value-type'|translate}}</label>
+
+                              <div
+                                class="px-2 align-items-center border border-right d-flex input-group justify-content-between p-1 popup rounded">
+
+                                <div *ngFor="let option of officeAmountTypes">
+                                  <input type="radio" name="officeAmountType" 
+                                    formControlName="officeAmountType" value={{option.id}}
+                                    (change)="getValue(option.id)">
+                                  <span class="option-item mx-2">{{option.name}}</span>
+                                </div>
+
+
+                              </div>
+                            </div>
+                            <div class=" " *ngIf="showOfficeAmountPercentage">
+                              <label for="officeAmountPercentage"
+                                class="label-name">{{'page-form.ratio'|translate}}</label>
+                              <div class="form-group">
+
+                                <input type="number" step="0.01" class="form-control" name="officeAmountPercentage"
+                                  formControlName="officeAmountPercentage">
+                              </div>
+                            </div>
+                            <div class=" " *ngIf="showOfficeAmountValue">
+                              <label for="officeAmountValue" class="label-name">{{'page-form.amount'|translate}}</label>
+                              <div class="form-group">
+
+                                <input type="number" step="0.01" class="form-control" name="officeAmountValue"
+                                  formControlName="officeAmountValue">
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="annualIncreaseRatio"
+                                class="label-name">{{'page-form.annual-increase-ratio'|translate}}</label>
+
+                              <div class="form-group">
+
+                                <input type="number" step="0.01" class="form-control" name="annualIncreaseRatio"
+                                   formControlName="annualIncreaseRatio"
+                                  (change)="getAnnualIncreaseAmount()">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="annualIncreaseChecked"
+                                class="label-name">{{'page-form.annual-increase-rent'|translate}}
+
+                              </label>
+                              <div
+                                class="px-2 align-items-center border border-right d-flex input-group justify-content-between p-1 popup rounded">
+                                <div *ngFor="let option of annualIncreaseInRent">
+                                  <input type="radio" name="annualIncreaseChecked" 
+                                    formControlName="annualIncreaseChecked"
+                                    (change)="getAnnualIncreaseChecked(option.id)" value={{option.id}}>
+                                  <span class="option-item mx-2">{{option.name}}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" " *ngIf="showAnnualIncreaseAmount">
+                              <label for="annualIncreaseAmount"
+                                class="label-name">{{'page-form.annual-increase-amount'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" step="0.01" class="form-control" name="annualIncreaseAmount"
+                                 formControlName="annualIncreaseAmount">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="6">
+                      <a ngbNavLink>{{'page-form.vendor'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 ">
+                            <div class="">
+                              <label for="vendor-name" class="label-name">{{'page-form.vendor-name'|translate}}</label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="vendorId" style="width:100%" 
+                                  (change)="onChangeVendor(contractForm.value.vendorId)">
+                                  <ng-option *ngFor="let vendor of vendors"
+                                    [value]="vendor.id">{{lang=='ar'?vendor.nameAr:vendor.nameEn}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="vendor-commission-type"
+                                class="label-name">{{'page-form.commission-type'|translate}}</label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="vendorCommissionTypeId" style="width:100%">
+                                  <ng-option *ngFor="let type of vendorCommissions"
+                                    [value]="type.id">{{lang=='ar'?type.nameAr:type.nameEn}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </ng-template>
+                    </li>
+
+
+                    <li [ngbNavItem]="7" *ngIf="contractSetting?.showMaintenance">
+                      <a ngbNavLink> {{'page-form.maintenance'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        
+                          <div class="table-responsive">
+                            <table class="table table-bordered text-center ">
+                              <thead>
+                                <tr>
+
+                                  <th scope="col" style="width: 150px;">
+                                    {{'page-form.unit-name'|translate}}<span class="text-danger">*</span></th>
+                                  <th scope="col" style="width: 150px;">
+                                    {{'page-form.maintenance-service'|translate}}
+                                    <span class="text-danger">*</span>
+                                  </th>
+                                  <th scope="col">{{'page-form.date'|translate}}</th>
+                                  <th scope="col">
+                                    {{'page-form.description'|translate}}
+                                  </th>
+
+
+                                  <th scope="col" colspan="1">
+                                    {{'page-form.actions'|translate}}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <div class="input-group">
+                                      <ng-select formControlName="unitId" style="width:100%" name="unitId">
+                                        <ng-option *ngFor="let item of maintenanceUnits" [value]="item.id">
+                                          {{lang=='ar'?item.unitNameAr:item.unitNameEn}}
+                                        </ng-option>
+                                      </ng-select>
+                                      <!-- <div
+                                        *ngIf="(cmf['unitId'].touched || cmf['unitId'].dirty ) && cmf['unitId'].invalid"
+                                        class="alert alert-danger">
+                                        <i class="fa fa-close "></i>
+                                        <span *ngIf="cmf['unitId'].errors && cmf['unitId'].errors['required']">
+                                          {{'validation-messages.required-field'|translate}}</span>
+                                      </div> -->
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="input-group">
+                                      <ng-select formControlName="maintenanceServiceId" style="width:100%"
+                                        name="maintenanceServiceId">
+                                        <ng-option *ngFor="let item of maintenanceServices" [value]="item.id">
+                                          {{lang=='ar'?item.serviceNameAr:item.serviceNameEn}}</ng-option>
+                                      </ng-select>
+                                      <!-- <div
+                                        *ngIf="(cmf['maintenanceServiceId'].touched || cmf['maintenanceServiceId'].dirty ) && cmf['maintenanceServiceId'].invalid"
+                                        class="alert alert-danger">
+                                        <i class="fa fa-close "></i>
+                                        <span
+                                          *ngIf="cmf['maintenanceServiceId'].errors && cmf['maintenanceServiceId'].errors['required']">
+                                          {{'validation-messages.required-field'|translate}}</span>
+                                      </div> -->
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="input-group ">
+
+                                      <app-full-date name="maintenanceDate" formControlName="maintenanceDate"
+                                         ngDefaultControl [selectedDate]="maintenanceDate"
+                                        [dateType]="contractForm.value.calendarType"
+                                        (OnDateSelect)="getMaintenanceDate($event)">
+                                      </app-full-date>
+                                      <!-- <div
+                                        *ngIf="(cmf['maintenanceDate'].touched || cmf['maintenanceDate'].dirty ) && cmf['maintenanceDate'].invalid"
+                                        class="alert alert-danger">
+                                        <i class="fa fa-close "></i>
+                                        <span
+                                          *ngIf="cmf['maintenanceDate'].errors && cmf['maintenanceDate'].errors['required']">
+                                          {{'validation-messages.required-field'|translate}}</span>
+                                      </div> -->
+
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="input-group ">
+                                      <input type="text" class="form-control date-control" name="description"
+                                        formControlName="description">
+
+                                    </div>
+                                  </td>
+
+
+                                  <td>
+                                    <button type="button" class="btn btn-primary px-3"
+                                      ><i class="las la-plus"></i></button>
+                                  </td>
+                                </tr>
+                                <tr *ngFor="let item of selectedRentContractsMaintenance; let i= index">
+                                  <td hidden="true">{{item.unitId}}</td>
+                                  <td>{{lang=='ar'?item.unitNameAr:item.unitNameEn}}
+                                  </td>
+                                  <td>{{lang=='ar'?item.maintenanceServiceNameAr:item.maintenanceServiceNameEn}}
+                                  </td>
+                                  <td>{{item.maintenanceDate}}</td>
+                                  <td>{{item.description}}</td>
+                                  <td>
+                                    <button (click)="deleteContractMaintenanceUnits(item)" class="btn btn-danger px-3">
+                                      <i class="las la-trash-alt"></i>
+
+                                    </button>
+                                  </td>
+
+
+                                </tr>
+                                <tr>
+                                  <td colspan="4" rowspan="5"></td>
+
+                                  <td></td>
+
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        
+                      </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="8" *ngIf="rentContractDueList.length">
+                      <a ngbNavLink> {{'page-form.rentContractDues'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        
+                          <div class="table-responsive">
+                            <table class="table table-bordered text-center ">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th scope="col" style="width: 150px;">
+                                    {{'dues.tdDueName'|translate}}</th>
+                                    <th scope="col" style="width: 150px;">
+                                      {{'dues.tdUnitName'|translate}}</th>
+                                  <th scope="col" style="width: 150px;">
+                                    {{'dues.tdServiceName'|translate}}                                   
+                                  </th>
+                                  <th scope="col">{{'dues.tdDueAmount'|translate}}</th>
+                                  <th scope="col">
+                                    {{'dues.tdFromDate'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'dues.tdToDate'|translate}}
+                                  </th>
+
+
+                                  <th scope="col" colspan="1">
+                                    {{'dues.tdPaidAmount'|translate}}</th>
+                                    <th scope="col" colspan="1">
+                                      {{'dues.tdRemainAmount'|translate}}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                                <tr *ngFor="let item of rentContractDueList; let i= index;">
+                                  <td>{{i+1}}</td>
+                                  <td>{{"dues."+getDueName(item)|translate}}
+                                  </td>
+                                  <td>{{getDueUnitName(item)}}
+                                  </td>
+                                  <td>{{getServiceName(item)}}</td>
+                                  <td> {{getDueAmount(item)}}</td>
+                                  <td> {{getFromDate(item)}}</td>
+                                  <td> {{getToDate(item)}}</td>
+                                  <td> <input type="number" class="form-control" placeholder="{{'page-form.paid'|translate}}"
+                                    [ngModelOptions]="{standalone:true}" [(ngModel)]="item.paid"></td>
+                                  <td> {{getDueRemain(item)}}</td>
+                       
+
+
+                                </tr>
+                                <tr>
+                                  <td colspan="4" rowspan="5"></td>
+
+                                  <td></td>
+
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        
+                      </ng-template>
+                    </li>
+                    
+                    
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                  
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="inner-page-wrapper inner-page-wrapper-contracts" [hidden]="true">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="report-button">
+
+          <!-- <button *ngIf="showSave==true && renewContract==0" class="btn btn-highlight btn-lg"
+            (click)="saveRentContract()">
+            Save
+          </button>
+          <button *ngIf="renewContract==1" class="btn btn-highlight btn-lg" (click)="saveRentContract()">
+            Renew
+          </button>
+
+          <button *ngIf="showIssue" class="btn btn-highlight btn-lg" (click)="ContractIssued()">
+            Issue
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

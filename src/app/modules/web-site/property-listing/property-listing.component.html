@@ -1,0 +1,410 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white; font-size: 20px">
+    {{ "page-form.loading" | translate }}
+  </p>
+</ngx-spinner>
+
+<div class="page_wrapper">
+  <main class="main-content margin-top-mobile">
+    <section class="banner-top-common">
+      <div class="banner-top-common__banner_main">
+        <div class="banner_main_bg">
+          <img src="../assets/images/abut-imge1.jpeg" alt="" />
+          <div id="overlay"></div>
+        </div>
+      </div>
+      <div class="banner-top-common__page-heading">
+        <div class="container">
+          <div *ngIf="windowWidth < 752" class="row">
+            <div class="col-6">
+              <div routerLink="/product-map"
+                class="v-i-m-b">
+                {{ "search.view-in-map" | translate }}
+              </div>
+            </div>
+            <div class="col-6" (click)="openSearchCard()">
+              <div
+              class="s-a-f-b">
+                {{ "search.sort-filter" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="banner-top-common__page-heading-property section-search">
+      <div class="banner-top-common__banner_main">
+        <div class="banner_bottom">
+          <img src="../assets/images/856a757907667e9fa0b58d4c4dce5b02.png" />
+        </div>
+      </div>
+      <div class="featured_projects_main">
+        <div class="row container">
+          <div class="col-12" style="text-align: justify !important">
+            <h1>
+
+              <span class="text-light font-search search-tittel">{{ "search.search-for-property" | translate }}
+              </span>
+            </h1>
+          </div>
+        </div>
+        <div class="row search-inputs-bu container">
+          <div *ngIf="openSearch || windowWidth > 752" class="col-lg-4 col-xl-4 col-md-12 col-sm-12 forms-search pt-4"
+            style="width: 100%">
+            <div>
+              <div class="property-grid-view" style="width:80%;">
+                <!-- <button (click)="switch()">Switch Div</button> -->
+                <div [style.display]="!showFirstDiv ? 'block' : 'none'">
+              
+                  <div>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingZero">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true"
+                              aria-controls="collapseThree">
+                              {{ 'general.location' | translate }}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse show" role="tabpanel"
+                        aria-labelledby="headingOne">
+                        <div class="panel-body">
+                          <label>{{'general-lists.countries'|translate}}</label>
+                          <ng-select
+                          placeholder="{{'general-lists.countries'|translate}}"
+                         [items]="countries" 
+                         bindLabel="countryNameAr"
+                          [(ngModel)]="selectedCountry"
+                          [ngModelOptions]="{ standalone: true }"
+                          style="margin-bottom: 10px;" (change)="onSelectCountry()"
+                          ></ng-select>
+                          <label>{{'general-lists.regions'|translate}}</label>
+
+                          <ng-select
+                          [items]="regions" 
+                          bindLabel="regionNameAr"
+                          placeholder="{{'general-lists.regions'|translate}}"
+                           [(ngModel)]="selectedRegion"
+                           [ngModelOptions]="{ standalone: true }"
+                           style="margin-bottom: 10px;"
+                           (change)="onSelectRegion()"
+                           ></ng-select>
+                           <label>{{'general-lists.cities'|translate}}</label>
+                           <ng-select
+                           placeholder="{{'general-lists.cities'|translate}}"
+                          [items]="cities" 
+                          bindLabel="cityNameAr"
+                           [(ngModel)]="selectedCity"
+                           [ngModelOptions]="{ standalone: true }"
+                           style="margin-bottom: 10px;"
+                           (change)="onSelectCity()"
+                           ></ng-select>
+                           <label>{{'general-lists.districts'|translate}}</label>
+                           <ng-select
+                           placeholder="{{'general-lists.districts'|translate}}"
+                           [items]="districts" 
+                           bindLabel="districtNameAr"
+                            [(ngModel)]="selectedDistrict"
+                            [ngModelOptions]="{ standalone: true }"
+                            style="margin-bottom: 10px;"
+                            ></ng-select>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingZero">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true"
+                              aria-controls="collapseZero">
+                              {{ "website.keywords" | translate }}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseZero" class="panel-collapse collapse show" role="tabpanel"
+                          aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <input type="text" class="form-control" [(ngModel)]="keywords" />
+                            <div id="slider-range"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                              aria-controls="collapseOne">
+                              {{ "website.budget" | translate }}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel"
+                          aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <div class="row justify-content-around  mt-2 mb-4">
+                              <div class="panel-body input-search col-6" style="padding: 0 2px;">
+                                <input type="number"  style="text-align: center"  
+                                  class="form-control"   [(ngModel)]="fromPrice"
+                                  placeholder="{{ 'search.min' | translate }}"
+                                  [ngModelOptions]="{ standalone: true }" style="font-size: 14px;"/>
+                                <div id="slider-range"></div>
+                              </div>
+                              <!-- <div class="space-line col-2 justify-content-md-center">
+                                <div class="line"></div>
+                              </div> -->
+                              <div class="panel-body input-search col-6" style="padding: 0 2px;">
+                                <input type="number"  style="text-align: center"
+                                  class="form-control"  [(ngModel)]="toPrice"
+                                  placeholder="{{ 'search.min' | translate }}"
+                                  [ngModelOptions]="{ standalone: true }" style="font-size: 14px;"/>
+                                <div id="slider-range"></div>
+                              </div>
+                            </div>
+                            <div id="slider-range"></div>
+                          </div>
+                        </div>
+                        
+                        
+                   
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                          <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                              aria-expanded="false" aria-controls="collapseTwo">
+                              {{ "website.search-attributes" | translate }}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse show" role="tabpanel"
+                          aria-labelledby="headingTwo">
+                          <div class="panel-body">
+                            <div class="type-property">
+                              <ul class="list-unstyled">
+                                <li *ngFor="let attr of attributes" style="    margin-top: 5px;;">
+                                  <a style="font-weight: bold; padding: 15px 0px;" class="panel-heading" href="javascript:void(0)">{{
+                                    getAttributeName(attr)
+                                    }}</a>
+                                    
+                                
+                                    <div class="div-data-type"  *ngIf="attr.dataType == 1">
+                                      <!--Text-->
+                                      <input type="text" class="form-control"  name="{{ 'number' + attr.id }}" [(ngModel)]="attr.value"
+                                        [ngModelOptions]="{ standalone: true }" />
+                                    </div>
+                              
+                                  <div style="display: flex;
+                                  justify-content: space-between;
+                                  gap: 9px;
+                                  margin-top: 10px;
+                                  margin-bottom: 10px;" class="" *ngIf="attr.dataType == 2">
+                                  
+                                    <!-- <label class="label-height">{{"website.from" | translate }}</label>
+                                    <input type="number" class="form-control" placeholder="Min" name="{{ 'text' + attr.id }}" [(ngModel)]="attr.value"
+                                      [ngModelOptions]="{ standalone: true }" />
+                                    <input type="number" class="form-control" placeholder="Max" name="{{ 'text' + attr.id }}" [(ngModel)]="attr.valueTo"
+                                      [ngModelOptions]="{ standalone: true }" />
+                                       -->
+                                       <div class="row justify-content-around  mt-2 mb-4">
+                                        <div class="panel-body input-search col-6" style="padding: 0 2px;">
+                                          <input [(ngModel)]="attr.value" type="number"  style="text-align: center" 
+                                            class="form-control"  name="{{ 'text' + attr.id }}" 
+                                            placeholder="{{ 'search.min' | translate }}"
+                                             style="font-size: 14px;"/>
+                                          <div id="slider-range"></div>
+                                        </div>
+                                        <!-- <div class="space-line col-2 justify-content-md-center">
+                                          <div class="line"></div>
+                                        </div> -->
+                                        <div class="panel-body input-search col-6" style="padding: 0 2px;">
+                                          <input [(ngModel)]="attr.valueTo" type="number"  style="text-align: center" 
+                                            class="form-control" name="{{ 'text' + attr.id }}" 
+                                            placeholder="{{ 'search.max' | translate }}"
+                                             style="font-size: 14px;"/>
+                                          <div id="slider-range"></div>
+                                        </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="div-data-type" *ngIf="attr.dataType == 3">
+                                    <label class="label-height">{{
+                                      "website.from" | translate
+                                      }}</label>
+                                    <div style="width: 100%;">
+                                      
+                                      <app-full-date   [selectedDate]="attr.value" (OnDateSelect)="
+                                      onDateChanged($event, attr.id)">
+                                      </app-full-date>
+                                  </div>
+                                                         
+                                    <label class="label-height">{{
+                                      "website.to" | translate
+                                      }}</label>
+                                      <div style="width: 100%;">
+                                    <app-full-date   [selectedDate]="attr.valueTo" (OnDateSelect)="
+                                        onDateChangedTo($event, attr.id)
+                                      ">
+                                    </app-full-date>
+                                  </div>
+                                  </div>
+
+                                  <div class="div-data-type multisel" *ngIf="attr.dataType == 4" [hidden]="lang == 'en'">
+                                    <ng-select [multiple]="true"
+                                      [(ngModel)]="attr.value" [ngModelOptions]="{ standalone: true }"
+                                      name="{{ 'listAr' + attr.id }}"
+                                      >
+                                      <ng-option *ngFor="
+                                          let t of attr.selectListValuesAr.split(
+                                            ','
+                                          )
+                                        " [value]="t">
+                                        {{ t }}
+                                      </ng-option>
+                                    </ng-select>
+                                    
+                                  </div>
+
+                                  <div class="div-data-type multisel" *ngIf="attr.dataType == 4" [hidden]="lang == 'ar'">
+                                    <ng-select [multiple]="true" 
+                                      [(ngModel)]="attr.valueEn" [ngModelOptions]="{ standalone: true }"
+                                      name="{{ 'listEn' + attr.id }}" >
+                                      <ng-option *ngFor="
+                                          let t of attr.selectListValuesEn.split(
+                                            ','
+                                          )
+                                        " [value]="t">
+                                        {{ t }}
+                                      </ng-option>
+                                    </ng-select>
+                                    
+                                    <!-- <ng-select
+                                    [(ngModel)]="attr.valueEn" [ngModelOptions]="{ standalone: true }"
+                                    name="{{ 'listEn' + attr.id }}"
+                                     >
+                                     <ng-option *ngFor="
+                                     let t of attr.selectListValuesAr.split(
+                                       ','
+                                     )
+                                   " [value]="t">
+                                   {{ t }}
+                                 </ng-option>
+                                    </ng-select> -->
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <!-- <button style="
+                              width: 100%;
+                              height: 18rem !important;
+                              background: var(
+                                --linear-blue,
+                                linear-gradient(
+                                  179deg,
+                                  #47b3c1 1.12%,
+                                  #17646d 98.83%
+                                )
+                              );
+                              border-radius: 235px;
+                              color: white;
+                              border: 0px;
+                            " (click)="search()">
+                            {{ "website.search" | translate }}
+                          </button> -->
+                          <button class="btn-search" (click)="search()">
+                            <h3><svg class="mx-3" width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g id="Icon">
+                                  <path id="Vector"
+                                    d="M15.9665 15.9667L11.6999 11.7M7.4332 13.8333C3.89858 13.8333 1.0332 10.9679 1.0332 7.43332C1.0332 3.8987 3.89858 1.03333 7.4332 1.03333C10.9678 1.03333 13.8332 3.8987 13.8332 7.43332C13.8332 10.9679 10.9678 13.8333 7.4332 13.8333Z"
+                                    stroke="white" stroke-width="2" />
+                                </g>
+                              </svg>{{ "website.search" | translate }}</h3>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div [style.display]="showFirstDiv ? 'block' : 'none'" class="search-form">
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 col-xl-8 col-md-12 col-sm-12">
+            <div class="row align-items-center justify-content-between">
+              <div class="col-5">
+                <h4 class="text-light font-re font-search search-sub text-justify">
+                  {{ "search.displaying-a-total-of" | translate }}
+                  {{ opportunities.length }} {{ "search.outcomes" | translate }}
+                </h4>
+              </div>
+              <div class="col-7">
+                <div class="row" >
+                  <div class="col-4 d-flex pt-2" *ngIf="windowWidth > 752">
+                    <div class="dropdown" >
+                      <button  class="grid-select dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ "search.grid" | translate }}
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item grid-select-option" (click)="getColumn(1)">{{ "search.column1" | translate }}</a>
+                        <a class="dropdown-item grid-select-option" (click)="getColumn(2)">{{ "search.column2" | translate }}</a>
+                        <a class="dropdown-item grid-select-option" (click)="getColumn(3)">{{ "search.column3" | translate }}</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                      <div class="d-flex align-items-center gap-5 sort-con">
+                        <p class="text-light font-re font-search w-qc search-sub">
+                          {{ "search.sort-by" | translate }} 
+                        </p>
+                        <select id="inputState" class="sort-by-select font-search text-light search-sub">
+                          <option selected>{{ "search.news" | translate }}</option>
+                          <option>...</option>
+                        </select>
+                        <!-- <div id="inputState"  class="dropdown sort-by-select font-search text-light">
+                          <button  class="grid-select dropdown-toggle" style="color:black !important;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ "search.news" | translate }}
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item grid-select-option" >.....</a>
+                          </div>
+                        </div> -->
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <app-opportunity-details3 id="grid-cards" [options]="{pagination:false,size:size,number_card_pagination:number_card_pagination,col:col}" [classStylePush]="'col-6'" class="row"
+              [opportunities]="getShowingOpportunities(opportunities)"></app-opportunity-details3>
+              <div  class="pagination-container" dir="ltr">  
+                <ul class="page">
+                  <li class="page__btn" (click)="changePagination(pagination_content_page-1)" >
+                    <svg   viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.8411 19.0531L5.50781 10.3864L14.8411 1.71972" stroke="#222831" stroke-width="2" stroke-linecap="square"/>
+                    </svg>
+                  </li>
+                  <li class="page__numbers" (click)="changePagination(0)" [ngClass]="{'active': pagination_content_page == 0}"> 1</li>
+                  <li class="page__numbers " (click)="changePagination(1)" *ngIf="getRangePage(opportunities).length >=2" [ngClass]="{'active': pagination_content_page == 1}">2</li>
+                  <li class="page__dots" *ngIf="pagination_content_page > 3 && getRangePage(opportunities).length > 3">...</li>
+                  <li class="page__numbers" (click)="changePagination((pagination_content_page>3 && pagination_content_page < getRangePage(opportunities).length-1)?pagination_content_page:ceil(getRangePage(opportunities).length/2))" *ngIf="getRangePage(opportunities).length >=3" [ngClass]="{'active': (pagination_content_page == ceil(getRangePage(opportunities).length/2)-1 ||(pagination_content_page>2 && pagination_content_page < getRangePage(opportunities).length-1))}">
+                    {{(pagination_content_page>2 && pagination_content_page < getRangePage(opportunities).length-1)?pagination_content_page:ceil(getRangePage(opportunities).length/2)}}
+                  </li>
+                  <li class="page__dots" *ngIf="getRangePage(opportunities).length >4">...</li>
+                  <li class="page__numbers" (click)="changePagination(getRangePage(opportunities).length-1)" *ngIf="getRangePage(opportunities).length >3" [ngClass]="{'active': pagination_content_page == getRangePage(opportunities).length-1}">{{getRangePage(opportunities).length}}</li>
+                  <li class="page__btn" (click)="changePagination(pagination_content_page+1)">
+                    <svg   viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.95182 2.3864L15.2852 11.0531L5.95182 19.7197" stroke="#222831" stroke-width="2" stroke-linecap="square"/>
+                    </svg>
+                  </li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

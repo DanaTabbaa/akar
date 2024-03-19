@@ -1,0 +1,20 @@
+export const CONTROLPANEL:string="control-panel";
+export const WEBSITE:string="web-site";
+export const MOBILEREGEX:string='(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{1,10})';
+export const SPACEREGEX:string = '^[a-zA-Z\u0600-\u06FF]+(?:\s*[a-zA-Z\u0600-\u06FF]+)*$';
+export const EMAILREGEX:string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'
+export const TEXTREGEX:string = "(?:^|\\s)(\\d+)(?:\\s|$)"
+export const TEXTFORMATREGEX = "^[A-Za-z]+[A-Za-z0-9]*$"
+export const IDENTITYREGEX:string="^[0-9]+$"
+export const DISABLE_LIST_KEY="DisableListKey";
+export const DISABLE_NEW_KEY="DisableNewKey";
+export const DISABLE_UPDATE_KEY="DisableUpdateKey";
+export const DISABLE_SAVE_KEY="DisableSaveKey";
+export const DISABLE_COPY_KEY="DisableCopyKey";
+export const DISABLE_CANCEL_KEY="DisableCancelKey";
+export const DISABLE_EXPORT_KEY="DisableExportKey";
+export const DISABLE_Print_KEY="DisablePrintKey";
+export const LIST_ACTION = "List";
+export const NEW_ACTION = "New";
+export const Update_ACTION = "Update";
+

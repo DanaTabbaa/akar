@@ -1,0 +1,72 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="maintenanceServicesForm" id="MaintenanceFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>
+                    {{'maintenance-services.maintenance-service-info'|translate}}
+                  </h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-3 ">
+                      <div class=" ">
+                        <label for="serviceNameAr" class="label-name">
+                          {{'maintenance-services.service-name-ar'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="text" class="form-control" name="serviceNameAr" formControlName="serviceNameAr">
+                          <div
+                            *ngIf="(f['serviceNameAr'].touched || f['serviceNameAr'].dirty ) && f['serviceNameAr'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['serviceNameAr'].errors && f['serviceNameAr'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+
+                        <label for="serviceNameEn" class="label-name">
+                          {{'maintenance-services.service-name-en'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+
+                          <input type="text" class="form-control" name="serviceNameEn" formControlName="serviceNameEn">
+                          <div
+                            *ngIf="(f['serviceNameEn'].touched || f['serviceNameEn'].dirty ) && f['serviceNameEn'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['serviceNameEn'].errors && f['serviceNameEn'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="list list-container-add">
+  <app-maintenance-services-list
+    [changeMaintenanceServicesFlag]="changeMaintenanceServicesFlag"></app-maintenance-services-list>
+</div>

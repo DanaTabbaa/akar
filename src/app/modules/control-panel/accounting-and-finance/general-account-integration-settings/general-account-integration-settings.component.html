@@ -1,0 +1,105 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="accountIntegrationForm" id="accountIntegrationSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <h3>{{'page-form.general-account-settings'|translate}}</h3>
+
+
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class="">
+                                                <label for="owner-integration-type"
+                                                    class="label-name">{{'general.integration-type'|translate}}</label>
+
+                                                <div class="input-group  popup">
+                                                    <ng-select class="custom" [items]="accIntegrationTypes"
+                                                    formControlName="accIntegrationType"
+                                                        bindLabel="name" bindValue="id" style="width:100%">
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <label for="owner-connection-type"
+                                                    class="label-name">{{'general.connection-type'|translate}}</label>
+
+                                                <div class="input-group  popup">
+                                                    <ng-select class="custom" [items]="connectionTypes" formControlName="authType"
+                                                        bindLabel="name" bindValue="id" style="width:100%">
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="serverName"
+                                                    class="label-name">{{'general.serverName'|translate}}
+                                                </label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control"
+                                                        name="serverName" formControlName="serverName">
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <label for="dbName"
+                                                    class="label-name">{{'general.dbName'|translate}}
+                                                </label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control"
+                                                        name="dbName" formControlName="dbName">
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <label for="userName"
+                                                    class="label-name">{{'general.userName'|translate}}
+                                                </label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control" name="userName" formControlName="sqlUserName">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <label for="userPassword"
+                                                    class="label-name">{{'general.sqlPassword'|translate}}
+                                                </label>
+                                                <div class="form-group input-group">
+                                                    <input type="password" class="form-control"
+                                                        name="sqlPassword" formControlName="sqlPassword">
+                                                </div>
+                                            </div>
+
+                                            <div class="" style="padding-top: 14px;">
+                                                <button
+                                                    class="btn btn-success" (click)="checkConnection()">{{'general.check-connection'|translate}}</button> 
+                                                    &nbsp; <button
+                                                    class="btn btn-info" (click)="syncAccountData()">{{'general.sync-accounts'|translate}}</button>
+                                            </div>
+                                            
+
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

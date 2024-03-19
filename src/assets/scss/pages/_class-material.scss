@@ -1,0 +1,314 @@
+.inner-page-wrapper {
+  #breadcrumbs {
+    margin-left: 7px;
+  }
+  .lease-header-title {
+    margin-left: 0px;
+  }
+  .auction-detail {
+    .wrapper-title {
+      .auction-subtitle {
+        font-size: 1.125rem;
+        color: $gray30;
+        line-height: 22px;
+        text-align: left;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+/***********************Settings Media queries********************************/
+
+@include bp(mobile) {
+  .inner-page-wrapper {
+    .lease-header-title-unit {
+      font-size: 1.4rem;
+    }
+    .lease-header-title {
+      margin-left: -4px !important;
+    }
+    .settings-section {
+      padding: 10px !important;
+      .settings-title {
+        font-size: 1rem !important;
+      }
+    }
+    .settings-wrapper {
+      padding: 10px !important;
+      .servants {
+        width: 100% !important;
+      }
+    }
+    .lease-header-title {}
+    .main-units {
+      .wrapper-title {
+        .search-box {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/***********************Settings Media queries********************************/
+
+@include bp(ipad-pro) {
+  .inner-page-wrapper {
+    .main-units {
+      .wrapper-title {
+        .search-box {
+          width: 40%;
+        }
+      }
+    }
+  }
+  .servants {
+    width: 40% !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1920px) {
+  .inner-page-wrapper {
+    .main-units {
+      .wrapper-title {
+        .search-box {
+          width: 25%;
+        }
+      }
+    }
+  }
+}
+
+.inner-page-wrapper {
+  #breadcrumbs-unit {
+    list-style: none;
+    display: flex;
+    margin-left: 7px;
+    li {
+      /*margin: 0 1px;*/
+      a {
+        color: $gray30;
+        text-decoration: none;
+        font-size: 0.8125rem;
+        margin-left: -5px;
+        font-weight: 500;
+        &:hover {
+          transition-delay: 50ms;
+          transition: 50ms;
+          color: $gray30;
+          text-decoration: none;
+        }
+      }
+      &:last-child a {
+        color: $silver-chalice;
+      }
+    }
+    li+li::before {
+      color: $silver-chalice;
+      content: "/\00a0";
+      padding: 3px;
+    }
+  }
+  .main-units {
+    hr {
+      margin-top: 1.3rem;
+    }
+    .wrapper-title {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+      /*padding: 10px;*/
+      // border-bottom: 1px solid #707070;
+      .settings-subtitle {
+        font-size: 1.5rem;
+        color: $gray30;
+        line-height: 22px;
+        text-align: left;
+        font-weight: 600;
+      }
+    }
+    .search-box {
+      width: 25%;
+      .search-icon {
+        margin-top: 0px;
+        width: 100%;
+        font-size: 1rem;
+        &::before {
+          font-size: 0.8125rem;
+        }
+      }
+      .btn-box {
+        background-color: $purple;
+        color: $white;
+        -webkit-text-stroke: -7px;
+        width: 40px;
+        height: auto;
+      }
+    }
+  }
+  .auction-table {
+    padding: 10px;
+    .names-table,
+    td:nth-child(1),
+    td:nth-child(2),
+    td:nth-child(3) {
+      color: $raven;
+      font-weight: 400;
+      font-size: 0.8125rem;
+    }
+    th {
+      color: $gray30;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+  }
+  /**************class-material modal*********************/
+  .auction-detail {
+    .class-material-modal {
+      max-width: 450px;
+      .modal-wrapper {
+        position: relative;
+        left: 0;
+        height: auto;
+        bottom: -60px;
+        .modal-head {
+          border-bottom: none;
+          .report-modal-title {
+            font-size: 1.25rem;
+            line-height: 24px;
+            text-align: left;
+            color: $gray20;
+            font-weight: 600;
+            padding: 30px 14px 0px 10px;
+          }
+          .close {
+            border: none !important;
+            padding-right: 1.25rem;
+          }
+        }
+        .modal-body-part {
+          padding: 0px 30px;
+          ;
+           ::placeholder {
+            color: $gray-default;
+            font-size: 0.875rem;
+            line-height: 17px;
+            font-weight: 600 !important;
+          }
+          .arabic-name {
+            font-size: 1rem;
+            line-height: 24px;
+            text-align: left;
+            color: $gray20;
+            font-weight: 600;
+          }
+          .section-part {
+            @extend .arabic-name;
+            color: $dove-gray;
+            font-weight: 300;
+          }
+          .delete-message {
+            font-size: 0.875rem;
+            color: $dove-gray;
+            font-weight: 300;
+          }
+          .success-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .circle-wrapper {
+              position: relative;
+              width: 80px;
+              height: 80px;
+              float: left;
+              margin: 10px;
+            }
+            .icon {
+              position: absolute;
+              color: $white;
+              font-size: 2.25rem;
+              top: 15px;
+              left: 22px;
+            }
+            .circle {
+              display: block;
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              padding: 2.5px;
+              background-clip: content-box;
+            }
+            .success {
+              background-color: $genoa;
+            }
+            .update-message {
+              font-size: 1.5rem;
+              color: $gray20;
+              line-height: 38px;
+              text-align: center;
+              font-weight: 500;
+              max-width: 258px;
+            }
+          }
+        }
+        .modal-footer-part {
+          border-top: none;
+          display: flex;
+          justify-content: flex-start;
+          padding: 15px 25px;
+        }
+      }
+    }
+  }
+}
+/******************* IPAD media query *************************/
+
+@include bp(ipad) {
+  .inner-page-wrapper {
+    .settings-wrapper {
+      .main-wrap {
+        .wrapper-title {
+          .servants {
+            width: 40%;
+          }
+        }
+      }
+    }
+    .main-units {
+      .wrapper-title {
+        .search-box {
+          width: 50%;
+        }
+      }
+    }
+    .class-material-modal {
+      .modal-footer-part {
+        .btn-custom {
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+  }
+}
+/******************* MOBILE media query *************************/
+
+@include bp(mobile){
+  .class-material-modal {
+    .modal-footer-part {
+      .btn-custom {
+        width: 100%;
+        display: block;
+      }
+    }
+  }
+}
+/******************* IPHONE 5 media query *************************/
+
+@include bp(iphone5){
+  .table {
+    white-space: normal;
+  }
+}

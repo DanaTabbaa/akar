@@ -1,0 +1,9 @@
+html {
+	font-size: 10px;
+}
+// 1Rem = 10px the reason why we have mention 10px in HTML.
+body {
+	font-family: $primary-font;
+	font-size: 1.4rem;
+	line-height: 1.2;
+}

@@ -1,0 +1,9 @@
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="productsReceipts" [parentColName]="'groupId'" [divId]="'ProductsReceipt'" [columnSettings]="columnNames" [componentName]="'productsReceipt'" (onAddItem)="openAddProductsReceipt()" (onMenuActionSelected)="onMenuActionSelected($event)"
+            [showMenuOptions]="menuOptions" [refreshGrid]="isListEmpty" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'ProductsReceipt'"></app-tabulator>
+    </div>
+  </section>
+
+
+

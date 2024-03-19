@@ -1,0 +1,80 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="jobsTiltesForm" id="jobsTiltesSubmit" (ngSubmit)="onSave()"
+              class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'page-form.job-titles-information'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+                      <div class="">
+                        <label for="nameAr" class="label-name"><span class="text-danger">*</span>
+                          {{'page-form.name-arabic'|translate}}</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control icon-user" name="nameAr"
+                            formControlName="nameAr">
+                          <div *ngIf="f['nameAr'].touched && f['nameAr'].invalid"
+                            class=" alert-danger validtion">
+                            <div *ngIf="f['nameAr'].errors && f['nameAr'].invalid">
+                              <i class="fa fa-close "></i> {{'validation-messages.invalid-name'|translate}}
+                            </div>
+                            <div *ngIf="f['nameAr'].errors && f['nameAr'].errors['minlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.min-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['nameAr'].errors && f['nameAr'].errors['maxlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.max-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['nameAr'].errors && f['nameAr'].errors['pattern'] ">
+                              <i class="fa fa-times"></i>{{'error.space'|translate}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="nameEn" class="label-name"><span class="text-danger">*</span>
+                          {{'page-form.name-latin'|translate}}</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control icon-user" name="nameEn"
+                            formControlName="nameEn">
+                          <div *ngIf="f['nameEn'].touched && f['nameEn'].invalid"
+                            class=" alert-danger validtion">
+                            <div *ngIf="f['nameEn'].errors && f['nameEn'].invalid">
+                              <i class="fa fa-close "></i> {{'validation-messages.invalid-name'|translate}}
+                            </div>
+                            <div *ngIf="f['nameEn'].errors && f['nameEn'].errors['minlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.min-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['nameEn'].errors && f['nameEn'].errors['maxlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.max-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['nameEn'].errors && f['nameEn'].errors['pattern'] ">
+                              <i class="fa fa-times"></i>{{'error.space'|translate}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-slide-toggle
+                      formControlName="isActive">{{"login.is-active"|translate}}</mat-slide-toggle>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

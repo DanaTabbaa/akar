@@ -1,0 +1,22 @@
+.t-start{
+    text-align: start;
+}
+@media  (max-width:767px) {
+    .d-flex-mb{
+        display: flex;
+        justify-content: space-between;
+    }
+    .bt-st-mb{
+        width: 94px !important;
+        height: 30px !important;
+        font-size: 12px !important;
+        border-radius: 8px;
+    }
+}
+
+@media  (min-width:1000px) {
+    .des-st{
+        padding: 0px 80px;
+    }
+}
+

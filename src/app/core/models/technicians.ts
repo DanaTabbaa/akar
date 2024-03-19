@@ -1,0 +1,25 @@
+export class Technicians
+{
+    id:any;
+    technicianNameAr!:string;
+    technicianNameEn!:string;
+    phone!:string;
+    mobile!:string;
+    fax!:string;
+    email!:string;
+    identityNumber!:string;
+    identityIssuanceDate!:Date;
+    identityIssuancePlace!:string;
+    identityExpireDate!:Date;
+    nationalityId:any;
+    job!:string;
+    countryId:any;
+    regionId:any;
+    cityId:any;
+    districtId:any;
+    blockNumber!:string;
+    apartmentNumber!:string;
+    postalCode!:string;
+    additionalCode!:string;
+    detailedAddress!:string;
+}

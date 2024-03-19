@@ -1,0 +1,13 @@
+
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="billTypes" [parentColName]="'groupId'" 
+        [divId]="'BillTypes'" 
+        [columnSettings]="columnNames" [componentName]="'BillTypes'" (onAddItem)="openBillTypes()" 
+        (onMenuActionSelected)="onMenuActionSelected($event)"
+             [direction]="direction" [sortByList]="sortByCols" 
+            [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" 
+            (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'BillTypes'"></app-tabulator>
+    </div>
+  </section>
+  

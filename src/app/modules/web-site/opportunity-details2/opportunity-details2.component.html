@@ -1,0 +1,45 @@
+<div class="grid-apparment-list">
+    <div class="grid-apparment-img">
+        <!-- <img [src]="getImage(opportunity)" alt="list-01-01"> -->
+        <ng-image-slider [images]="opportunity.imageObjects" #nav [autoSlide]="1"
+            style="direction: ltr;margin-left:-194px" slideImage="1" [showArrow]="true"
+            [imageSize]="{width:320,heigth:300}"></ng-image-slider>
+        <button type="button" class="btn btn-price">{{opportunity.price}}
+            {{'website.currency'|translate}}</button>
+    </div>
+    <div class="grid-apparment-details1">
+        <div class="grid-apparment-left-box">
+            <h2 class="app-h">{{opportunity.nameAr}}</h2>
+            <p class="grid-apparment-name">{{opportunity.nameEn}}</p>
+            <div class="d-flex">
+                <p class="grid-apparment-details">
+                    {{'website.details'|translate}} : <span class="appar-bold">
+                        {{opportunity.description}}</span>
+                </p>
+                <p class="grid-apparment-status">{{'website.status'|translate}}
+                    : <span class="appar-bold">{{getStatusName(opportunity)}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="grid-apparment-left-right">
+            <div class="contact-box">
+                <!-- <p class="contact-heading">Contact</p>
+                        <p class="emi-info">EMI starts at 20k</p> -->
+            </div>
+        </div>
+        <div class="clearboth"></div>
+
+    </div>
+    <ul class="list-unstyled ">
+        <li *ngFor="let att of opportunityAttributes">
+            <p class="apartments-parts"> <img [src]="att.attributeIcon" > {{att.nameAr}}</p>
+            <div class="apartments-logo-img">
+               
+                <span class="appartments-num">{{att.value}}</span>
+            </div>
+
+        </li>
+
+    </ul>
+
+</div>

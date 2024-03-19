@@ -1,0 +1,101 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;">{{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="opportunityOfferForm" id="opportunityOfferFormSubmit" class="tabs-form ">
+                            <div class="main-building p-0">
+                                <div class="wrapper-title">
+                                    <!-- <h1 class="lease-header-title-building">{{'page-form.building'|translate}}</h1> -->
+                                    <h3 class="building-info">{{'page-form.opportunity-offer'|translate}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+
+                                            <!------------------------------------------------->
+                                            <div class="">
+                                                <label for="opportunity"
+                                                    class="label-name">{{'page-form.select-opportunity'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group">
+
+                                                    <ng-select formControlName="opportunityId" style="width:100%"
+                                                        >
+                                                        <ng-option *ngFor="let opportunity of opportunities" [value]="opportunity.id">
+                                                            {{lang=='ar'?opportunity.nameAr:opportunity.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="f['opportunityId'].touched && f['opportunityId'].invalid"
+                                                        class=" alert-danger validtion">
+                                                        <div *ngIf="f['opportunityId'].errors && f['opportunityId'].invalid">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'validation-messages.opportunity-required'|translate}}
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!------------------------------------------------->
+
+                                            <div class="">
+                                                <label for="expireDate"
+                                                    class="label-name">{{'page-form.expire-date'|translate}}</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <app-full-date name="expireDate" [selectedDate]="expireDate"
+                                                            (OnDateSelect)="getExpireDate($event)">
+                                                        </app-full-date>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                               
+                                            </div>
+
+                                            <div class="">
+                                                <mat-slide-toggle formControlName="status">{{"permissions.is-active"|translate}}
+                                                </mat-slide-toggle>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

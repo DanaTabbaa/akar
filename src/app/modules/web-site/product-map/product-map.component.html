@@ -1,0 +1,202 @@
+
+<div class="page_wrapper">
+
+
+
+    <main class="main-content margin-top-mobile">
+        <section class="banner-top-common">
+            <div class="banner-top-common__banner_main">
+                <div class="banner_main_bg">
+                    <img src="../assets/images/abut-imge1.jpeg" alt="">
+                    <div id="overlay"></div>
+                </div>
+
+            </div>
+            <div class="banner-top-common__page-heading">
+                <div class="container">
+              
+                </div>
+            </div>
+        </section>
+
+        <section class="property-listing-box">
+          <div  class="search_area">
+            <div class="container">
+              <div class="row ">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-col">
+                  <div class="p-1 select-search-home">
+                    <!-- <select class=" form-control input-search py-2" id="select" >
+                      <option selected>{{ "general.area-form" | translate }}</option>
+                      <option *ngFor="let city of cities" [value]="city.id">
+                        {{ lang == "ar" ? city.cityNameAr : city.cityNameEn }}
+                      </option>
+                  </select> -->
+                  
+                  
+                  <ng-select 
+                  [items]="cities"
+                  bindValue="id"
+                  bindLabel="{{ lang == 'ar' ? 'cityNameAr' : 'cityNameEn'  }}"
+                  placeholder="{{ 'general.city' | translate }}"
+                  [(ngModel)]="selectedCity"
+                  [closeOnSelect]="true"
+                  class=" form-control input-search py-2 border-select"
+                  id="select"
+                  >
+                </ng-select>
+                
+                
+                
+                  </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-col">
+                  <div class="p-1 select-search-home">
+                    <!-- <select class=" form-control input-search py-2" id="select" >
+                      <option selected>{{ "general.type-prorprty" | translate }}</option>
+                      <option  *ngFor="let type of opportunitiesTypes"  [value]="type.id">
+                      {{ lang == "ar" ? type.nameAr : type.nameEn }}
+                    </option>
+                    </select> -->
+                    
+                    
+                    <ng-select 
+                    [items]="opportunitiesTypes"
+                    bindValue="id"
+                    bindLabel="{{ lang == 'ar' ? 'nameAr' : 'nameEn'  }}"
+                    placeholder="{{ 'general.type-prorprty' | translate }}"
+                    [closeOnSelect]="true"
+                    [(ngModel)]="selectedType"
+                    class=" form-control input-search py-2 border-select"
+                    id="select"
+                    >
+                  </ng-select>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-col">
+                  <div class="p-1 select-search-home">
+                    <!-- <select class=" form-control input-search py-2" id="select" >
+                        <option selected>{{'website.status' | translate}}</option>
+                        <option>status 1</option>
+                        <option>status 2</option>
+         
+                    </select> -->
+                    
+                    <ng-select 
+                    [items]="status"
+                    bindValue="id"
+                    bindLabel="{{ lang == 'ar' ? 'nameAr' : 'nameEn'  }}"
+                    placeholder="{{ 'website.status' | translate }}"
+                    [(ngModel)]="purpose"
+                    [closeOnSelect]="true"
+                    class=" form-control input-search py-2 border-select"
+                    id="select"
+                    >
+                  </ng-select>
+                  
+                  </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                  <div class="row p-1">
+                    <div class="col-6 padding-col-left-6 ">
+                      <button (click)="gotoProperty()" class="adv-button form-control py-2">
+                        {{'search.advanced' | translate}}
+                      </button>
+                    </div>
+                    <div class="col-6 padding-col-right-6 ">
+                      <button  class="search-button  form-control py-2" >
+                        <b>{{ "general.search" | translate }}</b>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+          <div class="container" style="max-width:calc(100% - 20px)">
+                <div class="row pt-5" >
+                    <div class="col-md-12 col-lg-4" >
+                        <div class="body-cards mb-6">
+                            <div class="row">
+                              <div
+                                class="col-12"
+                                style="text-align: justify !important"
+                              >
+                                <h1>
+                                  <p class="font-search font-titel-search"
+                                    >{{ "search.search-for-property" | translate }}
+                                  </p>
+                                </h1>
+                              </div>
+                            </div>
+                            <div class="row  align-items-end justify-content-between">
+                              <div class="col-6 my-lg-4 my-xs-1">
+                                <p  class="font-search font-sup-titel-search text-justify text-s-hwva">
+                                  {{ "search.displaying-a-total-of" | translate }}
+                                  {{ opportunities.length }}
+                                  {{ "search.outcomes" | translate }}
+                                </p>
+                              </div>
+                            </div>
+                            <div class="inline-card mb-3" *ngFor="let opportunity of getShowingOpportunities(opportunities)">
+                              <div class="card_box">
+                                <div class="card-title">
+                                  <div class="blur-image"></div>
+                                  <img [src]="getImage(opportunity.opportunitiesImages)"    alt="../assets/images/imag-view-home2.png" class="card-img">
+                                  <div (click)="mapRef.openMark(opportunity.id)" class="address-details">
+                                    <svg  viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.94447 10.6991C10.3347 10.6991 11.463 9.57149 11.463 8.18218C11.463 6.79286 10.3347 5.66531 8.94447 5.66531C7.55425 5.66531 6.42595 6.79286 6.42595 8.18218C6.42595 9.57149 7.55425 10.6991 8.94447 10.6991Z" stroke="white" stroke-linecap="square"/>
+                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 8.18218C16.5 14.4744 10.2037 18.2497 8.94447 18.2497C7.68521 18.2497 1.38892 14.4744 1.38892 8.18218C1.38892 4.01297 4.77255 0.631577 8.94447 0.631577C13.1164 0.631577 16.5 4.01297 16.5 8.18218Z" stroke="white" stroke-linecap="square"/>
+                                    </svg>
+                                    <span>{{opportunity.addressDesc}}</span>
+                                  </div>
+                                </div>
+                                <div class="card-contant">
+                                  <div class="details">
+                                    <div class="title-details" [routerLink]="['/details/'+opportunity.id]"> {{  lang == "ar"  ? opportunity.nameAr  : opportunity.nameEn  }}</div>
+                                    <div class="price-details">{{opportunity.price}} {{ "general.SR" | translate }}</div>
+                                    <div class="des-details">{{opportunity.description.slice(0,90)}}...</div>
+                                    <div class="more-details ">
+                                      <div  *ngFor="let attr of getFirst3AttrNumber(opportunity.attributesValues)">
+                                        <div class="icon" [innerHTML]="getIconAttr(attr.attributeId)">
+                                        </div>
+                                        <span>{{attr.valueNum}}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div  class="pagination-container" dir="ltr">  
+                          <ul class="page">
+                            <li class="page__btn" (click)="changePagination(pagination_content_page-1)" >
+                              <svg   viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.8411 19.0531L5.50781 10.3864L14.8411 1.71972" stroke="#222831" stroke-width="2" stroke-linecap="square"/>
+                              </svg>
+                            </li>
+                            <li class="page__numbers" (click)="changePagination(0)" [ngClass]="{'active': pagination_content_page == 0}"> 1</li>
+                            <li class="page__numbers " (click)="changePagination(1)" *ngIf="getRangePage(opportunities).length >=2" [ngClass]="{'active': pagination_content_page == 1}">2</li>
+                            <li class="page__dots" *ngIf="pagination_content_page > 3 && getRangePage(opportunities).length > 3">...</li>
+                            <li class="page__numbers" (click)="changePagination((pagination_content_page>3 && pagination_content_page < getRangePage(opportunities).length-1)?pagination_content_page:ceil(getRangePage(opportunities).length/2))" *ngIf="getRangePage(opportunities).length >=3" [ngClass]="{'active': (pagination_content_page == ceil(getRangePage(opportunities).length/2)-1 ||(pagination_content_page>2 && pagination_content_page < getRangePage(opportunities).length-1))}">
+                              {{(pagination_content_page>2 && pagination_content_page < getRangePage(opportunities).length-1)?pagination_content_page:ceil(getRangePage(opportunities).length/2)}}
+                            </li>
+                            <li class="page__dots" *ngIf="getRangePage(opportunities).length >4">...</li>
+                            <li class="page__numbers" (click)="changePagination(getRangePage(opportunities).length-1)" *ngIf="getRangePage(opportunities).length >3" [ngClass]="{'active': pagination_content_page == getRangePage(opportunities).length-1}">{{getRangePage(opportunities).length}}</li>
+                            <li class="page__btn" (click)="changePagination(pagination_content_page+1)">
+                              <svg   viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.95182 2.3864L15.2852 11.0531L5.95182 19.7197" stroke="#222831" stroke-width="2" stroke-linecap="square"/>
+                              </svg>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-8 mb-5 map">
+                        <app-map #mapRef></app-map>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+</div>

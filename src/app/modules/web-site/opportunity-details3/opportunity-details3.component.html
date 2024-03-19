@@ -1,0 +1,55 @@
+
+
+<section id="tranding">
+
+  <div class="container"  dir="ltr">
+    <div [id]="idEl" class="cards-details" style="height: 45rem;" [ngClass]="{'tranding-slider': options.slider,'swiper':options.slider}" dir="ltr">
+      <div class="row to-ch" [ngClass]="{'swiper-wrapper': options.slider,'row': !options.slider}"> 
+        <div [attr.class]="options.slider==true?'':'col-'+options.col" [ngClass]="{'tranding-slide': options.slider,'swiper-slide':options.slider,'m-0': !options.slider,'mb-5': !options.slider}"    *ngFor="let opportunity of getShowingOpportunities(opportunities)">
+          <div [attr.class]="options.size+'-card'">
+            <div class="card_box">
+              <div class="card-title">
+                <div class="blur-image"></div>
+                <img   [src]="getImage(opportunity.opportunitiesImages)" alt="../assets/images/imag-view-home2.png" class="card-img">
+                <span class="card-status"  [attr.content]="'For Rent'"></span>
+                <div class="show-details justify-content-between" [routerLink]="['/details/'+opportunity.id]">{{ "home.FEAtURED" | translate }}</div>
+                <div class="address-details">
+                  <svg  viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.94447 10.6991C10.3347 10.6991 11.463 9.57149 11.463 8.18218C11.463 6.79286 10.3347 5.66531 8.94447 5.66531C7.55425 5.66531 6.42595 6.79286 6.42595 8.18218C6.42595 9.57149 7.55425 10.6991 8.94447 10.6991Z" stroke="white" stroke-linecap="square"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 8.18218C16.5 14.4744 10.2037 18.2497 8.94447 18.2497C7.68521 18.2497 1.38892 14.4744 1.38892 8.18218C1.38892 4.01297 4.77255 0.631577 8.94447 0.631577C13.1164 0.631577 16.5 4.01297 16.5 8.18218Z" stroke="white" stroke-linecap="square"/>
+                  </svg>
+                  <span>{{opportunity.addressDesc}}</span>
+                </div>
+              </div>
+              <div class="card-contant">
+                <div class="details">
+                  <div class="title-details" [routerLink]="['/details/'+opportunity.id]">{{lang=="ar"?  opportunity.nameAr:opportunity.nameEn}}</div>
+                  <div class="price-details">{{opportunity.price}} {{ "general.SR" | translate }}</div>
+                  <div class="des-details">{{opportunity.description.slice(0,75)}}...</div>
+                  <div class="more-details ">
+                    <div  *ngFor="let attr of getFirst3AttrNumber(opportunity.attributesValues)"  style="margin-right: 12px;">
+                      <div class="icon" [innerHTML]="getIconAttr(attr.attributeId)">
+                      </div>
+                      <span>{{attr.valueNum}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="tranding-slider-control" style="background-color: black;">
+        <div id="swiper-pagination33" class="swiper-pagination" style="background-color: black;"></div>
+      </div>
+
+    </div>
+    <div *ngIf="getRangePage(opportunities).length > 1">
+      <div class="d-flex justify-content-center pag-con" > 
+        <button [id]="idEl+'-point-'+i" class="pag-btn {{ i<3?'point-active':'' }}" (click)="scrollToSlide(i)"  *ngFor="let counter of getRangePage(opportunities); let i = index" class="po-call mx-1"></button>
+      </div>
+    </div>
+  </div>
+</section>
+

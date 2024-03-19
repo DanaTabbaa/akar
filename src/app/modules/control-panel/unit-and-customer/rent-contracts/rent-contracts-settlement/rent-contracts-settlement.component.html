@@ -1,0 +1,148 @@
+<section class="inner-page-wrapper inner-page-auction">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form #rentContractSettlement="ngForm" (ngSubmit)="doCalculateAndCreate()" class="tabs-form">
+                            <div class="main-contract">
+                                <div class="wrapper-title">
+                                    <h3>{{'rent-contracts.settlement'|translate}} {{contractName}} {{'general.number'
+                                        |translate}} : {{contractNumber}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class="">
+                                                <label for="settlementOpDate"
+                                                    class="label-name">{{'general.date'|translate}}</label>
+                                                <div>
+                                                    <div class="input-group ">
+                                                        <app-full-date [selectedDate]="operationDate"></app-full-date>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="settlementDate"
+                                                    class="label-name">{{'rent-contracts.settlement-date'|translate}}</label>
+                                                <div>
+                                                    <div class="input-group ">
+                                                        <app-full-date [selectedDate]="settelmentDate"
+                                                            (change)="doCalculate()"></app-full-date>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="tenant-name"
+                                                    class="label-name">{{'general.tenant'|translate}}</label>
+                                                <div class="input-group  popup">
+                                                    <ng-select style="width:100%" [(ngModel)]="tenantId"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <ng-option *ngFor="let tenant of tenants" [value]="tenant.id">
+                                                            {{lang=='ar'?tenant.nameAr:tenant.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="contractNumber"
+                                                    class="label-name">{{'page-form.contract-number'|translate}}</label>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="contractNumber"
+                                                        [(ngModel)]="contractNumber" disabled>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="contractPeriod"
+                                                    class="label-name">{{'rent-contracts.contract-period'|translate}}</label>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="contractPeriod"
+                                                        [(ngModel)]="contractPeriod" disabled>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="settlementPeriod"
+                                                    class="label-name">{{'rent-contracts.settlement-period'|translate}}</label>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="settelmentPeriod"
+                                                        [(ngModel)]="settelmentPeriod" disabled>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="servicesAmount"
+                                                    class="label-name">{{'rent-contracts.services-amount'|translate}}</label>
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control" name="servicesAmount"
+                                                        [(ngModel)]="servicesAmount">
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="owner-account"
+                                                    class="label-name">{{'page-form.owner-account'|translate}}</label>
+                                                <div class="input-group  popup">
+                                                    <ng-select name="ownerAccountId" style="width:100%"
+                                                        [(ngModel)]="ownerAccountId">
+                                                        <ng-option *ngFor="let type of ownerAccount" [value]="type.id">
+                                                            {{lang=='ar'?type.accArName:type.accEnName}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="txtSettlmentPeriod"
+                                                    class="label-name">{{'rent-contracts.total-dues-on-tenant'|translate}}
+                                                </label>
+                                                <div class="form-group">
+
+                                                    <input type="text" name="txtSettlmentPeriod" class="form-control"
+                                                        disabled [(ngModel)]="totalCustomerDueAmount">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group d-flex align-items-center gap-1">
+                                                    <input type="checkbox" name="isGenerateEntry"
+                                                        [(ngModel)]="isGenerateEntry"
+                                                        (change)="selectGenerateEntry($event)">
+                                                    <label for="is-generate-entry"
+                                                        class="label-name m-0">{{'general.generate-entry'|translate}}</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <input type="checkbox" name="chk4" class="form-group">
+
+                          <span>تسوية شهرية</span>
+                          </div>
+
+                  </div> -->
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="">
+                                        <app-reusable-rent-contract-dues [contractId]="contractid"
+                                            [operationDate]="settelmentDate" [isMonthlySettlement]="isMonthlySettlement"
+                                            (onMasterSettelmentChange)="setMasterSettlment($event)"
+                                            (onExtSettelmentChange)="setExtSettlment($event)"
+                                            (getTotalDue)="getTotalDue($event)">
+                                        </app-reusable-rent-contract-dues>
+                                        <div class="row0 mt-3">
+                                            <button type="submit" *ngIf="isSettlement==false"
+                                                [disabled]="!rentContractSettlement.valid"
+                                                class="btn btn-primary btn-round">{{'buttons.save'|translate}}</button>
+                                            &nbsp;
+                                            <button class="btn btn-danger" *ngIf="isSettlement==true"
+                                                (click)="showConfirmDeleteMessage($event)">{{'buttons.delete'|translate}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

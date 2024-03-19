@@ -1,0 +1,278 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}</p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body" >
+            <form id="NotManagementFormSubmit" class="tabs-form">
+              <div class="main-unit">
+                <div class="wrapper-title">
+                  <h3>{{'user-manager.users-management'|translate}}</h3>
+                  <hr>
+                  <!-- <hr> -->
+                  <!-- start tabs -->
+                  <ul ngbNav #nav="ngbNav" class="nav-tabs mt-3 vvv">
+                    <!-- <li [ngbNavItem]="1">
+                      <a (click)="onSelcetAdd()" ngbNavLink>
+
+                        <ng-container *ngIf="(isUpdateClicked); else elseAdd">
+                          {{'user-manager.update-user'|translate}}
+                        </ng-container>
+                        <ng-template #elseAdd>
+                          {{'user-manager.add-user'|translate}}
+                        </ng-template>
+                      </a>
+                      <ng-template ngbNavContent>
+
+                        <form [formGroup]="UserRegisterationForm" id="UserRegisteration">
+                          <div class="col gap-2 grid grid-cols-3 p-0">
+                            <div class=" ">
+                              <label for="registerType"
+                                class="label-name">{{'user-manager.registeration-type'|translate}}</label>
+                              <div class="form-group">
+                                <div class="input-form">
+                                  <ng-select class="custom" formControlName="registerTypeId">
+                                    <ng-option *ngFor="let registerationTypes of registerationTypes"
+                                      [value]="registerationTypes.id">{{registerationTypes.name}}
+                                    </ng-option>
+                                  </ng-select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="registerType"
+                                class="label-name">{{'user-manager.user-type'|translate}}</label>
+                              <div class="form-group">
+                                <div class="input-form">
+                                  <ng-select class="custom" formControlName="userTypeId">
+                                    <ng-option *ngFor="let userType of userTypes" [value]="userType.id">
+                                      {{userType.name}}
+                                    </ng-option>
+                                  </ng-select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <div class="form-group">
+                                <label for="registerType"
+                                  class="label-name">{{'user-manager.user-country'|translate}}</label>
+                                <div class="input-form">
+                                  <ng-select formControlName="countryId"
+                                    placeholder="{{'page-form.country'|translate}}">
+                                    <ng-option *ngFor="let country of countries" [value]="country.id">
+                                      {{lang=='ar'? country.countryNameAr:country.countryNameEn}}
+                                    </ng-option>
+                                  </ng-select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="registerType" class="label-name">
+                                {{'user-manager.name-arabic'|translate}}</label>
+                              <div class="input-group form-group">
+                                <div class="input-group">
+                                  <input type="text" class="form-control icon-user tenant-icon"
+                                    formControlName="nameAr">
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="registerType"
+                                class="label-name"><span class="text-danger">*</span> {{'user-manager.name-latin'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" class="form-control icon-user " formControlName="nameEn">
+                              </div>
+                              <div *ngIf="(f['nameEn'].touched || f['nameEn'].dirty ) && f['nameEn'].invalid"
+                                class="validation alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['nameEn'].errors && f['nameEn'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                                <span *ngIf="f['nameEn'].errors && f['nameEn'].errors['minlength']">
+                                  {{'validation-messages.min-name-char'|translate}}</span>
+                              </div>
+
+                            </div>
+                            <div class=" ">
+                              <label for="userName" class="label-name"><span class="text-danger">*</span> {{'user-manager.user-name'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" class="form-control icon-user"
+                                  (change)="checkData('',UserRegisterationForm.value.userName,'')"
+                                  formControlName="userName">
+                              </div>
+
+                              <div *ngIf="(f['userName'].touched || f['userName'].dirty ) && f['userName'].invalid"
+                                class="validation alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['userName'].errors && f['userName'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}
+                                </span>
+                                <span *ngIf="f['userName'].errors && f['userName'].errors['minlength']">
+                                  {{'validation-messages.min-name-char'|translate}}
+                                </span>
+                              </div>
+                              <div class="alert alert-danger"
+                                *ngIf="(f['userName'].touched && f['userName'].dirty) &&checkDataResult?.isUserNameExist">
+                                <i class="fa fa-close "></i> {{checkDataResult.message}}
+                              </div>
+                              <div
+                                *ngIf="f['userName'].touched && f['userName'].valid &&checkDataResult?.isUserNameAvailbe"
+                                class="validation alert-success">
+                                <i class="fa fa-check"></i> {{'validation-messages.valid-user-name'|translate}}
+                              </div>
+
+                            </div>
+
+                            <div class=" ">
+                              <label for="email" class="label-name">{{'user-manager.user-email'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" class="form-control icon-user"
+                                  (change)="checkData(UserRegisterationForm.value.email)" formControlName="email">
+
+                              </div>
+                              <div class="validtion alert-danger"
+                                *ngIf="(f['email'].touched && f['email'].dirty) && f['email'].invalid">
+                                <i class="fa fa-close "></i> {{'validation-messages.invalid-email'|translate}}
+                              </div>
+
+                              <div class="validtion alert-danger"
+                                *ngIf="(f['email'].touched && f['email'].dirty) &&checkDataResult?.isEmailExist">
+                                <i class="fa fa-close "></i> {{checkDataResult.message}}
+                              </div>
+                              <div *ngIf="f['email'].touched && f['email'].valid && checkDataResult?.isEmailAvailbe"
+                                class="validtion alert-success">
+                                <i class="fa fa-check"></i> {{'validation-messages.valid-email'|translate}}
+                              </div>
+
+                            </div>
+                            <div class=" ">
+                              <label for="mobile" class="label-name">{{'user-manager.user-mobile'|translate}}</label>
+                              <div class="input-group form-group">
+                                <input type="text" maxLength="20"  class="form-control icon-padlock"
+                                  (change)="checkData('','',UserRegisterationForm.value.mobile)"
+                                  formControlName="mobile">
+                              </div>
+                              <div *ngIf="f['mobile'].touched && f['mobile'].invalid" class="alert alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['mobile'].errors && f['mobile'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                                <span *ngIf="f['mobile'].errors && f['mobile'].errors['pattern']">
+                                  {{'validation-messages.phone-pattern'|translate}}</span>
+                              </div>
+                              <div class="validtion alert-danger"
+                                *ngIf="(f['mobile'].touched && f['mobile'].dirty) &&checkDataResult?.isUserMobileExist">
+                                <i class="fa fa-close "></i> {{checkDataResult.message}}
+                              </div>
+                              <div
+                                *ngIf="f['mobile'].touched && f['mobile'].valid && checkDataResult?.isUserMobileAvailbe"
+                                class="validation alert-success">
+                                <i class="fa fa-check"></i> {{'validation-messages.valid-mobile'|translate}}
+                              </div>
+
+                            </div>
+                            <div class=" ">
+                              <label for="roles" class="label-name"><span class="text-danger">*</span>{{'permissions.role'|translate}}</label>
+                              <div class="form-group">
+                                <div class="input-form">
+                                  <ng-select class="custom" formControlName="roleId">
+                                    <ng-option *ngFor="let role of roles" [value]="role.id">
+
+                                      <ng-container *ngIf="lang=='ar'; else en">
+                                        {{role.roleNameEn}}
+                                      </ng-container>
+                                      <ng-template #en>
+                                        {{role.roleNameEn}}
+                                      </ng-template>
+                                    </ng-option>
+                                  </ng-select>
+                                  <div *ngIf="(f['roleId'].touched || f['roleId'].dirty ) && f['roleId'].invalid"
+                                    class="validation alert-danger">
+                                    <i class="fa fa-close "></i>
+                                    <span *ngIf="f['roleId'].errors && f['roleId'].errors['required']">
+                                      {{'validation-messages.required-field'|translate}}
+                                    </span>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" " *ngIf="UserRegisterationForm.value.registerTypeId==2">
+                              <label for="unifiedNumber"
+                                class="label-name">{{'user-manager.unified-number'|translate}}</label>
+                              <div class="form-group">
+                                <input type="text" class="form-control icon-padlock" formControlName="unifiedNumber">
+                              </div>
+                            </div>
+                            <div class=" " *ngIf="UserRegisterationForm.value.registerTypeId==2">
+                              <label for="commercialRegistrationNo"
+                                class="label-name">{{'user-manager.commercial-registeration-no'|translate}}</label>
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <input type="text" class="form-control icon-user"
+                                    formControlName="commercialRegistrationNo"
+                                    placeholder="{{'login.commercial-registration-no' | translate}}">
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" " *ngIf="UserRegisterationForm.value.registerTypeId ==2">
+                              <label for="commercialRegistrationNo"
+                                class="label-name">{{'user-manager.commercial-registration-issue-date'|translate}}</label>
+                              <div class="form-group">
+
+                                <app-full-date name="commercialRegistrationIssueDate"
+                                  [selectedDate]="commercialRegistrationIssueDate"
+                                  (OnDateSelect)="getCommercialRegistrationIssueDate($event)">
+                                </app-full-date>
+                                <div class="validation alert-danger" *ngIf="isCommercialRegistrationIssueDateExpired">
+                                  <i class="fa fa-close"></i> {{'validation-messages.invalid-date'|translate}}
+                                </div>
+                                <div class="validation alert-success"
+                                  *ngIf="isCommercialRegistrationIssueDateExpired==false && onSelectCommercialRegistrationIssueDate==true">
+                                  <i class="fa fa-check"></i> {{'validation-messages.valid-date'|translate}}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div *ngIf="!UserRegisterationForm.valid  && submited" class="alert alert-danger">
+                              <i class="fa fa-close "></i> {{errorMessage}}
+                            </div>
+                          </div>
+                        </form>
+
+                      </ng-template>
+                    </li> -->
+                    <li [ngbNavItem]>
+                      <a
+                         ngbNavLink>
+                        {{'user-manager.users-list'|translate}} </a>
+                      <ng-template ngbNavContent>
+                        <div class="container" >
+                          <app-tabulator [idColName]="'id'" [childRowData]="users" [parentColName]="'groupId'" [divId]="'Users'" [columnSettings]="columnNames" [componentName]="'users'" (onAddItem)="openUsers()" (onMenuActionSelected)="onMenuActionSelected($event)"
+                              [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'users'"></app-tabulator>
+                      </div>
+                      </ng-template>
+                    </li>
+                    <!-- <li [ngbNavItem]="3">
+                                            <a ngbNavLink>{{'user-manager.users-permissions'|translate}} </a>
+                                            <ng-template ngbNavContent>
+                                            </ng-template>
+                                        </li> -->
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class="" ></div>
+                  <!-- end tabs -->
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

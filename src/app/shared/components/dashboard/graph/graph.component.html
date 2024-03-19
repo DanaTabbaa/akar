@@ -1,0 +1,53 @@
+<!-- <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="graph">
+        <p class="graph-name">Total Outline of Units</p>
+        <div class="graph-unit">
+          <span class="circle"></span>
+          <span class="unit-count">28 Unit</span>
+        </div>
+        <div class="chart_wrap">
+          <div id="chart_div" class="chart"></div>
+        </div>
+        <div class="graph-units">
+          <span class="table-name">Table Name</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<div class=" d-flex justify-content-between  tile_count">
+  <div class="bg-white col-lg-12 col-md-12 col-sm-12 col-xs-12 p-3">
+    <div class="x_panel">
+      <div class="x_title">
+        <ul class="nav navbar-right panel_toolbox">
+          <!-- <li><a class="collapse-link"><i class="fas fa-chart-bar"></i></a>
+            </li> -->
+          <!-- <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Settings 1</a>
+            </li>
+            <li><a href="#">Settings 2</a>
+            </li>
+          </ul>
+        </li> -->
+          <!-- <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li> -->
+        </ul>
+        <h2 style="text-align:center;">
+          <ng-container *ngIf="lang=='en'; else unitarabservicest">
+            {{'dashboard.units-bar-char'|translate}}
+          </ng-container>
+          <ng-template #unitarabservicest>
+            {{'dashboard.units-bar-char'|translate}}
+          </ng-template>
+        </h2>
+
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content chart-container">
+        <canvas id="lineCharts"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

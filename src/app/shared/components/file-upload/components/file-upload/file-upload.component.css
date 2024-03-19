@@ -1,0 +1,68 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+}
+
+:host ::ng-deep .file-upload__input {
+  display: none;
+}
+
+.file-upload__upload-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+h2 {
+  font-size: 17px;
+  color: #757575;
+  position: relative;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.img-wrap {
+  position: relative;
+  text-align: center;
+  width: 500px;
+  max-height: 500px;
+}
+
+.img-wrap .close {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 100;
+  background-color: #FFF;
+  padding: 5px 2px 2px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.2;
+  text-align: center;
+  font-size: 22px;
+  line-height: 10px;
+  border-radius: 50%;
+}
+
+.img-wrap:hover .close {
+  opacity: 1;
+}
+
+.zoom {
+  transition: transform 0.2s; /* Animation */
+  cursor: pointer;
+}
+
+.zoom:hover {
+  transform: scale(1.8); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}/*# sourceMappingURL=file-upload.component.css.map */

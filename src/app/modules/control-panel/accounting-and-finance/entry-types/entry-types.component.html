@@ -1,0 +1,231 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="entryTypesForm" id="entryTypesForm" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'menu.entry-types'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+                      
+
+                      <div class=" ">
+                        <label for="code" class="label-name">{{'entry-type.code'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="code"
+                            formControlName="code">
+                          <div *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['code'].errors && f['code'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="entryKindId" class="label-name"> {{'entry-type.entry-type'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="entryKindId"
+                            [items]="entryKinds" [bindLabel]="lang=='ar'?'nameAr':'nameEn'" bindValue="id"
+                            style="width:100%">
+                          </ng-select>
+
+                          <div *ngIf="(f['entryKindId'].touched || f['entryKindId'].dirty ) && f['entryKindId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['entryKindId'].errors && f['entryKindId'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class=" ">
+                        <label for="contractArName" class="label-name">{{'entry-type.name'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="entryNameAr"
+                            formControlName="entryNameAr">
+                          <div *ngIf="(f['entryNameAr'].touched || f['entryNameAr'].dirty ) && f['entryNameAr'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['entryNameAr'].errors && f['entryNameAr'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="entryNameEn" class="label-name">
+                          {{'entry-type.latinName'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="entryNameEn"
+                            formControlName="entryNameEn">
+                          <div *ngIf="(f['entryNameEn'].touched || f['entryNameEn'].dirty ) && f['entryNameEn'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['entryNameEn'].errors && f['entryNameEn'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="defaultAccId" class="label-name">
+                          {{'voucher.defaultAccId'|translate}}                          
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="defaultAccId" style="width:100%">
+                            <ng-option *ngFor="let account of accounts"
+                              [value]="account.id">{{account.accCode+' - '+ (lang=='ar'?account.accArName:account.accEnName)}}
+                            </ng-option>
+                          </ng-select>
+                         
+                        </div>
+                      </div>
+
+
+
+                     
+
+                      <div class="">
+                        <label for="contractKindId" class="label-name">{{'entry-type.contract-type'|translate}} 
+                          <!-- <span class="text-danger">*</span> -->
+                          </label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" (change)="getFilterContractSettings(entryTypesForm.value.contractKindId)"
+                            formControlName="contractKindId" [items]="contractKinds"
+                            [bindLabel]="lang=='ar'?'nameAr':'nameEn'" bindValue="id" style="width:100%">
+                          </ng-select>
+
+                          <!-- <div
+                            *ngIf="(f['contractKindId'].touched || f['contractKindId'].dirty ) && f['contractKindId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['contractKindId'].errors && f['contractKindId'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="contractTypeId" class="label-name">
+                          {{'entry-type.contract-setting'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <p-multiSelect [options]="contractSettings" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="selectedContractTypes" [virtualScroll]="true"
+                            optionLabel="{{lang=='ar'?'contractArName':'contractEnName'}}" id="contractTypes"
+                            name="contractTypeIds" class="w-100"
+                            defaultLabel="{{'general.select'|translate}}"></p-multiSelect>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <form>
+                      <hr>
+                      <div class="wrapper-title">
+                        <h3>{{'entry-type.settings'|translate}} </h3>
+                      </div>
+                      <!-- <button type="button"
+                        class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                        aria-controls="collapseExample6">
+                        {{'entry-type.settings'|translate}}
+                      </button> -->
+                      <!-- //#collapse="ngbCollapse" [(ngbCollapse)]="collapse1" -->
+                      <div>
+                        <div class="col gap-2 grid grid-cols-2  py-2 ">
+
+                          <div class="d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center gap-1 popup">
+
+                              <input type="checkbox" [(ngModel)]="isGenerateEntry" name="isGenerateEntry"
+                                #generateEntry>
+                              <label for="isGenerateEntryByDue" class="label-name m-0">
+                                {{'entry-type.generate-entry'|translate}}</label>
+
+                            </div>
+                          </div>
+
+                          <!-- <br> -->
+                          <div class="d-flex align-items-center" *ngIf="false">
+                            <div class="form-group d-flex align-items-center gap-1 popup input-group ">
+                              <input type="checkbox" [(ngModel)]="isRelatedToContract" name="isRelatedToContract"
+                                #relatedToContract>
+                              <label for="relateToContract" class="label-name m-0">
+                                {{'entry-type.relate-to-contract'|translate}}</label>
+                            </div>
+                          </div>
+
+
+                         
+
+
+
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                  <hr>
+                  <!-- <div class="page-permissions">
+
+                    <div class="wrapper-title">
+                      <h3> {{'permissions.entryTypeUserPermissions'|translate}}</h3>
+                    </div>
+                  
+                    <div class="row">
+                      <div class="col-md-3 col-6 ">
+                        <div *ngFor="let user of subUsers; let i= index;" class="userscontract">
+                          <div>
+                            <input type="checkbox" [ngModelOptions]="{standalone: true}"
+                              [(ngModel)]="user.isUserChecked" (change)="onCheckUserChange($event,user.userId)"
+                              [attr.checked]="user.isUserChecked ? 'checked' : null" id="{{user.userId}}_checkbox">
+
+                            <label for="{{user.userName}}"></label>
+                            <span> {{user.userName}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-9 col-6">
+                        <div *ngFor="let userItem of subUsersList; let i= index;" class="permission-users">
+                          <div class="d-inline-flex px-2"
+                            *ngFor=" let permission of userItem?.permissionJson | keyvalue">
+                            <input type="checkbox" [attr.checked]="permission.value ? 'checked' : null"
+                              (change)="onCheckboxChange($event,userItem?.permissionJson,permission.key,userItem.userId)"
+                              id="{{permission+'_'+userItem.userId}}" value="{{permission.value}}">
+                            <label for="{{permission.key}}"></label>
+                            <span class="mx-1"> {{('pagePermission.'+permission.key)|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- hgfd -->

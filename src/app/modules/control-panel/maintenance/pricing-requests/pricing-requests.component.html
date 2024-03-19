@@ -1,0 +1,341 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="priceRequestForm" id="priceRequestFormSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+
+                                    <!-- start tabs -->
+                                    <nav ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.price-request-info' | translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-3 ">
+                                                        <div class=" ">
+                                                            <label for="id" class="label-name">
+                                {{'general.price-request-id'|translate}}
+                              </label>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" name="id" formControlName="id">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="maintenanceRequestId" class="label-name">
+                                {{'general.maintenance-request-id'|translate}}
+                              </label>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" name="maintenanceRequestId" formControlName="maintenanceRequestId">
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class=" ">
+                                    <label for="tenant" class="label-name">
+                                        {{'general.tenant'|translate}}
+                                    </label>
+                                    <label></label>
+                                </div> -->
+                                                        <div class=" ">
+                                                            <label for="date" class="label-name">{{'general.request-date'|translate}}
+                              </label>
+                                                            <div class="form-group">
+                                                                <app-full-date name="date" [selectedDate]="date" (OnDateSelect)="getRequestDate($event)">
+                                                                </app-full-date>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="notes" class="label-name">
+                                {{'general.description'|translate}}
+                              </label>
+                                                            <div class="form-group">
+                                                                <textarea type="text" class="form-control" name="notes" formControlName="notes"></textarea>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.price-request-details'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <!-- <div class="col gap-2 grid grid-cols-3 "> -->
+                                                    <form id="PriceRequestDetailsFormSubmit">
+                                                        <!-- <div class="row"> -->
+                                                        <table class="table table-bordered text-center ">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th scope="col" style="width: 150px;">
+                                                                        {{'general.product-category'|translate}}<span class="text-danger">*</span></th>
+
+                                                                    <th scope="col" style="width: 150px;">
+                                                                        {{'general.product'|translate}} <span class="text-danger">*</span></th>
+                                                                    <th scope="col">
+                                                                        {{'general.quantity'|translate}}<span class="text-danger">*</span>
+                                                                    </th>
+                                                                    <th scope="col">{{'general.price'|translate}}
+                                                                        <span class="text-danger">*</span>
+                                                                    </th>
+                                                                    <th scope="col">
+                                                                        {{'general.value-before-tax'|translate}}
+                                                                    </th>
+                                                                    <th scope="col">
+                                                                        {{'general.installation-price'|translate}}
+                                                                    </th>
+                                                                    <th scope="col">
+                                                                        {{'general.value-with-installtion-price-before-tax'|translate}}
+                                                                    </th>
+                                                                    <th scope="col">
+                                                                        {{'general.tax-ratio'|translate}}</th>
+                                                                    <th scope="col">
+                                                                        {{'general.tax-value'|translate}}</th>
+                                                                    <th scope="col">
+                                                                        {{'general.value-after-tax'|translate}}
+                                                                    </th>
+                                                                    <th scope="col">{{'general.unit'|translate}}
+                                                                    </th>
+                                                                    <th scope="col">
+                                                                        {{'general.equipment'|translate}}</th>
+
+                                                                    <th scope="col" colspan="1">
+                                                                        {{'general.actions'|translate}}
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select style="width:100%" name="productCategoryId" [(ngModel)]="productCategoryId" (change)="onChangeProductCatgeory()">
+                                                                                <ng-option *ngFor="let item of productCategories" [value]="item.id">
+                                                                                    {{lang=='ar'? item.categoryNameAr:item.categoryNameEn}}
+                                                                                </ng-option>
+                                                                            </ng-select>
+
+                                                                            <!-- <div *ngIf="(prd['productCategoryId'].touched || prd['productCategoryId'].dirty ) && prd['productCategoryId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="prd['productCategoryId'].errors && prd['productCategoryId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select [(ngModel)]="productId" (change)="onChangeProduct()" style="width:100%" name="productId">
+                                                                                <ng-option *ngFor="let item of products" [value]="item.id">
+                                                                                    {{lang=='ar'?item.productNameAr:item.productNameEn}}
+                                                                                </ng-option>
+                                                                            </ng-select>
+
+                                                                            <!-- <div *ngIf="(prd['productId'].touched || prd['productId'].dirty ) && prd['productId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="prd['productId'].errors && prd['productId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+
+
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group input-group">
+
+                                                                            <input type="text" class="form-control" name="quantity" [(ngModel)]="quantity" (change)="onChangeQuantityOrPrice()">
+
+                                                                            <!-- <div *ngIf="(prd['quantity'].touched || prd['quantity'].dirty ) && prd['quantity'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="prd['quantity'].errors && prd['quantity'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group input-group">
+
+                                                                            <input type="text" class="form-control" name="price" [(ngModel)]="price" (change)="onChangeQuantityOrPrice()">
+                                                                            <!-- <div *ngIf="(prd['price'].touched || prd['price'].dirty ) && prd['price'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="prd['price'].errors && prd['price'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group">
+
+                                                                            <input type="number" step="0.01" class="form-control" name="valueBeforeTax" [(ngModel)]="valueBeforeTax" [disabled]="true">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group">
+
+                                                                            <input type="number" step="0.01" class="form-control" name="installationPrice" [(ngModel)]="installationPrice" (change)="onChangeInstallationPrice()">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group">
+
+                                                                            <input type="text" class="form-control" name="valueWithInstallationPriceBeforeTax" [(ngModel)]="valueWithInstallationPriceBeforeTax" [disabled]="true">
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="form-group">
+
+                                                                            <input type="number" step="0.01" class="form-control" name="taxRatio" [(ngModel)]="taxRatio" (change)="onChangeTaxRatio()">
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="form-group">
+
+                                                                            <input type="number" step="0.01" class="form-control" name="taxValue" [(ngModel)]="taxValue" [disabled]="true">
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="form-group">
+
+                                                                            <input type="number" step="0.01" class="form-control" name="valueAfterTax" [(ngModel)]="valueAfterTax" [disabled]="true">
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select style="width:100%" name="unitId" [(ngModel)]="unitId">
+                                                                                <ng-option *ngFor="let item of units" [value]="item.id">
+                                                                                    {{lang=='ar'?item.unitNameAr:item.unitNameEn}}
+                                                                                </ng-option>
+                                                                            </ng-select>
+
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select style="width:100%" name="equipmentId" [(ngModel)]="equipmentId">
+                                                                                <ng-option *ngFor="let item of equipments" [value]="item.id">
+                                                                                    {{lang=='ar'?item.equipmentNameAr:item.equipmentNameEn}}
+                                                                                </ng-option>
+                                                                            </ng-select>
+
+                                                                        </div>
+                                                                    </td>
+
+
+
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary px-3 " (click)="addProduct()"><i
+                                        class="las la-plus"></i></button>
+
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr *ngFor="let item of selectedProducts; let i= index">
+                                                                    <td>{{lang=='ar'?item.productCategoryNameAr:item.productCategoryNameEn}}</td>
+                                                                    <td>{{lang=='ar'?item.productNameAr:item.productNameEn}}</td>
+                                                                    <td>{{item.quantity}}</td>
+                                                                    <td>{{item.price}}</td>
+                                                                    <td>{{item.valueBeforeTax}}</td>
+                                                                    <td>{{item.installationPrice}}</td>
+                                                                    <td>{{item.valueWithInstallationPriceBeforeTax}}
+                                                                    </td>
+                                                                    <td>{{item.taxRatio}}</td>
+                                                                    <td>{{item.taxValue}}</td>
+                                                                    <td>{{item.valueAfterTax}}</td>
+                                                                    <td>{{lang=='ar'?item.unitNameAr:item.unitNameEn}}</td>
+                                                                    <td>{{lang=='ar'?item.equimentNameAr:item.equipmentNameEn}}</td>
+
+                                                                    <td>
+                                                                        <button (click)="deleteProduct(item)" class="btn btn-danger px-3">
+                                      <i class="las la-trash-alt"></i>
+                                    </button>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="9" rowspan="9"></td>
+
+                                                                    <td></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <!-- </div> -->
+
+                                                        <div class=" ">
+                                                            <label for="totalWithInstallationPriceBeforeTax" class="label-name">{{'general.total-before-tax'|translate}}
+                              </label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control" name="totalWithInstallationPriceBeforeTax" [(ngModel)]="totalWithInstallationPriceBeforeTax" [disabled]="true">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="totalTax" class="label-name">{{'general.total-tax'|translate}}
+                              </label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control" name="totalTax" [(ngModel)]="totalTax" [disabled]="true">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="totalAfterTax" class="label-name">{{'general.total-after-tax'|translate}}
+                              </label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control" name="totalAfterTax" [(ngModel)]="totalAfterTax" [disabled]="true">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+
+                                                    <!-- </div> -->
+                                                </div>
+                                            </ng-template>
+                                        </li>
+
+
+
+                                    </nav>
+                                    <div [ngbNavOutlet]="nav" class=""></div>
+                                </div>
+                            </div>
+                            <!-- <button class="btn btn-highlight btn-lg"
+                (click)="onUpdate()"
+                   >
+                   Save
+            </button> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section  -->

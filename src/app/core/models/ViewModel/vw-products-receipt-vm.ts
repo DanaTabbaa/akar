@@ -1,0 +1,29 @@
+export class VwProductsReceiptVM {
+      id:any;
+      maintenanceRequestId:any;
+      date:any;
+      tenantId:any;
+      technicianId:any;
+      notes!:string;
+      totalWithInstallationPriceBeforeTax:any;
+      totalTax:any;
+      totalAfterTax:any;
+      productId:any;
+      quantity:any;
+      price:any;
+      unitId:any;
+      equipmentId:any;
+      installationPrice:any;
+      taxRatio:any;
+      productNameAr!:string;
+      productNameEn!:string;
+      unitNameAr!:string;
+      unitNameEn!:string;
+      equipmentNameAr!:string;
+      equipmentNameEn!:string;
+      userId:any;
+      productCategoryId:any;
+      productCategoryNameAr!:string;
+      productCategoryNameEn!:string;
+    
+    }

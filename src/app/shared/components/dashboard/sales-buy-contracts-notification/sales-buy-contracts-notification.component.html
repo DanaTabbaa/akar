@@ -1,0 +1,49 @@
+
+<section class="" *ngIf="showDailyDuesForSalesContracts==true">
+  <h3 style="text-align: center;">{{'dashboard-settings.daily-sales-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="salesContractDues" [parentColName]="'groupId'"
+      [divId]="'SalesContractDues'" [columnSettings]="salesContractDuesColumnNames" [componentName]="'salesContractDues'"
+      [direction]="direction" [sortByList]="sortByCols" [showExport]="false" [groupByList]="groupByCols"
+      [refreshGrid]="isSalesContractsDuesListEmpty" [panelId]="panelId" [searchFilters]="searchSalesContractDuesFilters"
+      (onSearchTextChange)="onSearchSalesContractDuesTextChange($event)" [groupType]="1" [path]="'SalesContractDues'">
+    </app-tabulator>
+  </div>
+</section>
+<section class=""  *ngIf="showDailyDuesForBuyContracts==true">
+  <h3 style="text-align: center;">{{'dashboard-settings.daily-buy-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="buyContractDues" [parentColName]="'groupId'"
+      [divId]="'BuyContractDues'" [columnSettings]="buyContractDuesColumnNames" [componentName]="'buyContractDues'"
+      [direction]="direction" [sortByList]="sortByCols" [showExport]="false" [groupByList]="groupByCols"
+      [refreshGrid]="isBuyContractsDuesListEmpty" [panelId]="panelId" [searchFilters]="searchBuyContractDuesFilters"
+      (onSearchTextChange)="onSearchBuyContractDuesTextChange($event)" [groupType]="1" [path]="'BuyContractDues'">
+    </app-tabulator>
+  </div>
+</section>
+<section class=""  *ngIf="showGenerateEntryNotificationForSalesContracts==true">
+  <h3 style="text-align: center;">{{'dashboard.generate-entry-sales-contract-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="generateEntrySalesContractDues" [parentColName]="'groupId'"
+      [divId]="'GenerateEntrySalesContractDues'" [columnSettings]="generateEntrySalesContractDuesColumnNames"
+      [componentName]="'generateEntrySalesContractDues'" [direction]="direction" [sortByList]="sortByCols"
+      [showExport]="false" [groupByList]="groupByCols" [refreshGrid]="isGenerateEntrySalesContractDuesListEmpty"
+      [panelId]="panelId" [searchFilters]="searchGenerateSalesContractDuesFilters"
+      (onSearchTextChange)="onSearchGenerateEntrySalesContractDuesTextChange($event)" [groupType]="1"
+      [path]="'GenerateEntrySalesContractDues'">
+    </app-tabulator>
+  </div>
+</section>
+<section class=""  *ngIf="showGenerateEntryNotificationForBuyContracts==true">
+  <h3 style="text-align: center;">{{'dashboard.generate-entry-buy-contract-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="generateEntryBuyContractDues" [parentColName]="'groupId'"
+      [divId]="'GenerateEntryBuyContractDues'" [columnSettings]="generateEntryBuyContractDuesColumnNames"
+      [componentName]="'generateEntryBuyContractDues'" [direction]="direction" [sortByList]="sortByCols"
+      [showExport]="false" [groupByList]="groupByCols" [refreshGrid]="isGenerateEntryBuyContractDuesListEmpty"
+      [panelId]="panelId" [searchFilters]="searchGenerateBuyContractDuesFilters"
+      (onSearchTextChange)="onSearchGenerateEntryBuyContractDuesTextChange($event)" [groupType]="1"
+      [path]="'GenerateEntryBuyContractDues'">
+    </app-tabulator>
+  </div>
+</section>

@@ -1,0 +1,64 @@
+<section class="inner-page-wrapper inner-page-wrapper-report">
+  <div class="container">
+    <!-- <div class="row">
+            <div class="col-md-12">
+                <h1 class="lease-header-title-report">Units Expenses</h1>
+
+            </div>
+        </div> -->
+    <div class="row">
+      <!-- <div class="col-md-12">
+
+                <button class="btn btn-primary btn-sm br-5 py-2 mx-2" (click)="gotoViewer()"><i class="fas fa-cogs"></i>&nbsp;
+          View</button>
+                <button (click)="cancelDefaultReportStatus()" type="button" class="btn btn-secondary">Cancel Default
+          Report</button>
+
+            </div> -->
+      <hr>
+      <div class="col-md-12">
+        <div class="main-report">
+          <div class="wrapper-title">
+            <app-filters [ShowOptions]="ShowOptions" (OnFilter)="OnFilter($event)"></app-filters>
+            <div class="row">
+              <div class="col-12  col-md-6">
+                <div class="form-group">
+                  <label for="" class="label-name">
+                    {{'reports.responsible-for-Spieces-cost'|translate}}
+
+                  </label>
+                  <ng-select name='responsibleId' class="form-control" id="responsibleId" [(ngModel)]="responsibleId"
+                    placeholder="{{'general.select'|translate}}">
+                    <ng-option *ngFor="let item of responsibleObj" [value]="item.id">
+                      <ng-container *ngIf="lang=='en'; else arabidist">
+                        {{item.nameen}}
+                      </ng-container>
+                      <ng-template #arabidist>
+                        {{item.namear}}
+                      </ng-template>
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+
+
+
+              <div class="col-12  col-md-6">
+                <div class="form-group">
+                  <label for="" class="label-name"> {{'reports.equipment'|translate}}</label>
+                  <ng-select style="width:100%" placeholder="{{'reports.equipment'|translate}}" name='equipmentId'
+                    [(ngModel)]="equipmentId" class="form-control" id="equipmentId">
+                    <ng-option *ngFor="let equipment of equipmentsList" [value]="equipment.id">
+                      {{lang=='ar'? equipment.equipmentNameAr:equipment.equipmentNameEn}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

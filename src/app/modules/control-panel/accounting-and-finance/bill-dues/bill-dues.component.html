@@ -1,0 +1,154 @@
+<!-- <div class="row"> -->
+<div class="table-responsive">
+  <table class="table table-bordered text-center table-striped">
+    <thead>
+      <th>#</th>
+      <th>{{'voucher-dues.contract-setting'|translate}}</th>
+      <th>{{'page-form.contract-number'|translate}}</th>
+      <!-- <th>{{'general.contract-id'|translate}}</th> -->
+      <th>{{'general.due-type'|translate}}</th>
+      <th>{{'general.due-amount'|translate}}</th>
+      <th>{{'general.due-start-date'|translate}}</th>
+      <th>{{'general.due-end-date'|translate}}</th>
+      <!-- <th>{{'general.paid'|translate}}</th>
+            <th>{{'general.notes'|translate}}</th>
+            <th></th> -->
+    </thead>
+
+    <tr *ngFor="let item of rentContractDues; let i= index;">
+      <td>
+        <!-- {{i+1}} -->
+        <input type="checkbox" (change)="selectRentDues(item,$event)">
+      </td>
+      <td>
+        {{lang=='ar'?item.contractSettingNameAr:item.contractSettingNameEn}}
+      </td>
+      <td>
+        {{item.contractNumber}}
+      </td>
+
+      <!-- <td>
+        {{item.rentContractId}}
+
+      </td> -->
+      <td>
+        {{lang=='ar'?item.typeNameAr:item.typeNameEn}}
+      </td>
+
+      <td>
+        {{setDecimalNumber(item.dueAmount)}}
+
+      </td>
+
+      <td>
+        {{item.dueStartDate}}
+      </td>
+
+
+      <td>
+        {{item.dueEndDate}}
+      </td>
+
+      <!-- <td>
+                <input type="number" class="form-control"
+                    [(ngModel)]="rentContractDues[i].paid">
+            </td>
+            <td>
+                {{item.notes}}
+            </td> -->
+
+
+    </tr>
+
+    <tr *ngFor="let item of maintenanceContractDues; let i= index;">
+      <td>
+        <!-- {{i+1}} -->
+        <!-- [attr.checked]="item.isInvoiced ? 'checked' : null" -->
+        <input type="checkbox" (change)="selectMaintenanceDues(item,$event)">
+      </td>
+      <td>
+        {{lang=='ar'?item.contractSettingNameAr:item.contractSettingNameEn}}
+      </td>
+
+      <td>
+        {{item.contractNumber}}
+
+      </td>
+      <td>
+        {{lang=='ar'?item.typeNameAr:item.typeNameEn}}
+      </td>
+
+      <td>
+        {{setDecimalNumber(item.dueAmount)}}
+
+      </td>
+
+      <td>
+        {{item.dueStartDate}}
+      </td>
+
+
+      <td>
+        {{item.dueEndDate}}
+      </td>
+
+      <!-- <td>
+                <input type="number" class="form-control"
+                    [(ngModel)]="maintenanceContractDues[i].paid">
+            </td>
+
+            <td>
+                {{item.notes}}
+            </td> -->
+
+
+
+    </tr>
+    <tr *ngFor="let item of salesBuyContractDues; let i= index;">
+      <td>
+        <!-- {{i+1}} -->
+        <input type="checkbox" (change)="selectSaleBuyDues(item,$event)">
+      </td>
+
+      <td>
+        <!-- {{lang=='ar'?item.contractSettingNameAr:item.contractSettingNameEn}} -->
+      </td>
+
+      <td>
+        <!-- {{item.contractNumber}} -->
+
+      </td>
+      <td>
+        <!-- {{lang=='en' ?item.typeNameEn:item.typeNameAr}} -->
+
+      </td>
+
+      <td>
+        {{setDecimalNumber(item.dueAmount)}}
+
+      </td>
+
+      <td>
+        {{item.dueStartDate}}
+      </td>
+
+
+      <td>
+        {{item.dueEndDate}}
+      </td>
+
+      <!-- <td>
+                <input type="number" class="form-control"
+                    [(ngModel)]="salesBuyContractDues[i].paid" >
+            </td>
+
+            <td>
+                {{item.notes}}
+            </td> -->
+
+
+
+    </tr>
+  </table>
+</div>
+<!-- </div> -->

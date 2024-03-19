@@ -1,0 +1,11 @@
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}... </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-auction">
+  <div class="container">
+      <app-tabulator [idColName]="'id'" [childRowData]="tenants" [parentColName]="'groupId'" [divId]="'Tenants'" [columnSettings]="columnNames" [componentName]="'tenants'" (onAddItem)="openAddTenants()" (onMenuActionSelected)="onMenuActionSelected($event)"
+          [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'Tenants'"></app-tabulator>
+  </div>
+</section>
+

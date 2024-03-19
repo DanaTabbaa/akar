@@ -1,0 +1,215 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">           
+            <form [formGroup]="voucherForm" id="vouchers" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{voucherData}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-3 ">
+                      <div class=" ">
+                        <label for="code" class="label-name">{{'voucher.code'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user"  name="code"
+                            formControlName="code">
+                          <div *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['code'].errors && f['code'].errors['required']">
+                              {{'voucher.code-required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+                        <label for="code" class="label-name">{{'voucher.date'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <app-full-date [selectedDate]="voucherDate" (OnDateSelect)="onSelectVoucherDate($event)">
+                          </app-full-date>
+                         
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="amount" class="label-name">{{'voucher.amount'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="amount" formControlName="amount">
+                          <div *ngIf="(f['amount'].touched || f['amount'].dirty ) && f['amount'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['amount'].errors && f['amount'].errors['required']">
+                              {{'voucher.amount-required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="officeId" class="label-name">
+                          {{'voucher.office'|translate}}
+                          
+                        </label>
+                        <div class="input-group  popup">
+
+                          <ng-select formControlName="officeId" style="width:100%" [readonly]="checkMode()">
+                            <ng-option *ngFor="let office of offices"
+                              [value]="office.id">{{lang=='ar'?office.nameAr:office.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                        
+                        </div>
+                      </div>
+
+
+                      <div class="" *ngIf="contractKindId==1 || contractKindId==2 || contractKindId ==3">
+                        <label for="owner" class="label-name" *ngIf="contractKindId==1">
+                          {{'voucher.owner'|translate}}
+                        </label>
+                        <label for="seller" class="label-name" *ngIf="contractKindId==2">
+                          {{'general.seller'|translate}}
+                        </label>
+                        <label for="purchaser" class="label-name" *ngIf="contractKindId==3">
+                          {{'general.purchaser'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="ownerId" style="width:100%" [readonly]="checkMode()"
+                            (change)="onChangeOwner(voucherForm.value.ownerId)">
+                            <ng-option *ngFor="let owner of owners"
+                              [value]="owner.id">{{lang=='ar'?owner.nameAr:owner.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                       
+                        </div>
+                      </div>
+
+                      
+                      <div class="" *ngIf="contractKindId==1">
+                        <label for="tenantId" class="label-name">
+                          {{'voucher.tenant'|translate}}
+                         
+                        </label>
+                        <div class="input-group  popup">
+
+                          <ng-select formControlName="tenantId" style="width:100%" [readonly]="checkMode()" (change)="onChangeTenant(voucherForm.value.tenantId)">
+                            <ng-option *ngFor="let tenant of tenants"
+                              [value]="tenant.id">{{lang=='ar'?tenant.nameAr:tenant.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                         
+                        </div>
+                      </div>
+                      <div class="" *ngIf="contractKindId==2 || contractKindId==3">
+                        <label for="buyer-name" class="label-name" *ngIf="contractKindId==2">
+                          {{'contract.buyer'|translate}}
+                        </label>
+                        <label for="seller-name" class="label-name" *ngIf="contractKindId==3">
+                          {{'contract.seller'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="purchaserId" style="width:100%">
+                            <ng-option *ngFor="let purchaser of purchasers" [value]="purchaser.id">
+                              {{lang=='ar'?purchaser.nameAr:purchaser.nameEn}}
+                            </ng-option>
+                          </ng-select>
+                        </div>
+                      </div>
+                      <!-- <div class="" *ngIf="false">
+                        <label for="officeAccId" class="label-name">
+                          {{'voucher.officeAccId'|translate}}
+                         
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="officeAccId" style="width:100%">
+                            <ng-option *ngFor="let officeAccount of officeAccounts"
+                              [value]="officeAccount.id">{{lang=='ar'?officeAccount.accArName:officeAccount.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                         
+                        </div>
+                      </div> -->
+
+                      <!-- <div class="" *ngIf="contractKindId==1 || contractKindId==2 || contractKindId ==3">
+                        <label for="ownerAccId" class="label-name">
+                          {{'voucher.ownerAccId'|translate}}                          
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="ownerAccId" style="width:100%">
+                            <ng-option *ngFor="let account of ownerAccounts"
+                              [value]="account.id">{{lang=='ar'?account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>                          
+                        </div>
+                      </div> -->
+
+
+                      <div class="" >
+                        <label for="accId" class="label-name">
+                          {{'voucher.accId'|translate}}                          
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="accId" style="width:100%">
+                            <ng-option *ngFor="let account of accounts"
+                              [value]="account.id">{{account.accCode+' - '+ (lang=='ar'?account.accArName:account.accEnName)}}
+                            </ng-option>
+                          </ng-select>
+                         
+                        </div>
+                      </div>
+
+                      
+
+                      <div class="" *ngIf="contractKindId==1">
+                        <label for="contractTypeId" class="label-name">
+                          {{'voucher.contract-setting'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <p-multiSelect [options]="contractsSettings" [ngModelOptions]="{standalone: true}" [readonly]="checkMode()"
+                            [(ngModel)]="selectedContractSettings" [virtualScroll]="true"
+                            optionLabel="{{lang=='ar'?'contractArName':'contractEnName'}}" id="contractTypes"
+                            name="contractTypeIds" class="w-100" (onChange)="onChangeContracts()"
+                            defaultLabel="{{'general.select'|translate}}"></p-multiSelect>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col gap-12 grid grid-cols-12  voucher-container ">
+                      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                        <li ngbNavItem [destroyOnHide]="false">
+                          <a ngbNavLink> {{'voucher.details' |translate}}</a>
+                          <ng-template ngbNavContent>
+                            <app-voucher-details [accounts]="accounts" [voucherDetialsForUpdate]="voucherDetails" (onVoucherDetailsChange)="onVoucherDetailsChange($event)"
+                              [kindId]="entryType?.kindId" [contractKindId]="entryType?.contractKindId"
+                              [ownerId]="voucherForm.value.ownerId" [id]="id"></app-voucher-details>
+                          </ng-template>
+                        </li>
+                        <li ngbNavItem [destroyOnHide]="false" [hidden]="contractKindId!=1">
+                          <a ngbNavLink> {{'voucher.dues' |translate}}</a>
+                          <ng-template ngbNavContent>
+                            <app-voucher-dues [voucherRentDuesDetails]="voucherRentContractDues"
+                              (onVoucherDueDetailsChange)="onVoucherDueChange($event)">
+                            </app-voucher-dues>
+                          </ng-template>
+                        </li>
+                      </ul>
+                      <div [ngbNavOutlet]="nav" class=""></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

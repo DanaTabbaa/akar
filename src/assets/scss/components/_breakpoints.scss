@@ -1,0 +1,69 @@
+$media-queries: true;
+@mixin bp($point) {
+    @if ($media-queries) {
+        $bp-large-desktop-max: 1920px;
+        $bp-large-desktop-min: 1367px;
+        $bp-desktop-max: 1366px;
+        $bp-desktop-min: 1201px;
+        $bp-laptop-max: 1200px;
+        $bp-laptop-min: 1025px;
+        $bp-ipad-pro-max: 1024px;
+        $bp-ipad-pro-min: 992px;
+        $bp-ipad-max: 991px;
+        $bp-ipad-min: 768px;
+        $bp-max-mobile: 767px;
+        $bp-iphone5: 320px;
+        @if $point==large-desktop {
+            @media //  Large Desktop
+            only screen and (min-width: #{$bp-large-desktop-min}) and (max-width: #{$bp-large-desktop-max}) {
+                @content;
+            }
+        }
+        @if $point==desktop {
+            @media // Desktops
+            only screen and (min-width: #{$bp-desktop-min}) and (max-width: #{$bp-desktop-max}) {
+                @content;
+            }
+        }
+        @if $point==laptop {
+            @media // Laptop
+            only screen and (min-width: #{$bp-laptop-min}) and (max-width: #{$bp-laptop-max}) {
+                @content;
+            }
+        }
+        @if $point==ipad-pro {
+            @media // iPad Pro
+            only screen and (min-width: #{$bp-ipad-pro-min}) and (max-width: #{$bp-ipad-pro-max}) {
+                @content;
+            }
+        }
+        @if $point==ipad {
+            @media // iPad Pro
+            only screen and (min-width: #{$bp-ipad-min}) and (max-width: #{$bp-ipad-max}) {
+                @content;
+            }
+        }
+        @if $point==mobile {
+            @media // Mobile
+            only screen and (max-width: #{$bp-max-mobile}) {
+                @content;
+                .inner-page-wrapper {
+                    margin-top: 24%;
+                    width: 100%;
+                    margin-left: 0;
+                }
+                .admin-header nav.navbar,
+                .admin-header .toolbar-fixed .page-title {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+            }
+        }
+        @if $point==iphone5 {
+            @media // iPhone 5
+            only screen and (max-width: #{$bp-iphone5}) {
+                @content;
+            }
+        }
+    }
+}

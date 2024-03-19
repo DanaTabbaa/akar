@@ -1,0 +1,432 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}</p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-offers">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form id="OfferFormSubmit" [formGroup]="OfferForm" class="tabs-form">
+
+                            <div class="main-offers">
+                                <div class="wrapper-title">
+                                    <h3>{{'page-form.owner-information'|translate}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+
+                                            <div class="Offers ">
+                                                <label for="Owners" class="label-name"><span class="text-danger">*</span>
+                          {{'page-form.owner'|translate}}</label>
+                                                <div class="input-group popup">
+                                                    <ng-select class="custom" formControlName="ownerId" (change)="loadDataByOwner(OfferForm.value.ownerId)" [(ngModel)]="ownerId" placeholder="">
+                                                        <ng-option *ngFor="let owner of owners" [value]="owner.id">{{lang=='ar'? owner.nameAr:owner.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Offers ">
+                                                <label for="Tenants" class="label-name"><span class="text-danger">*</span>
+                          {{'page-form.tenant'|translate}}</label>
+                                                <div class="input-group popup">
+                                                    <ng-select class="custom" formControlName="tenantId" placeholder="">
+                                                        <ng-option *ngFor="let tenant of tenants" [value]="tenant.id">{{lang=='ar'? tenant.nameAr:tenant.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['tenantId'].touched || f['tenantId'].dirty ) && f['tenantId'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['tenantId'].errors && f['tenantId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Offers ">
+                                                <label for="Tenants" class="label-name">{{'page-form.vendor'|translate}}</label>
+                                                <div class="input-group popup">
+                                                    <ng-select class="custom" formControlName="vendorId" placeholder="">
+                                                        <ng-option *ngFor="let vendor of vendors" [value]="vendor.id">{{lang=='ar'? vendor.nameAr:vendor.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="Realestate" class="label-name">{{'page-form.main-realestate'|translate}}</label>
+                                                <div class="input-group popup">
+                                                    <ng-select formControlName="realestateId" name="realestateId" id="realestateId">
+                                                        <ng-option *ngFor="let item of realestates" [value]="item.id">
+                                                            {{lang=='ar'? item.realestateNameAr:item.realestateNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="buildingId" class="label-name"><span class="text-danger">*</span>
+                          {{'page-form.building'|translate}}</label>
+                                                <div class="input-group popup">
+                                                    <ng-select formControlName="buildingId" name="buildingId" id="buildingId">
+                                                        <ng-option *ngFor="let item of buildings;" [value]="item.id">
+                                                            {{lang=='ar'? item.buildingNameAr:item.buildingNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['buildingId'].touched || f['buildingId'].dirty ) && f['buildingId'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['buildingId'].errors && f['buildingId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="purposeType" class="label-name"><span class="text-danger">*</span>
+                          {{'page-form.offer-purpose-type'|translate}}
+                        </label>
+                                                <div class="input-group popup">
+                                                    <ng-select formControlName="purposeType" [(ngModel)]="purposeType" name="purposeType" id="purposeType">
+                                                        <ng-option *ngFor="let item of pursposeTypes;" [value]="item.id">
+                                                            {{item.name}}
+                                                        </ng-option>
+
+                                                    </ng-select>
+                                                    <div *ngIf="(f['purposeType'].touched || f['purposeType'].dirty ) && f['purposeType'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['purposeType'].errors && f['purposeType'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <ul ngbNav #nav="ngbNav" class="nav-tabs  mt-3">
+
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.offer-description'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-2 ">
+                                                        <div class=" ">
+                                                            <label for="meterPrice" class="label-name">{{'page-form.offer-duration'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="number" min="0" step="0.01" class="form-control icon-user" name="offerDuration" formControlName="offerDuration">
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="contractDate" class="label-name">{{'page-form.offer-date'|translate}}</label>
+                                                            <div>
+                                                                <div class="input-group ">
+                                                                    <app-full-date name="offerDate" [selectedDate]="offerDate" (OnDateSelect)="getOfferDate($event)">
+                                                                    </app-full-date>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="rentalDutration" class="label-name">{{'page-form.rental-period'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="number" min="0" step="0.01" class="form-control icon-user" name="rentalPeriod" formControlName="rentalPeriod">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="rentPeriodType" class="label-name">{{'page-form.rent-period-type'|translate}}</label>
+                                                            <div class="input-group popup">
+                                                                <ng-select formControlName="rentPeriodType" name="rentPeriodType" id="rentPeriodType">
+                                                                    <ng-option *ngFor="let item of rentPeriodTypes;" [value]="item.id">
+                                                                        {{item.name}}
+                                                                    </ng-option>
+                                                                </ng-select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <hr> -->
+                                                <div class=" mt-3 mb-4">
+                                                    <div class="table-responsive" style="height: 200px;">
+                                                        <app-reusable-unit [ownerId]="ownerId" [purposeType]="purposeType" (onSelect)="onLoadUnits($event)" [selecedUnitsDetails]="selectedUnits" (onSelecedtUnit)="onSelectChangeUnits($event)" (onSelectUnitCalculateTotals)="onSelectChangeUnitsCalculateTotals($event)">
+                                                        </app-reusable-unit>
+                                                    </div>
+                                                </div>
+                                                <!-- <hr> -->
+                                                <div class="row0">
+                                                    <div class="col gap-2 grid grid-cols-3 p-3" style="background-color:#a98d4d1f ;">
+                                                        <div class="">
+                                                            <label for="Total Area" class="label-name">{{'page-form.total-area'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control" name="totalAreaSize" formControlName="totalAreaSize">
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="averagePriceOfMeter" class="label-name">{{'page-form.average-price-meter'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control" name="averagePriceOfMeter" formControlName="averagePriceOfMeter">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="averagePriceOfMeter" class="label-name">{{'page-form.total-rent-amount'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control" name="totalRentAmount" formControlName="totalRentAmount">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="firtsDueDate" class="label-name">{{'page-form.firts-due-date'|translate}}</label>
+                                                            <div>
+                                                                <div class="input-group ">
+                                                                    <app-full-date name="firtsDueDate" [selectedDate]="firtsDueDate" (OnDateSelect)="getFirtsDueDate($event)">
+                                                                    </app-full-date>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="numberOfPayments" class="label-name">{{'page-form.number-payments'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control" name="numberOfPayments" formControlName="numberOfPayments">
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="periodBetweenPayments" class="label-name">{{'page-form.period-between-payments'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="number" min="0" step="0.01" class="form-control" name="periodBetweenPayments" formControlName="periodBetweenPayments">
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="paymentTimeType" class="label-name">{{'page-form.payment-time-type'|translate}}</label>
+                                                            <div class="input-group popup ">
+                                                                <ng-select formControlName="paymentTimeType" name="paymentTimeType" id="paymentTimeType">
+                                                                    <ng-option *ngFor="let item of paymentTimeTypes;" [value]="item.id">
+                                                                        {{item.name}}
+                                                                    </ng-option>
+                                                                </ng-select>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="rentalDutration" class="label-name">{{'page-form.note'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control icon-user" name="note" formControlName="notes">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="report-button">
+                                                            <button class="btn btn-highlight btn-lg">
+                                                        Save
+                                                      </button>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </ng-template>
+                                        </li>
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.unit-services'|translate}}</a>
+                                            <ng-template ngbNavContent>
+
+
+                                                <form [formGroup]="ContractUnitsServiceForm" id="ContractUnitsServiceSubmit">
+
+                                                    <div class="mb-3 mt-3 table-responsive " style="height: 200px;">
+                                                        <table class="table table-bordered text-center ">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th scope="col" style="width: 150px;">
+                                                                        {{'page-form.unit-name'|translate}} <span class="text-danger">*</span></th>
+                                                                    <th scope="col">
+                                                                        {{'page-form.service-name'|translate}}<span class="text-danger">*</span></th>
+                                                                    <th scope="col">
+                                                                        {{'page-form.pay-on-time-in'|translate}} </th>
+                                                                    <th scope="col">
+                                                                        {{'page-form.calculate-method'|translate}}</th>
+                                                                    <th scope="col">{{'page-form.count'|translate}}</th>
+                                                                    <th scope="col">{{'page-form.ratio'|translate}}</th>
+                                                                    <th scope="col">{{'page-form.amount'|translate}}
+                                                                    </th>
+                                                                    <th scope="col">{{'page-form.tax'|translate}}%</th>
+                                                                    <th scope="col">
+                                                                        {{'page-form.amount-after-tax'|translate}}</th>
+                                                                    <!-- <th scope="col">Annual Increasement Ratio</th> -->
+                                                                    <th scope="col">
+                                                                        {{'page-form.from-account'|translate}}<span class="text-danger">*</span></th>
+                                                                    <th scope="col">
+                                                                        {{'page-form.to-account'|translate}}<span class="text-danger">*</span></th>
+
+
+                                                                    <th scope="col" colspan="1">
+                                                                        {{'page-form.actions'|translate}}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select formControlName="unitId" style="width:100%" name="unitId">
+                                                                                <ng-option *ngFor="let item of selectedUnits" [value]="item.unitId">
+                                                                                    {{lang=='ar'? item.unitNameAr:item.unitNameEn}}
+                                                                                </ng-option>
+                                                                            </ng-select>
+                                                                            <div *ngIf="(csf['unitId'].touched || csf['unitId'].dirty ) && csf['unitId'].invalid" class="alert alert-danger">
+                                                                                <i class="fa fa-close "></i>
+                                                                                <span *ngIf="csf['unitId'].errors && csf['unitId'].errors['required']">
+                                          {{'validation-messages.required-field'|translate}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select formControlName="serviceId" style="width:100%">
+                                                                                <ng-option *ngFor="let service of unitServices" [value]="service.id">
+                                                                                    {{lang=='ar'? service.unitServiceArName:service.unitServiceEnName}}
+                                                                                </ng-option>
+                                                                            </ng-select>
+                                                                            <div *ngIf="(csf['serviceId'].touched || csf['serviceId'].dirty ) && csf['serviceId'].invalid" class="alert alert-danger">
+                                                                                <i class="fa fa-close "></i>
+                                                                                <span *ngIf="csf['serviceId'].errors && csf['serviceId'].errors['required']">
+                                          {{'validation-messages.required-field'|translate}}</span>
+                                                                            </div>
+
+
+                                                                        </div>
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="input-group popup m-0">
+                                                                            <ng-select class="custom" formControlName="payOnTimeId" [items]="paymentsMethodsInRentContract" (change)="changeCalcMethodsInRentContract(ContractUnitsServiceForm.value.calcMethodType)" bindLabel="name" bindValue="id" style="width:100%">
+                                                                            </ng-select>
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="input-group popup m-0">
+                                                                            <ng-select class="custom" formControlName="calcMethodType" [(ngModel)]="calcMethodType" [items]="calculateMethodsInRentContract" (change)="changeCalcMethodsInRentContract(ContractUnitsServiceForm.value.calcMethodType)" bindLabel="name" bindValue="id"
+                                                                                style="width:100%">
+                                                                            </ng-select>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group m-0">
+                                                                            <input type="number" min="0" step="0.01" class="form-control" style="width:100%" name="countofservice" (change)="changeCalcMethodsInRentContract(ContractUnitsServiceForm.value.calcMethodType)" formControlName="countofservice">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group m-0">
+                                                                            <input type="number" min="0" step="0.01" style="width:100%" class="form-control" name="ratio" (change)="changeCalcMethodsInRentContract(ContractUnitsServiceForm.value.calcMethodType)" formControlName="ratio">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group m-0">
+                                                                            <input type="number" step="0.01" style="width:100%" class="form-control" name="amount" [(ngModel)]="amount" (change)="changeCalcMethodsInRentContract(ContractUnitsServiceForm.value.calcMethodType)" formControlName="amount">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group m-0">
+                                                                            <input type="number" step="0.01" style="width:100%" class="form-control" name="totalTaxes" [(ngModel)]="totalTaxes" (change)="changeCalcMethodsInRentContract(ContractUnitsServiceForm.value.calcMethodType)" formControlName="totalTaxes">
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="form-group m-0">
+                                                                            <input type="number" step="0.01" style="width:100%" class="form-control" name="amountWithTax" formControlName="amountWithTax">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select class="custom" formControlName="fromAccount" [items]="fromServiceAccount" bindLabel="name" bindValue="id" style="width:100%">
+                                                                            </ng-select>
+                                                                            <div *ngIf="(csf['fromAccount'].touched || csf['fromAccount'].dirty ) && csf['fromAccount'].invalid" class="alert alert-danger">
+                                                                                <i class="fa fa-close "></i>
+                                                                                <span *ngIf="csf['fromAccount'].errors && csf['fromAccount'].errors['required']">
+                                          {{'validation-messages.required-field'|translate}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <ng-select class="custom" formControlName="toAccount" [items]="toServiceAccount" bindLabel="name" bindValue="id" style="width:100%">
+                                                                            </ng-select>
+                                                                            <div *ngIf="(csf['toAccount'].touched || csf['toAccount'].dirty ) && csf['toAccount'].invalid" class="alert alert-danger">
+                                                                                <i class="fa fa-close "></i>
+                                                                                <span *ngIf="csf['toAccount'].errors && csf['toAccount'].errors['required']">
+                                          {{'validation-messages.required-field'|translate}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+
+
+
+
+
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary px-3" (click)="addContractUnitsServices()">
+                                      <i class="las la-plus"></i>
+                                      <!-- Add -->
+                                    </button>
+
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr *ngFor="let item of selectedUnitServiceDetails; let i= index">
+
+                                                                    <td>{{item.unitNameEn}}</td>
+                                                                    <td>{{item.unitServiceNameEn}}</td>
+                                                                    <td>{{item.payOnTimeName}}</td>
+                                                                    <td>{{item.calcMethodTypeName}}</td>
+                                                                    <td>{{item.numberOfServices}}</td>
+                                                                    <td>{{item.serviceRatio}}</td>
+                                                                    <td>{{item.serviceAmount}}</td>
+                                                                    <td>{{item.serviceTax}}</td>
+                                                                    <td>{{item.amountAfterTax}}</td>
+                                                                    <td>{{item.fromAccountName}}</td>
+                                                                    <td>{{item.toAccountName}}</td>
+
+                                                                    <td>
+                                                                        <button (click)="deleteUnitServices(item)" class="btn btn-danger px-3">
+                                      <i class="las la-trash-alt"></i>
+                                      <!-- Delete -->
+                                    </button>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </form>
+
+                                            </ng-template>
+                                        </li>
+                                    </ul>
+
+                                    <div [ngbNavOutlet]="nav" class=""></div>
+
+
+                                    <!-- start offers info -->
+
+
+                                    <!-- end offers info -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- kkkkk -->

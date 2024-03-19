@@ -1,0 +1,177 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="productForm" id="productFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'products.product-info'|translate}}</h3>
+                  <div class="row">
+
+                    <div class="col gap-2 grid grid-cols-3 ">
+                      <div class=" ">
+                        <label for="productNameAr" class="label-name">
+                          {{'products.product-name-ar'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="form-group input-group ">
+
+                          <input type="text" class="form-control" name="productNameAr" formControlName="productNameAr">
+                          <div
+                            *ngIf="(f['productNameAr'].touched || f['productNameAr'].dirty ) && f['productNameAr'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['productNameAr'].errors && f['productNameAr'].errors['required']">
+                              {{'products.product-name-ar-required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class=" ">
+
+                        <label for="productNameEn" class="label-name">
+                          {{'products.product-name-en'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+
+                          <input type="text" class="form-control" name="productNameEn" formControlName="productNameEn">
+                          <div
+                            *ngIf="(f['productNameEn'].touched || f['productNameEn'].dirty ) && f['productNameEn'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['productNameEn'].errors && f['productNameEn'].errors['required']">
+                              {{'products.product-name-en-required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class=" ">
+                        <label for="productCategory" class="label-name">
+                          {{'products.product-category'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select style="width:100%" placeholder="Product Category"
+                            formControlName="productCategoryId" name='productCategoryId' class=""
+                            id="productCategoryId">
+                            <ng-option *ngFor="let productCategory of productsCategoriesList"
+                              [value]="productCategory.id">
+                              {{lang=='ar'?productCategory.categoryNameAr :productCategory.categoryNameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <div
+                            *ngIf="(f['productCategoryId'].touched || f['productCategoryId'].dirty ) && f['productCategoryId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['productCategoryId'].errors && f['productCategoryId'].errors['required']">
+                              {{'products.product-category-required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+                        <label for="productType" class="label-name">
+                          {{'products.product-type'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group mb-3 popup">
+                          <ng-select class="custom" formControlName="productType" [items]="productTypes"
+                            bindLabel="name" bindValue="id" style="width:100%"
+                            placeholder="{{'products.product-type'|translate}}">
+                          </ng-select>
+                          <div *ngIf="(f['productType'].touched || f['productType'].dirty ) && f['productType'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['productType'].errors && f['productType'].errors['required']">
+                              {{'products.product-type-required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+                        <label for="sellPrice" class="label-name">
+                          {{'general.sell-price'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="number" step="0.01" class="form-control" name="sellPrice"
+                            formControlName="sellPrice">
+                          <div *ngIf="(f['sellPrice'].touched || f['sellPrice'].dirty ) && f['sellPrice'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['sellPrice'].errors && f['sellPrice'].errors['required']">
+                              {{'general.sell-price-required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+                        <label for="purchasePrice" class="label-name">
+                          {{'general.purchase-price'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="number" step="0.01" class="form-control" name="purchasePrice"
+                            formControlName="purchasePrice">
+                          <div
+                            *ngIf="(f['purchasePrice'].touched || f['purchasePrice'].dirty ) && f['purchasePrice'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['purchasePrice'].errors && f['purchasePrice'].errors['required']">
+                              {{'general.purchase-price-required'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+                        <div class="form-group d-flex align-items-center gap-1">
+
+                          <input type="checkbox" class="" name="isTaxable" formControlName="isTaxable">
+                          <label for="isTaxable" class="label-name m-0">
+                            {{'general.is-taxable'|translate}}
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class=" " *ngIf="productForm.value.isTaxable">
+                        <label for="taxRatio" class="label-name">
+                          {{'general.tax-ratio'|translate}}
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="number" step="0.01" class="form-control" name="taxRatio"
+                            formControlName="taxRatio">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="list list-container-add">
+  <app-products-list [changeProductsFlag]="changeProductsFlag"></app-products-list>
+</div>
+<!-- Section  -->

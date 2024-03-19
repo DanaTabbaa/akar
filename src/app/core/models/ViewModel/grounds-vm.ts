@@ -1,0 +1,37 @@
+export interface GroundVM {
+  id: number;
+  groundNameAr: string;
+  groundNameEn: string;
+  purposeType: number | null;
+  ownerId: number | null;
+  areaSize: number | null;
+  readyForSale: boolean | null;
+  meterPrice: number | null;
+  sellSpace: number | null;
+  sellPrice: number | null;
+  officeId: number | null;
+  borderEast: string;
+  borderWest: string;
+  borderSouth: string;
+  borderNorth: string;
+  notes: string;
+  countryId: number | null;
+  regionId: number | null;
+  cityId: number | null;
+  districtId: number | null;
+  propertyInstrument: string;
+  addressInDetails: string;
+  previousOwnerNameAr: string;
+  noPlanned: string;
+  previousOwnerNameEn: string;
+  ownerNameEn: string;
+  ownerNameAr: string;
+  countryNameAr: string;
+  countryNameEn: string;
+  cityNameAr: string;
+  cityNameEn: string;
+  districtNameAr: string;
+  districtNameEn: string;
+  regionNameAr: string;
+  regionNameEn: string;
+}

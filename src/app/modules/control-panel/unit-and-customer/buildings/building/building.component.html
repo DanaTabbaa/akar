@@ -1,0 +1,509 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;">{{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<!-- <section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12"> -->
+
+<!-- </div>
+    </div> -->
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="buildingForm" id="buildingFormSubmit" class="tabs-form ">
+              <div class="main-building p-0">
+                <div class="wrapper-title">
+                  <!-- <h1 class="lease-header-title-building">{{'page-form.building'|translate}}</h1> -->
+                  <h3 class="building-info">{{'page-form.building-information'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-3 ">
+                      <div class="">
+                        <label for="buildingNameAr" class="label-name">{{'page-form.name-arabic'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control" name="buildingNameAr"
+                            formControlName="buildingNameAr">
+
+                          <div *ngIf="f['buildingNameAr'].touched && f['buildingNameAr'].invalid"
+                            class=" alert-danger validtion">
+                            <div *ngIf="f['buildingNameAr'].errors && f['buildingNameAr'].invalid">
+                              <i class="fa fa-close "></i>
+                              {{'input-validation.name-invalid'|translate}}
+                            </div>
+                            <div *ngIf="f['buildingNameAr'].errors && f['buildingNameAr'].errors['minlength']">
+                              <i class="fa fa-close "></i>
+                              {{'input-validation.name-min'|translate}}
+                            </div>
+                            <div *ngIf="f['buildingNameAr'].errors && f['buildingNameAr'].errors['maxlength']">
+                              <i class="fa fa-close "></i>
+                              {{'input-validation.name-max'|translate}}
+                            </div>
+                            <div *ngIf="f['buildingNameAr'].errors && f['buildingNameAr'].errors['pattern'] ">
+                              <i class="fa fa-times"></i>{{'error.space'|translate}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="english-building" class="label-name">{{'page-form.name-latin'|translate}}<span
+                            class="text-danger">*</span></label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="buildingNameEn"
+                            formControlName="buildingNameEn">
+                          <div *ngIf="f['buildingNameEn'].touched && f['buildingNameEn'].invalid"
+                            class=" alert-danger validtion">
+                            <div *ngIf="f['buildingNameEn'].errors && f['buildingNameEn'].invalid">
+                              <i class="fa fa-close "></i>
+                              {{'validation-messages.invalid-name'|translate}}
+                            </div>
+                            <div *ngIf="f['buildingNameEn'].errors && f['buildingNameEn'].errors['minlength']">
+                              <i class="fa fa-close "></i>
+                              {{'validation-messages.min-name'|translate}}
+                            </div>
+                            <div *ngIf="f['buildingNameEn'].errors && f['buildingNameEn'].errors['maxlength']">
+                              <i class="fa fa-close "></i>
+                              {{'validation-messages.max-name'|translate}}
+                            </div>
+                            <div *ngIf="f['buildingNameEn'].errors && f['buildingNameEn'].errors['pattern'] ">
+                              <i class="fa fa-times"></i>{{'error.space'|translate}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="real-estate" class="label-name">{{'page-form.main-realestate'|translate}}
+                        </label>
+                        <div class="input-group popup">
+                          <ng-select formControlName="realestateId" name="realestateId" id="realestateId"
+                            style="width:100%" placeholder="{{'page-form.main-realestate'|translate}}">
+                            <ng-option *ngFor="let item of realestateGroup;" [value]="item.id">
+                              <ng-container *ngIf="lang=='ar'; else enrealestate">
+                                {{item.realestateNameAr}}
+                              </ng-container>
+                              <ng-template #enrealestate>
+                                {{item.realestateNameEn}}
+                              </ng-template>
+                            </ng-option>
+                          </ng-select>
+                          <div
+                            *ngIf="(f['realestateId'].touched || f['realestateId'].dirty ) && f['realestateId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['realestateId'].errors && f['realestateId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}} </span>
+                          </div>
+                        </div>
+
+
+
+
+                      </div>
+
+                      <div class="">
+                        <label for="marketing-real-estate"
+                          class="label-name">{{'page-form.realestate-marketing-office'|translate}}</label>
+                        <div class="input-group popup">
+                          <ng-select formControlName="officeId" style="width:100%"
+                            placeholder="{{'page-form.realestate-marketing-office'|translate}}">
+                            <ng-option *ngFor="let office of offices" [value]="office.id">
+                              {{lang=='ar'? office.nameAr:office.nameEn}}</ng-option>
+                          </ng-select>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="owner-name" class="label-name">{{'page-form.owner'|translate}}</label>
+                        <div class="input-group popup">
+                          <ng-select formControlName="ownerId" style="width:100%"
+                            placeholder="{{'page-form.owner'|translate}}">
+                            <ng-option *ngFor="let owner of owners" [value]="owner.id">
+                              {{lang=='ar'? owner.nameAr:owner.nameEn}}</ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}} </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="space" class="label-name">{{'page-form.area-size'|translate}}</label>
+                        <div class="input-group">
+                          <input type="number" step="0.01" class="form-control" name="areaSize"
+                            formControlName="areaSize">
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="unit_Number" class="label-name">{{'page-form.unit-number'|translate}}</label>
+                        <div class="input-group">
+                          <input type="number" class="form-control" name="unitNumber" formControlName="unitNumber">
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="galleries_Number"
+                          class="label-name">{{'page-form.number-galleries'|translate}}</label>
+                        <div class="input-group">
+                          <input type="number" class="form-control" name="galleriesNumber"
+                            formControlName="galleriesNumber">
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="parking_Slots_Number"
+                          class="label-name">{{'page-form.number-parking-lots'|translate}}</label>
+                        <div class="input-group">
+                          <input type="number" class="form-control" name="parkingSlotsNumber"
+                            formControlName="parkingSlotsNumber">
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="sub_Parking_Number"
+                          class="label-name">{{'page-form.number-sub-parking'|translate}}</label>
+                        <div class="input-group">
+                          <input type="number" class="form-control" name="subParkingNumber"
+                            formControlName="subParkingNumber">
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="elevator_Number"
+                          class="label-name">{{'page-form.number-elevators'|translate}}</label>
+                        <div class="input-group">
+                          <input type="number" class="form-control" name="elevatorNumber"
+                            formControlName="elevatorNumber">
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="propertyType" class="label-name">{{'page-form.type-property'|translate}}</label>
+                        <div class="input-group popup">
+                          <!-- <ng-select (ngModel)="selectedPropertyTypes" style="width:100%">
+                      <ng-option  *ngFor="let type of propertyType" bindLabel="name" bindValue="id"></ng-option>
+                   </ng-select> -->
+                          <ng-select class="custom" formControlName="propertyType" [items]="propertyType"
+                            bindLabel="name" bindValue="id" style="width:100%"
+                            placeholder="{{'page-form.type-property'|translate}}">
+                          </ng-select>
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="type-of-prperty-optional" class="label-name">{{'page-form.building-type'|translate}}
+
+                        </label>
+                        <div class="input-group popup">
+                          <ng-select formControlName="buildingType"
+                            placeholder="{{'page-form.building-type'|translate}}" style="width:100%">
+                            <ng-option *ngFor="let type of buildingTypes" [value]="type.id">
+                              {{type.name}}
+                            </ng-option>
+                          </ng-select>
+
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="floorId" class="label-name">
+                          {{'page-form.floors'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+
+                          <p-multiSelect [options]="floors" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="selectedFloors" [virtualScroll]="true"
+                            optionLabel="{{lang=='en'?'floorNameEn':'floorNameAr'}}" id="floors" name="floorIds"
+                            class="w-100" defaultLabel="{{'general.select'|translate}}"></p-multiSelect>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                  <hr>
+                  <!-- test -->
+                  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li [ngbNavItem]="1" [destroyOnHide]="false">
+                      <a ngbNavLink>{{'page-form.location-details'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-2 ">
+                            <div class="">
+                              <label for="country" class="label-name">{{'page-form.country'|translate}}</label>
+                              <div class="input-group popup">
+                                <ng-select formControlName="countryId" style="width:100%"
+                                  placeholder="{{'page-form.country'|translate}}"
+                                  (change)="onChangeCountry(buildingForm.value.countryId)">
+                                  <ng-option *ngFor="let country of countries" [value]="country.id">
+                                    {{lang == 'en'? country.countryNameEn:country.countryNameAr}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="region" class="label-name">{{'page-form.region'|translate}}</label>
+                              <div class="input-group popup">
+                                <ng-select formControlName="regionId" style="width:100%"
+                                  placeholder="{{'page-form.region'|translate}}"
+                                  (change)="onChangeRegion(buildingForm.value.regionId)">
+                                  <ng-option *ngFor="let region of regions" [value]="region.id">{{
+                                    lang == 'en'? region.regionNameEn: region.regionNameAr}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="city" class="label-name">{{'page-form.city'|translate}}</label>
+                              <div class="input-group popup">
+                                <ng-select (change)="onChangeCity(buildingForm.value.cityId)" formControlName="cityId"
+                                  style="width:100%" placeholder="{{'page-form.city'|translate}}">
+                                  <ng-option *ngFor="let city of cities" [value]="city.id">{{lang == 'en'? city.cityNameEn:city.cityNameAr}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="district" class="label-name">{{'page-form.district'|translate}}
+                                ({{'general.optional'|translate}})</label>
+                              <div class="input-group popup">
+                                <ng-select formControlName="districtId" style="width:100%"
+                                  placeholder="{{'page-form.district'|translate}}">
+                                  <ng-option *ngFor="let district of districts" [value]="district.id">
+                                    {{lang=='en'?district.districtNameEn:district.districtNameAr}}</ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <hr />
+                        <h3 class="building-info">{{'page-form.location-map'|translate}}</h3>
+                        <div class="row">
+
+
+                          <div id="map">
+                            <app-leaflet-map (onPositionSelected)="onPositionSelected($event)" [latlon]="position" [locationDescription]="buildingForm.controls['locationDescription'].value"></app-leaflet-map>
+                          </div>
+
+                          <!-- <div
+                                                        class="col-md-12 col-lg-8 col-xl-8 pr-3 pr-sm-3 pr-md-3 pr-lg-0">
+                                                        <iframe
+                                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241316.64332144568!2d72.74109713631994!3d19.082522324824836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1603377395753!5m2!1sen!2sin"
+                                                            width="100%" height="330" frameborder="0" style="border:0;"
+                                                            allowfullscreen="" aria-hidden="false"
+                                                            tabindex="0"></iframe>
+                                                    </div> -->
+                          <div class="col-md-12 col-lg-4 col-xl-4 pl-3 pl-sm-4 pl-md-3 pl-lg-0 ml-0">
+                            <div class="map-info">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="map-info-names">
+                                    <!-- <input type="text" class="input-form" disabled [(ngModel)]="longitude" [ngModelOptions]="{standalone: true}" > -->
+                                    <input type="text" class="input-form" readonly formControlName="lng" >
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="map-info-names mt-4">
+                                    <!-- <input type="text" disabled class="input-form"  [(ngModel)]="latitude"  [ngModelOptions]="{standalone: true}"> -->
+                                    <input type="text" readonly class="input-form"  formControlName="lat">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="map-info-names custom-width mt-4">
+                                    <textarea class="form-control" formControlName="locationDescription" placeholder="{{'page-form.locationDescription'|translate}}">
+
+                                    </textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                      <a ngbNavLink class="building-info0">{{'page-form.owner-information'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-2 ">
+                            <div class="">
+                              <label for="deed-number" class="label-name">{{'page-form.deed-number'|translate}}</label>
+                              <div class="input-group">
+                                <input type="text" class="form-control" name="deedNumber" formControlName="deedNumber">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="issuer" class="label-name">{{'page-form.issuer'|translate}}</label>
+                              <div class="input-group">
+                                <input type="text" class="form-control" name="issuer" formControlName="issuer">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="property_Deed_Date"
+                                class="label-name">{{'page-form.issue-date'|translate}}</label>
+                              <div>
+                                <div class="input-group">
+                                  <app-full-date name="issueDate" [selectedDate]="issueDate"
+                                    (OnDateSelect)="getIssueDate($event)">
+                                  </app-full-date>
+
+                                </div>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="issue-place" class="label-name">{{'page-form.place-issue'|translate}}</label>
+                              <div class="input-group">
+                                <input type="text" class="form-control" name="issuePlace" formControlName="issuePlace">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="property_Deed_Date"
+                                class="label-name">{{'page-form.property-deed-date'|translate}}</label>
+                              <div>
+                                <div class="input-group">
+
+                                  <app-full-date name="propertyDeedDate" (OnDateSelect)="getPropertyDeedDate($event)"
+                                    [selectedDate]="propertyDeedDate">
+                                  </app-full-date>
+
+                                </div>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="permit_Number"
+                                class="label-name">{{'page-form.building-permit-number'|translate}}</label>
+                              <div class="input-group">
+                                <input type="text" class="form-control" name="permitNumber"
+                                  formControlName="permitNumber">
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="permit_Date"
+                                class="label-name">{{'page-form.building-permit-date'|translate}}</label>
+                              <div>
+                                <div class="input-group">
+
+                                  <app-full-date name="permitDate" (OnDateSelect)="getPermitDate($event)"
+                                    [selectedDate]="permitDate">
+                                  </app-full-date>
+
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="building_Address"
+                                class="label-name">{{'page-form.building-address'|translate}}</label>
+                              <div class="input-group">
+                                <textarea class="form-control" rows="4" name="buildingAddress"
+                                  formControlName="buildingAddress"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+                    <!-- <li [ngbNavItem]="3">
+                      <a ngbNavLink>{{'page-form.linking-accounts'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-2 ">
+                            <div class="">
+                              <label for="cost-center" class="label-name">{{'page-form.cost-center'|translate}}</label>
+                              <div class="input-group">
+                                <ng-select formControlName="costCenterId" style="width:100%" placeholder="Cost Center">
+                                  <ng-option *ngFor="let item of costCenters" [value]="item.id">{{lang=='ar'?
+                                    item.costCenterAr:item.costCenterEn}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="defereed-revenue"
+                                class="label-name">{{'page-form.deferred-revenue-account'|translate}}</label>
+                              <div class="input-group">
+                                <ng-select formControlName="deferredRevenueAccountId" style="width:100%"
+                                  placeholder="Deferred Revenue Account">
+                                  <ng-option *ngFor="let item of deferredRevenueAccounts" [value]="item.id">
+                                    {{lang=='ar'?item.accArName:item.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="revenue-calculation"
+                                class="label-name">{{'page-form.revenue-account'|translate}}</label>
+                              <div class="input-group">
+                                <ng-select formControlName="accuredRevenueAccountId" style="width:100%"
+                                  placeholder="Accured Revenue Account">
+                                  <ng-option *ngFor="let item of accuredRevenueAccounts" [value]="item.id">
+                                    {{lang=='ar'?item.accArName :item.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="calculate-tax"
+                                class="label-name">{{'page-form.taxes-account'|translate}}</label>
+                              <div class="input-group">
+                                <ng-select formControlName="taxAccountId" style="width:100%"
+                                  placeholder="{{'page-form.taxes-account'|translate}}">
+                                  <ng-option *ngFor="let item of taxAccounts" [value]="item.id">{{lang=='ar'?
+                                    item.accArName:item.accEnName}}</ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="insurance-account"
+                                class="label-name">{{'page-form.insurance-account'|translate}}</label>
+                              <div class="input-group">
+                                <ng-select formControlName="insuranceAccountId" style="width:100%"
+                                  placeholder="{{'page-form.insurance-account'|translate}}">
+                                  <ng-option *ngFor="let item of insuranceAccounts" [value]="item.id">{{lang=='ar'?
+                                    item.accArName:item.accEnName}}</ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="sevice-account"
+                                class="label-name">{{'page-form.services-account'|translate}}</label>
+                              <div class="input-group">
+                                <ng-select formControlName="serviceAccountId" style="width:100%"
+                                  placeholder="{{'page-form.services-account'|translate}}">
+                                  <ng-option *ngFor="let item of serviceAccounts" [value]="item.id">
+                                    {{lang=='ar'?item.accArName:item.accEnName}}</ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       
+
+
+                      </ng-template>
+                    </li> -->
+
+                  </ul>
+
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                  <!-- test -->
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

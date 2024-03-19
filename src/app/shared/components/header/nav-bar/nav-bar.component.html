@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-lg navbar-light nav-size" data-blast="bgColor">
+  <!---------Start Right Nav Bar -------------->
+  <div class="logo-toggle">
+    <!-- <img src="./assets/images/logo akarat.png" class="logo-img logo-hidden"> -->
+    <a id="menu-toggle" style="color: white;">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.3337 1.66699L20.3337 5.66699M20.3337 5.66699L16.3337 9.66699M20.3337 5.66699H5.66699C3.45785 5.66699 1.66699 7.45785 1.66699 9.66699V11.667M5.66699 20.3337L1.66699 16.3337M1.66699 16.3337L5.66699 12.3337M1.66699 16.3337H16.3337C18.5428 16.3337 20.3337 14.5428 20.3337 12.3337V10.3337" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      </svg>    </a>
+  </div>
+  <!-- <a class="px-md-0 px-lg-3 mx-1 menus-link" id="menu-toggle1">
+    <i class="fa fa-gavel" title="auction"></i>
+    <span class="pl-1 pl-lg-3 pr-lg-3">{{'sidebar.auctions'|translate}}</span>
+  </a>
+  <a class="menus-link" id="menu-toggle1">
+    <i class="fa fa-building" title="real estate market"></i>
+    <span class="pl-1 pl-lg-3 pr-lg-3">{{'nav-bar.real-estate-market'|translate}}</span>
+  </a> -->
+  <!---------End Right Nav Bar -------------->
+  <ul class="navbar-nav nav-rings ml-auto">
+    <!--Start Notification Part-->
+    <!-- <li class="nav-item dropdown bell-wrap">
+      <a class="nav-link dropdown nav-icon dropdown-toggle mail-icon" href="#" id="navDropBell" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="la la-bell-o bell" aria-hidden="true"></i>
+        <span class="label label-success bell-badge bell-mob">25</span>
+      </a>
+      <div class="dropdown-menu drop-card dropdown-menu-right" aria-labelledby="navDropBell">
+        <div class="drop-desc">
+          <a class="dropdown-item " href="#">Lease Contract No. 78 Has Been
+            <br /> Renewed</a>
+          <span>2020-08-28</span>
+        </div>
+        <div class="drop-desc">
+          <a class="dropdown-item " href="#">Lease Contract No. 78 Has Been
+            <br /> Renewed</a>
+          <span>2020-08-28</span>
+        </div>
+        <div class="drop-desc">
+          <a class="dropdown-item " href="#">Lease Contract No. 78 Has Been
+            <br /> Renewed</a>
+          <span>2020-08-28</span>
+        </div>
+        <div class="text-center view-drop">
+          <a href="">View all</a>
+        </div>
+      </div>
+    </li> -->
+    <!--End Notification Weddget-->
+    <!---Start Message Weddget----->
+    <!-- <li class="nav-item dropdown">
+      <a class="nav-link dropdown nav-icon dropdown-toggle mail-icon" href="#" id="navDropdownBadge" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="la la-envelope-o mail" aria-hidden="true"></i>
+        <span class="label label-success mail-badge mail-mob">25</span>
+      </a>
+      <div class="dropdown-menu drop-card dropdown-menu-right" aria-labelledby="navDropdownBadge">
+        <div class="drop-desc">
+          <a class="dropdown-item " href="#">Lease Contract No. 78 Has Been
+            <br /> Renewed</a>
+          <span>2020-08-28</span>
+        </div>
+        <div class="drop-desc">
+          <a class="dropdown-item " href="#">Lease Contract No. 78 Has Been
+            <br /> Renewed</a>
+          <span>2020-08-28</span>
+        </div>
+        <div class="drop-desc">
+          <a class="dropdown-item " href="#">Lease Contract No. 78 Has Been
+            <br /> Renewed</a>
+          <span>2020-08-28</span>
+        </div>
+        <div class="text-center view-drop">
+          <a href="">View all</a>
+        </div>
+      </div>
+    </li> -->
+    <!---End Message Weddget----->
+    <!---Start Message Weddget----->
+    <li class="nav-item dropdown">
+      <a style="color: white !important;" class="nav-link dropdown nav-icon dropdown-toggle flag" href="#" id="navDropdownBadge" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span *ngIf="lang == 'en'">English</span>
+        <span *ngIf="lang == 'ar'">Arabic</span>
+      </a>
+      <div class="dropdown-menu drop-card dropdown-menu-right" aria-labelledby="navDropdownBadge">
+        <div class="drop-desc">
+          <a class="dropdown-item flag" (click)="changeToEnglish()" onclick='changeToLTR()'><img
+              src="./assets/images/flags/us.svg" width="30"> {{'nav-bar.english-language'|translate}}</a>
+        </div>
+        <div class="drop-desc">
+          <a class="dropdown-item flag" (click)="changeToArabic()" onclick='changeToRTL();'> <img
+              src="./assets/images/flags/sa.svg" width="30"> {{'nav-bar.arabic-language'|translate}}</a>
+        </div>
+      </div>
+    </li>
+    <!---End Message Weddget----->
+    <!-----Start User Profile Setting----->
+    <li class="nav-item dropdown">
+      <a style="color: white !important;" class="nav-link user-name dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <span>{{userName}}</span>
+
+        <img src="./assets/images/user-avatar.png" class="user-image" alt="User Image">
+      </a>
+      <div class="dropdown-menu drop-card dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <!-- <a class="dropdown-item" href="#">{{'nav-bar.settings'|translate}}</a>
+        <a class="dropdown-item" href="#">{{'nav-bar.real-estate-market'|translate}}</a> -->
+        <a class="dropdown-item" [routerLink]="['/control-panel/admin-panel/user-registeration-request']"
+          routerLinkActive="router-link-active">{{'sidebar.users-registerations-requests'|translate}}</a>
+          <a class="dropdown-item"  [routerLink]="['/control-panel/admin-panel/change-password']"
+              routerLinkActive="router-link-active">
+              {{'sidebar.change-password'|translate}} </a>
+        <a class="dropdown-item" (click)="logOut()">{{'nav-bar.sign-out'|translate}}</a>
+      </div>
+    </li>
+    <!-----End User Profile Setting----->
+  </ul>
+</nav>

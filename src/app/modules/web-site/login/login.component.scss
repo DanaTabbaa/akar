@@ -1,0 +1,35 @@
+.errorMessage {
+    color: red
+}
+
+.successMessage {
+    color: red;
+}
+
+.successMessage {
+    color: red;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+    .login-d-none {
+        display: none !important;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: max-content;
+    /* set a fixed height for the container */
+}
+
+.box {
+    width: 100%;
+    height: 100px;
+    background-color: #ccc;
+    border: 1px solid #000;
+}

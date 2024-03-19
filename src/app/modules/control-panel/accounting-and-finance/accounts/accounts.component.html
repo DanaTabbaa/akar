@@ -1,0 +1,262 @@
+<!-- Section  -->
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-scale-multiple" [fullScreen] = "true"><p style="color: white ;font-size: 20px;" > {{'page-form.loading'|translate}} </p></ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-accounts">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="accountForm" id="AccountsFormSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <h3>{{'accounts.account-info'|translate}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class="">
+                                                <label for="main-account"
+                                                    class="label-name">{{'accounts.main-account'|translate}}</label>
+
+                                                <div class="input-group">
+                                                    <ng-select formControlName="parentAccId" style="width:100%" (change)="onChangeMainAcc(accountForm.value.parentAccId)">
+                                                        <ng-option *ngFor="let item of mainAccounts" [value]="item.id">
+                                                            {{lang=='ar'? item.accArName:item.accEnName}}</ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+
+                                            
+                                            <div class="">
+                                                <label for="accState"
+                                                    class="label-name">{{'accounts.account-state'|translate}}</label>
+                                                <div class="input-group  popup">
+                                                    <ng-select class="custom" formControlName="accState"
+                                                        [items]="accountStates" bindLabel="name" bindValue="id"
+                                                        style="width:100%">
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="accCode"
+                                                    class="label-name">{{'accounts.account-code'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+
+                                                    <input type="text" class="form-control icon-user" name="accCode"
+                                                        formControlName="accCode">
+                                                    <div *ngIf="(f['accCode'].touched || f['accCode'].dirty ) && f['accCode'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accCode'].errors && f['accCode'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+
+
+                                            <div class=" ">
+                                                <label for="accArName"
+                                                    class="label-name">{{'accounts.account-name-arabic'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+
+                                                    <input type="text" class="form-control icon-user" name="accArName"
+                                                        formControlName="accArName">
+                                                    <div *ngIf="(f['accArName'].touched || f['accArName'].dirty ) && f['accArName'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accArName'].errors && f['accArName'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="accEnName"
+                                                    class="label-name">{{'accounts.account-name-english'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+
+                                                    <input type="text" class="form-control icon-user" name="accEnName"
+                                                        formControlName="accEnName">
+                                                    <div *ngIf="(f['accEnName'].touched || f['accEnName'].dirty ) && f['accEnName'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accEnName'].errors && f['accEnName'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="" hidden>
+                                                <label for="accDate"
+                                                    class="label-name">{{'accounts.account-date'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div>
+                                                    <div class="input-group ">
+                                                        <app-full-date name="accDate" formControlName="accDate"
+                                                            ngDefaultControl
+                                                            [selectedDate]="accDate"
+                                                            (OnDateSelect)="getAccountDate($event)">
+                                                        </app-full-date>
+
+                                                    </div>
+                                                    <div *ngIf="(f['accDate'].touched || f['accDate'].dirty ) && f['accDate'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accDate'].errors && f['accDate'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <label for="account-register-date"
+                                                    class="label-name">{{'accounts.account-register-date'|translate}}
+                                                    <span class="text-danger">*</span></label>
+                                                <div>
+                                                    <div class="input-group ">
+                                                        <app-full-date name="accCheckDate"
+                                                            formControlName="accCheckDate" 
+                                                            ngDefaultControl [selectedDate]="accCheckDate"
+                                                            (OnDateSelect)="getCheckAccountDate($event)">
+                                                        </app-full-date>
+
+                                                    </div>
+                                                    <div *ngIf="(f['accCheckDate'].touched || f['accCheckDate'].dirty ) && f['accCheckDate'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accCheckDate'].errors && f['accCheckDate'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <label for="accClassId"
+                                                    class="label-name">{{'accounts.account-classification'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <ng-select class="custom" formControlName="accClassId" [readonly]="isReadOnlyAccClass" 
+                                                        [items]="accountsClassification" bindLabel="name" bindValue="id"
+                                                        style="width:100%">
+                                                    </ng-select>
+                                                    <div *ngIf="(f['accClassId'].touched || f['accClassId'].dirty ) && f['accClassId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accClassId'].errors && f['accClassId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="accountType" class="label-name">
+                                                    {{'accounts.account-type'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <ng-select class="custom" formControlName="accountType"
+                                                        [items]="accountTypes" bindLabel="name" bindValue="id"
+                                                        style="width:100%">
+                                                    </ng-select>
+                                                    <div *ngIf="(f['accountType'].touched || f['accountType'].dirty ) && f['accountType'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accountType'].errors && f['accountType'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="" >
+                                                <label for="accNature"
+                                                    class="label-name">{{'accounts.account-nature'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group  popup">
+                                                    <ng-select class="custom" formControlName="accNature"
+                                                        [items]="accountNature" bindLabel="name" bindValue="id"
+                                                        style="width:100%">
+                                                    </ng-select>
+                                                    <div *ngIf="(f['accNature'].touched || f['accNature'].dirty ) && f['accNature'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['accNature'].errors && f['accNature'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="">
+                                                <label for="currencyId"
+                                                    class="label-name">{{'accounts.currency'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <ng-select formControlName="currencyId" style="width:100%">
+                                                        <ng-option *ngFor="let item of currencies" [value]="item.id">
+                                                            {{lang=='ar'?item.currencyNameAr:item.currencyNameEn}}</ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['currencyId'].touched || f['currencyId'].dirty ) && f['currencyId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['currencyId'].errors && f['currencyId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="" hidden>
+                                                <label for="accDebit"
+                                                    class="label-name">{{'accounts.account-debit'|translate}}</label>
+                                                <div class="input-group ">
+                                                    <input type="number" class="form-control" name="accDebit"
+                                                        formControlName="accDebit">
+                                                </div>
+                                            </div>
+                                            <div class="" hidden>
+                                                <label for="accCredit"
+                                                    class="label-name">{{'accounts.account-credit'|translate}}</label>
+                                                <div class="input-group ">
+                                                    <input type="number" class="form-control" name="accCredit"
+                                                        formControlName="accCredit">
+                                                </div>
+                                            </div>
+                                            <div class="">
+
+                                                <label for="accRemarks"
+                                                    class="label-name">{{'accounts.notes'|translate}}</label>
+                                                <div class="input-group ">
+                                                    <textarea class="form-control" name="accRemarks"
+                                                        formControlName="accRemarks"></textarea>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex align-items-center"  >
+
+                                        <div class="form-group d-flex align-items-center gap-1">
+                                            <input type="checkbox" name="deActivate" formControlName="deActivate">
+                                            <label for="deActivate"
+                                                class="label-name m-0">{{'accounts.deActivate'|translate}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

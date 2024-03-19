@@ -1,0 +1,319 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="maintenanceBillsForm" id="maintenanceBillsFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+
+                  <!-- start tabs -->
+                  <nav ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+                    <li ngbNavItem>
+                      <a (click)="getMaintenanceRequestDetails(maintenanceBillsForm.value.maintenanceRequestId)"
+                        ngbNavLink>{{'maintenance-bills.maintenance-bill-info' | translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 ">
+                            <div class=" ">
+                              <label for="date" class="label-name">{{'general.invoice-date'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <app-full-date name="date" [selectedDate]="date"
+                                  (OnDateSelect)="getInvoiceDate($event)">
+                                </app-full-date>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="maintenanceRequestId"
+                                class="label-name">{{'maintenance-requests.maintenance-request'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="maintenanceRequestId" style="width:100%"
+                                  (ngModelChange)="getMaintenanceRequestDetails(maintenanceBillsForm.value.maintenanceRequestId);getProductsReceiptDetails(maintenanceBillsForm.value.maintenanceRequestId)">
+                                  <ng-option *ngFor="let maintenanceRequest of maintenanceRequests"
+                                    [value]="maintenanceRequest.id">
+                                    {{maintenanceRequest.id}}
+                                  </ng-option>
+                                </ng-select>
+                                <div
+                                  *ngIf="(pr['maintenanceRequestId'].touched || pr['maintenanceRequestId'].dirty ) && pr['maintenanceRequestId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="pr['maintenanceRequestId'].errors && pr['maintenanceRequestId'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="tenantId" class="label-name">{{'general.tenant'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="tenantId" [(ngModel)]="tenantId" style="width:100%">
+                                  <ng-option *ngFor="let tenant of tenants" [value]="tenant.id">
+                                    {{lang=='ar'? tenant.nameAr:tenant.nameEn}}
+                                  </ng-option>
+                                </ng-select>
+                                <div *ngIf="(pr['tenantId'].touched || pr['tenantId'].dirty ) && pr['tenantId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="pr['tenantId'].errors && pr['tenantId'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="unitId" class="label-name">{{'general.unit'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="unitId" [(ngModel)]="unitId" style="width:100%">
+                                  <ng-option *ngFor="let unit of units" [value]="unit.id">
+                                    {{lang=='ar'? unit.unitNameAr:unit.unitNameEn}}
+                                  </ng-option>
+                                </ng-select>
+                                <div *ngIf="(pr['unitId'].touched || pr['unitId'].dirty ) && pr['unitId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="pr['unitId'].errors && pr['unitId'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+
+
+
+
+                            <div class="">
+                              <label for="maintenanceCoston" class="label-name">
+                                {{'products-receipt.maintenance-cost-on'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select class="custom" formControlName="maintenanceCostOn"
+                                  [items]="maintenanceCostOns" bindLabel="name" bindValue="id" style="width:100%">
+                                </ng-select>
+                                <div
+                                  *ngIf="(pr['maintenanceCostOn'].touched || pr['maintenanceCostOn'].dirty ) && pr['maintenanceCostOn'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="pr['maintenanceCostOn'].errors && pr['maintenanceCostOn'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div class=" ">
+                              <label for="notes" class="label-name">
+                                {{'general.description'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <textarea type="text" class="form-control" name="notes"
+                                  formControlName="notes"></textarea>
+
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="ownerServicesAccountId"
+                                class="label-name">{{'general.owner-service-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="ownerServicesAccountId" style="width:100%">
+                                  <ng-option *ngFor="let ownerServiceAccount of ownerServiceAccounts"
+                                    [value]="ownerServiceAccount.id">
+                                    {{lang=='ar'? ownerServiceAccount.accArName:ownerServiceAccount.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="taxAccountId" class="label-name">{{'general.tax-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="taxAccountId" style="width:100%">
+                                  <ng-option *ngFor="let taxAccount of taxAccounts" [value]="taxAccount.id">
+                                    {{lang=='ar'? taxAccount.accArName:taxAccount.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="taxAccountId" class="label-name">{{'general.tenant-account'|translate}}
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="tenantAccountId" style="width:100%">
+                                  <ng-option *ngFor="let tenantAccount of tenantsAccounts" [value]="tenantAccount.id">
+                                    {{lang=='ar'? tenantAccount.accArName:tenantAccount.accEnName}}
+                                  </ng-option>
+                                </ng-select>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+
+                    <li ngbNavItem>
+                      <a (click)="getProductsReceiptDetails(maintenanceBillsForm.value.maintenanceRequestId)"
+                        ngbNavLink>{{'general.products'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <!-- <div class="row"> -->
+                        <!-- <form id="maintenanceBillDetailsFormSubmit"> -->
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-responsive0 text-center"
+                            style="overflow-y: scroll !important;height: 200px;">
+                            <thead>
+                              <tr>
+                                <th scope="col" style="width: 150px;">
+                                  {{'general.product-category'|translate}}
+                                </th>
+                                <th scope="col" style="width: 150px;">
+                                  {{'general.product'|translate}}
+                                </th>
+                                <th scope="col">
+                                  {{'general.quantity'|translate}}
+
+                                </th>
+                                <th scope="col">
+                                  {{'general.price'|translate}}
+                                </th>
+
+                                <th scope="col">
+                                  {{'general.value-before-tax'|translate}}
+                                </th>
+                                <th scope="col">
+                                  {{'general.installation-price'|translate}}
+                                </th>
+                                <th scope="col">
+                                  {{'general.value-with-installtion-price-before-tax'|translate}}
+                                </th>
+                                <th scope="col">
+                                  {{'general.tax-ratio'|translate}}
+                                </th>
+                                <th scope="col">
+                                  {{'general.tax-value'|translate}}
+                                </th>
+                                <th scope="col">
+                                  {{'general.value-after-tax'|translate}}
+                                </th>
+                                <th>
+
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+
+                              <tr *ngFor="let item of selectedProducts; let i= index">
+                                <td>{{item.categoryNameEn}}</td>
+                                <td>{{item.productNameEn}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.valueBeforeTax}}</td>
+                                <td>{{item.installationPrice}}</td>
+                                <td>{{item.valueWithInstallationPriceBeforeTax}}</td>
+                                <td>{{item.taxRatio}}</td>
+                                <td>{{item.taxValue}}</td>
+                                <td>{{item.valueAfterTax}}</td>
+                                <td>
+                                  <div class="form-check">
+                                    <div class="checkbox inlineblock m-r-20">
+                                      <input type="checkbox" name="{{ 'checkbox' + i }}" id="{{ 'checkbox' + i }}"
+                                        (change)="onChange(item, $event)" [checked]="item.billed">
+                                      <label class="form-check-label" for="{{ 'checkbox' + i }}">
+                                      </label>
+                                    </div>
+                                  </div>
+                                </td>
+
+
+
+                              </tr>
+                              <tr>
+                                <td colspan="9" rowspan="9"></td>
+
+                                <!-- <td></td> -->
+
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="bg-total d-flex flex-column gap-2 p-3">
+                          <div class="col-12 col-md-6 offset-md-6 mb-3" *ngShow="false">
+                            <label for="specialDiscount" class="label-name">
+                              {{'maintenance-bills.special-discount'|translate}}
+                            </label>
+                            <div class="form-group input-group ">
+                              <input type="number" class="form-control" name="specialDiscount"
+                                [(ngModel)]="specialDiscount" [ngModelOptions]="{standalone: true}">
+                            </div>
+
+                          </div>
+                          <div class="col-12 col-md-6 offset-md-6">
+                            <label for="totalBeforeTax" class="label-name">{{'general.total-before-tax'|translate}}
+                              :
+                            </label>
+                            <label>{{totalBeforeTax}}</label>
+
+                          </div>
+
+                          <div class="col-12 col-md-6 offset-md-6">
+                            <label for="totalBeforeTax"
+                              class="label-name">{{'general.total-with-installtion-price-before-tax'|translate}}
+                              :
+                            </label>
+                            <label>{{totalBeforeTaxWithInstallationPrice}}</label>
+
+                          </div>
+
+                          <div class="col-12 col-md-6 offset-md-6">
+                            <label for="totalTax" class="label-name">{{'general.total-tax'|translate}}
+                              :
+                            </label>
+                            <label>{{totalTax}}</label>
+
+
+                          </div>
+
+                          <div class="col-12 col-md-6 offset-md-6">
+                            <label for="totalAfterTax" class="label-name">{{'general.total-after-tax'|translate}}
+                              :
+                            </label>
+                            <label>{{totalAfterTax}}</label>
+                          </div>
+                          <!-- </div> -->
+                        </div>
+                        <!-- </form> -->
+
+
+                        <!-- </div> -->
+                      </ng-template>
+                    </li>
+
+
+
+                  </nav>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

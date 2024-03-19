@@ -1,0 +1,20 @@
+export class VMBills
+{
+    id:any
+    code!:string;
+    billDate!:Date;
+    ownerId:any;
+    ownerAccId:any;
+    tenantId:any;
+    tenantAccId:any;
+    taxAccId:any;
+    officeId:any;
+    purchaserId:any;
+    purchaserAccId:any;
+    sellerId:any
+    sellerAccId:any;
+    revenueAccId:any;
+    notes!:string;
+    billTypeId:any;
+    userId:any;
+}

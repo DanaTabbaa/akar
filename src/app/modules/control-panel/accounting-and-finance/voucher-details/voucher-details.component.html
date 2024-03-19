@@ -1,0 +1,83 @@
+<!-- <div class="row"> -->
+
+<div class="table-responsive">
+
+  <table class="table table-bordered table-responsive0 text-center" style="overflow-y: scroll !important;height:px;">
+
+    <thead>
+      <th style="min-width:50px !important;width:50px !important;">#</th>
+      <th [hidden]="!(kindId==2 || kindId==3)">{{'voucher-details.debit'|translate}}</th>
+      <th [hidden]="!(kindId==1 || kindId==4)">{{'voucher-details.credit'|translate}}</th>
+      <th>{{'voucher-details.account'|translate}}</th>
+      <th>{{'voucher-details.unit'|translate}}</th>
+      <th>{{'voucher-details.notes'|translate}}</th>
+      <th></th>
+    </thead>
+
+    <tr *ngFor="let item of voucherDetails; let i= index;">
+      <td style="min-width:50px !important;width:50px !important;"> 
+        {{i+1}}
+      </td>
+
+      <td [hidden]="!(kindId==2 || kindId==3)">
+        <input type="number" min="0" class="form-control" (change)="calculateTotal(i)"
+          [(ngModel)]="voucherDetails[i].debit">
+      </td>
+
+      <td [hidden]="!(kindId==1 || kindId==4)">
+        <input type="number" min="0" class="form-control" (change)="calculateTotal(i)"
+          [(ngModel)]="voucherDetails[i].credit">
+      </td>
+
+      <td>
+        <input type="text" class="form-control" (keydown.Enter)="openAccSearchDialog(i)"
+          placeholder="{{'general.search'|translate}}" [(ngModel)]="voucherDetails[i].accName">
+      </td>
+      <td>
+        <input type="text" class="form-control" (keydown.Enter)="openUnitSearchDialog(i)"
+          placeholder="{{'general.search'|translate}}" [(ngModel)]="voucherDetails[i].unitName">
+      </td>
+      <td>
+        <input type="text"  class="form-control" [(ngModel)]="voucherDetails[i].notes">
+      </td>
+      <td>
+        <button class="btn btn-danger px-3" (click)="deleteItem(i)" type="button">
+          <!-- {{'voucher-details.delete-item'
+        |translate}} -->
+          <i class="las la-trash-alt"></i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td style="min-width:50px !important;width:50px !important;">{{voucherDetails.length + 1}}</td>
+      <td [hidden]="!(kindId==2 || kindId==3)">
+        <input type="number" [(ngModel)]="selectedVoucherDetails.debit" (change)="calculateTotal(-1)" min="0"
+          class="form-control">
+      </td>
+      <td [hidden]="!(kindId==1 || kindId==4)">
+        <input type="number" [(ngModel)]="selectedVoucherDetails.credit" (change)="calculateTotal(-1)" min="0"
+          class="form-control">
+      </td>
+      <td>
+        <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+          [(ngModel)]="selectedVoucherDetails.accName" (keydown.Enter)="openAccSearchDialog(-1)">
+      </td>
+      <td>
+        <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+          [(ngModel)]="selectedVoucherDetails.unitName" (keydown.Enter)="openUnitSearchDialog(-1)">
+      </td>
+
+      <td>
+        <input type="text" [(ngModel)]="selectedVoucherDetails.notes" class="form-control">
+      </td>
+      <td>
+        <button class="btn btn-primary px-3" (click)="addItem()" type="button">
+          <!-- {{'voucher-details.add-item'
+        |translate}} -->
+          <i class="las la-plus"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+
+</div>

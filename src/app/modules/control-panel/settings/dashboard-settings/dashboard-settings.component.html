@@ -1,0 +1,206 @@
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-units">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="dashboardSettingsForm" id="dashboardSettingsSubmit" class="tabs-form">
+              <div class="main-dashboard-settings">
+                <div class="wrapper-title">
+                  <h3 class="lease-header-title-building">
+                    {{'dashboard-settings.dashboard-settings'|translate}}
+                  </h3>
+                  <hr>
+                  <!-- start tabs -->
+                  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'dashboard-settings.tenants-notification'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="col rowgap-15 grid grid-cols-2 p-3 align-items-end ">
+                          <div class="align-items-baseline align-items-center d-flex form-group gap-1 ">
+                            <input type="checkbox" formControlName="showExpiryOfPersonIdentity">
+                            <label for="showExpiryOfPersonIdentity"
+                              class="label-name">{{'dashboard-settings.expiry-of-person-identity'|translate}}</label>
+                          </div>
+
+                          <div class=" " *ngIf="dashboardSettingsForm.value.showExpiryOfPersonIdentity">
+                            <label for="notificationPeriodForExpiryOfPersonIdentity"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control"
+                              formControlName="notificationPeriodForExpiryOfPersonIdentity">
+                          </div>
+
+
+
+                          <div class=" align-items-end align-items-center d-flex form-group gap-1">
+                            <input type="checkbox" formControlName="showLatePaymentsToTenants">
+                            <label for="showLatePaymentsToTenants"
+                              class="label-name">{{'dashboard-settings.late-payments-on-tenants'|translate}}</label>
+                          </div>
+                          <div class=" " [hidden]="true" *ngIf="dashboardSettingsForm.value.showLatePaymentsToTenants">
+                            <label for="notificationPeriodForLatePaymentsToTenants"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control"
+                              formControlName="notificationPeriodForLatePaymentsToTenants">
+                          </div>
+
+                          <div class="align-items-baseline align-items-center d-flex form-group gap-1 ">
+                            <input type="checkbox" formControlName="showUnderContractRentalUnits">
+                            <label for="showUnderContractRentalUnits"
+                              class="label-name">{{'dashboard-settings.show-under-contract-rental-units'|translate}}</label>
+                          </div>
+
+                          <div class=" align-items-baseline align-items-center d-flex form-group gap-1">
+                            <input type="checkbox" formControlName="showExpiryPriceOffersOfRent">
+                            <label for="showExpiryPriceOffersOfRent"
+                              class="label-name">{{'dashboard-settings.price-offers-rent-will-expire-within'|translate}}</label>
+                          </div>
+                          <div class=" " *ngIf="dashboardSettingsForm.value.showExpiryPriceOffersOfRent">
+                            <label for="notificationPeriodForExpiryPriceOffersOfRent"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control"
+                              formControlName="notificationPeriodForExpiryPriceOffersOfRent">
+                          </div>
+                        </div>
+
+                      </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'dashboard-settings.purchasers-notification'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="col gap-2 grid grid-cols-3 p-3 align-items-end "
+                          style="background-color:#a98d4d1f ;">
+                          <div class=" align-items-baseline align-items-center d-flex form-group gap-1 align-items-end">
+                            <input type="checkbox" formControlName="showExpiryPriceOffersOfSales">
+                            <label for="showExpiryPriceOffersOfSales"
+                              class="label-name">{{'dashboard-settings.price-offers-sales-will-expire-within'|translate}}</label>
+                          </div>
+                          <div class=" " *ngIf="dashboardSettingsForm.value.showExpiryPriceOffersOfSales">
+                            <label for="notificationPeriodForExpiryPriceOffersOfSales"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control"
+                              formControlName="notificationPeriodForExpiryPriceOffersOfSales">
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'dashboard-settings.dues-notification'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="col rowgap-15 grid grid-cols-2 p-3 align-items-end "
+                          style="background-color:#a98d4d1f ;">
+                          <div class="  d-flex form-group gap-1 align-items-end">
+                            <input type="checkbox" formControlName="isEndRentContractNotification">
+                            <label for="isEndRentContractNotification"
+                              class="label-name">{{'dashboard-settings.rent-contracts-will-expire-within'|translate}}</label>
+                          </div>
+                          <div class=" " *ngIf="dashboardSettingsForm.value.isEndRentContractNotification">
+                            <label for="endRentContractNotificationPeriod"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control" formControlName="endRentContractNotificationPeriod">
+                          </div>
+                          <div class=" align-items-baseline align-items-center d-flex form-group gap-1">
+                            <input type="checkbox" formControlName="showDailyDuesForRentContracts">
+                            <label for="showDailyDuesForRentContracts"
+                              class="label-name">{{'dashboard-settings.daily-rent-dues'|translate}}</label>
+                          </div>
+                          <div class="align-items-baseline align-items-center d-flex form-group gap-1 ">
+                            <input type="checkbox" formControlName="showDailyDuesForSalesContracts">
+                            <label for="showDailyDuesForSalesContracts"
+                              class="label-name">{{'dashboard-settings.daily-sales-dues'|translate}}</label>
+                          </div>
+                          <div class="align-items-baseline align-items-center d-flex form-group gap-1 ">
+                            <input type="checkbox" formControlName="showDailyDuesForBuyContracts">
+                            <label for="showDailyDuesForBuyContracts"
+                              class="label-name">{{'dashboard-settings.daily-buy-dues'|translate}}</label>
+                          </div>
+                          <div class=" align-items-baseline align-items-center d-flex form-group gap-1">
+                            <input type="checkbox" formControlName="showDailyDuesForMaintenanceContracts">
+                            <label for="showDailyDuesForMaintenanceContracts"
+                              class="label-name">{{'dashboard-settings.daily-maintenance-dues'|translate}}</label>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'dashboard-settings.entries-notification'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="col rowgap-15  gap-2 grid grid-cols-2 p-3 align-items-end"
+                          style="background-color:#a98d4d1f ;">
+                          <div class=" align-items-baseline align-items-center d-flex form-group gap-1">
+                            <input type="checkbox" formControlName="showGenerateEntryNotificationForRentContracts">
+                            <label for="showGenerateEntryNotificationForRentContracts"
+                              class="label-name">{{'dashboard-settings.show-generate-entries-for-rent-contracts'|translate}}</label>
+                          </div>
+                          <div class="align-items-baseline align-items-center d-flex form-group gap-1 "
+                            *ngIf="dashboardSettingsForm.value.showGenerateEntryNotificationForRentContracts">
+                            <input type="checkbox" formControlName="generateDetailsDueEntryForRentContracts">
+                            <label for="generateDetailsDueEntryForRentContracts"
+                              class="label-name">{{'dashboard-settings.generate-entry-details-to-due-period'|translate}}</label>
+                          </div>
+                          <div class=" "
+                            *ngIf="dashboardSettingsForm.value.showGenerateEntryNotificationForRentContracts">
+                            <label for="notificationPeriodForRentContracts"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control"
+                              formControlName="notificationPeriodForRentContracts">
+                          </div>
+
+                          <div class=" align-items-baseline align-items-center d-flex form-group gap-1">
+                            <input type="checkbox" formControlName="showGenerateEntryNotificationForSalesContracts">
+                            <label for="showGenerateEntryNotificationForSalesContracts"
+                              class="label-name">{{'dashboard-settings.show-generate-entries-for-sales-contracts'|translate}}</label>
+                          </div>
+                          <div class=" "
+                            *ngIf="dashboardSettingsForm.value.showGenerateEntryNotificationForSalesContracts">
+                            <label for="notificationPeriodForSalesContracts"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control"
+                              formControlName="notificationPeriodForSalesContracts">
+                          </div>
+
+                          <div class=" align-items-baseline align-items-center d-flex form-group gap-1">
+                            <input type="checkbox" formControlName="showGenerateEntryNotificationForBuyContracts">
+                            <label for="showGenerateEntryNotificationForBuyContracts"
+                              class="label-name">{{'dashboard-settings.show-generate-entries-for-buy-contracts'|translate}}</label>
+                          </div>
+                          <div class=" "
+                            *ngIf="dashboardSettingsForm.value.showGenerateEntryNotificationForBuyContracts">
+                            <label for="notificationPeriodForBuyContracts"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control" formControlName="notificationPeriodForBuyContracts">
+                          </div>
+
+                          <div class="align-items-baseline align-items-center d-flex form-group gap-1 ">
+                            <input type="checkbox"
+                              formControlName="showGenerateEntryNotificationForMaintenanceContracts">
+                            <label for="showGenerateEntryNotificationForMaintenanceContracts"
+                              class="label-name">{{'dashboard-settings.show-generate-entries-for-maintenance-contracts'|translate}}</label>
+                          </div>
+                          <div class=" "
+                            *ngIf="dashboardSettingsForm.value.showGenerateEntryNotificationForMaintenanceContracts">
+                            <label for="notificationPeriodForMaintenanceContracts"
+                              class="label-name">{{'dashboard-settings.notification-before'|translate}}</label>
+                            <input type="text" class="form-control"
+                              formControlName="notificationPeriodForMaintenanceContracts">
+                          </div>
+
+                        </div>
+
+                      </ng-template>
+                    </li>
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                  <!-- end tabs -->
+
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

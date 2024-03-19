@@ -1,0 +1,72 @@
+<!--
+ <section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="main-auction">
+            <div class="wrapper-title">
+              <div class="input-group ">
+                <input type="text" class="form-control" placeholder="Search here" name="identify-number">
+                <button type="submit" class="btn-box" data-blast="bgColor">
+                <i class="fa fa-search fa-sm search-icon"></i>
+                </button>
+              </div>
+              <a [routerLink]="['/control-panel/definitions/add-building']" routerLinkActive="router-link-active"  class="addition" data-blast="borderColor">Addition</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="auction-detail">
+            <div class="wrapper-title">
+              <p class="auction-subtitle mb-3 mb-md-4 mb-lg-0">Buildings</p>
+
+            </div>
+            <hr>
+
+              <table class="table table-responsive0 table-bordered text-center ">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Building Name In Arabic</th>
+                    <th scope="col">Building Name In English</th>
+                    <th scope="col">Space</th>
+                    <th scope="col">Real Estate Office</th>
+                    <th scope="col" colspan="2">Actions</th>
+                  </tr>
+                  <tr *ngFor="let item of buildings; let i= index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.buildingNameAr}}</td>
+                    <td>{{item.buildingNameEn}}</td>
+                    <td>{{item.areaSize}}</td>
+                    <td>{{item.officeId}}</td>
+
+
+                    <td><a href="javascript:void(0);" class="dropdown-item" (click)="edit(item.id)"  ><i
+                                class="fas fa-user-edit ml-1"></i>
+                            Edit</a></td>
+
+                    <td> <a href="javascript:void(0);" class="dropdown-item" (click)="delete(item.id)" ><i
+                                class="fas fa-trash text-danger ml-1"></i>
+                            Delete</a></td>
+
+                </tr>
+
+
+              </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-scale-multiple" [fullScreen] = "true"><p style="color: white ;font-size: 20px;" > Loading... </p></ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="buildings" [parentColName]="'groupId'" [divId]="'Buildings'" [columnSettings]="columnNames" [componentName]="'Buildings'" (onAddItem)="openAddBuilding()" (onMenuActionSelected)="onMenuActionSelected($event)"
+            [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'Buildings'"></app-tabulator>
+    </div>
+</section>

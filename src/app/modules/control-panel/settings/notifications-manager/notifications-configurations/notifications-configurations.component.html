@@ -1,0 +1,528 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-units">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="NotConfigurationsForm" id="NotManagementFormSubmit" class="tabs-form">
+              <div class="main-unit">
+                <div class="wrapper-title">
+                  <h3>{{'noifications-configs.notifications-page-title'|translate}}</h3>
+                  <hr>
+                  <div class="row" *ngIf="isConfigurationsCreated">
+                    <!-- <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class=" "> -->
+                    <div class="table-responsive first-child-sm">
+                      <table class="table table-bordered table-responsive0 text-center"
+                        style="overflow-y: scroll !important;">
+
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th scope="col">{{'noifications-configs.email'|translate}}
+                            </th>
+                            <th scope="col">
+                              {{'noifications-configs.smsAccount'|translate}}</th>
+                            <th scope="col">
+                              {{'noifications-configs.whatsAppProvider'|translate}}
+                            </th>
+                            <th scope="col">
+                              {{'noifications-configs.sentTime'|translate}}</th>
+                            <th scope="col">
+                              {{'noifications-configs.repeatNumber'|translate}}</th>
+                            <th scope="col">
+                              {{'noifications-configs.dayBetweenSent'|translate}}</th>
+                            <th scope="col"> {{'general.action'|translate}}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of notConfigurationsList; let i= index">
+                            <td>{{i+1}}</td>
+                            <td>
+                              <ng-container *ngIf="!item?.email; else email">
+                                {{'notification.notExist'|translate}}
+                              </ng-container>
+                              <ng-template #email>
+                                {{item.email}}
+                              </ng-template>
+                            </td>
+                            <td>
+                              <ng-container *ngIf="!item?.smsUserName; else smsUserName">
+                                {{'notification.notExist'|translate}}
+                              </ng-container>
+                              <ng-template #smsUserName>
+                                {{item.smsUserName}}
+                              </ng-template>
+                            </td>
+                            <td>
+                              <ng-container *ngIf="!item?.whatsAppProviderId; else whatsAppProviderId">
+                                {{'notification.notExist'|translate}}
+                              </ng-container>
+                              <ng-template #whatsAppProviderId>
+                                <span *ngIf="item.whatsAppProviderId==1">Twilio</span>
+                                <span *ngIf="item.whatsAppProviderId==2">
+                                  UltraMessage</span>
+                              </ng-template>
+                            </td>
+                            <td>
+
+                              <ng-container *ngIf="!item?.sentTime; else sentTime">
+                                {{'notification.notExist'|translate}}
+                              </ng-container>
+                              <ng-template #sentTime>
+                                {{item.sentTime}}
+                              </ng-template>
+                            </td>
+                            <td>
+                              <ng-container *ngIf="!item?.repeatNumber; else repeatNumber">
+                                {{'notification.notExist'|translate}}
+                              </ng-container>
+                              <ng-template #repeatNumber>
+                                {{item.repeatNumber}}
+                              </ng-template>
+                            </td>
+                            <td>
+
+                              <ng-container *ngIf="!item?.dayBetweenSent; else dayBetweenSent">
+                                {{'notification.notExist'|translate}}
+                              </ng-container>
+                              <ng-template #dayBetweenSent>
+                                {{item.dayBetweenSent}}
+                              </ng-template>
+                            </td>
+
+                            <td class="action">
+                              <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <div class="btn-group" role="group">
+                                  <button id="btnGroupDrop1" type="button" class="bg-secondary btn dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cog ml-1"></i>
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <a href="javascript:void(0);" (click)="getNotConfigurationsById(item.id)"
+                                      class="dropdown-item"><i class="fa fa-edit ml-1"></i>
+                                      {{'buttons.edit'|translate}}</a>
+                                    <a (click)="delete(item.id)" class="dropdown-item"><i
+                                        class="fas fa-trash  ml-1"></i>
+                                      {{'buttons.delete'|translate}}</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- </div> -->
+                  </div>
+                  <hr>
+                  <div class="" *ngIf="!isConfigurationsCreated || onUpdateSelect">
+                    <div class="row">
+                      <div class="col gap-2 grid grid-cols-3 ">
+                        <div class=" ">
+                          <div class="form-group">
+                            <label class="label-name" for="sentTime"> {{ 'noifications-configs.sentTime'
+                              |translate}}</label>
+                            <input type="time" id="sentTime" name="sentTime" formControlName="sentTime"
+                              class="form-control">
+                          </div>
+                        </div>
+                        <div class=" ">
+                          <label for="repeatNumber" class="label-name">{{
+                            'noifications-configs.repeatNumber'
+                            |translate}}</label>
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="repeatNumber" formControlName="repeatNumber">
+                            <div
+                              *ngIf="(f['repeatNumber'].touched || f['repeatNumber'].dirty ) && f['repeatNumber'].invalid"
+                              class="alert alert-danger">
+                              <i class="fa fa-close "></i>
+                              <span *ngIf="f['repeatNumber'].errors && f['repeatNumber'].errors['required']">
+                                required</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class=" ">
+                          <label for="dayBetweenSent" class="label-name">{{
+                            'noifications-configs.dayBetweenSent'
+                            |translate}}</label>
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="dayBetweenSent"
+                              formControlName="dayBetweenSent">
+                            <div
+                              *ngIf="(f['dayBetweenSent'].touched || f['dayBetweenSent'].dirty ) && f['dayBetweenSent'].invalid"
+                              class="alert alert-danger">
+                              <i class="fa fa-close "></i>
+                              <span *ngIf="f['dayBetweenSent'].errors && f['dayBetweenSent'].errors['required']">
+                                {{'validation-messages.required-field'|translate}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row m-0 gap-1">
+                      <div class="col gap-2 grid grid-cols-4 bg-total p-2">
+                        <div class=" ">
+                          <div class="form-group d-flex align-items-center gap-1">
+                            <input type="checkbox" name="isContractCreated" formControlName="isContractCreated">
+                            <label for="isContractCreated"
+                              class="label-name m-0">{{'noifications-configs.isContractCreated'|translate}}
+                            </label>
+                          </div>
+                        </div>
+                        <div class=" ">
+                          <div class="form-group d-flex align-items-center gap-1">
+                            <input type="checkbox" name="isReceiptVoucherCreated"
+                              formControlName="isReceiptVoucherCreated">
+                            <label for="isReceiptVoucherCreated"
+                              class="label-name m-0">{{'noifications-configs.isReceiptVoucherCreated'|translate}}
+                            </label>
+                          </div>
+                        </div>
+                        <div class=" ">
+                          <div class="form-group d-flex align-items-center gap-1">
+                            <input type="checkbox" name="isOwner" formControlName="isOwner">
+                            <label for="isOwner"
+                              class="label-name m-0">{{'noifications-configs.isOwner'|translate}}</label>
+                          </div>
+                        </div>
+                        <div class=" ">
+                          <div class="form-group d-flex align-items-center gap-1">
+                            <input type="checkbox" name="isTenant" formControlName="isTenant">
+                            <label for="isTenant"
+                              class="label-name m-0">{{'noifications-configs.isTenant'|translate}}</label>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+
+                      <div class="col gap-2 grid grid-cols-4 bg-total p-2">
+                        <div class="form-group d-flex align-items-center gap-1">
+                          <input type="checkbox" name="isWhatsApp" formControlName="isWhatsApp">
+                          <label for="isWhatsApp" class="label-name m-0">{{'noifications-configs.isWhatsApp'|translate}}
+                          </label>
+                        </div>
+                        <div class="form-group d-flex align-items-center gap-1">
+                          <input type="checkbox" name="isEmail" formControlName="isEmail">
+                          <label for="isEmail" class="label-name m-0">{{'noifications-configs.isEmail'|translate}}
+                          </label>
+                        </div>
+                        <div class="form-group d-flex align-items-center gap-1">
+                          <input type="checkbox" name="isSms" formControlName="isSms">
+                          <label for="isSms" class="label-name m-0">{{'noifications-configs.isSms'|translate}}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <!-- start tabs -->
+                    <ul ngbNav #nav="ngbNav" [(activeId)]="activeTap" class="nav-tabs mt-3">
+                      <li [ngbNavItem]="1">
+                        <a ngbNavLink>{{'noifications-configs.custom-email-server-settings'|
+                          translate}}</a>
+                        <ng-template ngbNavContent>
+                          <div class="row">
+                            <div class="col gap-2 grid grid-cols-2 mt-3">
+                              <div class=" ">
+                                <label for="email" class="label-name">{{'noifications-configs.email'|
+                                  translate}}
+                                </label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" name="email" formControlName="email">
+                                </div>
+                                <div *ngIf="(f['email'].touched || f['email'].dirty ) && f['email'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="f['email'].errors && f['email'].errors['email']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+                              <div class=" ">
+                                <label for="emailPassword" class="label-name">{{
+                                  'noifications-configs.emailPassword' |
+                                  translate}}</label>
+                                <div class="form-group">
+                                  <input type="password" class="form-control" name="emailPassword"
+                                    formControlName="emailPassword">
+                                </div>
+                                <div
+                                  *ngIf="(f['emailPassword'].touched || f['emailPassword'].dirty ) && f['emailPassword'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="f['emailPassword'].errors && f['emailPassword'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="col gap-2 grid grid-cols-3 ">
+                              <div class=" ">
+                                <label for="dispalyName" class="label-name">{{
+                                  'noifications-configs.dispalyName' |
+                                  translate}}</label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" name="dispalyName"
+                                    formControlName="dispalyName">
+                                </div>
+                                <div
+                                  *ngIf="(f['dispalyName'].touched || f['dispalyName'].dirty ) && f['dispalyName'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="f['dispalyName'].errors && f['dispalyName'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+                              <div class=" ">
+                                <label for="hostName" class="label-name">{{
+                                  'noifications-configs.hostName' |
+                                  translate}}</label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" name="hostName" formControlName="hostName">
+                                </div>
+                                <div *ngIf="(f['hostName'].touched || f['hostName'].dirty ) && f['hostName'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="f['hostName'].errors && f['hostName'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+
+                              <div class=" ">
+                                <label for="portNumber" class="label-name">{{
+                                  'noifications-configs.portNumber' |
+                                  translate}}</label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" name="portNumber"
+                                    formControlName="portNumber">
+                                </div>
+                                <div
+                                  *ngIf="(f['portNumber'].touched || f['portNumber'].dirty ) && f['portNumber'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="f['portNumber'].errors && f['portNumber'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                          <hr>
+                          <!-- <div class="row">
+                          <div class="col gap-2 grid  ">
+                            <div class=" ">
+                            </div>
+                          </div>
+                        </div> -->
+                        </ng-template>
+                      </li>
+                      <li [ngbNavItem]="2">
+                        <a ngbNavLink> {{'noifications-configs.whatsapp-settings'| translate}}
+                        </a>
+                        <ng-template ngbNavContent>
+                          <div class="row">
+                            <div class="col gap-2 grid grid-cols-3 ">
+                              <div class=" ">
+                                <label for="whatsAppProviderId"
+                                  class="label-name">{{'noifications-configs.whatsAppProvider'|translate}}<span
+                                    class="text-danger">*</span></label>
+                                <div class="input-group  popup">
+                                  <ng-select formControlName="whatsAppProviderId" style="width:100%">
+                                    <ng-option *ngFor="let Provider of WhatsAppProviders" [value]="Provider.id">
+                                      {{Provider.name}}
+                                    </ng-option>
+                                  </ng-select>
+                                  <div
+                                    *ngIf="(f['whatsAppProviderId'].touched || f['whatsAppProviderId'].dirty ) && f['whatsAppProviderId'].invalid"
+                                    class="alert alert-danger">
+                                    <i class="fa fa-close "></i>
+                                    <span *ngIf="f['eventId'].errors && f['eventId'].errors['required']">
+                                      {{'validation-messages.required-field'|translate}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class=" " *ngIf="NotConfigurationsForm.value.whatsAppProviderId==2">
+                                <label for="whatsAppAccountSid"
+                                  class="label-name">{{'noifications-configs.whatsAppAccountSid'
+                                  | translate}}</label>
+
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="AC42d86e4444c....."
+                                    name="whatsAppAccountSid" formControlName="whatsAppAccountSid">
+                                </div>
+                                <div
+                                  *ngIf="(f['whatsAppAccountSid'].touched || f['whatsAppAccountSid'].dirty ) && f['whatsAppAccountSid'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="f['whatsAppAccountSid'].errors && f['whatsAppAccountSid'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+                              <div class=" " *ngIf="NotConfigurationsForm.value.whatsAppProviderId==2">
+                                <label for="whatsAppAuthToken"
+                                  class="label-name">{{'noifications-configs.whatsAppAuthToken'
+                                  | translate}}</label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="AC42d86e......"
+                                    name="whatsAppAuthToken" formControlName="whatsAppAuthToken">
+                                </div>
+                                <div
+                                  *ngIf="(f['whatsAppAuthToken'].touched || f['whatsAppAuthToken'].dirty ) && f['whatsAppAuthToken'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="f['whatsAppAuthToken'].errors && f['whatsAppAuthToken'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+                              <div class=" " *ngIf="NotConfigurationsForm.value.whatsAppProviderId==1">
+                                <label for="whatsAppTwilioInstanceId" class="label-name">{{
+                                  'noifications-configs.whatsAppTwilioInstanceId' |
+                                  translate}}</label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="AC42d86e4444c....."
+                                    name="whatsAppTwilioInstanceId" formControlName="whatsAppTwilioInstanceId">
+                                </div>
+                                <div
+                                  *ngIf="(f['whatsAppTwilioInstanceId'].touched || f['whatsAppTwilioInstanceId'].dirty ) && f['whatsAppTwilioInstanceId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="f['whatsAppTwilioInstanceId'].errors && f['whatsAppTwilioInstanceId'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+                              <div class=" " *ngIf="NotConfigurationsForm.value.whatsAppProviderId==1">
+                                <label for="whatsAppTwilioToken"
+                                  class="label-name">{{'noifications-configs.whatsAppTwilioToken'
+                                  | translate}}</label>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="AC42d86e......"
+                                    name="whatsAppTwilioToken" formControlName="whatsAppTwilioToken">
+                                </div>
+                                <div
+                                  *ngIf="(f['whatsAppTwilioToken'].touched || f['whatsAppTwilioToken'].dirty ) && f['whatsAppTwilioToken'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="f['whatsAppTwilioToken'].errors && f['whatsAppTwilioToken'].errors['required']">
+                                    {{'validation-messages.required-field'|translate}}</span>
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </div>
+
+                        </ng-template>
+                      </li>
+                      <li [ngbNavItem]="3">
+                        <a ngbNavLink>{{'noifications-configs.sms-settings'| translate}} </a>
+                        <ng-template ngbNavContent>
+                          <div class="col gap-2 grid grid-cols-1 mt-2">
+                            <div class=" ">
+                              <label for="whatsAppTwilioInstanceId" class="label-name">{{
+                                'noifications-configs.smsUrl' | translate}}</label>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="smsUrl" formControlName="smsUrl">
+                              </div>
+                              <div *ngIf="(f['smsUrl'].touched || f['smsUrl'].dirty ) && f['smsUrl'].invalid"
+                                class="alert alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['smsUrl'].errors && f['smsUrl'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                              </div>
+                            </div>
+
+
+
+
+                            <div class=" ">
+                              <label for="smsUrlCredit" class="label-name">{{
+                                'noifications-configs.smsUrlCredit' |
+                                translate}}</label>
+                              <div class="form-group input-group">
+                                <input type="text" class="form-control" name="smsUrlCredit"
+                                  formControlName="smsUrlCredit">
+                              </div>
+                              <div
+                                *ngIf="(f['smsUrlCredit'].touched || f['smsUrlCredit'].dirty ) && f['smsUrlCredit'].invalid"
+                                class="alert alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['smsUrlCredit'].errors && f['smsUrlCredit'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                              </div>
+                            </div>
+
+
+                          </div>
+
+                          <div class="col gap-2 grid grid-cols-3 ">
+                            <div class=" ">
+                              <label for="smsUserName" class="label-name">{{'noifications-configs.smsUserName'
+                                | translate}}</label>
+                              <div class="form-group input-group">
+                                <input type="text" class="form-control" placeholder="AC42d86e......" name="smsUserName"
+                                  formControlName="smsUserName">
+                              </div>
+                              <div
+                                *ngIf="(f['smsUserName'].touched || f['smsUserName'].dirty ) && f['smsUserName'].invalid"
+                                class="alert alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['smsUserName'].errors && f['smsUserName'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="smsPassword" class="label-name">{{'noifications-configs.smsPassword'
+                                | translate}}</label>
+                              <div class="form-group input-group">
+                                <input type="password" class="form-control" name="smsPassword"
+                                  formControlName="smsPassword">
+                              </div>
+                              <div
+                                *ngIf="(f['smsPassword'].touched || f['smsPassword'].dirty ) && f['smsPassword'].invalid"
+                                class="alert alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['smsPassword'].errors && f['smsPassword'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="smsSender" class="label-name">{{'noifications-configs.smsSender' |
+                                translate}}</label>
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="AC42d86e......" name="smsSender"
+                                  formControlName="smsSender">
+                              </div>
+                              <div *ngIf="(f['smsSender'].touched || f['smsSender'].dirty ) && f['smsSender'].invalid"
+                                class="alert alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="f['smsSender'].errors && f['smsSender'].errors['required']">
+                                  {{'validation-messages.required-field'|translate}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </li>
+                    </ul>
+                    <div [ngbNavOutlet]="nav" class=""></div>
+                    <!-- end tabs -->
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

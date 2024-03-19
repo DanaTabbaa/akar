@@ -1,0 +1,93 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="productCategoryForm" id="productCategoryFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>
+                    {{'products-categories.product-category-info'|translate}}
+                  </h3>
+                  <div class="row">
+
+                    <div class="col gap-2 grid grid-cols-3 ">
+                      <div class=" ">
+                        <label for="mainProductCategory" class="label-name">
+                          {{'products-categories.main-product-category-name'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select style="width:100%"
+                            placeholder="{{'products-categories.main-product-category-name'|translate}}"
+                            formControlName="parentId" name='parentId' class="" id="parentId">
+                            <ng-option *ngFor="let productCategory of productsCategoriesList"
+                              [value]="productCategory.id">
+                              {{lang=='ar'?productCategory.categoryNameAr :productCategory.categoryNameEn}}
+                            </ng-option>
+                          </ng-select>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+
+                        <label for="categoryNameAr" class="label-name">
+                          {{'products-categories.category-name-ar'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+
+                          <input type="text" class="form-control" name="categoryNameAr"
+                            formControlName="categoryNameAr">
+                          <div
+                            *ngIf="(f['categoryNameAr'].touched || f['categoryNameAr'].dirty ) && f['categoryNameAr'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['categoryNameAr'].errors && f['categoryNameAr'].errors['required']">
+                              {{'products-categories.category-name-ar-required'|translate}}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+
+                        <label for="categoryNameEn" class="label-name">
+                          {{'products-categories.category-name-en'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="text" class="form-control" name="categoryNameEn"
+                            formControlName="categoryNameEn">
+                          <div
+                            *ngIf="(f['categoryNameEn'].touched || f['categoryNameEn'].dirty ) && f['categoryNameEn'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['categoryNameEn'].errors && f['categoryNameEn'].errors['required']">
+                              {{'products-categories.category-name-en-required'|translate}}
+
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="list list-container-add">
+  <app-products-categories-list
+    [changeProductsCategoriesFlag]="changeProductsCategoriesFlag"></app-products-categories-list>
+</div>

@@ -1,0 +1,472 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="productsReceiptForm" id="productsReceiptFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+
+                  <!-- start tabs -->
+                  <nav ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'products-receipt.products-receipt.info' | translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 ">
+                            <div class=" " *ngIf="showProductReceiptId">
+                              <label for="id" class="label-name">
+                                {{'general.product-receipt-id'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="id" formControlName="id">
+
+                              </div>
+                            </div>
+
+                            <div class=" " *ngIf="showMaintenanceRequestId">
+                              <label for="maintenanceRequestId" class="label-name">
+                                {{'general.maintenance-request-id'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="maintenanceRequestId"
+                                  formControlName="maintenanceRequestId">
+                              </div>
+                            </div>
+
+                            <div class=" ">
+                              <label for="date" class="label-name">{{'general.receipt-date'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <app-full-date [(ngModel)]="date" name="date" formControlName="date"
+                                  [selectedDate]="date" (OnDateSelect)="getRequestDate($event)" ngDefaultControl>
+                                </app-full-date>
+                              </div>
+                              <div *ngIf="(pr['date'].touched || pr['date'].dirty ) && pr['date'].invalid"
+                                class="alert alert-danger">
+                                <i class="fa fa-close "></i>
+                                <span *ngIf="pr['date'].errors && pr['date'].errors['required']">
+                                  {{'general.required'|translate}}</span>
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="tenantId" class="label-name">{{'general.tenant'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="tenantId" style="width:100%">
+                                  <ng-option *ngFor="let tenant of tenants" [value]="tenant.id">
+                                    {{lang=='ar'? tenant.nameAr:tenant.nameEn}}
+                                  </ng-option>
+                                </ng-select>
+                                <div *ngIf="(pr['tenantId'].touched || pr['tenantId'].dirty ) && pr['tenantId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="pr['tenantId'].errors && pr['tenantId'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="technicianId" class="label-name">{{'general.technician'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="technicianId" style="width:100%">
+                                  <ng-option *ngFor="let technician of technicians" [value]="technician.id">
+                                    {{lang=='ar'? technician.technicianNameAr:technician.technicianNameEn}}
+                                  </ng-option>
+                                </ng-select>
+                                <div
+                                  *ngIf="(pr['technicianId'].touched || pr['technicianId'].dirty ) && pr['technicianId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="pr['technicianId'].errors && pr['technicianId'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="maintenanceCoston" class="label-name">
+                                {{'products-receipt.maintenance-cost-on'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select class="custom" formControlName="maintenanceCostOn"
+                                  [items]="maintenanceCostOn" bindLabel="name" bindValue="id" style="width:100%">
+                                </ng-select>
+                                <div
+                                  *ngIf="(pr['maintenanceCostOn'].touched || pr['maintenanceCostOn'].dirty ) && pr['maintenanceCostOn'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span
+                                    *ngIf="pr['maintenanceCostOn'].errors && pr['maintenanceCostOn'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class=" ">
+                              <label for="notes" class="label-name">
+                                {{'general.description'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <textarea type="text" class="form-control" name="notes"
+                                  formControlName="notes"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'products-receipt.products-receipt-details'|translate}}</a>
+                      <ng-template ngbNavContent>
+
+                        <form id="PriceRequestDetailsFormSubmit">
+                          <!-- start details -->
+                          <div class="table-responsive">
+                            <table class="table table-bordered table-responsive0 text-center"
+                              style="overflow-y: scroll !important;height: 200px;">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+
+                                  <th scope="col" style="width: 50px;">
+                                    {{'general.product-category'|translate}}<span class="text-danger">*</span></th>
+
+                                  <th scope="col" style="width: 50px;">
+                                    {{'general.product'|translate}} <span class="text-danger">*</span></th>
+                                  <th scope="col">
+                                    {{'general.quantity'|translate}}<span class="text-danger">*</span>
+                                  </th>
+                                  <th scope="col">{{'general.price'|translate}}
+                                    <span class="text-danger">*</span>
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.value-before-tax'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.installation-price'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.value-with-installtion-price-before-tax'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.tax-ratio'|translate}}</th>
+                                  <th scope="col">
+                                    {{'general.tax-value'|translate}}</th>
+                                  <th scope="col">
+                                    {{'general.value-after-tax'|translate}}
+                                  </th>
+                                  <th scope="col">{{'general.unit'|translate}}
+                                  </th>
+                                  <th scope="col">
+                                    {{'general.equipment'|translate}}</th>
+
+                                  <th scope="col" colspan="1">
+                                    {{'general.actions'|translate}}
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of productsReceiptDetails; let i= index;">
+                                  <td>
+                                    {{i+1}}
+                                  </td>
+                                  <td scope="col" style="width: 50px;">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control"
+                                        placeholder="{{'general.search'|translate}}"
+                                        [ngModelOptions]="{standalone: true}"
+                                        (keydown.Enter)="openProductCategorySearchDialog(i)"
+                                        (change)="onChangeProductCatgeory()"
+                                        [(ngModel)]="productsReceiptDetails[i].categoryNameAr">
+
+                                    </div>
+                                  </td>
+                                  <td scope="col" style="width: 50px;">
+                                    <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                      [ngModelOptions]="{standalone: true}" (keydown.Enter)="openProductSearchDialog(i)"
+                                      [(ngModel)]="productsReceiptDetails[i].productNameAr">
+                                  </td>
+                                  <td>
+                                    <div class="form-group input-group">
+
+                                      <input type="number" class="form-control" name="quantity"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="productsReceiptDetails[i].quantity"
+                                        (change)="onChangeQuantityOrPrice()">
+
+
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group input-group">
+
+                                      <input type="number" class="form-control" name="price"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="productsReceiptDetails[i].price"
+                                        (change)="onChangeQuantityOrPrice()">
+
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="valueBeforeTax"
+                                        [(ngModel)]="productsReceiptDetails[i].valueBeforeTax"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="installationPrice"
+                                        [(ngModel)]="productsReceiptDetails[i].installationPrice"
+                                        [ngModelOptions]="{standalone: true}" (change)="onChangeInstallationPrice()">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="text" class="form-control" name="valueWithInstallationPriceBeforeTax"
+                                        [(ngModel)]="productsReceiptDetails[i].valueWithInstallationPriceBeforeTax"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="taxRatio"
+                                        [(ngModel)]="productsReceiptDetails[i].taxRatio"
+                                        [ngModelOptions]="{standalone: true}" (change)="onChangeTaxRatio()">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="taxValue"
+                                        [(ngModel)]="productsReceiptDetails[i].taxValue"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="valueAfterTax"
+                                        [(ngModel)]="productsReceiptDetails[i].valueAfterTax"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                      [(ngModel)]="productsReceiptDetails[i].unitNameAr"
+                                      [ngModelOptions]="{standalone: true}" (keydown.Enter)="openUnitSearchDialog(-1)">
+                                  </td>
+
+                                  <td>
+                                    <div class="input-group">
+                                      <input type="text" class="form-control"
+                                        placeholder="{{'general.search'|translate}}"
+                                        [ngModelOptions]="{standalone: true}"
+                                        (keydown.Enter)="openEquipmentSearchDialog(i)"
+                                        [(ngModel)]="productsReceiptDetails[i].equimentNameAr">
+
+                                    </div>
+                                  </td>
+
+
+
+                                  <td>
+                                    <button type="button" class="btn btn-primary px-3 " (click)="deleteProduct(item)">
+                                      <i class="las la-trash-alt"></i>
+                                    </button>
+
+                                  </td>
+
+
+                                </tr>
+                                <tr>
+                                  <td>{{productsReceiptDetails.length+1}}</td>
+                                  <td scope="col" style="width: 50px;">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control"
+                                        placeholder="{{'general.search'|translate}}"
+                                        [ngModelOptions]="{standalone: true}"
+                                        (keydown.Enter)="openProductCategorySearchDialog(-1)"
+                                        (change)="onChangeProductCatgeory()"
+                                        [(ngModel)]="selectProductsReceiptDetails.categoryNameAr">
+
+                                    </div>
+                                  </td>
+                                  <td scope="col" style="width: 50px;">
+                                    <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                      [ngModelOptions]="{standalone: true}"
+                                      (keydown.Enter)="openProductSearchDialog(-1)"
+                                      [(ngModel)]="selectProductsReceiptDetails.productNameAr">
+                                  </td>
+                                  <td>
+                                    <div class="form-group input-group">
+                                      <input type="number" class="form-control" name="quantity"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="selectProductsReceiptDetails.quantity"
+                                        (change)="onChangeQuantityOrPrice()">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group input-group">
+                                      <input type="number" class="form-control" name="price"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="selectProductsReceiptDetails.price"
+                                        (change)="onChangeQuantityOrPrice()">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="valueBeforeTax"
+                                        [(ngModel)]="selectProductsReceiptDetails.valueBeforeTax"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="installationPrice"
+                                        [(ngModel)]="selectProductsReceiptDetails.installationPrice"
+                                        [ngModelOptions]="{standalone: true}" (change)="onChangeInstallationPrice()">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="text" class="form-control" name="valueWithInstallationPriceBeforeTax"
+                                        [(ngModel)]="selectProductsReceiptDetails.valueWithInstallationPriceBeforeTax"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="taxRatio"
+                                        [(ngModel)]="selectProductsReceiptDetails.taxRatio"
+                                        [ngModelOptions]="{standalone: true}" (change)="onChangeTaxRatio()">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="taxValue"
+                                        [(ngModel)]="selectProductsReceiptDetails.taxValue"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="form-group">
+
+                                      <input type="number" step="0.01" class="form-control" name="valueAfterTax"
+                                        [(ngModel)]="selectProductsReceiptDetails.valueAfterTax"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                      [(ngModel)]="selectProductsReceiptDetails.unitNameAr"
+                                      [ngModelOptions]="{standalone: true}" (keydown.Enter)="openUnitSearchDialog(-1)">
+                                  </td>
+
+                                  <td>
+
+                                    <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                      [ngModelOptions]="{standalone: true}"
+                                      (keydown.Enter)="openEquipmentSearchDialog(-1)"
+                                      [(ngModel)]="selectProductsReceiptDetails.equimentNameAr">
+                                  </td>
+                                  <td>
+                                    <button type="button" class="btn btn-primary px-3 " (click)="addProduct()">
+                                      <i class="las la-plus"></i>
+                                    </button>
+
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <!-- end details -->
+                          <!-- </div> -->
+                          <div class="bg-total d-flex flex-column gap-2 p-3">
+
+                            <div class="col-12 col-md-6 offset-md-6">
+                              <label for="totalWithInstallationPriceBeforeTax"
+                                class="label-name">{{'general.total-before-tax'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="totalWithInstallationPriceBeforeTax"
+                                  [(ngModel)]="totalWithInstallationPriceBeforeTax" [disabled]="true">
+                              </div>
+                            </div>
+
+                            <div class=" col-12 col-md-6 offset-md-6">
+                              <label for="totalTax" class="label-name">{{'general.total-tax'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="totalTax" [(ngModel)]="totalTax"
+                                  [disabled]="true">
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 offset-md-6 ">
+                              <label for="totalAfterTax" class="label-name">{{'general.total-after-tax'|translate}}
+                              </label>
+                              <div class="form-group">
+
+                                <input type="number" class="form-control" name="totalAfterTax"
+                                  [(ngModel)]="totalAfterTax" [disabled]="true">
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
+
+                        <!-- </div> -->
+                        <!-- </div> -->
+                      </ng-template>
+                    </li>
+
+
+
+                  </nav>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                </div>
+              </div>
+              <!-- <button class="btn btn-highlight btn-lg"
+                (click)="onUpdate()"
+                   >
+                   Save
+            </button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

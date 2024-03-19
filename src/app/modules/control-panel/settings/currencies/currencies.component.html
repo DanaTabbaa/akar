@@ -1,0 +1,88 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-currencies">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="CurrenciesForm" id="CurrenciesSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'page-form.currency-information'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+                      <div class="">
+                        <label for="currencyNameAr" class="label-name"><span class="text-danger">*</span>
+                          {{'page-form.name-arabic'|translate}}</label>
+                        <div class="form-group">
+
+                          <input type="text" class="form-control icon-user" name="currencyNameAr"
+                            formControlName="currencyNameAr">
+                          <div *ngIf="f['currencyNameAr'].touched && f['currencyNameAr'].invalid"
+                            class=" alert-danger validtion">
+                            <div *ngIf="f['currencyNameAr'].errors && f['currencyNameAr'].invalid">
+                              <i class="fa fa-close "></i> {{'validation-messages.invalid-name'|translate}}
+                            </div>
+                            <div *ngIf="f['currencyNameAr'].errors && f['currencyNameAr'].errors['minlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.min-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['currencyNameAr'].errors && f['currencyNameAr'].errors['maxlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.max-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['currencyNameAr'].errors && f['currencyNameAr'].errors['pattern'] ">
+                              <i class="fa fa-times"></i>{{'error.space'|translate}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="currencyNameEn" class="label-name"> <span class="text-danger">*</span>
+                          {{'page-form.name-latin'|translate}}</label>
+                        <div class="form-group">
+
+                          <input type="text" class="form-control icon-user" name="currencyNameEn"
+                            formControlName="currencyNameEn">
+                          <div *ngIf="f['currencyNameEn'].touched && f['currencyNameEn'].invalid"
+                            class=" alert-danger validtion">
+                            <div *ngIf="f['currencyNameEn'].errors && f['currencyNameEn'].invalid">
+                              <i class="fa fa-close "></i> {{'validation-messages.invalid-name'|translate}}
+                            </div>
+                            <div *ngIf="f['currencyNameEn'].errors && f['currencyNameEn'].errors['minlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.min-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['currencyNameEn'].errors && f['currencyNameEn'].errors['maxlength']">
+                              <i class="fa fa-close "></i> {{'validation-messages.max-name-char'|translate}}
+                            </div>
+                            <div *ngIf="f['currencyNameEn'].errors && f['currencyNameEn'].errors['pattern'] ">
+                              <i class="fa fa-times"></i>{{'error.space'|translate}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<div class="list list-container-add">
+  <app-currencies-list [changeCurrenciesFlag]="changeCurrencyFlag"></app-currencies-list>
+</div>

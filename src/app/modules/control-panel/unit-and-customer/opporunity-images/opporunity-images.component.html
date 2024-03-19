@@ -1,0 +1,166 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+<section class="">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div class="col-md-120"> -->
+      <div class="card m-0 mb-5">
+        <div class="card-body">
+          <form [formGroup]="opportunityImagesForm" id="opportunityImagesForm" class="tabs-form vvv">
+            <div class="main-customer">
+              <div class="wrapper-title">
+                <h3>{{'page-form.opportunity-images'|translate}}</h3>
+                <div class="row">
+                 
+                  
+                  <div class="col gap-2 grid grid-cols-6 align-items-end">
+                    <div class=" ">
+                      <label for="nameAr" class="label-name"><span
+                          class="text-danger"></span>{{'page-form.name-arabic'|translate}}
+                      </label>
+                      <div class="form-group input-group">
+                        <input type="text" class="form-control" name="nameAr" formControlName="nameAr">
+                        <div *ngIf="(f['nameAr'].touched || f['nameAr'].dirty ) && f['nameAr'].invalid"
+                          class="validation alert-danger">
+                          <i class="fa fa-close "></i>
+                          <span *ngIf="f['nameAr'].errors && f['nameAr'].errors['required']">
+                            {{'validation-messages.required-field'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="nameEn" class="label-name"><span
+                          class="text-danger">*</span>{{'page-form.name-latin'|translate}}
+                      </label>
+                      <div class="form-group input-group">
+                        <input type="text" class="form-control" name="nameEn" formControlName="nameEn">
+                        <div *ngIf="(f['nameEn'].touched || f['nameEn'].dirty ) && f['nameEn'].invalid"
+                          class="alert alert-danger">
+                          <i class="fa fa-close "></i>
+                          <span *ngIf="f['nameEn'].errors && f['nameEn'].errors['required']">
+                            {{'validation-messages.required-field'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="descriptions" class="label-name">{{'page-form.description'|translate}}</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="descriptions" formControlName="descriptions">
+                        <div *ngIf="f['descriptions'].touched && f['descriptions'].invalid"
+                          class=" alert-danger validtion">
+                          <div *ngIf="f['descriptions'].errors && f['descriptions'].invalid">
+                            <i class="fa fa-close "></i> {{'validation-messages.invalid-descriptions'|translate}}
+                          </div>
+                          <div *ngIf="f['descriptions'].errors && f['descriptions'].errors['pattern']">
+                            <i class="fa fa-close "></i> {{'general.numbers-only'|translate}}
+                          </div>
+                        </div>
+                        <div class="validation alert-success"
+                          *ngIf="f['descriptions'].touched && f['descriptions'].valid && f['descriptions'].dirty">
+                          <i class="fa fa-check"></i> {{'validation-messages.valid-descriptions'|translate}}
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                    
+
+
+
+
+
+
+
+                    <mat-slide-toggle formControlName="isActive">{{"permissions.is-active"|translate}}
+                    </mat-slide-toggle>
+
+                  </div>
+                  <div class="col gap-2 grid grid-cols-6 align-items-end">
+                    <div class=" ">
+                      <img id="viewer" class="img-profile" style="height:200px;">
+                      <br>
+                      <input type="file" #file (change)="readImage(file)" style="padding-top: 39px!important;"> &nbsp;
+                      <button class="btn btn-danger" (click)="uploadFiles(file.files, $event)">
+                        <i class="fa fa-upload"></i> {{progress}} %
+                      </button>
+  
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col gap-2 grid grid-cols-12 align-items-end">
+                    <div class=" ">
+                      <label class="label-name">
+                      </label>
+                      <div class="form-group">
+                        <button *ngIf="updateMode==false" (click)="addOpportunityImage()"
+                          class="btn btn-primary">{{'buttons.save'|translate}}</button>
+                        <button *ngIf="updateMode" (click)="editOpportunintyImage(opportunityImagesForm.value)"
+                          class="btn btn-primary">{{'buttons.edit'|translate}}</button>
+  
+                        <button (click)="resetModalForm($event)"
+                          class="btn btn-primary">{{'buttons.new'|translate}}</button>
+  
+                        <button (click)="onClose($event)" class="btn btn-danger">{{'buttons.close'|translate}}</button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="row mt-5">
+                  <table class="table table-bordered table-responsive0 text-center"
+                    style="overflow-y: scroll !important;height:px;">
+                    <thead>
+                      <tr>
+                        <th id="index">#</th>
+                        <th>{{ 'page-form.name-ar' | translate }}</th>
+                        <th>{{ 'page-form.name-en' | translate }}</th>
+                        <th>{{ 'page-form.descriptions' | translate }}</th>
+
+                        <th>{{ 'page-form.is-active' | translate }}</th>
+                        <th>{{ 'page-form.image' | translate }}</th>
+                        <th>{{ 'page-form.action' | translate }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let image of opportunityImages; let index = index">
+                        <td id="index">{{index+1}}</td>
+                        <td>{{ image.nameAr }}</td>
+                        <td>{{ image.nameEn }}</td>
+                        <td>{{ image.descriptions }}</td>
+                        <td>{{getActiveStatus(image.isActive)}}</td>
+
+
+                        <td><img [src]="getImageSrc(image)" style="width:100px;height:100px;"></td>
+
+                        <td>
+                          <button
+                            (click)="deleteOpportunityImage(index, $event)">{{'buttons.delete'|translate}}</button>
+                          &nbsp;
+                          <button (click)="getEditItem(image, $event)">{{'buttons.edit'|translate}}</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<section class="">
+  <!-- <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="responsiblePersons" [parentColName]="'groupId'" [divId]="'Owners'"
+      [columnSettings]="columnNames" [componentName]="'owners'" (onAddItem)="openResponsiblePersons()"
+      (onMenuActionSelected)="onMenuActionSelected($event)" [showMenuOptions]="menuOptions" [direction]="direction"
+      [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters"
+      (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'Owners'"></app-tabulator>
+  </div> -->
+</section>

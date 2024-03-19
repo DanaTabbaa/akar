@@ -1,0 +1,335 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <!-- <form [formGroup]="maintenanceRequestDetailsForm" id="maintenanceRequestDetailsFormSubmit" class="tabs-form"> -->
+                        <div class="main-customer">
+                            <div class="wrapper-title">
+                                <h3>{{'maintenance-requests.maintenance-request-details' | translate}}</h3>
+                                <div class="row">
+
+                                    <div class="col gap-2 grid grid-cols-3 ">
+
+                                        <div class=" ">
+                                            <label for="maintenanceRequestId" class="label-name">
+                                                {{'general.maintenance-request-id'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{id}}
+                                            </label>
+                                        </div>
+
+
+                                        <div class=" ">
+                                            <label for="requestStatus" class="label-name">
+                                                {{'maintenance-requests.request-status'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{requestStatus}}
+                                            </label>
+                                        </div>
+
+                                        <div class=" ">
+                                            <label for="requestType" class="label-name">
+                                                {{'maintenance-requests.request-type'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{requestType}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="tenant" class="label-name">
+                                                {{'general.tenant'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{tenantName}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="technician" class="label-name">
+                                                {{'general.technician'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{technicianName}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="unit" class="label-name">
+                                                {{'general.unit'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{unitName}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="maintenanceServiceName" class="label-name">
+                                                {{'general.maintenance-service'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{maintenanceServiceName}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="ratingValueByTenant" class="label-name">
+                                                {{'maintenance-requests.rating-value-by-tenant'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{ratingValueByTenant}}/10
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="ratingTxtByTenant" class="label-name">
+                                                {{'maintenance-requests.rating-text-by-tenant'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{ratingTxtByTenant}}
+                                            </label>
+                                        </div>
+
+                                        <div class=" ">
+                                            <label for="ratingValueByTechnician" class="label-name">
+                                                {{'maintenance-requests.rating-value-by-technician'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{ratingValueByTechnician}}/10
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="ratingTxtByTechnician" class="label-name">
+                                                {{'maintenance-requests.rating-text-by-technician'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{ratingTxtByTechnician}}
+                                            </label>
+                                        </div>
+
+                                        <div class=" ">
+                                            <label for="ratingValueByMaintenanceManager" class="label-name">
+                                                {{'maintenance-requests.rating-value-by-maintenance-manager'|translate}}
+                                                :
+                                            </label>
+                                            <label>
+                                                {{ratingValueByResponsibleForMaintenance}}/10
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="ratingTxtByMaintenanceManager" class="label-name">
+                                                {{'maintenance-requests.rating-text-by-maintenance-manager'|translate}}
+                                                :
+                                            </label>
+                                            <label>
+                                                {{ratingTxtByResponsibleForMaintenance}}
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class=" ">
+                                        <label for="productsPriced" class="label-name">
+                                            {{'maintenance-requests.products-priced'|translate}} :
+                                        </label>
+                                    </div>
+                                    <table class="table table-bordered text-center ">
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col" style="width: 150px;">
+                                                    {{'general.product-category'|translate}}
+                                                </th>
+
+                                                <th scope="col" style="width: 150px;">
+                                                    {{'general.product'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.quantity'|translate}}
+
+                                                </th>
+                                                <th scope="col">{{'general.price'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.value-before-tax'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.installation-price'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.value-with-installtion-price-before-tax'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.tax-ratio'|translate}}</th>
+                                                <th scope="col">
+                                                    {{'general.tax-value'|translate}}</th>
+                                                <th scope="col">
+                                                    {{'general.value-after-tax'|translate}}
+                                                </th>
+                                                <th scope="col">{{'general.unit'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.equipment'|translate}}</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of selectedProductsPriced; let i= index">
+                                                <td>{{item.productCategoryNameEn}}</td>
+                                                <td>{{item.productNameEn}}</td>
+                                                <td>{{item.quantity}}</td>
+                                                <td>{{item.price}}</td>
+                                                <td>{{item.valueBeforeTax}}</td>
+                                                <td>{{item.installationPrice}}</td>
+                                                <td>{{item.valueWithInstallationPriceBeforeTax}}</td>
+                                                <td>{{item.taxRatio}}</td>
+                                                <td>{{item.taxValue}}</td>
+                                                <td>{{item.valueAfterTax}}</td>
+                                                <td>{{item.unitNameEn}}</td>
+                                                <td>{{item.equipmentNameEn}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col gap-2 grid grid-cols-3 ">
+
+                                        <div class=" ">
+                                            <label for="totalWithInstallationPriceBeforeTax" class="label-name">
+                                                {{'general.total-before-tax'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{totalWithInstallationPriceBeforeTaxPriced}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="totalTaxPriced" class="label-name">
+                                                {{'general.total-tax'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{totalTaxPriced}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="totalAfterTaxPriced" class="label-name">
+                                                {{'general.total-after-tax'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{totalAfterTaxPriced}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class=" ">
+                                        <label for="productsPieces" class="label-name">
+                                            {{'maintenance-requests.species-exchanged'|translate}} :
+                                        </label>
+                                    </div>
+                                    <table class="table table-bordered text-center ">
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col" style="width: 150px;">
+                                                    {{'general.product-category'|translate}}
+                                                </th>
+
+                                                <th scope="col" style="width: 150px;">
+                                                    {{'general.product'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.quantity'|translate}}
+
+                                                </th>
+                                                <th scope="col">{{'general.price'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.value-before-tax'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.installation-price'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.value-with-installtion-price-before-tax'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.tax-ratio'|translate}}</th>
+                                                <th scope="col">
+                                                    {{'general.tax-value'|translate}}</th>
+                                                <th scope="col">
+                                                    {{'general.value-after-tax'|translate}}
+                                                </th>
+                                                <th scope="col">{{'general.unit'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'general.equipment'|translate}}</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of selectedProductsPieces; let i= index">
+                                                <td>{{item.categoryNameEn}}</td>
+                                                <td>{{item.productNameEn}}</td>
+                                                <td>{{item.quantity}}</td>
+                                                <td>{{item.price}}</td>
+                                                <td>{{item.valueBeforeTax}}</td>
+                                                <td>{{item.installationPrice}}</td>
+                                                <td>{{item.valueWithInstallationPriceBeforeTax}}</td>
+                                                <td>{{item.taxRatio}}</td>
+                                                <td>{{item.taxValue}}</td>
+                                                <td>{{item.valueAfterTax}}</td>
+                                                <td>{{item.unitNameEn}}</td>
+                                                <td>{{item.equipmentNameEn}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col gap-2 grid grid-cols-3 ">
+
+                                        <div class=" ">
+                                            <label for="totalWithInstallationPriceBeforeTaxPieces" class="label-name">
+                                                {{'general.total-before-tax'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{totalWithInstallationPriceBeforeTaxPieces}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="totalTaxPieces" class="label-name">
+                                                {{'general.total-tax'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{totalTaxPieces}}
+                                            </label>
+                                        </div>
+                                        <div class=" ">
+                                            <label for="totalAfterTaxPieces" class="label-name">
+                                                {{'general.total-after-tax'|translate}} :
+                                            </label>
+                                            <label>
+                                                {{totalAfterTaxPieces}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section  -->

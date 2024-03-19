@@ -1,0 +1,88 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-units">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 ">
+          <div class="card-body">
+            <form [formGroup]="CountriesForm" id="CountrySubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'page-form.country-information'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+                      <div class="">
+                        <label for="countryNameAr" class="label-name">
+
+                          {{'page-form.name-arabic'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+
+                          <input type="text" class="form-control icon-user"
+                            [ngClass]="{'is-invalid':f['countryNameAr'].errors || f['countryNameAr'].invalid}"
+                            name="countryNameAr" formControlName="countryNameAr">
+                          <div
+                            *ngIf="(f['countryNameAr'].touched || f['countryNameAr'].dirty ) && f['countryNameAr'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['countryNameAr'].errors && f['countryNameAr'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="countryNameEn" class="label-name">
+                          {{'page-form.name-latin'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group">
+
+                          <input type="text" class="form-control icon-user" name="countryNameEn"
+                            formControlName="countryNameEn">
+                          <div
+                            *ngIf="(f['countryNameEn'].touched || f['countryNameEn'].dirty ) && f['countryNameEn'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['countryNameEn'].errors && f['countryNameEn'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="countryIsoCode" class="label-name">
+                          {{'page-form.country-iso-code'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group">
+
+                          <input type="text" class="form-control icon-user" name="countryIsoCode"
+                            formControlName="countryIsoCode">
+                          <div
+                            *ngIf="(f['countryIsoCode'].touched || f['countryIsoCode'].dirty ) && f['countryIsoCode'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['countryIsoCode'].errors && f['countryIsoCode'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="list list-container-add">
+  <app-countries-list [changeCountriesFlag]="changeCountriesFlag"></app-countries-list>
+</div>

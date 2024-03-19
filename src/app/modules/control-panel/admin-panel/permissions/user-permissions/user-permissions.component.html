@@ -1,0 +1,256 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}</p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <form id="roleFrom" [formGroup]="roleFrom" class="tabs-form">
+              <div class="main-unit">
+                <div class="wrapper-title">
+                  <h3>{{'component-names.role-permission'|translate}}</h3>
+                  <hr>
+                  <div class="col gap-2 grid grid-cols-3 p-0">
+                    <div class=" ">
+                      <label for="roleNameAr" class="label-name">
+                        {{'page-form.name-arabic'|translate}}</label>
+                      <div class="input-group form-group">
+                        <div class="input-group">
+                          <input type="text" class="form-control icon-user tenant-icon" formControlName="roleNameAr">
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" ">
+                      <label for="roleNameEn" class="label-name">{{'user-manager.name-latin'|translate}}</label>
+                      <div class="input-group form-group">
+                        <input type="text" class="form-control icon-user " formControlName="roleNameEn">
+                        <div *ngIf="(f['roleNameEn'].touched || f['roleNameEn'].dirty ) && f['roleNameEn'].invalid"
+                          class="validation alert-danger">
+                          <i class="fa fa-close "></i>
+                          <span *ngIf="f['roleNameEn'].errors && f['roleNameEn'].errors['required']">
+                            {{'validation-messages.required-field'|translate}}</span>
+                          <span *ngIf="f['roleNameEn'].errors && f['roleNameEn'].errors['minlength']">
+                            {{'validation-messages.min-name-char'|translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class=" ">
+                      <label for="remark" class="label-name">{{'page-form.remarks'|translate}}</label>
+                      <div class="input-group form-group">
+                        <input type="text" class="form-control icon-user " formControlName="remark">
+
+                      </div>
+                    </div>
+                    <div class="form-group d-flex align-items-center gap-1">
+
+                      <input type="checkbox" formControlName="isActive" name="isActive">
+                      <label for="isActive" class="label-name m-0">{{'permissions.is-active'|translate}} </label>
+                    </div>
+
+                  </div>
+                  <hr>
+               
+
+                  
+
+
+
+                  <hr>
+
+                  <nav ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+
+                    <li [ngbNavItem]="1" [destroyOnHide]="false">
+                        <a ngbNavLink>{{'page-form.pages'|translate}}</a>
+                        <ng-template ngbNavContent>
+                          <div class="col gap-2 grid grid-cols-3 p-0">
+                            <div class=" ">
+                              <label for="roleNameAr" class="label-name">
+                                {{'page-form.page-search'|translate}}</label>
+                              <div class="input-group form-group">
+                                <div class="input-group">
+                                  <input type="text" class="form-control icon-user tenant-icon"
+                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="searchText">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group d-flex align-items-center gap-1">
+        
+                              <input id="checkAllPermissions" formControlName="checkAllPermissions" type="checkbox"
+                                (change)="onSelecetAllPermissions($event)" name="checkAllPermissions">
+                              <label for="checkAllPermissions" class="label-name m-0">{{'page-form.check-all'|translate}} </label>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <div *ngFor="let page of pages |filter:searchText:'pageNameAr':'pageNameEn'; let i= index;" class="col-md-4 col-sm-12 mb-1 ">
+                              <div class="checkbox-wrapper">
+                                <ng-container *ngIf="lang=='ar'; else en">
+                                  <h6 class="title-permissions">{{page.pageNameAr}}</h6>
+                                </ng-container>
+                                <ng-template #en>
+                                  <h6 class="title-permissions">{{page.pageNameEn}}</h6>
+                                </ng-template>
+                                <span class="title-permissions">{{'page-form.check-all'|translate}}</span>
+                                <!-- <input class="choose-all " type="checkbox"> -->
+                                <input    type="checkbox"  [ngModelOptions]="{standalone: true}" [(ngModel)]="page.checkAllPagePermissions"  (change)="onSelecetPageAllPermissions($event,page)"  class="choose-all my-checkbox">
+                                <ul *ngFor="let permission of page?.pagePermissionJson |keyvalue" class="list-wrap">
+                                  <li>
+                                    <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="permission.value"
+                                      (change)="onCheckboxChange($event,page,permission.key)"
+                                      [attr.checked]="permission.value ? 'checked' : null" id="{{permission.key}}{{page.id}}">
+                                    <label for="{{permission.key}}{{page.id}}"></label>
+                                    <span> {{('pagePermission.'+permission.key)|translate}} </span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <hr>
+                            </div>
+        
+        
+        
+                          </div>
+                        </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="2" [destroyOnHide]="false">
+                      <a ngbNavLink>{{'page-form.contracts-settings'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="col gap-2 grid grid-cols-3 p-0">
+                          <div class=" ">
+                            <label for="roleNameAr" class="label-name">
+                              {{'page-form.page-search-contract'|translate}}</label>
+                            <div class="input-group form-group">
+                              <div class="input-group">
+                                <input type="text" class="form-control icon-user tenant-icon"
+                                  [ngModelOptions]="{standalone: true}" [(ngModel)]="searchTextContract">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group d-flex align-items-center gap-1">
+      
+                            <input id="checkAllPermissionsContracts" formControlName="checkAllPermissionsContracts" type="checkbox"
+                              (change)="onSelecetAllContactsPermissions($event)" name="checkAllPermissionsContracts">
+                            <label for="checkAllPermissionsContracts" class="label-name m-0">{{'page-form.check-all'|translate}} </label>
+                          </div>
+                        </div>
+                        <br>
+                          <div class="row">
+                            <div *ngFor="let contractPerm of contractSettingsPermissions |filter:searchTextContract:'contractArName':'contractEnName'; let i= index;" class="col-md-4 col-sm-12 mb-1 ">
+                              <div class="checkbox-wrapper">
+                                <ng-container *ngIf="lang=='ar'; else en">
+                                  <h6 class="title-permissions">{{contractPerm.contractArName}}</h6>
+                                </ng-container>
+                                <ng-template #en>
+                                  <h6 class="title-permissions">{{contractPerm.contractEnName}}</h6>
+                                </ng-template>
+                                <span class="title-permissions">{{'page-form.check-all'|translate}}</span>
+                                <!-- <input class="choose-all " type="checkbox"> -->
+                                <input    type="checkbox"  [ngModelOptions]="{standalone: true}"
+                                 [(ngModel)]="contractPerm.isUserChecked"  
+                                 (change)="onSelecetPageAllContractPermissions($event,contractPerm)"  
+                                 class="choose-all-contract my-checkbox">
+                                <ul *ngFor="let permission of contractPerm?.permissionsJson |keyvalue" 
+                                class="list-wrap">
+                                  <li>
+                                    <input type="checkbox" [ngModelOptions]="{standalone: true}" 
+                                    [(ngModel)]="permission.value"
+                                      (change)="onCheckboxContractSettingsChange($event,contractPerm,permission.key)"
+                                      [attr.checked]="permission.value ? 'checked' : null" id="contract{{permission.key}}{{contractPerm.id}}">
+                                    <label for="contract{{permission.key}}{{contractPerm.id}}"></label>
+                                    <span> {{('pagePermission.'+permission.key)|translate}} </span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <hr>
+                            </div>
+        
+        
+        
+                          </div>
+                      </ng-template>
+                    </li>
+
+
+                    <li [ngbNavItem]="3" [destroyOnHide]="false">
+                      <a ngbNavLink>{{'page-form.entry-types'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="col gap-2 grid grid-cols-3 p-0">
+                          <div class=" ">
+                            <label for="roleNameAr" class="label-name">
+                              {{'page-form.page-search-entry'|translate}}</label>
+                            <div class="input-group form-group">
+                              <div class="input-group">
+                                <input type="text" class="form-control icon-user tenant-icon"
+                                  [ngModelOptions]="{standalone: true}" [(ngModel)]="searchTextEntry">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group d-flex align-items-center gap-1">
+      
+                            <input id="checkAllPermissionsEntryTypes" formControlName="checkAllPermissionsEntryTypes" type="checkbox"
+                              (change)="onSelecetAllEntryTypesPermissions($event)" name="checkAllPermissionsEntryTypes">
+                            <label for="checkAllPermissionsEntryTypes" class="label-name m-0">{{'page-form.check-all'|translate}} </label>
+                          </div>
+                        </div>
+                        <br>
+                          <div class="row">
+                            <div *ngFor="let entryTypePerm of entryTypesPermissions |filter:searchTextEntry:'entryNameAr':'entryNameEn'; let i= index;" class="col-md-4 col-sm-12 mb-1 ">
+                              <div class="checkbox-wrapper">
+                                <ng-container *ngIf="lang=='ar'; else en">
+                                  <h6 class="title-permissions">{{entryTypePerm.entryNameAr}}</h6>
+                                </ng-container>
+                                <ng-template #en>
+                                  <h6 class="title-permissions">{{entryTypePerm.entryNameEn}}</h6>
+                                </ng-template>
+                                <span class="title-permissions">{{'page-form.check-all'|translate}}</span>
+                                <!-- <input class="choose-all " type="checkbox"> -->
+                                <input    type="checkbox"  [ngModelOptions]="{standalone: true}"
+                                 [(ngModel)]="entryTypePerm.isUserChecked"  
+                                 (change)="onSelecetPageAllEntryTypesPermissions($event,entryTypePerm)"  
+                                 class="choose-all-entry-type my-checkbox">
+                                <ul *ngFor="let permission of entryTypePerm?.permissionsJson |keyvalue" 
+                                class="list-wrap">
+                                  <li>
+                                    <input type="checkbox" [ngModelOptions]="{standalone: true}" 
+                                    class="choose-all-entry-type"
+                                    [(ngModel)]="permission.value"
+                                      (change)="onCheckboxEntryTypeChange($event,entryTypePerm,permission.key)"
+                                      [attr.checked]="permission.value ? 'checked' : null" id="entry{{permission.key}}{{entryTypePerm.id}}">
+                                    <label for="entry{{permission.key}}{{entryTypePerm.id}}"></label>
+                                    <span> {{('pagePermission.'+permission.key)|translate}} </span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <hr>
+                            </div>
+        
+        
+        
+                          </div>
+                      </ng-template>
+                    </li>
+                    
+                  </nav>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+
+                  
+
+
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->

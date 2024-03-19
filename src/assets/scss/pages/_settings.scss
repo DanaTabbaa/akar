@@ -1,0 +1,610 @@
+.inner-page-wrapper {
+    #breadcrumbs {
+        margin-left: 7px;
+    }
+    .lease-header-title {
+        margin-left: 0px;
+    }
+    .settings-section {
+        background-color: $white;
+        padding: 30px;
+        &__text {
+            &--info {
+                font-size: 14px;
+                line-height: 17px;
+                color: #323A46;
+                margin: 10px 0 0 0;
+            }
+        }
+        .settings-title {
+            color: $gray30;
+            line-height: 29px;
+            text-align: left;
+            letter-spacing: 0px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            width: 100%;
+        }
+    }
+    .settings-wrapper {
+        background-color: #FAFAFA;
+        padding: 30px;
+        .main-wrap {
+            background: $white;
+            border: 1px solid #E9E9E9;
+            border-radius: 5px;
+            opacity: 1;
+            padding: 20px;
+            .wrapper-title {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                flex-wrap: wrap;
+                // border-bottom: 1px solid #707070;
+                .settings-subtitle {
+                    font-size: 1.125rem;
+                    color: $gray30;
+                    line-height: 22px;
+                    text-align: left;
+                    font-weight: 600;
+                }
+                .servants {
+                    width: 25%;
+                    background: #FFFFFF 0% 0% no-repeat padding-box;
+                    border: 1px solid $theme-primary !important;
+                    border-radius: 5px;
+                    opacity: 1;
+                    option {
+                        color: $purple;
+                    }
+                }
+            }
+        }
+    }
+    .auction-detail {
+        .wrapper-title {
+            .switch {
+                width: 20%
+            }
+        }
+    }
+}
+
+
+/***********************Control required field ********************************/
+
+@media only screen and (min-width: 1200px) and (max-width: 1920px) {
+    .inner-page-wrapper {
+        .main-units {
+            .wrapper-title {
+                .search-box {
+                    width: 25%;
+                }
+            }
+        }
+    }
+}
+
+@include bp(ipad-pro) {
+    .inner-page-wrapper {
+        .main-units {
+            .wrapper-title {
+                .search-box {
+                    width: 40%;
+                }
+            }
+        }
+    }
+    .servants {
+        width: 40% !important;
+    }
+}
+
+@include bp(ipad) {
+    .inner-page-wrapper {
+        .settings-wrapper {
+            .main-wrap {
+                .wrapper-title {
+                    .servants {
+                        width: 40%;
+                    }
+                }
+            }
+        }
+        .main-units {
+            .wrapper-title {
+                .search-box {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+@include bp(mobile) {
+    .inner-page-wrapper {
+        .lease-header-title {
+            font-size: 1.3rem;
+        }
+        .lease-header-title {
+            margin-left: -4px !important;
+        }
+        .settings-section {
+            padding: 10px !important;
+            .settings-title {
+                font-size: 1rem !important;
+            }
+        }
+        .settings-wrapper {
+            padding: 10px !important;
+            .servants {
+                width: 100% !important;
+            }
+        }
+        .settings-section {
+            .settings-save-btn {
+                width: 100%;
+                display: block;
+            }
+        }
+        .checkbox-wrapper .list-wrap {
+            display: block;
+            width: 100%;
+            li {
+                display: inline-flex;
+                width: 100%;
+                span {
+                    margin-top: -2px;
+                }
+            }
+        }
+        .main-wrap {
+            .second-list {
+                margin-top: 20px !important;
+            }
+            .verticle-line {
+                display: block;
+                unicode-bidi: isolate;
+                margin-block-start: 0.5em;
+                margin-block-end: 0.5em;
+                margin-inline-start: auto;
+                margin-inline-end: auto;
+                overflow: hidden;
+                border-style: inset;
+                border: 1px solid #E9E9E9;
+                &::before {
+                    display: none;
+                }
+            }
+        }
+        .main-units {
+            .wrapper-title {
+                .search-box {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+
+/*****************Type of units******************/
+
+.inner-page-wrapper {
+    .lease-header-title-unit {
+        color: $gray30;
+        line-height: 31px;
+        text-align: left;
+        letter-spacing: 0px;
+        font-size: 1.625rem;
+        font-weight: 600;
+        margin-top: 25px;
+        /*margin-left: 12px;  */
+    }
+    #breadcrumbs-unit {
+        list-style: none;
+        display: flex;
+        margin-left: 7px;
+        li {
+            /*margin: 0 1px;*/
+            a {
+                color: $gray30;
+                text-decoration: none;
+                font-size: 0.8125rem;
+                margin-left: -5px;
+                font-weight: 500;
+                &:hover {
+                    transition-delay: 50ms;
+                    transition: 50ms;
+                    color: $gray30;
+                    text-decoration: none;
+                }
+            }
+            &:last-child a {
+                color: #A2A2A2;
+            }
+        }
+        li+li::before {
+            color: #A2A2A2;
+            content: "/\00a0";
+            padding: 3px;
+        }
+    }
+    .main-units {
+        hr {
+            margin-top: 1.3rem;
+        }
+        .wrapper-title {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .settings-subtitle {
+                font-size: 1.5rem;
+                color: $gray30;
+                line-height: 22px;
+                text-align: left;
+                font-weight: 600;
+            }
+        }
+        .search-box {
+            width: 25%;
+            .search-icon {
+                margin-top: 0px;
+                width: 100%;
+                font-size: 1rem;
+                &::before {
+                    font-size: 0.8125rem;
+                }
+            }
+            .btn-box {
+                background-color: $purple;
+                color: $white;
+                -webkit-text-stroke: -7px;
+                width: 40px;
+                height: auto;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
+                margin-left: -1px;
+            }
+        }
+    }
+    .auction-table {
+        padding: 10px;
+        .names-table,
+        td:nth-child(1),
+        td:nth-child(2),
+        td:nth-child(3) {
+            color: #6C757D;
+            font-weight: 400;
+            font-size: 0.8125rem;
+        }
+        th {
+            color: $gray30;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+    }
+    /**************Type of unit modal*********************/
+    .auction-detail {
+        .unit-type-modal {
+            max-width: 850px;
+            .modal-wrapper {
+                position: relative;
+                left: 0;
+                height: auto;
+                bottom: 0px;
+                .modal-head {
+                    border-bottom: none;
+                    .report-modal-title {
+                        font-size: 20px;
+                        line-height: 24px;
+                        text-align: left;
+                        color: #333333;
+                        font-weight: 600;
+                        padding-left: 13px;
+                    }
+                    .close {
+                        border: none !important;
+                        padding-right: 20px;
+                    }
+                }
+                .modal-body-part {
+                    padding: 30px;
+                    ;
+                    .arabic-name {
+                        font-size: 16px;
+                        line-height: 24px;
+                        text-align: left;
+                        color: #333333;
+                        font-weight: 600;
+                    }
+                    .section-part {
+                        @extend .arabic-name;
+                        color: #666666;
+                        font-weight: 300;
+                    }
+                    .list-popup-bg-color {
+                        background-color: #F7F7F7;
+                        padding: 15px;
+                        .checkbox-wrapper {
+                            margin-top: 0px;
+                            .list-wrap {
+                                margin: 20px 0;
+                            }
+                        }
+                    }
+                }
+                .modal-footer-part {
+                    border-top: none;
+                    display: flex;
+                    justify-content: flex-start;
+                    padding: 15px 25px;
+                }
+            }
+        }
+    }
+}
+
+
+/*******************Type of unit - modal - css media*************************/
+
+@include bp(ipad) {
+    .unit-type-modal {
+        .modal-footer-part {
+            button {
+                width: 100%;
+                display: block;
+            }
+        }
+    }
+}
+
+@include bp(mobile) {
+    .unit-type-modal {
+        .modal-footer-part {
+            button {
+                width: 100%;
+                display: block;
+            }
+        }
+    }
+}
+
+
+/* new -------------------------------------------------------------------------*/
+
+.heading {
+    &--subtitle {
+        letter-spacing: 0px;
+        color: #323A46;
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 15px;
+        ;
+        font-weight: 500;
+    }
+}
+
+.settings-wrapper {
+    .table {
+        tr {
+            th {
+                background: #e2e2e2;
+                border-bottom: 0;
+                padding: 15px 20px;
+                border: 0;
+                &:first-child {
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                }
+                &:last-child {
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    border-top: 0;
+                    padding: 15px 20px;
+                    .fa {
+                        &-arrow-alt-circle-down {
+                            margin-right: 10px;
+                        }
+                        &-times {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.setting-custom-margin {
+    margin-bottom: 30px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// for file upload
+.hidden {
+    display: none;
+}
+
+.heading--title {
+    border-bottom: 1px solid rgba(112, 112, 112, .1);
+    margin-bottom: 30.5px;
+    padding-bottom: 26.5px;
+}
+
+.preview-zone {
+    .box {
+        position: relative;
+        background: #ffffff;
+        width: 100%;
+        border: 0;
+        padding: 0;
+    }
+}
+
+.box-body img {
+    height: 100%;
+    object-fit: contain;
+}
+
+.box-body .file-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #333333;
+    line-height: 21px;
+    text-align: left;
+    margin: 5px 0px;
+    position: absolute;
+    left: 110px;
+    top: 30%;
+}
+
+.remove-preview {
+    display: inline-block;
+    position: absolute;
+    top: 65%;
+    left: 110px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 16px;
+    color: #6E768E;
+}
+
+.remove-preview i {
+    margin-right: 10px;
+}
+
+.box-body {
+    background: #FAFAFA 0% 0% no-repeat padding-box;
+    border: 1px solid #E9E9E9;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    opacity: 1;
+    width: 75px;
+    height: 75px;
+    margin-top: 20px;
+}
+
+.dropzone-wrapper {
+    position: relative;
+    min-height: 300px;
+    width: 100%;
+    .btn {
+        display: inline-block;
+        margin: 1rem .5rem 1rem .5rem;
+        clear: both;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: .2rem;
+        outline: none;
+        padding: 0 2rem;
+        height: 36px;
+        line-height: 36px;
+        color: $purple;
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+        background: $white;
+        border-color: $purple;
+        border: 1px solid;
+        cursor: pointer;
+        &:hover,
+        &:focus {
+            border-color: #bbb;
+            background: #bbbbbb;
+        }
+    }
+    @include bp(ipad) {
+        input[type='file'] {
+            padding: 140px 50px 100px 50px !important;
+        }
+    }
+}
+
+.dropzone-desc img {
+    width: 50px;
+    margin-bottom: 7px;
+}
+
+.dropzone-desc p {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0;
+}
+
+.dropzone-desc {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    padding: 4rem 1.5rem;
+    text-align: center;
+    background: #fafafa;
+    border-radius: 7px;
+    border: 1px solid #eee;
+    transition: all .2s ease;
+}
+
+.preview-zone {
+    position: absolute;
+    top: 33%;
+    left: 108%;
+    width: 100%;
+    @include bp(ipad-pro) {
+        top: 42%;
+        left: 112%;
+    }
+    .box {
+        @include bp(ipad) {
+            background: transparent !important;
+        }
+    }
+}
+
+.dropzone,
+.dropzone:focus {
+    position: absolute;
+    outline: none !important;
+    width: 100%;
+    height: 150px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.dropzone-wrapper:hover,
+.dropzone-wrapper.dragover {
+    // background: #fafafa;
+}
+
+.preview-zone {
+    text-align: center;
+}
+
+.preview-zone .box {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+@include bp(mobile) {
+    .preview-zone {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+}

@@ -1,0 +1,19 @@
+export class VwMaintenanceBills
+{
+    id:any;
+    date!:Date;
+    tenantId:any;
+    unitId:any;
+    maintenanceRequestId:any;
+    maintenanceCostOn!:number;
+    notes!:string;
+    specialDiscount:any;
+    ownerServicesAccountId:any;
+    taxAccountId:any;
+    tenantAccountId:any;
+    tenantNameAr!:string;
+    tenantNameEn!:string;
+    unitNameAr!:string;
+    unitNameEn!:string;
+    userId:any;
+}

@@ -1,0 +1,222 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<div class="row">
+  <div class="mb-3 col-md-12">
+    <input type="text" class="form-control" placeholder="{{'upload-files.file-name'|translate}}" [(ngModel)]="fileName"
+     >
+  </div>
+</div>
+<mat-toolbar fxLayoutAlign="space-between center">
+  <h5>{{'general.upload-files'|translate}}</h5>
+  <!-- <div fxLayoutGap="8px">
+        <button
+          mat-stroked-button
+          [color]="_showStatusBar ? 'primary' : ''"
+          (click)="_showStatusBar = !_showStatusBar"
+          matTooltip="Toggle status bar"
+        >
+          <mat-icon class="rotate-90">{{
+            _showStatusBar ? 'view_sidebar' : 'view_week'
+          }}</mat-icon>
+        </button>
+        <button
+          mat-stroked-button
+          [color]="_allowMultiple ? 'primary' : ''"
+          (click)="_allowMultiple = !_allowMultiple"
+          matTooltip="Toggle multiple file selection"
+        >
+          <mat-icon>{{
+            _allowMultiple ? 'file_copy_outline' : 'upload_file'
+          }}</mat-icon>
+        </button>
+        <button
+          mat-stroked-button
+          [color]="_showCaption ? 'primary' : ''"
+          (click)="_showCaption = !_showCaption"
+          matTooltip="Toggle caption"
+        >
+          <mat-icon>{{
+            _showCaption ? 'closed_caption' : 'closed_caption_off'
+          }}</mat-icon>
+        </button>
+        <button
+          mat-stroked-button
+          [color]="_throwError ? 'warn' : ''"
+          matTooltip="Throw error"
+          (click)="_throwError = !_throwError"
+        >
+          <mat-icon>{{ _throwError ? 'error' : 'error_outline' }}</mat-icon>
+        </button>
+        <button mat-stroked-button (click)="fileUpload.reset()" matTooltip="Reset">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div> -->
+</mat-toolbar>
+
+<mat-divider></mat-divider>
+
+<app-file-upload #fileUpload [fileName]="fileName" [uploadSource]="_uploadSource" [statusBar]="_showStatusBar">
+  <input appFileUploadInput [multiple]="_allowMultiple" type="file" />
+
+  <app-file-upload-caption *ngIf="_showCaption">
+    {{'upload-files.supported-file-types'|translate}}<span ></span> PDF, TIFF, WORD, PNG, JPEG
+  </app-file-upload-caption>
+
+  <!-- <ng-container *appFileUploadItemAction="let uploadItem">
+        <button mat-button>Custom Action</button>
+      </ng-container> -->
+</app-file-upload>
+<mat-divider></mat-divider>
+<div *ngIf="attachments.length>0"  class="col-md-12 tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="Images" role="tabpanel" aria-labelledby="nav-booking-tab">
+    <div class="container-fluid">
+      <div class="row clearfix">
+        <div class="col-md-12">
+          <div class="card-header headercard font-weight-bold mb-1">
+            <strong>{{'upload-files.attachments'|translate}}</strong>
+          </div>
+          <div class="body table-responsive table_units_2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>{{'upload-files.file-no'|translate}}</th>
+                  <th>{{'upload-files.file-name'|translate}}</th>
+                  <th>{{'upload-files.record-no'|translate}}</th>
+                  <th>{{'upload-files.file'|translate}}</th>
+                  <th>{{'upload-files.file-type'|translate}}</th>
+                  <th>{{'upload-files.download'|translate}}</th>
+                  <th>{{'general.actions'|translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of attachments;let i=index">
+                  <td>{{i+1}}</td>
+                  <!-- <td>
+                        <a href="javascript:void(0);" (click)="setunitdefaultimage(item.fileName)">
+                          <ng-container *ngIf="defaultimage==item.fileName; else selectdefault">
+                            {{'unit.defaulted'|translate}}
+                          </ng-container>
+                          <ng-template #selectdefault>
+                            {{'unit.default'|translate}}
+                          </ng-template>
+                          <i class="fa fa-home"></i>
+                        </a>
+                      </td> -->
+                  <td>{{item.originalFileName}}</td>
+                  <td>{{item.recordId}}</td>
+                  <td>
+                    <img [src]="getpath(item.fileName)" alt="" class="rounded-circle float-right" height="30">
+
+                  </td>
+                  <td>{{item.fileType}}</td>
+                  <td>
+                    <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                        aria-hidden="true"></i></a>
+                  </td>
+                  <td>
+                    <a (click)="deleteFile(item.id)" class="del_btn">
+                      <i class="fas fa-times"></i> {{'upload-files.delete-file'|translate}}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="tab-pane fade" id="PDF" role="tabpanel" aria-labelledby="nav-purchasing-tab">
+        <div class="container-fluid">
+          <div class="row clearfix">
+            <div class="col-md-12" *ngIf="id>0">
+              <div class="card-header headercard font-weight-bold mb-1">
+                <strong>{{'unit.uploadedfiles'|translate}}</strong>
+              </div>
+              <div class="body table-responsive table_units_2">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>{{'unit.fileno'|translate}}</th>
+                      <th>{{'unit.filename'|translate}}</th>
+                      <th>{{'maintainance.download'|translate}}</th>
+                      <th>{{'unit.Delete'|translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of pdffiles;let i=index">
+                      <td>{{i+1}}</td>
+                      <td>
+                        <p>{{GetFileName(item.fileName)}}</p>
+                      </td>
+                      <td>
+                        <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                            aria-hidden="true"></i></a>
+                      </td>
+                      <td>
+                        <a (click)="deletefile(item.id)" class="del_btn">
+                          <i class="fas fa-times"></i>
+                          {{'unit.Delete'|translate}}
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="Videos" role="tabpanel" aria-labelledby="nav-purchasing-tab">
+        <div class="container-fluid">
+          <div class="row clearfix">
+            <div class="col-md-12" *ngIf="id>0">
+              <div class="card-header headercard font-weight-bold mb-1">
+                <strong>{{'unit.uploadedfiles'|translate}}</strong>
+              </div>
+              <div class="body table-responsive table_units_2">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>{{'unit.fileno'|translate}}</th>
+                      <th>{{'unit.filename'|translate}}</th>
+                      <th>{{'maintainance.download'|translate}}</th>
+                      <th>{{'unit.Delete'|translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of videosfiles;let i=index">
+                      <td>{{i+1}}</td>
+                      <td>
+                        <p>{{item.fileName}}</p>
+                      </td>
+                      <td>
+                        <a (click)="download(getpath(item.fileName),item.fileName)"><i class="fa fa-download"
+                            aria-hidden="true"></i></a>
+                      </td>
+                      <td>
+                        <a (click)="deletefile(item.id)" class="del_btn">
+                          <i class="fas fa-times"></i>
+                          {{'unit.Delete'|translate}}
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+</div>
+
+
+
+
+
+
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="btn-primary btn">{{'buttons.close'|translate}}</button>
+  <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+</mat-dialog-actions>

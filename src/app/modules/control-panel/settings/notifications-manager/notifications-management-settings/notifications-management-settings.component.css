@@ -1,0 +1,29 @@
+:host ::ng-deep .p-multiselect {
+  min-width: 17rem;
+  width: 18rem;
+}
+
+:host ::ng-deep .multiselect-custom .p-multiselect-label {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+:host ::ng-deep .multiselect-custom .country-item-value {
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-flex;
+  margin-right: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+}
+:host ::ng-deep .multiselect-custom .country-item-value img.flag {
+  width: 17px;
+}
+:host ::ng-deep .multiselect-custom .country-placeholder {
+  padding: 0.25rem;
+}
+
+@media screen and (max-width: 640px) {
+  :host ::ng-deep .p-multiselect {
+    width: 100%;
+  }
+}/*# sourceMappingURL=notifications-management-settings.component.css.map */

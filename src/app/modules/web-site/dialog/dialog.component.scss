@@ -1,0 +1,97 @@
+.dialog-size{
+  width: 615px;
+    height: 673px;
+   text-align: start;
+   overflow: auto;
+}
+
+@media (max-width: 800px) {
+  .dialog-size{
+    width: fit-content !important;
+}
+}
+/* WebKit browsers (Chrome, Safari) */
+.dialog-size::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dialog-size::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+.dialog-size::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Firefox */
+.dialog-size {
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Reduce the height of the scrollbar */
+.dialog-size::-webkit-scrollbar {
+  height: 5px !important;
+}
+
+
+.dialog-size::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Set the color of the scrollbar track */
+}
+.change-forms .nav-item .nav-link {
+    color: gray;
+    background-color: white;
+}
+.change-forms .nav-item .nav-link p{
+
+        font-size: 20px;
+}
+.change-forms .nav-item .nav-link:active,
+.change-forms .nav-item .nav-link:focus {
+  color: black ;
+  background-color: white ;
+  border-bottom: 2px solid ;
+  font-weight: 700 ;
+}
+.change-forms .nav-item .nav-link.active{
+  color: black ;
+  background-color: white ;
+  border-bottom: 2px solid ;
+  font-weight: 700 ;
+}
+.close-btn-dialog{
+  width: 31px;
+  height: 31px;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  background-color: rgb(240, 80, 15);
+}
+.btn-sign-in{
+  height: 58px;
+  border-radius: 15px;
+  border: none;
+  font-size: 20px !important;
+  border: #1E1E1E33 1px solid;
+}
+.ds-primary{
+  background: var(--Primary, #3A9DAB);
+}
+.ds-primary-t{
+ color: var(--Primary, #3A9DAB);
+}
+
+.form-check-input:checked {
+  background-color: var(--Primary, #3A9DAB); /* Change the background color to your desired color */
+  border-color: var(--Primary, #3A9DAB); /* Change the border color to your desired color */
+}
+
+.form-check-input:checked + .form-check-label::before {
+  background-color: var(--Primary, #3A9DAB); /* Change the background color to your desired color */
+  border-color: var(--Primary, #3A9DAB); /* Change the border color to your desired color */
+}
+.label-input-log{
+  font-weight: 700; 
+  font-size: 20px;
+  margin-bottom: 10px;
+}

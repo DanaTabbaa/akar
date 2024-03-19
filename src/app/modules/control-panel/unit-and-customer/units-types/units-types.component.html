@@ -1,0 +1,163 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> Proccessing... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="unitTypeForm" id="UnitTypeSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'page-form.unit-type-information'|translate}}</h3>
+                  <hr>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+                      <div class="">
+                        <label for="unitTypeForm" class="label-name "><span
+                            class="text-danger">*</span>{{'page-form.name-arabic'|translate}}</label>
+                        <div class="form-group input-group">
+
+                          <input type="text" class="form-control icon-user" name="typeNameAr"
+                            formControlName="typeNameAr">
+                          <div class="validation0 alert-danger0"
+                            *ngIf="unitTypeForm.get('typeNameAr')?.touched && unitTypeForm.get('typeNameAr')?.invalid">
+                            <div class="validation alert-danger"
+                              *ngIf="unitTypeForm.get('typeNameAr')?.hasError('required')"><i class="fa fa-close "></i>
+                              {{'validation-messages.invalid-name'|translate}}
+                            </div>
+                            <div class="validation alert-danger"
+                              *ngIf="unitTypeForm.get('typeNameAr')?.hasError('pattern')"><i
+                                class="fa fa-times"></i>{{'error.space'|translate}}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="typeNameEn" class="label-name"> <span
+                            class="text-danger">*</span>{{'page-form.name-latin'|translate}}</label>
+                        <div class="form-group input-group">
+
+                          <input type="text" class="form-control icon-user" name="typeNameEn"
+                            formControlName="typeNameEn">
+                          <div class="validation0 alert-danger0"
+                            *ngIf="unitTypeForm.get('typeNameEn')?.touched && unitTypeForm.get('typeNameAr')?.invalid">
+                            <div class="validation alert-danger"
+                              *ngIf="unitTypeForm.get('typeNameEn')?.hasError('required')"><i class="fa fa-close "></i>
+                              {{'validation-messages.invalid-name'|translate}}
+                            </div>
+                            <div class="validation alert-danger"
+                              *ngIf="unitTypeForm.get('typeNameEn')?.hasError('pattern')"><i
+                                class="fa fa-times"></i>{{'error.space'|translate}}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addArea" formControlName="addArea">
+                          <label for="addArea" class="label-name m-0">{{'page-form.add-area'|translate}}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addNoOfRooms" formControlName="addNoOfRooms">
+                          <label for="addNoOfRooms"
+                            class="label-name m-0">{{'page-form.add-number-rooms'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addNoOfBathRooms" formControlName="addNoOfBathRooms">
+                          <label for="addNoOfBathRooms"
+                            class="label-name m-0">{{'page-form.add-bath-rooms'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addBuildingNo" formControlName="addBuildingNo">
+                          <label for="addBuildingNo"
+                            class="label-name m-0">{{'page-form.add-building-no'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addFloorNo" formControlName="addFloorNo">
+                          <label for="addFloorNo" class="label-name m-0">{{'page-form.add-floor-no'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addHeight" formControlName="addHeight">
+                          <label for="addHeight" class="label-name m-0">{{'page-form.add-height'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addPropertyCount" formControlName="addPropertyCount">
+                          <label for="addPropertyCount"
+                            class="label-name m-0">{{'page-form.add-property-count'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addDimentionNorth" formControlName="addDimentionNorth">
+                          <label for="addDimentionNorth"
+                            class="label-name m-0">{{'page-form.add-dimention-north'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addDimensionEast" formControlName="addDimensionEast">
+                          <label for="addDimensionEast"
+                            class="label-name m-0">{{'page-form.add-dimension-east'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addDimensionWest" formControlName="addDimensionWest">
+                          <label for="addDimensionWest"
+                            class="label-name m-0">{{'page-form.add-dimension-west'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addDimensionSouth" formControlName="addDimensionSouth">
+                          <label for="addDimensionSouth"
+                            class="label-name m-0">{{'page-form.add-dimension-south'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addElectricityMeterNumber"
+                            formControlName="addElectricityMeterNumber">
+                          <label for="addElectricityMeterNumber"
+                            class="label-name m-0">{{'page-form.add-electricity-meter-number'|translate}}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addAge" formControlName="addAge">
+                          <label for="addAge" class="label-name m-0">{{'page-form.add-age'|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="align-items-center d-flex form-group gap-1 my-2">
+                          <input type="checkbox" name="addCountOfFloors" formControlName="addCountOfFloors">
+                          <label for="addCountOfFloors"
+                            class="label-name m-0">{{'page-form.add-count-floors'|translate}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

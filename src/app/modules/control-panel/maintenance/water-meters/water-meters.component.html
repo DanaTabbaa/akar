@@ -1,0 +1,149 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="WaterMeterForm" id="waterMeterFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'water-meters.water-meter-info'|translate}}</h3>
+                  <div class="row">
+
+                    <div class="col gap-2 grid grid-cols-3 ">
+
+                      <div class=" ">
+                        <label for="buildingId" class="label-name">
+                          {{'general.building'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select style="width:100%" placeholder="{{'general.building'|translate}}"
+                            formControlName="buildingId" name='buildingId' class="" id="buildingId"
+                            (change)="getUnitsForRent()">
+                            <ng-option *ngFor="let building of buildingsList"
+                              [value]="building.id">{{lang=='ar'?building.buildingNameAr:building.buildingNameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['buildingId'].touched || f['buildingId'].dirty ) && f['buildingId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['buildingId'].errors && f['buildingId'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="unitId" class="label-name">
+                          {{'general.unit'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select style="width:100%" placeholder="unit" formControlName="unitId" name='unitId'
+                            class="" id="unitId">
+                            <ng-option *ngFor="let unit of unitsList" [value]="unit.id">
+                              {{lang=='ar'?unit.unitNameAr:unit.unitNameEn}}
+                            </ng-option>
+                          </ng-select>
+
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="meterNumber" class="label-name">
+                          {{'general.meter-number'|translate}}
+                          <span class="text-danger">*</span>
+
+                        </label>
+                        <div class="form-group input-group ">
+
+                          <input type="text" class="form-control" name="meterNumber" formControlName="meterNumber">
+                          <div *ngIf="(f['meterNumber'].touched || f['meterNumber'].dirty ) && f['meterNumber'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['meterNumber'].errors && f['meterNumber'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class=" ">
+                        <label for="accountNumber" class="label-name">
+                          {{'general.account-number'|translate}}
+                          <span class="text-danger">*</span>
+
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="text" class="form-control" name="accountNumber" formControlName="accountNumber">
+                          <div
+                            *ngIf="(f['accountNumber'].touched || f['accountNumber'].dirty ) && f['accountNumber'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['accountNumber'].errors && f['accountNumber'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class=" ">
+                        <label for="subscriptionNumber" class="label-name">
+                          {{'general.subscription-number'|translate}}
+                          <span class="text-danger">*</span>
+
+                        </label>
+                        <div class="form-group input-group ">
+                          <input type="text" class="form-control" name="subscriptionNumber"
+                            formControlName="subscriptionNumber">
+
+                          <div
+                            *ngIf="(f['subscriptionNumber'].touched || f['subscriptionNumber'].dirty ) && f['subscriptionNumber'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['subscriptionNumber'].errors && f['subscriptionNumber'].errors['required']">
+                              {{'general.required'|translate}}
+                            </span>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="description" class="label-name">{{'general.description'|translate}}</label>
+                        <div class="input-group ">
+                          <textarea class="form-control" name="description" formControlName="description"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- </form> -->
+  </div>
+  <!-- </div>
+  </div>
+  </div>
+  </div> -->
+</section>
+<div class="list list-container-add">
+  <app-water-meters-list [changeWaterMetersFlag]="changeWaterMetersFlag"></app-water-meters-list>
+</div>
+<!-- Section  -->

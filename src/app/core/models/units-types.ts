@@ -1,0 +1,20 @@
+export class UnitsTypes
+{
+    id:any;
+    typeNameAr!:string;
+    typeNameEn!:string;
+    addArea!:boolean;  
+    addNoOfRooms!:boolean; 
+    addNoOfBathRooms!:boolean; 
+      addBuildingNo!:boolean; 
+      addFloorNo!:boolean; 
+      addHeight!:boolean; 
+      addPropertyCount!:boolean; 
+      addDimentionNorth!:boolean; 
+      addDimensionEast!:boolean; 
+      addDimensionWest!:boolean; 
+      addDimensionSouth!:boolean; 
+      addElectricityMeterNumber!:boolean; 
+      addAge!:boolean; 
+      addCountOfFloors!:boolean; 
+}

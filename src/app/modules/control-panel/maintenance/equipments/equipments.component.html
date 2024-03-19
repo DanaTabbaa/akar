@@ -1,0 +1,210 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="equipmentForm" id="equipmentFormSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <h3>{{'equipments.equipment-info'|translate}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class=" ">
+                                                <label for="ownerId" class="label-name">
+                                                    {{'general.owner'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select style="width:100%" placeholder="{{'general.owner'|translate}}" formControlName="ownerId" name='ownerId' class="" id="ownerId">
+                                                        <ng-option *ngFor="let owner of ownersList" [value]="owner.id">
+                                                            {{lang=='ar'?owner.nameAr:owner.nameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="equipmentNumber" class="label-name">
+                                                    {{'equipments.equipment-number'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="text" class="form-control" name="equipmentNumber" formControlName="equipmentNumber">
+                                                    <div *ngIf="(f['equipmentNumber'].touched || f['equipmentNumber'].dirty ) && f['equipmentNumber'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['equipmentNumber'].errors && f['equipmentNumber'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="equipmentNameAr" class="label-name">
+                                                    {{'equipments.equipment-name-ar'|translate}}
+                                                    <span class="text-danger">*</span>
+
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="text" class="form-control" name="equipmentNameAr" formControlName="equipmentNameAr">
+                                                    <div *ngIf="(f['equipmentNameAr'].touched || f['equipmentNameAr'].dirty ) && f['equipmentNameAr'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['equipmentNameAr'].errors && f['equipmentNameAr'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="equipmentNameEn" class="label-name">
+                                                    {{'equipments.equipment-name-en'|translate}}
+                                                    <span class="text-danger">*</span>
+
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="text" class="form-control" name="equipmentNameEn" formControlName="equipmentNameEn">
+                                                    <div *ngIf="(f['equipmentNameEn'].touched || f['equipmentNameEn'].dirty ) && f['equipmentNameEn'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['equipmentNameEn'].errors && f['equipmentNameEn'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="manufactureYear" class="label-name">
+                                                    {{'equipments.manufacture-year'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="number" class="form-control"  id="manufactureYear" (keyup)="checkNumber(equipmentForm.value.manufactureYear);"  maxlength="4" min="1" max="3000" name="manufactureYear" formControlName="manufactureYear">
+
+
+
+                                                </div>
+                                                <div *ngIf="(f['manufactureYear'].touched || f['manufactureYear'].dirty ) && f['manufactureYear'].invalid" class="validation alert-danger">
+                                                  <i class="fa fa-close "></i>
+                                                  <span *ngIf="f['manufactureYear'].errors && f['manufactureYear'].errors['required']">
+                                                      {{'general.required'|translate}}
+                                                  </span>
+                                                  <span *ngIf="f['manufactureYear'].invalid">
+                                                    {{'messages.invalid-data'|translate}}
+                                                </span>
+
+
+                                              </div>
+                                              <span *ngIf="isValidManufactureYear" class="validation alert-danger">
+                                                <i class="fa fa-close "></i>  {{'messages.invalid-manufacture-year'|translate}}
+                                            </span>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="model" class="label-name">
+                                                    {{'equipments.model'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="text" class="form-control" name="model" formControlName="model">
+                                                    <div *ngIf="(f['model'].touched || f['model'].dirty ) && f['model'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['model'].errors && f['model'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="manufacturingCompany" class="label-name">
+                                                    {{'equipments.manufacturing-company'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="text" class="form-control" name="manufacturingCompany" formControlName="manufacturingCompany">
+                                                    <div *ngIf="(f['manufacturingCompany'].touched || f['manufacturingCompany'].dirty ) && f['manufacturingCompany'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['manufacturingCompany'].errors && f['manufacturingCompany'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class=" ">
+                                                <label for="supplyingCompany" class="label-name">
+                                                    {{'equipments.supplying-company'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="text" class="form-control" name="supplyingCompany" formControlName="supplyingCompany">
+                                                    <div *ngIf="(f['supplyingCompany'].touched || f['supplyingCompany'].dirty ) && f['supplyingCompany'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['supplyingCompany'].errors && f['supplyingCompany'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="installationDate" class="label-name">{{'equipments.installation-date'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <app-full-date name="installationDate" [selectedDate]="installationDate" (OnDateSelect)="getInstallationDate($event)">
+                                                    </app-full-date>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="installationPlace" class="label-name">
+                                                    {{'equipments.installation-place'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group input-group ">
+                                                    <input type="text" class="form-control" name="installationPlace" formControlName="installationPlace">
+                                                    <div *ngIf="(f['installationPlace'].touched || f['installationPlace'].dirty ) && f['installationPlace'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['installationPlace'].errors && f['installationPlace'].errors['required']">
+                                                            {{'general.required'|translate}}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section  -->

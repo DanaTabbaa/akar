@@ -1,0 +1,13 @@
+<div id="wrapper" class="admin-header ">
+    <app-sidebar></app-sidebar>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <app-nav-bar></app-nav-bar>
+        <app-toolbar *ngIf="!isCurrentComponentDashboard"></app-toolbar>
+
+        <router-outlet (activate)="onActivated($event)"> </router-outlet>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>

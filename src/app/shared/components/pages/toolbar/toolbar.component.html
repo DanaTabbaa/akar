@@ -1,0 +1,179 @@
+<section class="inner-page-wrapper">
+  <div [class.headerSubAr]="lang == 'ar'" class="header-sub justify-content-between  " style="padding: 10px 7px;">
+    <div class="toolbar-wrapper">
+      <div class="k-toolbar d-flex">
+        <div class="btn-tools">
+          <button *ngIf="showButtons?.showList" (click)="goToList()" [disabled]="disabledList"
+            [ngClass]="{'disabled':disabledList}"
+            class="k-button k-button-md k-button-solid-base k-rounded-md btn-primary" type="button"
+            routerLinkActive="router-link-active">
+            <i class="las la-list"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.list'|translate}}
+            </span>
+          </button>
+          <button *ngIf="showButtons?.showNew" (click)="doNewEvent()" [disabled]="disabledNew"
+            [ngClass]="{'disabled':disabledNew}" class="k-button k-button-md k-button-solid-base k-rounded-md"
+            type="button">
+            <i class="las la-file-alt"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.new'|translate}}
+            </span>
+          </button>
+
+          <button *ngIf="showButtons?.showSave" (click)="doSaveEvent()" [disabled]="disabledSave"
+            [ngClass]="{'disabled':disabledSave}" class="k-button k-button-md k-button-solid-base k-rounded-md"
+            type="button" form="#GroundsFormSubmit">
+            <i class="las la-save"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.save'|translate}}
+            </span>
+          </button>
+          <button *ngIf="showButtons?.showChangePassword" (click)="doChangePasswordEvent()"
+            [disabled]="disableChangePassword" [ngClass]="{'disabled':disableChangePassword}"
+            class="k-button k-button-md k-button-solid-base k-rounded-md" type="button" form="#GroundsFormSubmit">
+            <i class="las la-save"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.change-password'|translate}}
+            </span>
+          </button>
+          <button *ngIf="showButtons?.showUpdate" (click)="doUpdateEvent()" [disabled]="disabledUpate"
+            [ngClass]="{'disabled':disabledUpate}" class="k-button k-button-md k-button-solid-base k-rounded-md "
+            type="button">
+            <i class="las la-history"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.update'|translate}}
+            </span>
+          </button>
+
+          <!-- <button *ngIf="showButtons?.showCopy" (click)="doCopyEvent();" [disabled]="disabledCopy"   [ngClass]="{'disabled':disabledCopy}"  class="k-button k-button-md k-button-solid-base k-rounded-md"
+                                  form="#GroundsFormSubmit" type="button">
+                                  <i class="las la-copy"></i>
+                                  <span class="k-button-text">
+                                    {{ 'toolbar.copy'|translate}}
+                                  </span>
+                              </button> -->
+
+          <!-- <button *ngIf="showButtons?.showDelete" (click)="doDeleteEvent();" class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+                                <i class="las la-trash-alt"></i>
+                                <span class="k-button-text">
+                                    Delete
+                                </span>
+                            </button> -->
+          <!-- <button *ngIf="showButtons?.showCancel" (click)="doCancelEvent();" [disabled]="disabledCancel"  [ngClass]="{'disabled':disabledCancel}" class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+                                  <i class="las la-trash-alt"></i>
+                                  <span class="k-button-text">
+                                    {{ 'toolbar.cancel'|translate}}
+                                  </span>
+                              </button>
+                              <button  *ngIf="showButtons?.showPrint"  (click)="doPrintEvent();" [disabled]="disabledPrint"  [ngClass]="{'disabled':disabledPrint}"   class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+                                  <i class="las la-print"></i>
+                                  <span class="k-button-text">
+                                    {{ 'toolbar.print'|translate}}
+                                  </span>
+                              </button>
+                              <button *ngIf="showButtons?.showExport" (click)="doExportEvent();" [disabled]="disabledExport"  [ngClass]="{'disabled':disabledExport}" class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+                                  <i class="las la-file-export"></i>
+                                  <span class="k-button-text">
+                                    {{ 'toolbar.export'|translate}}
+                                  </span>
+                              </button> -->
+
+          <button *ngIf="showButtons?.showIssue" (click)="doIssueEvent();" [disabled]="disableIssue"
+            [ngClass]="{'disabled':disableIssue}" class="k-button k-button-md k-button-solid-base k-rounded-md"
+            type="button">
+            <i class="las la-history"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.issue'|translate}}
+            </span>
+          </button>
+
+          <button *ngIf="showButtons?.showRenew" (click)="doRenewEvent();" [disabled]="disableRenew"
+            [ngClass]="{'disabled':disableRenew}" class="k-button k-button-md k-button-solid-base k-rounded-md"
+            type="button">
+            <i class="las la-history"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.renew'|translate}}
+
+            </span>
+          </button>
+          <button *ngIf="showButtons?.showView" (click)="doViewEvent();" [disabled]="disableView"
+            [ngClass]="{'disabled':disableView}" class="k-button k-button-md k-button-solid-base k-rounded-md"
+            type="button">
+            <i class="las la-history"></i>
+
+            <span class="k-button-text">
+              {{ 'toolbar.view'|translate}}
+
+
+
+            </span>
+          </button>
+          <button *ngIf="showButtons?.showCancelDefaultReport" (click)="doCancelDefaultReportEvent();"
+            [disabled]="disableCancelDefaultReport" [ngClass]="{'disabled':disableCancelDefaultReport}"
+            class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+            <i class="las la-history"></i>
+            <span class="k-button-text">
+              {{ 'toolbar.cancelDefaultReport'|translate}}
+
+            </span>
+          </button>
+        </div>
+        <button [disabled]="disabledList" [ngClass]="{'disabled':disabledList}" mat-button
+          class="k-button k-button-md k-button-solid-base k-rounded-md" [matMenuTriggerFor]="menu">
+          <i class="fa fa-paperclip"></i>
+          <span class="k-button-text">{{'general.attachments'|translate}}</span>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openUploadFileDialog()"
+            class="k-button k-button-md k-button-solid-base k-rounded-md" title="More tools" type="submit">
+            <span class="k-button-text">
+              {{'general.upload-files'|translate}}
+
+            </span>
+
+          </button>
+          <button mat-menu-item (click)="openPreviewUploadedFilesDialog()" type="submit"
+            class="k-button k-button-md k-button-solid-base k-rounded-md">
+
+
+            <span class="k-button-text">
+              {{'general.preview-files'|translate}}
+
+            </span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+
+    <span class="header-name header-name-container-bread">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" data-bs-original-title="" title=""> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                <path style="color: white;" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline style="color: white;" points="9 22 9 12 15 12 15 22"></polyline>
+              </svg></a>
+          </li>
+          <li class="breadcrumb-item">{{toolbarPathData.componentList|translate}}</li>
+          <li *ngIf="toolbarPathData?.componentAdd !=''||undefined" class="breadcrumb-item active">
+            {{toolbarPathData.componentAdd|translate}}</li>
+        </ol>
+      </span>
+  </div>
+  <div class="toolbar-fixed">
+    <div class="container-fluid">
+      <div class="page-title">
+        <div class="row">
+  
+  
+          <div class="col-12 p-0">
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

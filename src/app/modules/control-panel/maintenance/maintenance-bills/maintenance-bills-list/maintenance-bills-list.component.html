@@ -1,0 +1,6 @@
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="maintenanceBills" [parentColName]="'groupId'" [divId]="'MaintenanceBills'" [columnSettings]="columnNames" [componentName]="'maintenanceBills'" (onAddItem)="openMaintenanceBills()" (onMenuActionSelected)="onMenuActionSelected($event)"
+            [showMenuOptions]="menuOptions" [refreshGrid]="isListEmpty" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'MaintenanceBills'"></app-tabulator>
+    </div>
+  </section>

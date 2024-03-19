@@ -1,0 +1,191 @@
+<section>
+    <div class="card m-0 mb-5">
+        <div class="card-body">
+            <form [formGroup]="UnitsServiceForm" id="UnitsServiceSubmit">
+
+                <div class="row">
+                    <table class="table table-responsive0 table-bordered text-center ">
+                        <tr>
+
+                            <th scope="col" style="width: 150px;">Unit Name</th>
+                            <th scope="col">Service Name</th>
+                            <th scope="col">Pay On Time In </th>
+                            <th scope="col">Calculate Method</th>
+                            <th scope="col">Number</th>
+                            <th scope="col">Ratio</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Taxes %</th>
+                            <th scope="col">Amount After Tax</th>
+
+                            <th scope="col">From Account</th>
+                            <th scope="col">To Account</th>
+
+
+                            <th scope="col" colspan="1">Actions</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <ng-select formControlName="unitId" style="width:100%" name="unitId">
+                                        <ng-option *ngFor="let item of units" [value]="item.id">
+                                            {{lang=='ar'? item.unitNameAr:item.unitNameEn}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="input-group">
+                                    <ng-select formControlName="serviceId" style="width:100%">
+                                        <ng-option *ngFor="let service of unitServices" [value]="service.id">
+                                            {{service.unitServiceEnName}}
+                                        </ng-option>
+                                    </ng-select>
+
+
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="form-group">
+
+                                    <ng-select class="custom" formControlName="payOnTimeId" [items]="paymentsMethods" (change)="changeCalcMethods(UnitsServiceForm.value.calcMethodType)" bindLabel="name" bindValue="id" style="width:100%">
+                                    </ng-select>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+
+                                    <ng-select class="custom" formControlName="calcMethodType" [items]="calculateMethods" (change)="changeCalcMethods(UnitsServiceForm.value.calcMethodType)" bindLabel="name" bindValue="id" style="width:100%">
+                                    </ng-select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="countofservice" (change)="changeCalcMethods(UnitsServiceForm.value.calcMethodType)" formControlName="countofservice">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="ratio" (change)="changeCalcMethods(UnitsServiceForm.value.calcMethodType)" formControlName="ratio">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="amount" (change)="changeCalcMethods(UnitsServiceForm.value.calcMethodType)" formControlName="amount">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="totalTaxes" (change)="changeCalcMethods(UnitsServiceForm.value.calcMethodType)" formControlName="totalTaxes">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+
+                                    <input type="number" step="0.01" class="form-control" name="amountWithTax" formControlName="amountWithTax">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+
+                                    <ng-select class="custom" formControlName="fromAccount" [items]="fromServiceAccount" bindLabel="name" bindValue="id" style="width:100%">
+                                    </ng-select>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+
+                                    <ng-select class="custom" formControlName="toAccount" [items]="toServiceAccount" bindLabel="name" bindValue="id" style="width:100%">
+                                    </ng-select>
+                                </div>
+                            </td>
+
+
+
+
+
+                            <td>
+                                <button type="button" class="btn btn-secondary" class="form-control" (click)="addUnitsServices()">Add</button>
+
+                            </td>
+
+
+                        </tr>
+
+
+                    </table>
+                </div>
+                <div class="row">
+
+                    <table class="table table-responsive0 table-bordered text-center ">
+                        <tr>
+
+                            <th scope="col" style="width: 150px;">Unit Name</th>
+                            <th scope="col">Service Name</th>
+                            <th scope="col">Pay On Time In </th>
+                            <th scope="col">Calculate Method</th>
+                            <th scope="col">Number</th>
+                            <th scope="col">Ratio</th>
+                            <th scope="col">Amount</th>`
+                            <th scope="col">Taxes</th>
+                            <th scope="col">Amount After Tax</th>
+                            <th scope="col">From Account</th>
+                            <th scope="col">To Account</th>
+
+
+                            <th scope="col" colspan="1">Actions</th>
+                        </tr>
+                        <tr *ngFor="let item of selectedUnitServiceDetails; let i= index">
+                            <td>{{item.unitNameEn}}</td>
+                            <td>{{item.unitServiceNameEn}}</td>
+                            <td>{{item.payOnTimeName}}</td>
+                            <td>{{item.calcMethodTypeName}}</td>
+                            <td>{{item.numberOfServices}}</td>
+                            <td>{{item.serviceRatio}}</td>
+                            <td>{{item.serviceAmount}}</td>
+                            <td>{{item.serviceTax}}</td>
+                            <td>{{item.amountAfterTax}}</td>
+                            <td>{{item.fromAccountName}}</td>
+                            <td>{{item.toAccountName}}</td>
+
+                            <td>
+                                <button (click)="deletetUnitService(item.id)">
+                                    Delete
+                                </button>
+                            </td>
+
+
+                        </tr>
+                    </table>
+                </div>
+            </form>
+
+            <!-- <div class="row">
+          <div class="col-md-12 col-lg-3 col-xl-3 ">
+            <label for="totalAmountOfService" class="label-name">Total Amount Of Service</label>
+            <div class="form-group">
+
+              <input type="text" class="form-control" name="totalAmountOfService" [(ngModel)]="totalAmountOfService"
+                formControlName="totalAmountOfService">
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-3 col-xl-3 ">
+            <label for="totalServiceTaxes" class="label-name">Total Services Taxes</label>
+            <div class="form-group">
+
+              <input type="text" class="form-control" name="totalServiceTaxes" [(ngModel)]="totalServiceTaxes"
+                formControlName="totalServiceTaxes">
+            </div>
+          </div>
+        </div> -->
+        </div>
+    </div>
+</section>

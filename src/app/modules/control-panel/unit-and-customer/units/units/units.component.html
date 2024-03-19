@@ -1,0 +1,565 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="unitForm" id="UnitFormSubmit" class="tabs-form">
+                            <div class="main-unit">
+                                <div class="wrapper-title">
+                                    <h3>{{'page-form.unit-information'|translate}}</h3>
+
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class=" ">
+                                                <label for="code"
+                                                    class="label-name">{{'page-form.unit-code'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group ">
+
+                                                    <input type="text" class="form-control icon-user" name="code"
+                                                        formControlName="code">
+                                                    <div *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['code'].errors && f['code'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                        
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="unitNameAr"
+                                                    class="label-name">{{'page-form.name-arabic'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group ">
+
+                                                    <input type="text" class="form-control icon-user" name="unitNameAr"
+                                                        formControlName="unitNameAr">
+                                                    <div *ngIf="(f['unitNameAr'].touched || f['unitNameAr'].dirty ) && f['unitNameAr'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['unitNameAr'].errors && f['unitNameAr'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                        <span
+                                                            *ngIf="f['unitNameAr'].errors && f['unitNameAr'].errors['maxlength']">
+                                                            {{'validation-messages.max-name-char'|translate}}</span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="unitNameEn"
+                                                    class="label-name">{{'page-form.name-latin'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group ">
+
+                                                    <input type="text" class="form-control icon-user" name="unitNameEn"
+                                                        formControlName="unitNameEn">
+                                                    <div *ngIf="(f['unitNameEn'].touched || f['unitNameEn'].dirty ) && f['unitNameEn'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['unitNameEn'].errors && f['unitNameEn'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                        <span
+                                                            *ngIf="f['unitNameEn'].errors && f['unitNameEn'].errors['maxlength']">
+                                                            {{'validation-messages.max-name-char'|translate}}</span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="unitTypeId"
+                                                    class="label-name">{{'page-form.unit-type'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group  popup">
+                                                    <ng-select formControlName="unitTypeId" style="width:100%">
+
+                                                        <ng-option *ngFor="let type of unitsTypes" [value]="type.id">
+                                                            {{lang=='ar'? type.typeNameAr:type.typeNameEn}}</ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['unitTypeId'].touched || f['unitTypeId'].dirty ) && f['unitTypeId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['unitTypeId'].errors && f['unitTypeId'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="">
+                                                <label for="purpose-type"
+                                                    class="label-name">{{'page-form.unit-purpose-type'|translate}}
+                                                    <span class="text-danger">*</span></label>
+                                                <div class="input-group  popup">
+
+                                                    <!-- <ng-select class="custom" formControlName="purposeType"
+                                                        (change)="onPurposeTypeChange(unitForm.value.purposeType)"
+                                                        [items]="purposeTypes" bindLabel="name" bindValue="id"
+                                                        style="width:100%"></ng-select> -->
+
+                                                    <p-multiSelect [options]="purposeTypes"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="selectedPurposeTypes" [virtualScroll]="true"
+                                                        (ngModelChange)="onPurposeTypeChange()"
+                                                        optionLabel="{{'name'}}" id="contractTypes"
+                                                        name="contractTypeIds" class="w-100"
+                                                        defaultLabel="{{'general.select'|translate}}"></p-multiSelect>
+                                                    <div *ngIf="(f['purposeType'].touched || f['purposeType'].dirty ) && f['purposeType'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['purposeType'].errors && f['purposeType'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <!-- <div class="row">
+
+                                                                                                                                                                                        <div class="col gap-2 grid grid-cols-3">
+
+                                                                                                                                                                                          <div class="form-group d-flex align-items-center gap-1">
+
+                                                                                <input type="checkbox" formControlName="isFeatured">
+                                                <label for="isFeatured" class="label-name m-0">Feature the unit</label>
+
+
+                                            </div>
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                              <input type="checkbox" formControlName="hasPriceOffer">
+                                              <label for="hasPriceOffer" class="label-name m-0">Has Price Offer
+                                              </label>
+
+                                            </div>
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                              <input type="checkbox" formControlName="hasGarage">
+                                              <label for="hasGarage" class="label-name m-0">Has garage
+                                              </label>
+</div>
+
+</div>
+</div> -->
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3">
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                                <input type="checkbox" name="isFeatured" formControlName="isFeatured">
+                                                <label for="isFeatured"
+                                                    class="label-name m-0">{{'page-form.is-featured'|translate}}
+                                                </label>
+                                            </div>
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                                <input type="checkbox" name="hasPriceOffer"
+                                                    formControlName="hasPriceOffer" (change)="offerInformationChange()">
+                                                <label for="hasPriceOffer"
+                                                    class="label-name m-0">{{'page-form.has-price-offer'|translate}}
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                                <input type="checkbox" name="hasGarage" formControlName="hasGarage"
+                                                    (change)="garageInformationChange()">
+                                                <label for="hasGarage"
+                                                    class="label-name m-0">{{'page-form.has-garage'|translate}} </label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div *ngIf="showOfferInformation" class="my-3">
+                                        <button type="button"
+                                            class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                                            (click)="collapse2.toggle()" [attr.aria-expanded]="!gfg2"
+                                            aria-controls="collapse2Example">
+                                            {{'page-form.offer-information'|translate}} </button>
+                                        <div #collapse2="ngbCollapse" [(ngbCollapse)]="gfg2">
+                                            <div class="col gap-2 grid grid-cols-3  py-2 container-collapse">
+                                                <div class=" ">
+                                                    <label for="offerPrice"
+                                                        class="label-name">{{'page-form.offer-price'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="number" class="form-control" name="offerPrice"
+                                                            formControlName="offerPrice">
+                                                    </div>
+                                                </div>
+
+                                                <div class=" ">
+                                                    <label for="offerDescription"
+                                                        class="label-name">{{'page-form.offer-description'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="text" class="form-control" name="offerDescription"
+                                                            formControlName="offerDescription">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div *ngIf="showGarageInformation" class="my-3">
+                                        <button type="button"
+                                            class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                                            (click)="collapse3.toggle()" [attr.aria-expanded]="!gfg3"
+                                            aria-controls="collapse3Example">
+                                            {{'page-form.garage-information'|translate}}
+                                        </button>
+                                        <div #collapse3="ngbCollapse" [(ngbCollapse)]="gfg3">
+                                            <div class="col gap-2 grid grid-cols-3  py-2 container-collapse">
+                                                <div class=" ">
+                                                    <label for="garageArea"
+                                                        class="label-name">{{'page-form.garage-area'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="number" class="form-control" name="garageArea"
+                                                            formControlName="garageArea">
+                                                    </div>
+                                                </div>
+
+                                                <div class="">
+                                                    <label for="vehiclesCount"
+                                                        class="label-name">{{'page-form.vehicles-count'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="number" class="form-control" name="vehiclesCount"
+                                                            formControlName="vehiclesCount">
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <label for="customGarageCount"
+                                                        class="label-name">{{'page-form.custom-garage-count'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="number" class="form-control"
+                                                            name="customGarageCount"
+                                                            formControlName="customGarageCount">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <!-- start tabs -->
+                                    <ul ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.basic-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-2 ">
+
+                                                        <div class="">
+                                                            <label for="marketing-real-estate"
+                                                                class="label-name">{{'page-form.office'|translate}}</label>
+                                                            <div class="input-group  popup">
+
+                                                                <ng-select formControlName="officeId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let office of offices"
+                                                                        [value]="office.id">{{lang=='ar'?
+                                                                        office.nameAr:office.nameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="owner-name"
+                                                                class="label-name">{{'page-form.owner'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="ownerId" style="width:100%">
+
+                                                                    <ng-option *ngFor="let owner of owners"
+                                                                        [value]="owner.id">{{lang=='ar'?
+                                                                        owner.nameAr:owner.nameEn}}</ng-option>
+                                                                </ng-select>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="buildingId"
+                                                                class="label-name">{{'page-form.building'|translate}}
+                                                                <span class="text-danger">*</span></label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="buildingId"
+                                                                    name="buildingId" id="buildingId"
+                                                                    (change)="onSelectBuilding(null)"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let item of buildings;"
+                                                                        [value]="item.id">
+
+                                                                        {{lang=='ar'?
+                                                                        item.buildingNameAr:item.buildingNameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                                <div *ngIf="(f['buildingId'].touched || f['buildingId'].dirty ) && f['buildingId'].invalid"
+                                                                    class="alert alert-danger">
+                                                                    <i class="fa fa-close "></i>
+                                                                    <span
+                                                                        *ngIf="f['buildingId'].errors && f['buildingId'].errors['required']">
+                                                                        {{'validation-messages.required-field'|translate}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class=" ">
+                                                            <label for="floorId" class="label-name">{{'page-form.floor'|translate}} <span
+                                                                    class="text-danger">*</span></label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="floorId" name="floorId" id="floorId" style="width:100%">
+                                                                    <ng-option *ngFor="let item of BuildingFloor;" [value]="item.id">
+
+                                                                        {{item.FloorId}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                                <div *ngIf="(f['floorId'].touched || f['floorId'].dirty ) && f['floorId'].invalid" class="alert alert-danger">
+                                                                    <i class="fa fa-close "></i>
+                                                                    <span *ngIf="f['floorId'].errors && f['floorId'].errors['required']">
+                                                                        {{'validation-messages.required-field'|translate}}</span>
+                                                                </div>
+
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="">
+                                                            <label for="floorId" class="label-name">
+                                                                {{'page-form.floors'|translate}}
+                                                                <span class="text-danger">*</span></label>
+                                                            <div class="input-group  popup">
+
+                                                                <ng-select formControlName="floorId" name="floorId"
+                                                                    id="floorId" style="width:100%">
+                                                                    <ng-option *ngFor="let item of floors;"
+                                                                        [value]="item.id">
+                                                                        {{lang=='ar'?
+                                                                        item.floorNameAr:item.floorNameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                                <div *ngIf="(f['floorId'].touched || f['floorId'].dirty ) && f['floorId'].invalid"
+                                                                    class="alert alert-danger">
+                                                                    <i class="fa fa-close "></i>
+                                                                    <span
+                                                                        *ngIf="f['floorId'].errors && f['floorId'].errors['required']">
+                                                                        {{'validation-messages.required-field'|translate}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <!-- <li ngbNavItem>
+                                            <a ngbNavLink>Building information</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-2 ">
+
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li> -->
+                                        <li *ngIf="showRentInfoTab" ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.rent-unit-information'|translate}}</a>
+                                            <ng-template [ngClass]="{'active show':showSellInfoTab||showRentInfoTab}"
+                                                ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-2 ">
+
+
+                                                        <div class=" ">
+                                                            <label for="rentMeterPrice"
+                                                                class="label-name">{{'page-form.meter-price'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="rentMeterPrice"
+                                                                    formControlName="rentMeterPrice"
+                                                                    
+                                                                    (change)="getRentPrice()">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="rentAreaSize" class="label-name">
+                                                                {{'page-form.area-size'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="rentAreaSize" formControlName="rentAreaSize"
+                                                                    
+                                                                    (change)="getRentPrice()">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="rentPrice"
+                                                                class="label-name">{{'page-form.rent-price'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="rentPrice" formControlName="rentPrice"
+                                                                    >
+
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="taxRatio"
+                                                                class="label-name">{{'page-form.tax-ratio'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="taxRatio" 
+                                                                    formControlName="taxRatio" (change)="getTaxValue()">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="taxAmount"
+                                                                class="label-name">{{'page-form.tax-amount'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="taxAmount" 
+                                                                    formControlName="taxAmount">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="insurranceRatio"
+                                                                class="label-name">{{'page-form.insurrance-ratio'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="insurranceRatio"
+                                                                    formControlName="insurranceRatio"
+                                                                    
+                                                                    (change)="getInsuranceValue()">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="insurranceAmount"
+                                                                class="label-name">{{'page-form.insurrance-amount'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="insurranceAmount"
+                                                                    formControlName="insurranceAmount"
+                                                                    >
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </ng-template>
+                                        </li>
+                                        <li *ngIf="showSellInfoTab" ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.sell-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-3 "
+                                                        [ngClass]="{'active show':showSellInfoTab||showRentInfoTab}">
+
+                                                        <div class=" ">
+                                                            <label for="sellMeterPrice"
+                                                                class="label-name">{{'page-form.meter-price'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="sellMeterPrice"
+                                                                    formControlName="sellMeterPrice"
+                                                                    
+                                                                    (change)="getSellPrice()">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="sellAreaSize"
+                                                                class="label-name">{{'page-form.area-size'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="sellAreaSize" formControlName="sellAreaSize"
+                                                                    
+                                                                    (change)="getSellPrice()">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" ">
+                                                            <label for="sellPrice"
+                                                                class="label-name">{{'page-form.sell-price'|translate}}</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control icon-user"
+                                                                    name="sellPrice" formControlName="sellPrice"
+                                                                     [disabled]="true">
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="">
+                                                    <div class="form-group d-flex align-items-center gap-1">
+                                                        <input type="checkbox" name="readyForSell"
+                                                            formControlName="readyForSell">
+                                                        <label for="readyForSell"
+                                                            class="label-name m-0">{{'page-form.ready-for-sell'|translate}}</label>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+
+                                    </ul>
+
+                                    <div [ngbNavOutlet]="nav" class=""></div>
+                                    <!-- end tabs -->
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section  -->

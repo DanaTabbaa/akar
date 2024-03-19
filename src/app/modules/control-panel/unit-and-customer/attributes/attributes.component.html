@@ -1,0 +1,194 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;">{{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="attributeForm" id="attributeFormSubmit" class="tabs-form ">
+                            <div class="main-building p-0">
+                                <div class="wrapper-title">
+                                    <!-- <h1 class="lease-header-title-building">{{'page-form.building'|translate}}</h1> -->
+                                    <h3 class="building-info">{{'page-form.attribute-info'|translate}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class="">
+                                                <label for="nameAr"
+                                                    class="label-name">{{'page-form.name-arabic'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control" name="nameAr"
+                                                        formControlName="nameAr">
+
+                                                    <div *ngIf="f['nameAr'].touched && f['nameAr'].invalid"
+                                                        class=" alert-danger validtion">
+                                                        <div *ngIf="f['nameAr'].errors && f['nameAr'].invalid">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'input-validation.name-invalid'|translate}}
+                                                        </div>
+                                                        <div
+                                                            *ngIf="f['nameAr'].errors && f['nameAr'].errors['minlength']">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'input-validation.name-min'|translate}}
+                                                        </div>
+                                                        <div
+                                                            *ngIf="f['nameAr'].errors && f['nameAr'].errors['maxlength']">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'input-validation.name-max'|translate}}
+                                                        </div>
+                                                        <div
+                                                            *ngIf="f['nameAr'].errors && f['nameAr'].errors['pattern'] ">
+                                                            <i class="fa fa-times"></i>{{'error.space'|translate}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="nameEn"
+                                                    class="label-name">{{'page-form.name-latin'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="nameEn"
+                                                        formControlName="nameEn">
+                                                    <div *ngIf="f['nameEn'].touched && f['nameEn'].invalid"
+                                                        class=" alert-danger validtion">
+                                                        <div *ngIf="f['nameEn'].errors && f['nameEn'].invalid">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'validation-messages.invalid-name'|translate}}
+                                                        </div>
+                                                        <div
+                                                            *ngIf="f['nameEn'].errors && f['nameEn'].errors['minlength']">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'validation-messages.min-name'|translate}}
+                                                        </div>
+                                                        <div
+                                                            *ngIf="f['nameEn'].errors && f['nameEn'].errors['maxlength']">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'validation-messages.max-name'|translate}}
+                                                        </div>
+                                                        <div
+                                                            *ngIf="f['nameEn'].errors && f['nameEn'].errors['pattern'] ">
+                                                            <i class="fa fa-times"></i>{{'error.space'|translate}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="attribute-type"
+                                                    class="label-name">{{'page-form.attribute-type'|translate}}
+
+                                                </label>
+                                                <div class="input-group popup">
+                                                    <ng-select formControlName="dataType"
+                                                        placeholder="{{'page-form.attribute-type'|translate}}"
+                                                        style="width:100%">
+                                                        <ng-option *ngFor="let type of attributeTypes"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </ng-option>
+                                                    </ng-select>
+
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label for="attribute-icon"
+                                                    class="label-name">{{'page-form.attribute-icon'|translate}}
+
+                                                </label>
+                                                <div class="input-group popup">
+                                                    <ng-select  
+                                                    formControlName="iconType"
+                                                        placeholder="{{'page-form.attribute-icon'|translate}}"
+                                                        style="width:100%">
+                                                        <ng-option *ngFor="let icon of attributeIcons.icons"
+                                                            [value]="icon.id">
+                                                            {{lang=="ar"? icon.nameAr:icon.name}}
+                                                        </ng-option>
+                                                    </ng-select>
+
+                                                </div>
+                                            </div>
+
+                                           
+                                            <!-- <div class="">
+                                                <mat-slide-toggle formControlName="status">{{"permissions.is-active"|translate}}
+                                                </mat-slide-toggle>
+                                            </div> -->
+
+
+                                            <div class="" [hidden]="attributeForm.value.dataType != 4">
+                                                <label for="list-ar"
+                                                    class="label-name">{{'page-form.list-ar'|translate}}
+
+                                                </label>
+                                                <div class="input-group popup">
+                                                   <textarea class="form-control" formControlName="selectListValuesAr"></textarea>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="" [hidden]="attributeForm.value.dataType != 4">
+                                                <label for="list-en"
+                                                    class="label-name">{{'page-form.list-en'|translate}}
+
+                                                </label>
+                                                <div class="input-group popup">
+                                                   <textarea class="form-control" formControlName="selectListValuesEn"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="" *ngIf="attributeForm.value.iconType == 4">
+                                                <!-- <label for="icon"
+                                                    class="label-name">{{'page-form.custom-icon'|translate}}<span
+                                                        class="text-danger"></span></label> -->
+
+                                                <!-- <div class="form-group input-group">
+                                                    <input type="text" class="form-control" name="attributeIcon" title="{{'page-form.custom-icon-desc'|translate}}"
+                                                        formControlName="attributeIcon">                                                    
+                                                </div> -->
+                                                <div class="col gap-2 grid grid-cols-6 align-items-end">
+                                                    <div class=" ">
+                                                      <img id="viewer" class="img-profile" style="height:50px;">
+                                                      <br>
+                                                      <input type="file" #file (change)="readImage(file)" style="padding-top: 39px!important;"> &nbsp;
+                                                      <button class="btn btn-danger" (click)="uploadFiles(file.files, $event)">
+                                                        <i class="fa fa-upload"></i> {{progress}} %
+                                                      </button>
+                                  
+                                                    </div>
+                                                  </div>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                                        </div>
+                                        
+                                    </div>
+                                    <hr>
+                                    <!-- test -->
+
+                                    <!-- test -->
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

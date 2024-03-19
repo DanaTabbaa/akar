@@ -1,0 +1,257 @@
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-units">
+    <div class="page-body">
+        <div class="toolbar-fixed" style="z-index: 998;">
+            <div class="container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>
+                                Entry</h3>
+                        </div>
+                        <div class="col-6">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#" data-bs-original-title="" title=""> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                        </svg></a>
+                                </li>
+                                <li class="breadcrumb-item">Entry Types</li>
+                                <li class="breadcrumb-item active">Add Entry Type </li>
+                            </ol>
+                        </div>
+                        <div class="col-12">
+
+                            <div class="toolbar-wrapper">
+
+
+                                <div class="k-toolbar d-flex">
+                                    <div class="btn-tools">
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md btn-primary" type="button" [routerLink]="['/control-panel/settings/contracts-settings-list']" routerLinkActive="router-link-active">
+
+                                            <i class="las la-list"></i>
+
+
+                                            <span class="k-button-text">
+                                                list
+                                            </span>
+                                        </button>
+
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md" type="button" (click)="save()" form="#ContractsSettingSubmit">
+
+                                            <i class="las la-save"></i>
+
+
+                                            <span class="k-button-text">
+                                                save
+                                            </span>
+                                        </button>
+
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md" [routerLink]="['/control-panel/settings/add-contract-setting']" type="button">
+
+                                            <i class="las la-file-alt"></i>
+
+
+                                            <span class="k-button-text">
+                                                New
+                                            </span>
+                                        </button>
+
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md" form="#ContractsSettingSubmit" type="button">
+
+                                            <i class="las la-copy"></i>
+
+
+                                            <span class="k-button-text">
+                                                copy
+                                            </span>
+                                        </button>
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md " (click)="save()" type="button">
+
+                                            <i class="las la-history"></i>
+
+
+                                            <span class="k-button-text">
+                                                update
+                                            </span>
+                                        </button>
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+
+                                            <i class="las la-trash-alt"></i>
+
+
+                                            <span class="k-button-text">
+                                                cancel
+                                            </span>
+                                        </button>
+
+
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+
+                                            <i class="las la-print"></i>
+
+
+                                            <span class="k-button-text">
+                                                print
+                                            </span>
+                                        </button>
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md" type="button">
+
+                                            <i class="las la-file-export"></i>
+
+
+                                            <span class="k-button-text">
+                                                export
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class=" ml-auto">
+                                        <div>
+                                            <span class="k-textbox k-input k-input-solid k-rounded-md k-input-md"><input
+                                                    type="text" class="k-input-inner" placeholder="Search..."
+                                                    tabindex="-1">
+                                                <span class="k-input-suffix"><span
+                                                        class="k-icon k-i-search"></span></span>
+                                            </span>
+                                        </div>
+                                        <button class="k-button k-button-md k-button-solid-base k-rounded-md" title="More tools" type="submit">
+
+                                            <i class="las la-ellipsis-v"></i>
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="entryForm" id="entryForm" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <h3>Entry Types</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-2">
+
+                                            <div class=" ">
+                                                <label for="contractArName" class="label-name">Name <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control icon-user" name="code" formControlName="code">
+                                                    <div *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid" class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['code'].errors && f['code'].errors['required']">
+                                                            Code is required</span>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="entryEnName" class="label-name">Latin Name <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+                                                    <app-full-date [selectedDate]="entryDate" (OnDateSelect)="onEntryDateSelect($event)"></app-full-date>
+
+
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="">
+                                                <label for="contractTypeId" class="label-name">Entry Type <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group  popup">
+                                                    <ng-select class="custom" formControlName="ownerAccId" [items]="ownerAccounts" bindLabel="'accArName'" bindValue="id" style="width:100%">
+                                                    </ng-select>
+
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <label for="contractTypeId" class="label-name">Entry Type <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group  popup">
+                                                    <ng-select class="custom" formControlName="tenantAccId" [items]="tenantAccounts" bindLabel="'accArName'" bindValue="id" style="width:100%">
+                                                    </ng-select>
+
+
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+                                        <form>
+                                            <hr>
+                                            <button type="button" class="btn-collapse btn btn-block btn-primary justify-content-start text-start" aria-controls="collapseExample6">
+                                                Entry Type Settings
+                                            </button>
+                                            <!-- //#collapse="ngbCollapse" [(ngbCollapse)]="collapse1" -->
+                                            <div>
+                                                <div class="col gap-2 grid grid-cols-2  py-2 container-collapse">
+
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="form-group d-flex align-items-center gap-1 popup">
+
+                                                            <input type="checkbox">
+                                                            <label for="isGenerateEntryByDue" class="label-name m-0">
+                                                                Generate Entry </label>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="form-group d-flex align-items-center gap-1 popup input-group ">
+
+                                                            <input type="checkbox">
+                                                            <label for="showValueDistribution" class="label-name m-0">Show Value Distribution</label>
+
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="form-group d-flex align-items-center gap-1 popup input-group ">
+
+                                                            <input type="checkbox">
+                                                            <label for="distributeValueOnDues" class="label-name m-0">Distribute Value on Dues</label>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- hgfd -->

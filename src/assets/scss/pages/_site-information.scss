@@ -1,0 +1,229 @@
+.inner-page-wrapper {
+  #breadcrumbs {
+    margin-left: 7px;
+  }
+  .lease-header-title {
+    margin-left: 0px;
+  }
+  .settings-wrapper {
+    background-color: $snow;
+    padding: 30px;
+    /*section*/
+    .main-auction {
+      hr {
+        margin-top: 1.3rem;
+      }
+    }
+  }
+  .settings-section {
+    background-color: $white;
+    padding: 30px;
+    // border-radius: 5px;
+    .building-info {
+      font-size: 1.125rem;
+      color: $gray30;
+      line-height: 22px;
+      text-align: left;
+      font-weight: 500;
+    }
+    .file-box {
+      padding: 0 20px;
+      .file-detail {
+        margin: -10px 0;
+        
+        .file-size {
+          border-radius: 2px;
+          opacity: 1;
+          width: 100%;
+          display: block;
+          font-weight: 500;
+          text-align: left;
+          line-height: 17px;
+          padding: 3px 10px 4px 10px;
+          background-color: $gallery;
+          font-size: 0.875rem;
+          color: $slate-gray;
+          margin: 6px 0;
+        }
+      }
+      .image-preview {
+        background: $snow 0% 0% no-repeat padding-box;
+        border: 1px solid $white-col;
+        border-radius: 5px;
+        opacity: 1;
+        width: 75px;
+        height: 75px;
+        margin-top: 20px;
+      }
+      .file-action {
+        margin: 30px 0;
+        .file-name {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: $gray20;
+          line-height: 21px;
+          text-align: left;
+          margin: 5px 0px;
+        }
+        .view-section::before {
+          font-size: 0.625rem;
+          color: $slate-gray;
+          opacity: 1;
+          font-weight: 600;
+        }
+        .show {
+          margin: 1px 10px;
+          font-size: 0.8125rem;
+          font-weight: 400;
+          line-height: 16px;
+          color: $slate-gray;
+        }
+      }
+    }
+  }
+  .image-section {
+    padding: 30px;
+    .building-info {
+      font-size: 1.125rem;
+      color: $gray30;
+      line-height: 22px;
+      text-align: left;
+      font-weight: 500;
+    }
+    .names-table,
+    td:nth-child(1),
+    td:nth-child(2),
+    td:nth-child(3) {
+      color: $gray20;
+      font-weight: 500;
+      font-size: 0.8125rem;
+    }
+    th {
+      color: $gray30;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    tbody {
+      background: $snow;
+    }
+  }
+  .thead-bg-color {
+    background: #E2E2E2;
+    border-radius: 5px;
+    opacity: 1
+  }
+}
+
+
+/***********************site information Media queries********************************/
+
+@media only screen and (min-width:1367px) and (max-width:1920px) {}
+
+@include bp(large-desktop) {}
+
+@media only screen and (min-width:1200px) and (max-width:1366px) {}
+
+@include bp(desktop) {}
+
+@media only screen and (min-width:1025px) and (max-width:1199px) {}
+
+@include bp(laptop) {
+  .inner-page-wrapper {
+    .settings-wrapper {
+      .main-screen {}
+    }
+  }
+}
+
+@include bp(ipad-pro) {
+  .inner-page-wrapper {
+    .settings-wrapper {
+      .main-screen {}
+    }
+  }
+}
+
+@include bp(ipad) {
+  .inner-page-wrapper {
+    .settings-section {
+      .file-box {
+        padding: 0;
+        .file-action {
+          margin: 30px 0px;
+        }
+      }
+    }
+    .settings-wrapper {
+      .main-screen {
+        .main-upper-section {
+          .subtitle-info {
+            font-size: 1.125rem;
+          }
+        }
+      }
+    }
+    .settings-save-btn {
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+@include bp(mobile) {
+  .inner-page-wrapper {
+    #breadcrumbs {
+      white-space: nowrap;
+    }
+    .settings-section {
+      .upload-info {
+        margin: 0px -7px;
+        padding: 0 9px;
+      }
+      .file-box {
+        padding: 0;
+        .file-action {
+          margin: 30px 0px;
+        }
+      }
+    }
+    .lease-header-title {
+      font-size: 1.3rem;
+    }
+    .lease-header-title {
+      margin-left: 0px !important;
+    }
+    .settings-section {
+      padding: 10px !important;
+      .settings-title {
+        font-size: 1rem !important;
+      }
+    }
+    .settings-wrapper {
+      padding: 10px !important;
+      .btn-custom {
+        width: 100%;
+        display: block;
+      }
+      .main-screen {}
+    }
+  }
+}
+
+@include bp(iphone5) {
+  .inner-page-wrapper {
+    #breadcrumbs {
+      white-space: nowrap;
+    }
+    .settings-section {
+      .file-box {
+        padding: 0;
+        .file-action {
+          margin: 30px 0px;
+        }
+      }
+    }
+    .settings-wrapper {
+      .main-screen {}
+    }
+  }
+}

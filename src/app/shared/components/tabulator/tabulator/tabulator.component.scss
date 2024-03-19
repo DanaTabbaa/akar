@@ -1,0 +1,103 @@
+.tabulator {
+    font-size: 12px;
+    border: none;
+}
+
+.tabulator .tabulator-header {
+    font-weight: normal;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.tabulator .tabulator-header .tabulator-col {
+    height: 48px;
+    background-color: #ffffff;
+    border: none;
+    padding: 0 7px;
+}
+
+.tabulator-row {
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+    min-height: 48px;
+    vertical-align: middle;
+}
+
+.tabulator-row .tabulator-cell {
+    padding: 16px 7px;
+    border-right: none;
+    vertical-align: middle;
+}
+
+.tabulator-row .tabulator-cell:first-of-type,
+.tabulator .tabulator-header .tabulator-col:first-of-type {
+    padding-left: 24px;
+}
+
+.tabulator-row.tabulator-row-even {
+    background-color: #ffffff;
+}
+
+//  .sniper-icon-btn-pdf {
+//     background-color: rgb(245, 87, 24);
+//     border: none;
+//     color: white;
+//     // padding: 8px 9px;
+//     font-size: 16px;
+//     cursor: pointer;
+//     margin: 3px;
+//   }
+//   .sniper-icon-btn-excel {
+//     background-color: rgb(00, 255, 00);
+//     border: none;
+//     color: white;
+//     // padding: 8px 9px;
+//     font-size: 16px;
+//     cursor: pointer;
+//     margin: 3px;
+//   }
+// .sniper-icon-btn-csv {
+//   background-color: rgb(0, 162, 255);
+//   border: none;
+//   color: white;
+//   // padding: 8px 9px;
+//   font-size: 16px;
+//   cursor: pointer;
+//   margin: 3px;
+// }
+// .sniper-icon-btn-html {
+//   background-color: rgb(255, 196, 0);
+//   border: none;
+//   color: white;
+//   // padding: 8px 9px;
+//   font-size: 16px;
+//   cursor: pointer;
+//   margin: 3px;
+// }
+// .sniper-icon-btn-json {
+//   background-color: rgb(52, 233, 233);
+//   border: none;
+//   color: white;
+//   // padding: 8px 9px;
+//   font-size: 16px;
+//   cursor: pointer;
+//   margin: 3px;
+// }
+
+.div-search-de {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42.393px;
+    height: 36.458px;
+    flex-shrink: 0;
+    margin: -1px -4px;
+    z-index: 1;
+    border-radius: 6px 0px 0px 6px;
+    border-right: 1px solid rgba(123, 123, 123, 0.64);
+    background: linear-gradient(179deg, #47B3C1 1.12%, #17646D 98.83%);
+}
+.divSearchDeAr {
+    border-radius: 0px 6px 6px 0px !important;
+}

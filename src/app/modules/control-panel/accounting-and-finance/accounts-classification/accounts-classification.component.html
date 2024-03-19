@@ -1,0 +1,62 @@
+<!-- Section  -->
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-scale-multiple" [fullScreen] = "true"><p style="color: white ;font-size: 20px;" > {{'page-form.loading'|translate}} </p></ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+   
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="accountClassificationForm" id="accountsClassificationSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <h3>
+                                        {{'accounts-classification.account-classification-info'|translate}}
+                                       
+                                    </h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                            <div class=" ">
+                                                <label for="classificationArName" class="label-name">
+                                                    {{'accounts-classification.account-classification-arabic'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control icon-user" name="classificationArName" formControlName="classificationArName">
+                                                    <div *ngIf="(f['classificationArName'].touched || f['classificationArName'].dirty ) && f['classificationArName'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['classificationArName'].errors && f['classificationArName'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="classificationEnName" class="label-name">
+                                                    {{'accounts-classification.account-classification-english'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="form-group input-group">
+                                                    <input type="text" class="form-control icon-user" name="classificationEnName" formControlName="classificationEnName">
+                                                    <div *ngIf="(f['classificationEnName'].touched || f['classificationEnName'].dirty ) && f['classificationEnName'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['classificationEnName'].errors && f['classificationEnName'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

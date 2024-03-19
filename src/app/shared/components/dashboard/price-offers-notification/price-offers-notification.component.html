@@ -1,0 +1,23 @@
+
+<section class=""  *ngIf="showExpiryPriceOffersOfRent==true">
+  <h3 style="text-align: center;">{{'dashboard.price-offers-rent-about-to-expire'|translate}}</h3>
+  <div class="container">
+      <app-tabulator [idColName]="'id'" [childRowData]="rentOffers" [parentColName]="'groupId'"
+          [divId]="'RentOffers'" [columnSettings]="rentColumnNames" [componentName]="'RentOffers'"
+           [refreshGrid]="isRentListEmpty" [direction]="direction" [sortByList]="sortByCols"
+          [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchRentFilters" [showExport]="false"
+          (onSearchTextChange)="onSearchRentTextChange($event)" [groupType]="1" [path]="'RentOffers'">
+      </app-tabulator>
+  </div>
+</section>
+<section class="" *ngIf="showExpiryPriceOffersOfSales==true">
+    <h3 style="text-align: center;">{{'dashboard.price-offers-sales-about-to-expire'|translate}}</h3>
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="salesOffers" [parentColName]="'groupId'"
+            [divId]="'SalesOffers'" [columnSettings]="salesColumnNames" [componentName]="'SalesOffers'"
+             [refreshGrid]="isSalesListEmpty" [direction]="direction" [sortByList]="sortByCols"
+            [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchSalesFilters" [showExport]="false"
+            (onSearchTextChange)="onSearchSalesTextChange($event)" [groupType]="1" [path]="'SalesOffers'">
+        </app-tabulator>
+    </div>
+</section>

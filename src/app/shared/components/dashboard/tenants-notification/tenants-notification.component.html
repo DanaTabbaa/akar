@@ -1,0 +1,12 @@
+
+<section class=""  *ngIf="showExpiryOfPersonIdentity==true">
+  <h3 style="text-align: center;">{{'dashboard.identity-responsible-person-for-tenants-expire'|translate}}</h3>
+  <div class="container">
+      <app-tabulator [idColName]="'id'" [childRowData]="tenants" [parentColName]="'groupId'"
+          [divId]="'Tenants'" [columnSettings]="columnNames" [componentName]="'tenants'"
+           [refreshGrid]="isListEmpty" [direction]="direction" [sortByList]="sortByCols"
+          [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" [showExport]="false"
+          (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'Tenants'">
+      </app-tabulator>
+  </div>
+</section>

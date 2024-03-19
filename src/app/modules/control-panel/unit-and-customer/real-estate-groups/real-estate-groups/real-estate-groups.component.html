@@ -1,0 +1,456 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="realestateForm" id="RealestateFormSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <!-- Real estate group information -->
+                                    <h3>{{'page-form.realestate-group-info'|translate}}</h3>
+                                      <div class="row">
+
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                          <div class="">
+                                            <div>
+                                              <label class="ml-3">
+                                                <input type="radio" [checked]="selectedOption=='main'" name="option" [ngModelOptions]="{standalone: true}" value="main" [(ngModel)]="selectedOption">
+                                                {{'page-form.main-realestate-group'|translate}}
+                                              </label>
+
+                                              <label>
+                                                <input type="radio" name="option" value="sub" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedOption">
+                                                {{'page-form.sub-realestate-group'|translate}}
+                                              </label>
+                                            </div>
+                                          </div>
+                                          </div>
+                                      </div>
+
+
+                                    <div class="row">
+
+
+                                        <div class="col gap-2 grid grid-cols-3 ">
+                                          <!-- <div class="">
+                                            <div>
+                                              <label class="ml-3">
+                                                <input type="radio" [checked]="selectedOption=='main'" name="option" [ngModelOptions]="{standalone: true}" value="main" [(ngModel)]="selectedOption">
+                                                {{'page-form.main-realestate-group'|translate}}
+                                              </label>
+
+                                              <label>
+                                                <input type="radio" name="option" value="sub" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedOption">
+                                                {{'page-form.sub-realestate-group'|translate}}
+                                              </label>
+                                            </div>
+                                          </div> -->
+                                            <div class=" " *ngIf="selectedOption=='sub'">
+                                                <label for="mainRealestate"
+                                                    class="label-name">{{'page-form.main-realestate'|translate}}</label>
+                                                <div class="input-group  popup">
+
+                                                    <ng-select style="width:100%" placeholder="{{'page-form.main-realestate'|translate}}" formControlName="parentId" name='realeStateId' class="" id="realeStateId">
+                                                        <ng-option *ngFor="let realestate of realestateList" [value]="realestate.id">{{lang=='ar'? realestate.realestateNameAr:realestate.realestateNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+
+                                                <label for="realestateNameAr"
+                                                    class="label-name">{{'page-form.realestate-name-arabic'|translate}}
+                                                    <span class="text-danger">*</span></label>
+                                                <div class="form-group input-group ">
+
+                                                    <input type="text" class="form-control" name="realestateNameAr"
+                                                        formControlName="realestateNameAr">
+                                                    <div *ngIf="(f['realestateNameAr'].touched || f['realestateNameAr'].dirty ) && f['realestateNameAr'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['realestateNameAr'].errors && f['realestateNameAr'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="realestateNameEn" class="label-name"><span
+                                                        class="text-danger">*</span>
+                                                    {{'page-form.realestate-name-latin'|translate}}</label>
+                                                <div class="form-group input-group ">
+
+                                                    <input type="text" class="form-control" name="realestateNameEn"
+                                                        formControlName="realestateNameEn">
+                                                    <div *ngIf="(f['realestateNameEn'].touched || f['realestateNameEn'].dirty ) && f['realestateNameEn'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['realestateNameEn'].errors && f['realestateNameEn'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="unitTypeId" class="label-name"><span
+                                                        class="text-danger">*</span>{{'page-form.realestate-type'|translate}}
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select formControlName="unitTypeId" style="width:100%">
+                                                        <ng-option *ngFor="let type of unitsTypes" [value]="type.id">
+                                                            {{lang=='ar'? type.typeNameAr:type.typeNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                    <div *ngIf="(f['unitTypeId'].touched || f['unitTypeId'].dirty ) && f['unitTypeId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['unitTypeId'].errors && f['unitTypeId'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="">
+                                                <label for="purpose-type"
+                                                    class="label-name">{{'page-form.realestate-purpose'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group  popup">
+
+                                                    <ng-select class="custom" formControlName="purposeType"
+                                                        [items]="purposeTypes" bindLabel="name" bindValue="id"
+                                                        style="width:100%"></ng-select>
+                                                    <div *ngIf="(f['purposeType'].touched || f['purposeType'].dirty ) && f['purposeType'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['purposeType'].errors && f['purposeType'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="" hidden>
+                                                <label for="realestateNumber" class="label-name">
+                                                    <span
+                                                        class="text-danger">*</span>{{'page-form.realestate-number'|translate}}
+                                                </label>
+                                                <div class="form-group input-group ">
+
+                                                    <input type="text" class="form-control" name="realestateNumber"
+                                                        formControlName="realestateNumber">
+                                                    <div *ngIf="(f['realestateNumber'].touched || f['realestateNumber'].dirty ) && f['realestateNumber'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['realestateNumber'].errors && f['realestateNumber'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class=" " hidden>
+                                                <label for="realestateCount" class="label-name"><span
+                                                        class="text-danger">*</span>{{'page-form.realestate-count'|translate}}
+                                                </label>
+                                                <div class="form-group input-group ">
+
+                                                    <input type="number" class="form-control" name="realestateCount"
+                                                        formControlName="realestateCount">
+                                                    <div *ngIf="(f['realestateCount'].touched || f['realestateCount'].dirty ) && f['realestateCount'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['realestateCount'].errors && f['realestateCount'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3">
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                                <input type="checkbox" name="isFeatured" formControlName="isFeatured">
+                                                <label for="isFeatured"
+                                                    class="label-name m-0">{{'page-form.is-featured'|translate}}
+                                                </label>
+                                            </div>
+
+
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                                <input type="checkbox" name="hasPriceOffer"
+                                                    formControlName="hasPriceOffer" (change)="offerInformationChange()">
+                                                <label for="hasPriceOffer"
+                                                    class="label-name m-0">{{'page-form.has-price-offer'|translate}}
+                                                </label>
+                                            </div>
+
+
+                                            <div class="form-group d-flex align-items-center gap-1">
+
+                                                <input type="checkbox" name="hasGarage" formControlName="hasGarage"
+                                                    (change)="garageInformationChange()">
+                                                <label for="hasGarage"
+                                                    class="label-name m-0">{{'page-form.has-garage'|translate}} </label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div *ngIf="showOfferInformation" class="my-3">
+                                        <button type="button"
+                                            class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                                            (click)="collapse2.toggle()" [attr.aria-expanded]="!gfg2"
+                                            aria-controls="collapse2Example">
+                                            {{'page-form.offer-information'|translate}}
+                                        </button>
+                                        <div #collapse2="ngbCollapse" [(ngbCollapse)]="gfg2">
+                                            <div class="col gap-2 grid grid-cols-3  py-2 container-collapse">
+                                                <div class=" ">
+                                                    <label for="offerPrice"
+                                                        class="label-name">{{'page-form.offer-price'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="text" class="form-control" name="offerPrice"
+                                                            formControlName="offerPrice">
+                                                    </div>
+                                                </div>
+
+                                                <div class=" ">
+                                                    <label for="offerDescription"
+                                                        class="label-name">{{'page-form.offer-description'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="text" class="form-control" name="offerDescription"
+                                                            formControlName="offerDescription">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div *ngIf="showGarageInformation" class="my-3">
+                                        <button type="button"
+                                            class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                                            (click)="collapse3.toggle()" [attr.aria-expanded]="!gfg3"
+                                            aria-controls="collapse3Example">
+                                            {{"page-form.garage-information"|translate}}
+                                        </button>
+                                        <div #collapse3="ngbCollapse" [(ngbCollapse)]="gfg3">
+                                            <div class="col gap-2 grid grid-cols-3  py-2 container-collapse">
+                                                <div class=" ">
+                                                    <label for="garageArea"
+                                                        class="label-name">{{'page-form.garage-area'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="text" class="form-control" name="garageArea"
+                                                            formControlName="garageArea">
+                                                    </div>
+                                                </div>
+
+                                                <div class="">
+                                                    <label for="vehiclesCount"
+                                                        class="label-name">{{'page-form.vehicles-count'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="text" class="form-control" name="vehiclesCount"
+                                                            formControlName="vehiclesCount">
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <label for="customGarageCount"
+                                                        class="label-name">{{'page-form.custom-garage-count'|translate}}</label>
+                                                    <div class="form-group">
+
+                                                        <input type="text" class="form-control" name="customGarageCount"
+                                                            formControlName="customGarageCount">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- end  -->
+                                    <hr>
+                                    <ul ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.other-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-2  ">
+                                                        <div class="">
+                                                            <label for="marketing.realestate" class="label-name">
+                                                                {{'page-form.realestate-marketing-office'|translate}}</label>
+                                                            <div class="input-group  popup">
+
+                                                                <ng-select formControlName="officeId" style="width:100%">
+                                                                    <ng-option *ngFor="let office of offices" [value]="office.id">{{lang=='ar'? office.nameAr:office.nameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="owner-name"
+                                                                class="label-name">{{'page-form.owner'|translate}}
+                                                            </label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="ownerId" style="width:100%">
+                                                                    <ng-option *ngFor="let owner of owners" [value]="owner.id">{{lang=='ar'? owner.nameAr:owner.nameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="realestateDescription"
+                                                                class="label-name">{{'page-form.realestate-description'|translate}}</label>
+                                                            <div class="form-group">
+                                                                <textarea type="text" class="form-control"
+                                                                    name="realestateDescription"
+                                                                    formControlName="realestateDescription"></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <li *ngIf="realestateForm.value.purposeType==rentPuropseType" ngbNavItem>
+                                            <a ngbNavLink> {{'page-form.rent-realestate-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-2 ">
+                                                        <div class=" ">
+                                                            <label for="annualRent"
+                                                                class="label-name">{{'page-form.annual-rent'|translate}}
+                                                            </label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control"
+                                                                    name="annualRent" formControlName="annualRent"
+                                                                    [(ngModel)]="annualRent"
+                                                                    (change)="getMonthlyRent()">
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="monthlyRent"
+                                                                class="label-name">{{'page-form.monthly-rent'|translate}}
+                                                            </label>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="monthlyRent" formControlName="monthlyRent"
+                                                                    [(ngModel)]="monthlyRent">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="insuranceRatio"
+                                                                class="label-name">{{'page-form.insurance-ratio'|translate}}
+                                                            </label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control"
+                                                                    name="insuranceRatio"
+                                                                    formControlName="insuranceRatio"
+                                                                    [(ngModel)]="insuranceRatio"
+                                                                    (change)="getInsuranceValue()">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="insuranceValue"
+                                                                class="label-name">{{'page-form.insurance-value'|translate}}
+                                                            </label>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="insuranceValue"
+                                                                    formControlName="insuranceValue"
+                                                                    [(ngModel)]="insuranceValue">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <li ngbNavItem hidden>
+                                            <a ngbNavLink>{{'page-form.list-electric-meter-numbers'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col  " >
+                                                        <label for="electricityCounterNo"
+                                                            class="label-name">{{'page-form.electricities-counter-no'|translate}}</label>
+                                                        <div class="form-group">
+                                                            <textarea type="text" class="form-control"
+                                                                name="electricityCounterNo"
+                                                                formControlName="electricityCounterNo"></textarea>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                    </ul>
+
+                                    <div [ngbNavOutlet]="nav" class=""></div>
+
+                                    <!-- <h3>List of electric meter numbers</h3>
+                                    <div class="col-12 p-0">
+                                        <label for="electricityCounterNo" class="label-name">Please enter the
+                                            electricity meter numbers
+                                            separated by (,).</label>
+                                        <div class="form-group">
+                                            <textarea type="text" class="form-control" name="electricityCounterNo" formControlName="electricityCounterNo"></textarea>
+
+                                        </div>
+                                    </div> -->
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

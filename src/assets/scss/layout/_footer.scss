@@ -1,0 +1,335 @@
+// .footer {
+//     background-image: url("../images/footer-background-img.png");
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: 100% 100%;
+//     height: auto;
+//     padding-top: 63px;
+//     &__top {
+//         display: flex;
+//         flex-wrap: wrap;
+//         justify-content: space-between;
+//         position: relative;
+//         padding-bottom: 20px;
+//         &:after {
+//             content: "";
+//             width: 100%;
+//             background-color: #ffffff;
+//             opacity: 0.5;
+//             height: 0.5px;
+//             position: absolute;
+//             left: 0;
+//             right: 0;
+//             bottom: 0;
+//         }
+//         .footer-get-in-touch {
+//             width: 80%;
+//             padding-left: 15px;
+//             @include breakpoint(desktop-max) {
+//                 width: 70%;
+//             }
+//             @include breakpoint(ipad-max) {
+//                 width: 100%;
+//                 padding-left: 0px;
+//                 margin-bottom: 2rem;
+//             }
+//             &__top {
+//                 .get-in-touch-title {
+//                     text-align: center;
+//                     display: none;
+//                     @include breakpoint(mobile-max) {
+//                         display: block;
+//                     }
+//                 }
+//             }
+//             &__bottom {
+//                 display: flex;
+//                 flex-wrap: nowrap;
+//                 @include breakpoint(mobile-max) {
+//                     flex-wrap: wrap;
+//                 }
+//                 .footer-menu-list {
+//                     width: 33.33%;
+//                     margin-top: 56px;
+//                     @include breakpoint(mobile-max) {
+//                         width: 100%;
+//                         margin-top: 0px;
+//                         text-align: center;
+//                     }
+//                     .ups-footer-menu-list {
+//                         li {
+//                             a {
+//                                 color: #ffffff;
+//                                 font-family: 'Fira Sans', sans-serif;
+//                                 font-weight: 400;
+//                                 margin-bottom: 35px;
+//                                 font-size: 16px;
+//                                 line-height: 40px;
+//                                 text-decoration: none;
+//                                 @include transition();
+//                                 &:hover {
+//                                     color: #242cd5;
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//                 .footer-phone-email {
+//                     width: 66.66%;
+//                     @include breakpoint(mobile-max) {
+//                         width: 100%;
+//                     }
+//                     &__top {
+//                         @include breakpoint(mobile-max) {
+//                             display: none;
+//                         }
+//                     }
+//                     &__bottom {
+//                         display: flex;
+//                         flex-wrap: nowrap;
+//                         @include breakpoint(mobile-max) {
+//                             flex-wrap: wrap;
+//                         }
+//                         .footer-phone {
+//                             width: 50%;
+//                             @include breakpoint(mobile-max) {
+//                                 width: 100%;
+//                                 text-align: center;
+//                             }
+//                             .footer-phone-subtitle {
+//                                 margin-bottom: 40px;
+//                                 @include breakpoint(mobile-max) {
+//                                     margin-bottom: 16px;
+//                                 }
+//                             }
+//                             .footer-address {
+//                                 font-family: 'Fira Sans', sans-serif;
+//                                 font-weight: 400;
+//                                 line-height: 28px;
+//                                 color: #ffffff;
+//                                 font-size: 15px;
+//                                 max-width: 195px;
+//                                 @include breakpoint(mobile-max) {
+//                                     max-width: none;
+//                                 }
+//                             }
+//                         }
+//                         .footer-email {
+//                             width: 50%;
+//                             @include breakpoint(mobile-max) {
+//                                 width: 100%;
+//                                 margin-bottom: 2rem;
+//                                 text-align: center;
+//                             }
+//                             .footer-caption-subtitle-email {
+//                                 margin-bottom: 21px;
+//                             }
+//                             .ups-list-footer-social {
+//                                 margin-bottom: 0px;
+//                                 display: flex;
+//                                 @include breakpoint(mobile-max) {
+//                                     justify-content: center;
+//                                 }
+//                                 li {
+//                                     padding: 10px 10px;
+//                                     // display: inline-block;
+//                                     a {
+//                                         text-decoration: none;
+//                                         @include transition();
+//                                         &:hover {
+//                                             span {
+//                                                 &:before {
+//                                                     color: #FF0000;
+//                                                 }
+//                                             }
+//                                         }
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//         .footer-subscribe-us {
+//             width: 20%;
+//             padding-right: 15px;
+//             @include breakpoint(desktop-max) {
+//                 width: 30%;
+//             }
+//             @include breakpoint(ipad-max) {
+//                 width: 100%;
+//                 padding-right: 0px;
+//             }
+//             &__top {
+//                 .footer-subscribe-title {
+//                     @include breakpoint(ipad-max) {
+//                         text-align: center;
+//                     }
+//                 }
+//             }
+//             &__bottom {
+//                 .footer-subscribe-form {
+//                     .subscribe-form {
+//                         .form-group {
+//                             .form-control {
+//                                 text-align: center !important;
+//                                 height: 40px;
+//                                 margin-bottom: 18px !important;
+//                                 @include form-control-footer();
+//                                 @include breakpoint(ipad-max) {
+//                                     width: 70%;
+//                                     margin: 0 auto;
+//                                     margin-bottom: 1rem;
+//                                 }
+//                                 @include breakpoint(ipad-max) {
+//                                     width: 100%;
+//                                 }
+//                             }
+//                             .footer-subscribe-btn {
+//                                 // background-color: #00387a;
+//                                 // color: #ffffff;
+//                                 // padding: 11px 50px 10px 50px;
+//                                 // border: 1px solid transparent;
+//                                 // display: inline-block;
+//                                 // border-radius: 4px;
+//                                 // @include transition();
+//                                 // &:hover {
+//                                 //     background-color: #ffffff;
+//                                 //     color: #00387a;
+//                                 // }
+//                                 @include breakpoint(ipad-max) {
+//                                     margin: 0 auto;
+//                                     display: block;
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     &__bottom {
+//         display: flex;
+//         justify-content: center;
+//         padding: 25px 0px;
+//         .copy-rights {
+//             font-size: 14px;
+//             font-family: 'Fira Sans', sans-serif;
+//             font-weight: 400;
+//             color: #ffffff;
+//         }
+//     }
+// }
+.footer-bg-opacity {
+    @include background-color-rgba(#000000, 1);
+}
+
+.footer {
+    background-image: url(../images/footer-background-img.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100% 100%;
+    height: auto;
+    padding-top: 63px;
+    .bottom-border {
+        padding-bottom: 20px;
+        position: relative;
+        &::after {
+            content: "";
+            width: 100%;
+            background-color: #ffffff;
+            opacity: 0.5;
+            height: 0.5px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .footer-menu-list {
+            .footer-links-heading {
+                color: #ffffff;
+                font-family: 'Fira Sans', sans-serif;
+                font-weight: 400;
+                margin-bottom: 35px;
+                font-size: 18px;
+            }
+            .ups-footer-menu-list {
+                li {
+                    a {
+                        color: #ffffff;
+                        font-family: 'Fira Sans', sans-serif;
+                        font-weight: 400;
+                        margin-bottom: 35px;
+                        font-size: 16px;
+                        line-height: 40px;
+                        text-decoration: none;
+                        transition: all 0.5s ease-in-out;
+                    }
+                    &:hover a {
+                        color: #242cd5;
+                    }
+                }
+            }
+        }
+        .footer-phone-email {
+            .footer-address {
+                font-family: 'Fira Sans', sans-serif;
+                font-weight: 400;
+                line-height: 28px;
+                color: #ffffff;
+                font-size: 15px;
+                max-width: 195px;
+            }
+            .footer-caption-subtitle {
+                font-family: 'Fira Sans', sans-serif;
+                font-weight: 400;
+                line-height: 40px;
+                color: #ffffff;
+                font-size: 24px;
+                margin-bottom: 40px;
+                @include breakpoint(ipad-max) {
+                    font-size: 17px;
+                }
+            }
+            .ups-list-footer-social {
+                margin-bottom: 0px;
+                display: flex;
+                li {
+                    padding: 10px 10px;
+                    a {
+                        &:hover {
+                            span:before {
+                                color: $theme-primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .footer-subscribe-us {
+            .form-control {
+                text-align: center !important;
+                height: 40px;
+                margin-bottom: 18px !important;
+                background-color: #ffffff !important;
+                color: #000 !important;
+                border: none !important;
+                padding: 12px 0px 12px 0px !important;
+                font-size: 14px;
+                margin-bottom: 29px;
+                border-radius: 5px !important;
+            }
+        }
+    }
+    .footer__bottom {
+        padding: 25px 0px;
+        .copy-rights {
+            font-size: 14px;
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 400;
+            color: #ffffff;
+            text-align: center;
+        }
+    }
+}

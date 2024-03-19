@@ -1,0 +1,6 @@
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [refreshGrid]="isListEmpty" [childRowData]="electricityMeters" [parentColName]="'groupId'" [divId]="'ElectricityMeters'" [columnSettings]="columnNames" [componentName]="'electricityMeters'" (onAddItem)="openAddElectricityMeters()" (onMenuActionSelected)="onMenuActionSelected($event)"
+            [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'ElectricityMeters'"></app-tabulator>
+    </div>
+  </section>

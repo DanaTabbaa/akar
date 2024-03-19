@@ -1,0 +1,8 @@
+.units-overview .row {
+  row-gap: 35px;
+}
+
+#page-content-wrapper {
+  height: max-content !important;
+  background: #fff !important;
+}

@@ -1,0 +1,35 @@
+<section class="" *ngIf="isEndRentContractNotification==true">
+  <h3 style="text-align: center;">{{'dashboard.rent-contracts-ended'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="endRentContracts" [parentColName]="'groupId'"
+      [divId]="'EndRentContracts'" [columnSettings]="endRentContractsColumnNames" [componentName]="'endRentContracts'"
+      [direction]="direction" [sortByList]="sortByCols" [showExport]="false" [groupByList]="groupByCols"
+      [refreshGrid]="isEndRentContractsListEmpty" [panelId]="panelId" [searchFilters]="searchEndRentContractsFilters"
+      (onSearchTextChange)="onSearchEndRentContractsTextChange($event)" [groupType]="1" [path]="'EndRentContracts'">
+    </app-tabulator>
+  </div>
+</section>
+<section class=""  *ngIf="showDailyDuesForRentContracts==true">
+  <h3 style="text-align: center;">{{'dashboard-settings.daily-rent-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="rentContractDues" [parentColName]="'groupId'"
+      [divId]="'RentContractDues'" [columnSettings]="rentContractDuesColumnNames" [componentName]="'rentContractDues'"
+      [direction]="direction" [sortByList]="sortByCols" [showExport]="false" [groupByList]="groupByCols"
+      [refreshGrid]="isRentContractsDuesListEmpty" [panelId]="panelId" [searchFilters]="searchRentContractDuesFilters"
+      (onSearchTextChange)="onSearchRentContractDuesTextChange($event)" [groupType]="1" [path]="'RentContractDues'">
+    </app-tabulator>
+  </div>
+</section>
+<section class=""  *ngIf="showGenerateEntryNotificationForRentContracts==true">
+  <h3 style="text-align: center;">{{'dashboard.generate-entry-rent-contract-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="generateEntryRentContractDues" [parentColName]="'groupId'"
+      [divId]="'GenerateEntryRentContractDues'" [columnSettings]="generateEntryRentContractDuesColumnNames"
+      [componentName]="'generateEntryRentContractDues'" [direction]="direction" [sortByList]="sortByCols"
+      [showExport]="false" [groupByList]="groupByCols" [refreshGrid]="isGenerateEntryRentContractDuesListEmpty"
+      [panelId]="panelId" [searchFilters]="searchGenerateRentContractDuesFilters"
+      (onSearchTextChange)="onSearchGenerateEntryRentContractDuesTextChange($event)" [groupType]="1"
+      [path]="'GenerateEntryRentContractDues'">
+    </app-tabulator>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+input[type="submit"] {
+    outline: none;
+    // focus:none;
+}
+
+button:focus {
+    outline: 0 !important;
+}
+
+.form-btn-common {
+    background-color: #00387a;
+    color: #ffffff;
+    padding: 11px 50px 10px 50px;
+    border: 1px solid transparent;
+    display: inline-block;
+    border-radius: 4px;
+    @include transition();
+    &:hover {
+        background-color: #ffffff;
+        color: #00387a;
+    }
+    @include breakpoint(ipad-max) {
+        margin: 0 auto;
+        display: block;
+    }
+}

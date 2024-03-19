@@ -1,0 +1,10 @@
+<section class="inner-page-wrapper inner-page-auction">
+    <div class="container">
+        <app-tabulator [idColName]="'id'" [childRowData]="equipments" [parentColName]="'groupId'" [divId]="'Equipments'" [columnSettings]="columnNames" [componentName]="'equipments'" (onAddItem)="openAddEquipments()" (onMenuActionSelected)="onMenuActionSelected($event)"
+            [showMenuOptions]="menuOptions" [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchTextChange($event)" [groupType]="1" [path]="'Equipments'"></app-tabulator>
+        </div>
+  </section>
+  
+  
+  
+  

@@ -1,0 +1,27 @@
+<section class=""  *ngIf="showDailyDuesForMaintenanceContracts==true">
+  <h3 style="text-align: center;">{{'dashboard-settings.daily-maintenance-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="maintenanceContractDues" [parentColName]="'groupId'"
+      [divId]="'MaintenanceContractDues'" [columnSettings]="maintenanceContractDuesColumnNames"
+      [componentName]="'maintenanceContractDues'" [direction]="direction" [sortByList]="sortByCols" [showExport]="false"
+      [groupByList]="groupByCols" [refreshGrid]="isMaintenanceContractsDuesListEmpty" [panelId]="panelId"
+      [searchFilters]="searchMaintenanceContractDuesFilters"
+      (onSearchTextChange)="onSearchMaintenanceContractDuesTextChange($event)" [groupType]="1"
+      [path]="'MaintenanceContractDues'">
+    </app-tabulator>
+  </div>
+</section>
+<section class=""  *ngIf="showGenerateEntryNotificationForMaintenanceContracts==true">
+  <h3 style="text-align: center;">{{'dashboard.generate-entry-maintenance-contract-dues'|translate}}</h3>
+  <div class="container">
+    <app-tabulator [idColName]="'id'" [childRowData]="generateEntryMaintenanceContractDues" [parentColName]="'groupId'"
+      [divId]="'GenerateEntryMaintenanceContractDues'"
+      [columnSettings]="generateEntryMaintenanceContractDuesColumnNames"
+      [componentName]="'generateEntryMaintenanceContractDues'" [direction]="direction" [sortByList]="sortByCols"
+      [showExport]="false" [groupByList]="groupByCols" [refreshGrid]="isGenerateEntryMaintenanceContractDuesListEmpty"
+      [panelId]="panelId" [searchFilters]="searchGenerateMaintenanceContractDuesFilters"
+      (onSearchTextChange)="onSearchGenerateEntryMaintenanceContractDuesTextChange($event)" [groupType]="1"
+      [path]="'GenerateEntryMainetenanceContractDues'">
+    </app-tabulator>
+  </div>
+</section>

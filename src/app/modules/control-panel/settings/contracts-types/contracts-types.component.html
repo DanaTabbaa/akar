@@ -1,0 +1,52 @@
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-units">
+
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="ContractsTypesForm" id="ContractsTypesSubmit">
+                    <div class="main-contracts-types">
+                        <div class="wrapper-title">
+
+                            <p class="contract-type-info">{{'page-form.contract-type-information'|translate}}</p>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-3 col-xl-3 ">
+                                    <label for="contractTypeArName" class="label-name">{{'page-form.name-arabic'|translate}}</label>
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control icon-user" name="contractTypeArName"
+                                            formControlName="contractTypeArName">
+                                            <div *ngIf="(f['contractTypeArName'].touched || f['contractTypeArName'].dirty ) && f['contractTypeArName'].invalid" class="alert alert-danger">
+                                              <i class="fa fa-close "></i>
+                                              <span *ngIf="f['contractTypeArName'].errors && f['contractTypeArName'].errors['required']">
+                                                {{'validation-messages.required-field'|translate}}</span>
+                                          </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-3 col-xl-3 ">
+                                    <label for="contractTypeEnName" class="label-name">{{'page-form.name-latin'|translate}}</label>
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control icon-user" name="contractTypeEnName"
+                                            formControlName="contractTypeEnName">
+                                            <div *ngIf="(f['contractTypeEnName'].touched || f['contractTypeEnName'].dirty ) && f['contractTypeEnName'].invalid" class="alert alert-danger">
+                                              <i class="fa fa-close "></i>
+                                              <span *ngIf="f['contractTypeEnName'].errors && f['contractTypeEnName'].errors['required']">
+                                                {{'validation-messages.required-field'|translate}}</span>
+                                          </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</section>

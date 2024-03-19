@@ -1,0 +1,494 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> Login... </p>
+</ngx-spinner>
+<div class="page_wrapper">
+
+  <main class="main-content margin-top-mobile">
+    <section class="banner-top-common">
+      <div class="banner-top-common__banner_main">
+        <div class="banner_main_bg">
+          <img src="../assets/images/about-us-bg.png" alt="">
+          <div id="overlay"></div>
+        </div>
+        <div class="banner_bottom">
+          <img src="../assets/images/banner_bottom_bg.png">
+        </div>
+
+        <div class="banner_bottom_arrow"><span></span></div>
+      </div>
+      <div class="banner-top-common__page-heading">
+        <div class="container">
+          <h1 class="banner-page-title">
+            {{'login.login-your-account' | translate}}
+          </h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb banner-top-breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/home"> {{'general.home' | translate}} </a></li>
+              <li class="breadcrumb-item"><a routerLink="/login"> {{'general.login' | translate}}</a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </section>
+    <section id="tabs" class="login-password-section-wrap project-tab">
+      <div class="container tabs-border-box">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 col-lg-7">
+
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 col-md-4">
+                <nav class="nav-tabs-wrap  mb-5">
+                  <div class="nav contact-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item contact-link active font-weight-bold " id="login-tabs" data-toggle="tab"
+                      href="#login" role="tab" aria-controls="login-tabs" aria-selected="true">
+                      {{'login.login' | translate}}</a>
+                    <a class="nav-item contact-link font-weight-bold" (click)="resetForms()" id="register-tab"
+                      data-toggle="tab" href="#register" role="tab" (click)="resetForms()" aria-controls="register-tab"
+                      aria-selected="false"> {{'login.register' | translate}} </a>
+                    <a class="nav-item contact-link font-weight-bold" (click)="resetForms()" id="forget-pass-tab"
+                      data-toggle="tab" href="#forget-pass" role="tab" aria-controls="forget-pass-tab"
+                      aria-selected="false">{{'login.forget-password' | translate}} </a>
+
+
+
+                  </div>
+                </nav>
+              </div>
+              <div class="col-sm-8 col-lg-8 col-md-8">
+
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tabs">
+
+                    <form [formGroup]="userLoign" #loginForm="ngForm" (ngSubmit)=" onLogin()" id="userLoign">
+                      <div class="gap-2 grid position-relative">
+                        <div class="form-group mb-3 text-start">
+                          <label for="accCode"
+                            class="label-name font-weight-bold text-primary">{{'login.user-name'|translate}}<span
+                              class="">*</span></label>
+                          <div class="input-group">
+                            <input type="text" class="form-control icon-user m-0"
+                              placeholder="{{'login.user-login'|translate}}" formControlName="userName">
+                            <!-- <img src="../assets/images/property/user.png" class="icon-user-img" alt="user-image"> -->
+
+                          </div>
+                          <div
+                            *ngIf="(login['userName'].touched || login['userName'].dirty ) && login['userName'].invalid"
+                            class="alert alert-danger  validation-alert m-0 p-0">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="login['userName'].errors && login['userName'].errors['required']">
+                              {{'validation-messages.required-user-name'|translate}}</span>
+                            <span *ngIf="login['userName'].errors && login['userName'].errors['minlength']">
+                              {{'validation-messages.min-name-char'|translate}}</span>
+                          </div>
+
+
+                        </div>
+
+
+                        <div class="form-group mb-3 text-start">
+                          <label for="password" class="font-weight-bold label-name text-primary">{{'general.password' |
+                            translate}}<span class="">*</span></label>
+                          <div class="input-group">
+                            <input type="password" class="form-control icon-padlock m-0" formControlName="password"
+                              placeholder="{{'general.password' | translate}}">
+                            <!-- <img src="../assets/images/property/padlock.png" class="icon-padlock-img" alt="padlock-image"> -->
+                          </div>
+                          <div
+                            *ngIf="(login['password'].touched || login['password'].dirty ) && login['password'].invalid"
+                            class="alert alert-danger  validation-alert m-0 p-0">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="login['password'].errors && login['password'].errors['required']">
+                              {{'validation-messages.required-password' | translate}}</span>
+                            <span *ngIf="login['password'].errors && login['password'].errors['minlength']">
+                              {{'validation-messages.min-password' | translate}}</span>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <div class="form-group d-flex align-items-center gap-1 popup input-group ">
+                            <input type="checkbox" formControlName="rememberMe">
+                            <label for="rememberMe" class="label-name m-0">
+                              {{'login.remember-me'|translate}}
+                            </label>
+
+
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-button">
+                          <button type="submit" class="form-btn-common inquiry-form-btn btn-primary ">
+                            <span class="get-call-text">{{'login.login' | translate}}</span>
+                          </button>
+                        </div>
+                        <div *ngIf="(!userLoign.valid  && isLogin) || isLoginFailed "
+                          class="alert alert-danger  validation-alert m-0 p-0">
+
+                          <i class="fa fa-close "></i> {{errorMessage}}
+
+                        </div>
+
+
+                        <div *ngIf="isLoggedIn && !isLoginFailed " class="alert alert-success validationS-alert">
+                          <i class="fa fa-check "></i> {{'messages.login-success' | translate}}
+
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+                  <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                    <form [formGroup]="userRegisterationForm" (ngSubmit)="onRegister()" id="UserRegisteration">
+                      <div class="gap-2 grid">
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-form text-start">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.registeration-type'
+                              | translate}}</label>
+
+                            <ng-select class="custom" formControlName="registerTypeId"
+                              placeholder="{{'login.registeration-type' | translate}}" >
+                              <ng-option *ngFor="let registerationType of registerationTypes"
+                                [value]="registerationType.id">{{registerationType.name}}
+                              </ng-option>
+                            </ng-select>
+
+                          </div>
+
+                        </div>
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-form">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.user-type' |
+                              translate}}</label>
+                            <ng-select class="custom" formControlName="userTypeId"
+                              placeholder="{{'login.user-type' | translate}}" (change)="onUserTypeChange($event)">
+
+                              <ng-option *ngFor="let userType of userTypes" [value]="userType.id">{{userType.name}}
+                              </ng-option>
+                            </ng-select>
+                          </div>
+                        </div>
+
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-form">
+                            <label for=""
+                              class="label-name font-weight-bold text-primary">{{'page-form.country'|translate}}</label>
+                            <ng-select formControlName="countryId" placeholder="">
+                              <ng-option *ngFor="let country of countries" [value]="country.id">{{lang=='ar'?
+                                country.countryNameAr:country.countryNameEn}}
+                              </ng-option>
+                            </ng-select>
+                          </div>
+
+                        </div>
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-group">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.name-ar' |
+                              translate}}</label>
+                            <input type="text" class="form-control icon-user tenant-icon m-0" formControlName="nameAr"
+                              placeholder="">
+                            <!-- <img src="../assets/images/property/tenant.png" class="icon-tenant-img" alt="tenant-image"> -->
+                          </div>
+
+                        </div>
+                        <div class="form-group mb-3 text-start">
+
+                          <div class="input-group">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.name-en' |
+                              translate}}</label>
+                            <input type="text" class="form-control icon-user m-0" formControlName="nameEn"
+                              placeholder="">
+                            <!-- <img src="../assets/images/property/tenant.png" class="icon-tenant-img" alt="tenant-image"> -->
+                          </div>
+                          <div *ngIf="(f['nameEn'].touched || f['nameEn'].dirty ) && f['nameEn'].invalid"
+                            class="alert alert-danger  validation-alert m-0 p-0">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['nameEn'].errors && f['nameEn'].errors['required']">
+                              {{'validation-messages.required-name'|translate}}</span>
+                            <span *ngIf="f['nameEn'].errors && f['nameEn'].errors['minlength']">
+                              {{'validation-messages.min-name-char'|translate}}</span>
+
+                          </div>
+                        </div>
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-group">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.user-name' |
+                              translate}}</label>
+                            <input type="text" class="form-control icon-user m-0" formControlName="userName"
+                              (change)="checkData('',userRegisterationForm.value.userName,'')" placeholder="">
+                            <!-- <img src="../assets/images/property/user.png" class="icon-user-img" alt="user-image"> -->
+                          </div>
+                          <div *ngIf="(f['userName'].touched || f['userName'].dirty ) && f['userName'].invalid"
+                            class="alert alert-danger  validation-alert m-0 p-0">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['userName'].errors && f['userName'].errors['required']">
+                              {{'validation-messages.required-user-name'|translate}}
+                            </span>
+                            <span *ngIf="f['userName'].errors && f['userName'].errors['minlength']">
+                              {{'validation-messages.min-name-char'|translate}}
+                            </span>
+
+                          </div>
+                          <div class="alert alert-danger  validation-alert m-0 p-0"
+                            *ngIf="(f['userName'].touched && f['userName'].dirty) &&checkDataResult?.isUserNameExist">
+                            <!-- <i class="fa fa-close "></i>  -->
+                            {{checkDataResult.message}}
+                          </div>
+                          <div *ngIf="f['userName'].touched && f['userName'].valid &&checkDataResult?.isUserNameAvailbe"
+                            class="alert alert-success validationS-alert">
+                            <i class="fa fa-check"></i> {{'validation-messages.valid-user-name'|translate}}
+                          </div>
+
+
+                        </div>
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-group">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.email' |
+                              translate}}</label>
+                            <input type="text" class="form-control icon-user" formControlName="email"
+                              (change)="checkData(userRegisterationForm.value.email)" placeholder="">
+                            <!-- <img src="../assets/images/property/user.png" class="icon-user-img" alt="user-image"> -->
+                          </div>
+                          <div class="validtions">
+                            <div class="validtion alert-danger  validation-alert alert m-0 p-0"
+                              *ngIf="f['email'].touched && f['email'].errors && f['email'].errors['required']">
+                              <i class="fa fa-close "></i> {{'validation-messages.required-email'|translate}}
+                            </div>
+                            <div class="validtion alert-danger  validation-alert alert m-0 p-0 mb-4"
+                              *ngIf="(f['email'].touched && f['email'].dirty) && f['email'].invalid">
+                              <i class="fa fa-close "></i> {{'validation-messages.invalid-data'|translate}}
+                            </div>
+                            <div class="alert alert-danger  validation-alert m-0 p-0 mb-4"
+                              *ngIf="(f['email'].touched && f['email'].dirty) &&checkDataResult?.isEmailExist">
+                              <i class="fa fa-close "></i> {{checkDataResult.message}}
+                            </div>
+                          </div>
+
+
+                          <div *ngIf="f['email'].touched && f['email'].valid &&checkDataResult?.isEmailAvailbe"
+                            class="alert alert-success validationS-alert">
+                            <i class="fa fa-check"></i> {{'validation-messages.valid-email'|translate}}
+                          </div>
+                        </div>
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-group">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.mobile' |
+                              translate}}</label>
+                            <input type="text" maxLength="20" class="form-control icon-padlock m-0"
+                              formControlName="mobile" (change)="checkData('','',userRegisterationForm.value.mobile)"
+                              placeholder="">
+                          </div>
+                          <div *ngIf="f['mobile'].touched && f['mobile'].invalid"
+                            class="alert alert-danger  validation-alert m-0 p-0">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['mobile'].errors && f['mobile'].errors['required']">
+                              {{'validation-messages.required-mobile'|translate}}</span>
+                            <span *ngIf="f['mobile'].errors && f['mobile'].errors['pattern']">
+                              {{'validation-messages.phone-pattern'|translate}}</span>
+
+                          </div>
+                          <div class="alert alert-danger  validation-alert m-0 p-0"
+                            *ngIf="(f['mobile'].touched && f['mobile'].dirty) &&checkDataResult?.isUserMobileExist">
+                            <i class="fa fa-close "></i> {{checkDataResult.message}}
+                          </div>
+                          <div *ngIf="f['mobile'].touched && f['mobile'].valid && checkDataResult?.isUserMobileAvailbe"
+                            class="alert alert-success validationS-alert">
+                            <i class="fa fa-check"></i> {{'validation-messages.valid-mobile'|translate}}
+                          </div>
+                        </div>
+                        <div class="form-group mb-3 text-start" *ngIf="userRegisterationForm.value.registerType==2">
+                          <div class="input-group">
+                            <label for="" class="label-name font-weight-bold text-primary">{{'login.unified-number' |
+                              translate}}</label>
+                            <input type="text" class="form-control icon-padlock" formControlName="unifiedNumber"
+                              placeholder="{{'login.unified-number' | translate}}">
+
+                          </div>
+                        </div>
+                        <div class="form-group mb-3 text-start">
+                          <div class="input-group" *ngIf="userRegisterationForm.value.registerTypeId==2">
+                            <label for=""
+                              class="label-name font-weight-bold text-primary">{{'login.commercial-registration-no' |
+                              translate}}</label>
+                            <input type="text" class="form-control icon-user" formControlName="commercialRegistrationNo"
+                              placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-group mb-3 text-start" *ngIf="userRegisterationForm.value.registerTypeId ==2">
+                          <div class="input-group">
+                            <label for=""
+                              class="label-name font-weight-bold text-primary">{{'login.commercial-registration-issue-date'
+                              | translate}}</label>
+                            <!-- <input type="date" class="form-control icon-padlock"
+                              formControlName="commercialRegistrationIssueDate" placeholder=""> -->
+                              <app-full-date (OnDateSelect)="onSelectCommRegIssueDate($event)" formControlName="commercialRegistrationIssueDate"
+                               [selectedDate]="commercialRegistrationIssueDate"></app-full-date>
+                          </div>
+                        </div>
+
+                        <div class="form-group mb-3 text-start" *ngIf="userRegisterationForm.value.userTypeId== 4">
+                          <div class="input-group">
+                            <label for=""
+                              class="label-name font-weight-bold text-primary">{{'login.marketing-licence'
+                              | translate}}</label>
+                              <input type="text" class="form-control icon-user" formControlName="marketingLicenceNo"
+                              placeholder="">
+                          </div>
+                        </div>
+
+                        <div class="form-button">
+                          <button type="submit " class="form-btn-common inquiry-form-btn btn-primary ">
+                            <span class="get-call-text">{{'login.register' |
+                              translate}}</span>
+                          </button>
+                        </div>
+                        <div *ngIf="(userRegisterationForm.invalid  && submited) || isRegisterFaild"
+                          class="alert alert-danger  validation-alert m-0 p-0">
+                          <i class="fa fa-close "></i> {{errorMessage}}
+
+                        </div>
+
+                        
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="tab-pane fade" *ngIf="!isForgetPasswordDone" id="forget-pass" role="tabpanel"
+                    aria-labelledby="forget-pass-tab">
+
+                    <form [formGroup]="psForgetForm" #ForgetForm="ngForm" (ngSubmit)="onForgetPassword()"
+                      id="ForgetForm">
+
+                      <div class="gap-2 grid position-relative">
+                        <div class="form-group text-start ">
+                          <div class="input-group ">
+                            <label for="" class="label-name font-weight-bold text-primary">{{ 'login.email' |
+                              translate}}</label>
+                            <input type="text " class="form-control icon-user m-0 " formControlName="email"
+                              placeholder=" ">
+                            <!-- <img src="../assets/images/property/user.png " class="icon-user-img " alt="user-image "> -->
+
+                          </div>
+                          <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+                            <div *ngIf="name.errors?.['required']">
+                              Name is required.
+                            </div>
+                            <div *ngIf="name.errors?.['minlength']">
+                              Name must be at least 4 characters long.
+                            </div>
+                            <div *ngIf="name.errors?.['forbiddenName']">
+                              Name cannot be Bob.
+                            </div>
+                          </div> -->
+
+                        </div>
+                        <div
+                          *ngIf="psReset[ 'email'].invalid && (psReset[ 'email'].dirty || psReset[ 'email'].touched)">
+
+                          <div class="alert alert-danger validation-alert p-0 m-0 "
+                            *ngIf=" psReset[ 'email'].errors &&psReset[ 'email'].errors[ 'required'] ">
+                            <i class="fa fa-close "></i> {{'validation-messages.required-email'|translate}}
+                          </div>
+                          <div class="alert alert-danger validation-alert p-0 m-0"
+                            *ngIf="psReset[ 'email'].errors && psReset[ 'email'].errors['pattern']">
+                            <i class="fa fa-close "></i> {{'validation-messages.invalid-data'|translate}}
+                          </div>
+                          <div *ngIf="isForgetPasswordFailed" class="alert alert-danger validation-alert m-0 p-0 "
+                            role="alert ">
+                            <i class="fa fa-close "></i> {{errorMessage}}
+                          </div>
+                          <div *ngIf="isForgetPasswordDone && !isForgetPasswordFailed "
+                            class="alert alert-success validationS-alert " role="alert ">
+                            <i class="fa fa-check "></i> {{successMessage}}
+                          </div>
+
+                        </div>
+
+
+                        <div *ngIf="(psReset[ 'email'].touched && psReset[ 'email'].valid)&&isSubmitted==false"
+                          class="alert alert-success validationS-alert ">
+                          <i class="fa fa-check "></i> {{'validation-messages.valid-email'|translate}}
+                        </div>
+                      </div>
+                      <div class="form-button mt-5">
+                        <button type="submit " class="form-btn-common inquiry-form-btn btn-primary ">
+                          <span class="get-call-text ">{{'login.send'|translate}}</span>
+                        </button>
+                      </div>
+
+
+
+                    </form>
+
+
+
+                  </div>
+                  <div *ngIf="isForgetPasswordDone &&!isForgetPasswordFailed "
+                    class="alert alert-success validationS-alert " role="alert ">
+                    <i class="fa fa-check "></i> {{successMessage}}
+                  </div>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-5 col-lg-5 ">
+            <div class="address-map-image-box ">
+              <div class="img-inside-wrap ">
+                <img class="img-bg-blue " src="../assets/images/property/blob.svg " alt="bg-blue ">
+                <img class="about-img-absolute " src="../assets/images/about-us-bg-over.png " alt="about-us-bg-over ">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="backdrop border-top p-5 quick_inquiry_section ">
+      <div class="container ">
+        <div class="row ">
+          <div class="col-md-4 ">
+            <div class="section_heading ">
+              <h4>{{'general.quick-inquiry' | translate}}</h4>
+              <h1>{{'general.want-more-information?' | translate}}</h1>
+            </div>
+          </div>
+          <div class="col-md-8 ">
+            <div class="inquiry_form_main ">
+              <form action=" " name="inquiry-form-main " class="inquiry-form ">
+                <div class="form-wrapper ">
+                  <div class="form-group mb-3 text-start ">
+                    <input type="text " class="form-control " placeholder="{{ 'general.your-name' | translate}} ">
+                    <input type="tel " class="form-control " placeholder="{{ 'general.phone-number' | translate}} ">
+                    <input type="email " class="form-control " placeholder="{{ 'general.Email-ID' | translate}} ">
+                    <select class="form-control " id="select ">
+                      <option selected>{{'general.project' | translate}}</option>
+                      <option>Project 1</option>
+                      <option>Project 2</option>
+                      <option>Project 2</option>
+                      <option>Project 2</option>
+                    </select>
+                    <!-- <img src="../assets/images/property/next.png " class="custom-selectimg " alt="next-01 "> -->
+                  </div>
+                  <div class="form-button">
+                    <button class="form-btn-common inquiry-form-btn btn-primary ">
+                      <span class="call-img"><img src="../assets/images/form-call-img.png" alt="forms-call-img"
+                          width="25px">
+                        {{'general.get-call-back' | translate}}</span>
+                      <!-- <span class="get-call-text"></span> -->
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+</div>

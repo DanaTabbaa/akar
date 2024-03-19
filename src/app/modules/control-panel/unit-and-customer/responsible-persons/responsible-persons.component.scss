@@ -1,0 +1,21 @@
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+#index
+{
+  min-width: 20px !important;
+}
+
+table td, .table th {
+  width: max-content !important;
+  min-width: 120px !important;
+}
+
+
+table td, table th {
+  word-wrap: break-word;
+}
+.btn
+{
+  margin-left: 5px;
+}

@@ -1,0 +1,9 @@
+.units-overview .row {
+  row-gap: 35px;
+}
+
+#page-content-wrapper {
+  height: -moz-max-content !important;
+  height: max-content !important;
+  background: #fff !important;
+}/*# sourceMappingURL=metrics.component.css.map */

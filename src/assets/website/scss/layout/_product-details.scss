@@ -1,0 +1,308 @@
+.product-details-box-wrap {
+    padding-top: 75px;
+    @include breakpoint(ipad-max) {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .bottom-border {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 50px;
+        .product-price-box {
+            font-family: 'Barlow';
+            font-size: 47px;
+            font-weight: 600;
+            text-align: left;
+            color: $theme-primary;
+            @include breakpoint(ipad-max) {
+                font-size: 42px;
+            }
+        }
+        .product-price-box-inner {
+            font-family: 'Barlow';
+            font-size: 33px;
+            font-weight: 600;
+            text-align: left;
+            text-decoration: line-through;
+            color: #b8b6b6;
+            @include breakpoint(ipad-max) {
+                font-size: 32px;
+            }
+        }
+        .product-details-box {
+            font-family: 'Barlow';
+            font-size: 33px;
+            font-weight: 500;
+            text-align: left;
+            color: #a5a5a5;
+            margin-top: 48px;
+            @include breakpoint(mobile-max) {
+                margin-top: 30px;
+                margin-bottom: 50px;
+            }
+            .text-bold {
+                color: #444444;
+            }
+            @include breakpoint(ipad-max) {
+                font-size: 26px;
+            }
+        }
+        .apartment-size {
+            font-family: 'Barlow';
+            font-size: 34px;
+            font-weight: 600;
+            text-align: left;
+            color: #323232;
+            @include breakpoint(ipad-max) {
+                font-size: 30px;
+            }
+        }
+        .apartment-owner-name {
+            font-family: 'Barlow';
+            font-size: 31px;
+            font-weight: 500;
+            text-align: left;
+            color: #a5a5a5;
+            @include breakpoint(ipad-max) {
+                font-size: 28px;
+                margin-top: 22px;
+            }
+        }
+        .apartment-satus {
+            font-family: 'Barlow';
+            font-size: 33px;
+            font-weight: 500;
+            text-align: left;
+            color: #a5a5a5;
+            margin-top: 55px;
+            .text-bold {
+                color: #444444;
+            }
+            @include breakpoint(ipad-max) {
+                font-size: 26px;
+            }
+        }
+        .map-view-wapper {
+            float: right;
+            .mapview-heading {
+                font-family: 'Barlow';
+                font-size: 22px;
+                font-weight: 500;
+                text-align: left;
+                color: #707070;
+                display: inline;
+                margin-right: 8px;
+            }
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 52px;
+                height: 15px;
+                input {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                    &:checked+.slider {
+                        background-color: #e8e8e8;
+                    }
+                    &:focus+.slider {
+                        box-shadow: 0 0 1px #e8e8e8;
+                    }
+                    &:checked+.slider:before {
+                        -webkit-transform: translateX(26px);
+                        -ms-transform: translateX(26px);
+                        transform: translateX(26px);
+                    }
+                }
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #e8e8e8;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        height: 26px;
+                        width: 26px;
+                        left: 0px;
+                        bottom: -5px;
+                        background-color: $theme-primary;
+                        -webkit-transition: .4s;
+                        transition: .4s;
+                    }
+                }
+                .round {
+                    border-radius: 34px;
+                    &::before {
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+    .top-border {
+        padding-top: 50px;
+        padding-top: 50px;
+        padding-left: 15px;
+        padding-right: 15px;
+        .plat-building-box {
+            display: flex;
+            flex-wrap: wrap;
+            li {
+                margin-right: 128px;
+                &:last-child {
+                    margin-right: 0px;
+                }
+                @include breakpoint(mobile-max) {
+                    margin-right: 66px;
+                }
+                p {
+                    font-family: 'Barlow';
+                    font-size: 31px;
+                    line-height: 1.19;
+                    text-align: left;
+                    color: #464646;
+                    margin-bottom: 27px;
+                    @include breakpoint(mobile-max) {
+                        font-size: 24px;
+                    }
+                }
+                .bedrooms-box-wrap {
+                    display: flex;
+                    .bedroom-img {
+                        width: 50%;
+                        img {
+                            // width:100%;
+                            @include breakpoint(mobile-max) {
+                                width: 80%;
+                            }
+                        }
+                    }
+                    .bedroom-no {
+                        font-family: 'Barlow';
+                        font-size: 35px;
+                        font-weight: bold;
+                        text-align: left;
+                        line-height: 52px;
+                        color: $theme-primary;
+                        // &:first-child{
+                        //     padding-left: 5px;
+                        // }
+                        @include breakpoint(mobile-max) {
+                            padding-left: 0px;
+                            line-height: 30px;
+                        }
+                    }
+                }
+            }
+        }
+        .discription-box {
+            display: flex;
+            margin-top: 50px;
+            .desription-heading {
+                font-family: 'Barlow';
+                font-size: 40px;
+                font-weight: 500;
+                line-height: 0.78;
+                text-align: left;
+                color: #444444;
+                margin-right: 64px;
+                @include breakpoint(mobile-max) {
+                    font-size: 35px;
+                }
+            }
+            .desription-para {
+                font-family: 'Barlow';
+                font-size: 26px;
+                line-height: 1.35;
+                text-align: left;
+                color: #707070;
+                @include breakpoint(mobile-max) {
+                    font-size: 20px;
+                }
+                a {
+                    font-family: 'Barlow';
+                    font-size: 25px;
+                    line-height: 2.68;
+                    letter-spacing: 2px;
+                    text-align: left;
+                    color: $theme-primary;
+                    padding-bottom: 10px;
+                    border-bottom: 3px solid $theme-primary;
+                    @include breakpoint(mobile-max) {
+                        font-size: 18px;
+                    }
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#myCarousel {
+    margin-bottom: 50px;
+}
+
+#myCarousel .carousel-indicators {
+    position: static;
+    left: initial;
+    display: flex;
+    flex-direction: column;
+    border: none !important;
+}
+
+#myCarousel .carousel-indicators>li {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100%;
+    height: 124px;
+    text-indent: initial;
+    margin-bottom: 3px;
+}
+
+#myCarousel .carousel-indicators>li img {
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+}
+
+#myCarousel .carousel-indicators>li.active img {
+    opacity: 0.7;
+    border: 3px solid #ff8484;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.carousel-inner img {
+    height: 100%;
+}
+
+.list-toggle {
+    display: none;
+}
+
+.carousel-inner .img-count {
+    border-radius: 21px;
+    background-color: #00000057;
+    width: 12%;
+    height: 40px;
+    font-family: 'Barlow';
+    position: absolute;
+    bottom: 60px;
+    line-height: 37px;
+    color: #ffffff;
+    font-size: 25px;
+    text-align: center;
+    right: 32px;
+}

@@ -1,0 +1,435 @@
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> Proccessing... </p>
+</ngx-spinner> -->
+
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="billForm" id="bills" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+
+                  <h3>{{billInfo}}</h3>
+                  <div class="row">
+                    <!-- <input type="button" (click)="onSave()" value="Save"> -->
+
+                    <div class="col gap-2 grid grid-cols-3 mt-2 ">
+
+                      <div class=" ">
+                        <label for="code" class="label-name">{{'general.code'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" [(ngModel)]="code" name="code"
+                            formControlName="code">
+                          <div *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['code'].errors && f['code'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" ">
+                        <label for="billDate" class="label-name">{{'general.date'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <app-full-date [selectedDate]="billDate" (OnDateSelect)="onSelectBillDate($event)">
+                          </app-full-date>
+                          <div *ngIf="(f['billDate'].touched || f['billDate'].dirty ) && f['billDate'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['billDate'].errors && f['billDate'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="" hidden>
+                        <label for="office" class="label-name">{{'bill.office'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="officeId" [items]="offices" bindLabel="nameAr"
+                            bindValue="id" style="width:100%"></ng-select>
+                          <!-- <div *ngIf="(f['officeId'].touched || f['officeId'].dirty ) && f['officeId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['officeId'].errors && f['officeId'].errors['required']">
+                                                            {{'bill.office-required'|translate}}</span>
+                                                    </div> -->
+                        </div>
+                      </div>
+
+                      <div class="" hidden>
+                        <label for="owner" class="label-name">{{'general.owner'|translate}}
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="ownerId" [items]="owners" bindLabel="nameAr"
+                            bindValue="id" style="width:100%">
+                          </ng-select>
+                          <!-- <div *ngIf="(f['ownerId'].touched || f['ownerId'].dirty ) && f['ownerId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['ownerId'].errors && f['ownerId'].errors['ownerId']">
+                                                            {{'bill.owner-required'|translate}}</span>
+                                                    </div> -->
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showRent">
+                        <label for="tenant" class="label-name">{{'general.tenant'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="tenantId" [items]="tenants" bindLabel="nameAr"
+                            bindValue="id" style="width:100%"></ng-select>
+                          <!-- <div *ngIf="(f['tenantId'].touched || f['tenantId'].dirty ) && f['tenantId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['tenantId'].errors && f['tenantId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showMaintenance">
+                        <label for="supplierId" class="label-name">{{'general.supplier'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+
+                          <ng-select formControlName="supplierId" style="width:100%">
+                            <ng-option *ngFor="let supplier of suppliers"
+                              [value]="supplier.id">{{lang=='ar'?supplier.supplierNameAr:supplier.supplierNameEn}}
+                            </ng-option>
+                          </ng-select>
+                          <!--
+                                                    <div *ngIf="(f['supplierId'].touched || f['supplierId'].dirty ) && f['supplierId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['supplierId'].errors && f['supplierId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+                        </div>
+                      </div>
+
+                      <div class="" hidden>
+                        <label for="ownerAccId" class="label-name">{{'bill.ownerAccId'|translate}}
+                          <span class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" formControlName="ownerAccId" [items]="accounts"
+                            bindLabel="accArName" bindValue="id" style="width:100%"></ng-select>
+                          <!-- <div *ngIf="(f['ownerAccId'].touched || f['ownerAccId'].dirty ) && f['ownerAccId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['ownerAccId'].errors && f['ownerAccId'].errors['ownerAccId']">
+                                                            {{'bill.owner-acc-required'|translate}}</span>
+                                                    </div> -->
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showSaleBuy">
+                        <label for="sellerId" class="label-name" *ngIf="this.kindId==4">
+
+                          {{'general.seller'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+
+                        <label for="sellerId" class="label-name" *ngIf="this.kindId==5">
+
+                          {{'general.purchaser'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="sellerId" style="width:100%">
+
+                            <ng-option *ngFor="let seller of sellers" [value]="seller.id">
+                              {{lang=='ar'?seller.nameAr:seller.nameEn}}</ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['sellerId'].touched || f['sellerId'].dirty ) && f['sellerId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['sellerId'].errors && f['sellerId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+
+
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showSaleBuy">
+                        <label for="purchaserId" class="label-name" *ngIf="this.kindId==4">
+                          {{'general.purchaser'|translate}}
+
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+
+                        <label for="purchaserId" class="label-name" *ngIf="this.kindId==5">
+                          {{'general.seller'|translate}}
+
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="purchaserId" style="width:100%">
+
+                            <ng-option *ngFor="let purchaser of purchasers" [value]="purchaser.id">
+                              {{lang=='ar'?purchaser.nameAr:purchaser.nameEn}}</ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['purchaserId'].touched || f['purchaserId'].dirty ) && f['purchaserId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['purchaserId'].errors && f['purchaserId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+
+
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showRent">
+                        <label for="tenantAccId" class="label-name">{{'general.tenant-account'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="tenantAccId" style="width:100%">
+                            <ng-option *ngFor="let account of tenantAccounts"
+                              [value]="account.id">{{lang=='ar'?account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['tenantAccId'].touched || f['tenantAccId'].dirty ) && f['tenantAccId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['tenantAccId'].errors && f['tenantAccId'].errors['required']">
+                                                            {{'general.required'|translate}}</span>
+                                                    </div> -->
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="taxAccId" class="label-name">{{'general.tax-account'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="taxAccId" style="width:100%">
+                            <ng-option *ngFor="let account of taxAccounts"
+                              [value]="account.id">{{lang=='ar'?account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['taxAccId'].touched || f['taxAccId'].dirty ) && f['taxAccId'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['taxAccId'].errors && f['taxAccId'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div> -->
+
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showRent">
+                        <label for="revenueAccId" class="label-name">{{'general.revenue-account'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="revenueAccId" style="width:100%">
+                            <ng-option *ngFor="let account of revenueAccounts"
+                              [value]="account.id">{{lang=='ar'?account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['revenueAccId'].touched || f['revenueAccId'].dirty ) && f['revenueAccId'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['revenueAccId'].errors && f['revenueAccId'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div> -->
+
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showSaleBuy">
+                        <label for="purchaserAccId" class="label-name">{{'general.purchaser-account'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="purchaserAccId" style="width:100%">
+                            <ng-option *ngFor="let account of purchasersAccounts"
+                              [value]="account.id">{{lang=='ar'?account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['purchaserAccId'].touched || f['purchaserAccId'].dirty ) && f['purchaserAccId'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['purchaserAccId'].errors && f['purchaserAccId'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div> -->
+
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showSaleBuy">
+                        <label for="sellerAccId" class="label-name">{{'general.seller-account'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="sellerAccId" style="width:100%">
+                            <ng-option *ngFor="let account of sellersAccounts" [value]="account.id">{{lang=='ar'?
+                              account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['sellerAccId'].touched || f['sellerAccId'].dirty ) && f['sellerAccId'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['sellerAccId'].errors && f['sellerAccId'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div> -->
+
+                        </div>
+                      </div>
+
+                      <div class="" *ngIf="showMaintenance">
+                        <label for="supplierAccountId" class="label-name">{{'general.supplier-account'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="supplierAccountId" style="width:100%">
+                            <ng-option *ngFor="let account of suppliersAccounts" [value]="account.id">{{lang=='ar'?
+                              account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!--
+                                                    <div *ngIf="(f['supplierAccountId'].touched || f['supplierAccountId'].dirty ) && f['supplierAccountId'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['supplierAccountId'].errors && f['supplierAccountId'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div> -->
+
+                        </div>
+                      </div>
+                      <div class="" *ngIf="showMaintenance">
+                        <label for="expenseAccountId" class="label-name">{{'general.expense-account'|translate}}
+                          <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <div class="input-group  popup">
+                          <ng-select formControlName="expenseAccountId" style="width:100%">
+                            <ng-option *ngFor="let account of expensesAccounts" [value]="account.id">{{lang=='ar'?
+                              account.accArName:account.accEnName}}
+                            </ng-option>
+                          </ng-select>
+                          <!-- <div *ngIf="(f['expenseAccountId'].touched || f['expenseAccountId'].dirty ) && f['expenseAccountId'].invalid"
+                                                    class="alert alert-danger">
+                                                    <i class="fa fa-close "></i>
+                                                    <span
+                                                        *ngIf="f['expenseAccountId'].errors && f['expenseAccountId'].errors['required']">
+                                                        {{'general.required'|translate}}</span>
+                                                </div> -->
+                        </div>
+                      </div>
+                      <div class=" bg-total p-2">
+                        <h5 for="billTotal" class="title-total">{{'bill.bill-total'|translate}} :
+                        </h5>
+                        <label formControlName="billTotal" name="billTotal" class="total-bill">{{billTotal}}</label>
+                      </div>
+
+                      <!-- start tabs -->
+
+                    </div>
+
+
+                  </div>
+                  <hr>
+                  <div class="row bill-table0">
+                    <div class="col gap-12 grid grid-cols-12 ">
+                      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                        <li ngbNavItem [destroyOnHide]="false">
+                          <a ngbNavLink> {{'bill.bill-dues' |translate}}</a>
+                          <ng-template ngbNavContent>
+                            <div class=" table-responsive " *ngIf="showDisplay">
+
+                              <table class="table table-bordered text-center ">
+                                <thead>
+                                  <th>#</th>
+                                  <!-- <th></th> -->
+                                  <th>{{'general.contract-setting'|translate}}</th>
+                                  <th>{{'general.contract-number'|translate}}</th>
+                                  <th>{{'general.due-type'|translate}}</th>
+                                  <th>{{'general.due-amount'|translate}}</th>
+                                  <th>{{'general.due-start-date'|translate}}</th>
+                                  <th>{{'general.due-end-date'|translate}}</th>
+
+                                </thead>
+
+                                <tr *ngFor="let item of billDues; let i= index;">
+                                  <td>
+                                    <!-- {{i+1}} -->
+                                    <input type="checkbox" checked="true" (change)="selectDues(item,$event)">
+
+                                  </td>
+                                  <!-- <td>
+                                                                        <button (click)="deleteBillDue(item.dueId)"
+                                                                            class="btn btn-danger px-3">
+                                                                            <i class="las la-trash-alt"></i>
+                                                                        </button>
+                                                                    </td> -->
+                                  <td>
+                                    {{lang=='ar'?item.contractSettingNameAr:item.contractSettingNameEn}}
+
+                                  </td>
+                                  <td>
+                                    {{item.contractNumber}}
+
+                                  </td>
+                                  <td>
+                                    {{lang=='ar'?item.dueTypeNameAr:item.dueTypeNameEn}}
+                                  </td>
+
+                                  <td>
+                                    {{setDecimalNumber(item.dueAmount)}}
+
+                                  </td>
+
+                                  <td>
+                                    {{item.dueStartDate}}
+                                  </td>
+
+
+                                  <td>
+                                    {{item.dueEndDate}}
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                            <app-bill-dues [typeId]="kindId" *ngIf="showAdd" [contractTypeIds]="contractTypeIds"
+                              [tenantId]="billForm.value.tenantId" [sellerId]="billForm.value.sellerId"
+                              [purchaserId]="billForm.value.purchaserId" [supplierId]="billForm.value.supplierId"
+                              (onBillDuesChange)="onBillDuesChange($event)">
+                            </app-bill-dues>
+                          </ng-template>
+                        </li>
+                      </ul>
+                      <div [ngbNavOutlet]="nav" class=""></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

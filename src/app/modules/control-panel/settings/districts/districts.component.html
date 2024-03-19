@@ -1,0 +1,85 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-units">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0">
+          <div class="card-body">
+            <form [formGroup]="DistrictForm" id="DistrictSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'page-form.district-information'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+                      <div class=" ">
+                        <label for="districtNameAr" class="label-name">
+                          {{'page-form.name-arabic'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="districtNameAr"
+                            formControlName="districtNameAr">
+                          <div
+                            *ngIf="(f['districtNameAr'].touched || f['districtNameAr'].dirty ) && f['districtNameAr'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['districtNameAr'].errors && f['districtNameAr'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="districtNameEn" class="label-name">
+                          {{'page-form.name-latin'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="districtNameEn"
+                            formControlName="districtNameEn">
+                          <div
+                            *ngIf="(f['districtNameEn'].touched || f['districtNameEn'].dirty ) && f['districtNameEn'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['districtNameEn'].errors && f['districtNameEn'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="cityId" class="label-name">
+                          {{'page-form.city'|translate}}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group mb-3 popup">
+                          <ng-select formControlName="cityId" style="width:100%">
+                            <ng-option *ngFor="let city of cities" [value]="city.id">
+                              {{lang=='ar'? city.cityNameAr:city.cityNameEn}}</ng-option>
+                          </ng-select>
+                          <div *ngIf="(f['cityId'].touched || f['cityId'].dirty ) && f['cityId'].invalid"
+                            class="validation alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['cityId'].errors && f['cityId'].errors['required']">
+                              {{'validation-messages.required-field'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="list list-container-add">
+  <app-districts-list [changeDistrictsFlag]="changeDistrictFlag"></app-districts-list>
+</div>

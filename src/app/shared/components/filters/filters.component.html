@@ -1,0 +1,153 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.9)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">{{'general.loading'|translate}}...</p>
+</ngx-spinner>
+<div class="row">
+  <div class="wrapper-title">
+
+    <h3>{{'general.filterSearch'|translate}}</h3>
+  </div>
+</div>
+<div class="row mt-3 filter-search">
+
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowRegion">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.region'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.region'|translate}}" [(ngModel)]='selectedRegionId'
+        name='regionId' class="form-control" id="regionId" (ngModelChange)="onSelectRegion()">
+        <ng-option *ngFor="let region of regionList" [value]="region.id">{{lang=='ar'?
+          region.regionNameAr:region.regionNameEn}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowOwner">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.owner'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.owner'|translate}}" [(ngModel)]='selectedOwnerId'
+        name='owner' class="form-control" id="owner" (change)="GetTenants();GetOffices();GetBuildings()"
+        (ngModelChange)="onSelectOwner()">
+        <ng-option *ngFor="let owner of ownerList" [value]="owner.id">{{lang=='ar'? owner.nameAr:owner.nameEn}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowTenant">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.tenant'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.tenant'|translate}}" [(ngModel)]='selectedTenantId'
+        name='tenantId' class="form-control" id="tenantId" (ngModelChange)="onSelectTenant()">
+        <ng-option *ngFor="let tenant of tenantList" [value]="tenant.id">{{lang=='ar'? tenant.nameAr:tenant.nameEn}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowOffice">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.office'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.office'|translate}}" [(ngModel)]='selectedOfficeId'
+        name='officeId' class="form-control" id="officeId" (ngModelChange)="onSelectOffice()">
+        <ng-option *ngFor="let office of officeList" [value]="office.id">{{lang=='ar'? office.nameAr:office.nameEn}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowRealestate">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.realestate'|translate}}</label>
+
+      <ng-select style="width:100%" placeholder="{{'general.realestate'|translate}}" [(ngModel)]='selectedRealestateId'
+        name='realeStateId' class="form-control" id="realeStateId"
+        (change)="GetBuildings();getSubRealestate(selectedRealestateId)" (ngModelChange)="onSelectRealestate()">
+        <ng-option *ngFor="let realestate of realestateList"
+          [value]="realestate.id">{{lang=='ar'?realestate.realestateNameAr:realestate.realestateNameEn}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowSubRealestate">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.sub-realestate'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.sub-realestate'|translate}}"
+        [(ngModel)]='selectedSubRealestateId' name='subRealeStateId' class="form-control" id="subRealeStateId"
+        (ngModelChange)="onSelectSubRealestate()">
+        <ng-option *ngFor="let subRealestate of subRealestateList" [value]="subRealestate.id">
+          {{lang=='ar'? subRealestate.realestateNameAr:subRealestate.realestateNameEn}}
+        </ng-option>
+      </ng-select>
+
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowBuilding">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.building'|translate}}</label>
+
+      <ng-select style="width:100%" placeholder="{{'general.building'|translate}}" [(ngModel)]='selectedBuildingId'
+        name='buildingId' class="form-control" id="buildingId">
+        <ng-option *ngFor="let building of buildingList" [value]="building.id">{{lang=='ar'?
+          building.buildingNameAr:building.buildingNameEn}}
+        </ng-option>
+      </ng-select>
+
+    </div>
+  </div>
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowUnit">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.unit'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.unit'|translate}}" [(ngModel)]='selectedUnitId'
+        name='unitId' class="form-control" id="unitId" (ngModelChange)="onSelectUnit()">
+        <ng-option *ngFor="let unit of unitList" [value]="unit.id">{{unit.unitNameEn}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowFloor">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.floor'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.floor'|translate}}" [(ngModel)]='selectedFloorId'
+        name='floorId' class="form-control" id="floorId" (ngModelChange)="onSelectFloor()">
+        <ng-option *ngFor="let floor of floorList" [value]="floor.id">{{lang=='ar'?
+          floor.floorNameAr:floor.floorNameEn}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowRentContract">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.rent-contract'|translate}}</label>
+      <ng-select style="width:100%" placeholder="{{'general.rent-contract'|translate}}"
+        [(ngModel)]='selectedRentContractId' name='rentContractId' class="form-control" id="rentContractId"
+        (ngModelChange)="onSelectRentContract()">
+        <ng-option *ngFor="let contract of rentContractList" [value]="contract.id">{{contract.id}}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class=" col-md-6 col-12 mb-2" [hidden]="!ShowOptions.ShowFromDate">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.FromDate'|translate}}</label>
+      <app-full-date (OnDateSelect)="onSelectFromDate($event)" [selectedDate]="selectedFromDate"></app-full-date>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6 mb-2" [hidden]="!ShowOptions.ShowToDate">
+    <div class="form-group">
+      <label for="0" class="label-name">{{'general.ToDate'|translate}}</label>
+      <app-full-date (OnDateSelect)="onSelectToDate($event)" [selectedDate]="selectedToDate"></app-full-date>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-12 pull-right" style="padding-top: 10px;">
+    <button class="btn btn-primary" [hidden]="!ShowOptions.ShowSearch"
+      (click)="FireSearch()">{{'general.search'|translate}}</button>
+  </div>
+</div>

@@ -1,0 +1,690 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}}</p>
+</ngx-spinner>
+<!-- Sidebar -->
+<div id="sidebar-wrapper" class="bg-dark">
+  <div class="logo-name" data-blast="bgColor">
+    <a class="text-white" routerLink="/">
+      <img src="./assets/images/logo/زرياب 1.svg" class="logo-img">
+      <!-- <span class="px-3 sidebar-heading">{{'sidebar.resort-real-estate-version'|translate}} 1.0.1</span> -->
+    </a>
+    <a id="menu-toggle" class="show-mobile">
+      <i class="fa fa-close"></i>
+    </a>
+  </div>
+  <div class="list-group list-group-flush" id="parent" data-blast="bgColor">
+    <ul class="list-unstyled menus">
+      <li routerLinkActive="active" class="list-unstyled">
+        <a href="#" [routerLink]="['/admin/']" routerLinkActive="router-link-active" data-blast="color"
+          class="list-group-item list-group-item-action collapsed" data-parent="#parent" data-toggle="collapse"
+          data-target="#dashboard">
+          <i class="la la-home d-none d-md-block "></i>
+          <span class="nav-dash">{{'sidebar.dashboard'|translate}}
+
+          </span>
+        </a>
+      </li>
+      <li routerLinkActive="active" class="list-unstyled">
+        <a href="#" data-blast="color" class="list-group-item list-group-item-action collapsed" data-parent="#parent"
+          data-toggle="collapse" data-target="#admin">
+          <i class="d-md-block d-none  la la-building-o"></i>
+          <span class="nav-unit"> {{'sidebar.admin-panel'|translate}}
+            <i class="fa fa-angle-down" aria-hidden="true" data-blast="color"></i>
+          </span>
+        </a>
+        <ul class="sub-menu collapse" id="admin" data-blast="color">
+          <li *ngIf="checkUserPermissionsByPageId(1)" routerLinkActive="active">
+            <a [routerLink]="['/admin/admin-panel/user-registeration-request']"
+              routerLinkActive="router-link-active">
+              {{'sidebar.users-registerations-requests'|translate}} </a>
+          </li>
+          <!-- <li *ngIf="checkUserPermissionsByPageId(65)" routerLinkActive="active">
+            <a [routerLink]="['/admin/admin-panel/change-password']"
+              routerLinkActive="router-link-active">
+              {{'sidebar.change-password'|translate}} </a>
+          </li> -->
+          <li *ngIf="checkUserPermissionsByPageId(2)" routerLinkActive="active">
+            <a [routerLink]="['/admin/admin-panel/user-manager']" routerLinkActive="router-link-active">
+              {{'sidebar.user-manager'|translate}} </a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(3)" routerLinkActive="active">
+            <a [routerLink]="['/admin/admin-panel/roles-permissions']" routerLinkActive="router-link-active">
+              {{'sidebar.roles-permissions'|translate}} </a>
+          </li>
+        </ul>
+      </li>
+      <li routerLinkActive="active" data-parent="#parent" class="list-unstyled">
+        <a href="#" data-blast="color" class="list-group-item list-group-item-action collapsed" data-toggle="collapse"
+          data-target="#Unit">
+          <i class="d-md-block d-none  la la-building-o"></i>
+          <span class="nav-unit"> {{'sidebar.unit-and-customers'|translate}}
+            <i class="fa fa-angle-down" aria-hidden="true" data-blast="color"></i>
+          </span>
+        </a>
+        <ul class="sub-menu collapse" id="Unit" data-blast="color">
+          <li routerLinkActive="active" *ngIf="checkUserPermissionsByPageId(1011)">
+            <a [routerLink]="['/admin/definitions/attributes-list']"
+              routerLinkActive="router-link-active">{{'sidebar.attributes'|translate}}</a>
+          </li>
+
+          <li routerLinkActive="active" *ngIf="checkUserPermissionsByPageId(1016)">
+            <a [routerLink]="['/admin/definitions/opportunities-types-list']"
+              routerLinkActive="router-link-active">{{'sidebar.opportunities-types-list'|translate}}</a>
+          </li>
+
+          <li routerLinkActive="active" *ngIf="checkUserPermissionsByPageId(1013)">
+            <a [routerLink]="['/admin/definitions/opportunities-list']"
+              routerLinkActive="router-link-active">{{'sidebar.opportunities'|translate}}</a>
+          </li>
+
+
+          <li routerLinkActive="active" *ngIf="checkUserPermissionsByPageId(1014)">
+            <a [routerLink]="['/admin/definitions/opportunities-offers']"
+              routerLinkActive="router-link-active">{{'sidebar.opportunities-offers'|translate}}</a>
+          </li>
+
+          <li routerLinkActive="active" *ngIf="checkUserPermissionsByPageId(1015)">
+            <a [routerLink]="['/admin/definitions/opportunities-specials']"
+              routerLinkActive="router-link-active">{{'sidebar.opportunities-specials'|translate}}</a>
+          </li>
+
+
+
+          <li *ngIf="checkUserPermissionsByPageId(4)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/owners-list']"
+              routerLinkActive="router-link-active">{{'sidebar.owners'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(10)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/tenants-list']"
+              routerLinkActive="router-link-active">{{'sidebar.tenants'|translate}}</a>
+          </li>
+          
+          <li *ngIf="checkUserPermissionsByPageId(5)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/real-estate-groups-list']"
+              routerLinkActive="router-link-active">
+              {{'sidebar.real-estate-groups'|translate}} </a>
+          </li>
+
+
+          <li routerLinkActive="active" *ngIf="checkUserPermissionsByPageId(7)">
+            <a [routerLink]="['/admin/definitions/buildings']"
+              routerLinkActive="router-link-active">{{'sidebar.buildings'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(35)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/units-types-list']" routerLinkActive="router-link-active">
+              {{'sidebar.units-types'|translate}}</a>
+          </li>
+
+          <li routerLinkActive="active" *ngIf="checkUserPermissionsByPageId(8)">
+            <a [routerLink]="['/admin/definitions/units-list']"
+              routerLinkActive="router-link-active">{{'sidebar.units'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(9)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/grounds-list']"
+              routerLinkActive="router-link-active">{{'sidebar.grounds'|translate}}</a>
+          </li>
+          
+          
+          
+          <li *ngIf="checkUserPermissionsByPageId(11)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/vendors-list']"
+              routerLinkActive="router-link-active">{{'sidebar.vendors'|translate}}</a>
+          </li>
+
+
+
+          <!-- <li *ngIf="checkUserPermissionsByPageId(12)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/offers-list']"
+              routerLinkActive="router-link-active">{{'sidebar.offers'|translate}}</a>
+          </li> -->
+
+
+          <li *ngIf="checkUserPermissionsByPageId(13)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/offices-list']" routerLinkActive="router-link-active">
+              {{'sidebar.real-estate-offices'|translate}}</a>
+          </li>
+          
+          <!-- <li *ngIf="checkUserPermissionsByPageId(15)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/purchasers-list']"
+              routerLinkActive="router-link-active">{{'sidebar.purchasers'|translate}}</a>
+          </li> -->
+          <li *ngIf="checkUserPermissionsByPageId(16)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/vendor-commissions-list']"
+              routerLinkActive="router-link-active">
+              {{'sidebar.vendor-commissions'|translate}}</a>
+          </li>
+
+
+          <!-- <li routerLinkActive="active">
+            <a >{{'sidebar.securities-guarding-companies'|translate}}</a>
+          </li>
+
+
+
+          <li routerLinkActive="active">
+            <a href="#">{{'sidebar.distressed-tenants'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="#">{{'sidebar.security-facts-units'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="#"> {{'sidebar.tenants-claims'|translate}}</a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a href="#">{{'sidebar.administrative-alerts'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="#"> {{'sidebar.private-messages'|translate}}</a>
+          </li> -->
+          <li *ngIf="checkUserPermissionsByPageId(34)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/contracts-settings-list']" routerLinkActive="router-link-active">
+              {{'sidebar.contracts-types'|translate}}</a>
+          <li class="mx-2" routerLinkActive="active" *ngIf="rentContractSettings.length>0">
+            <a>
+              [{{'sidebar.rent-contract' |translate}}] :
+            </a>
+
+          </li>
+          <li class="mx-3" *ngFor="let item of rentContractSettings">
+            <a (click)="getContractInfo(item)" [routerLink]="['/admin/definitions/rent-contracts-list']"
+              [queryParams]="{settingId:item.id}" routerLinkActive="router-link-active">
+              {{getContractName(item)}}
+            </a>
+          </li>
+
+          <li class="mx-2" routerLinkActive="active" *ngIf="salesContractSettings.length>0">
+            <a>
+              [{{'sidebar.sales-contract' |translate}}] :
+            </a>
+
+          </li>
+
+          <li class="mx-3" *ngFor="let item of salesContractSettings">
+            <a (click)="getContractInfo(item)" [routerLink]="['/admin/definitions/contracts-list']"
+              [queryParams]="{'settingId':item.id, 'typeId':item.contractTypeId}"
+              routerLinkActive="router-link-active">{{getContractName(item)}}</a>
+          </li>
+
+          <li class="mx-2" routerLinkActive="active" *ngIf="buyContractSettings.length>0">
+            <a>
+              [{{'sidebar.purchase-contract' |translate}}] :
+            </a>
+
+          </li>
+
+          <li class="mx-3" *ngFor="let item of buyContractSettings">
+            <a (click)="getContractInfo(item)" [routerLink]="['/admin/definitions/contracts-list']"
+              [queryParams]="{'settingId':item.id, 'typeId':item.contractTypeId}"
+              routerLinkActive="router-link-active">{{getContractName(item)}}</a>
+          </li>
+
+        </ul>
+      </li>
+      <li routerLinkActive="active" class="list-unstyled">
+        <a href="#" data-blast="color" data-parent="#parent" class="list-group-item list-group-item-action collapsed"
+          data-toggle="collapse" data-target="#Accounting">
+          <i class="las la-calculator d-none d-md-block "></i>
+          <span class="nav-acc">{{'sidebar.accounting-finance'|translate}}
+            <i class="fa fa-angle-down ss" aria-hidden="true" data-blast="color"></i>
+          </span>
+        </a>
+        <ul class="sub-menu collapse" id="Accounting" data-blast="color">
+          <!--  <li  routerLinkActive="active">
+              <a [routerLink]="['/admin/accounting/accounts-types-list']" routerLinkActive="router-link-active" >Accounts Types</a>
+            </li> -->
+
+         
+
+          <li routerLinkActive="active">
+            <a [routerLink]="['/admin/accounting/accounts-list']"
+              routerLinkActive="router-link-active">{{'sidebar.accounts'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(17)" routerLinkActive="active">
+            <a [routerLink]="['/admin/accounting/entry-type-list']" routerLinkActive="router-link-active">
+              {{'sidebar.entry-type'|translate}}</a>
+          </li>
+
+          <li class="mx-3" routerLinkActive="active" *ngFor="let e of entryTypes;">
+            <a (click)="getEntryTypeData(e)" [routerLink]="['/admin/accounting/voucher-list']"
+              [queryParams]="{typeId:e.id}" routerLinkActive="router-link-active">
+              {{getEntryTypeName(e)}}
+            </a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a [routerLink]="['/admin/accounting/bill-type-list']" routerLinkActive="router-link-active">
+              {{'sidebar.bill-type'|translate}}</a>
+          </li>
+
+          <li class="mx-3" routerLinkActive="active" *ngFor="let b of billTypesUsersPermissions;">
+            <a (click)="getBillTypeData(b)" [routerLink]="['/admin/accounting/bill-list']"
+              [queryParams]="{'typeId':b.billTypeId}" routerLinkActive="router-link-active">
+              {{getBillTypeName(b)}}</a>
+          </li>
+
+
+          <!-- <li routerLinkActive="active">
+            <a [routerLink]="['/admin/accounting/accounts-classification-list']"
+              routerLinkActive="router-link-active">{{'sidebar.accounts-classification'|translate}}</a>
+          </li> -->
+         
+          <!-- <li routerLinkActive="active">
+            <a href="">Request to issue a check</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Benefit</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Generate Entry Benefit</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Entitlements Alerts</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Discount request</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Add a lease Agreement</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Clauses Of New Contracts</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Real Receipt Bonds</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">SAR Exchange Bonds</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Check Cashing Vouchers</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Debit Notices(Add)</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Credit Notices(Deductions)</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Rental Invoice</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Real Estate Marketing Invoice</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Distribution of Revenue Due</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Air Conditioning Bills</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Water Bills</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Banks</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Check Stock</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">Finantial Constraints</a>
+          </li> -->
+        </ul>
+      </li>
+      <li routerLinkActive="active" class="list-unstyled">
+        <a href="#" data-blast="color" class="list-group-item list-group-item-action collapsed" data-toggle="collapse"
+          data-target="#Maintenance">
+          <i class="las la-tools d-none d-md-block "></i>
+          <span class="nav-main">{{'menu.maintenance'|translate}}
+            <i class="fa fa-angle-down" aria-hidden="true" data-blast="color"></i>
+          </span>
+          <!-- </span>
+                </span> -->
+        </a>
+        <ul class="sub-menu collapse" id="Maintenance" data-blast="color">
+
+          <li *ngIf="checkUserPermissionsByPageId(18)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-maintenance-service']"
+              routerLinkActive="router-link-active">{{'menu.maintenance-services'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(19)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-maintenance-warehouse']"
+              routerLinkActive="router-link-active">{{'menu.warehouses'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(20)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-product-category']"
+              routerLinkActive="router-link-active">{{'menu.products-categories'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(21)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-product']"
+              routerLinkActive="router-link-active">{{'menu.products'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(22)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-technician']"
+              routerLinkActive="router-link-active">{{'menu.technicians'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(23)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-supplier']"
+              routerLinkActive="router-link-active">{{'menu.suppliers'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(24)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/maintenance-requests-list']"
+              routerLinkActive="router-link-active">{{'menu.maintenance-requests'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(25)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/products-receipt-list']"
+              routerLinkActive="router-link-active">{{'menu.products-receipts'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(26)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-electricity-meter']"
+              routerLinkActive="router-link-active">{{'menu.electricity-meters'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(27)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/add-water-meter']"
+              routerLinkActive="router-link-active">{{'menu.water-meters'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(28)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/equipments-list']"
+              routerLinkActive="router-link-active">{{'menu.equipments'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(29)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/purchase-orders-list']"
+              routerLinkActive="router-link-active">{{'menu.purchase-orders'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(30)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/maintenance-offers-list']"
+              routerLinkActive="router-link-active">{{'menu.maintenance-offers'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(31)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/purchase-invoices-list']"
+              routerLinkActive="router-link-active">{{'menu.purchase-invoices'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(32)" routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/maintenance-bills-list']"
+              routerLinkActive="router-link-active">{{'menu.maintenance-bills'|translate}}</a>
+          </li>
+
+          <!-- <li routerLinkActive="active">
+            <a [routerLink]="['/admin/maintenance/maintenance-contracts-list']"
+              routerLinkActive="router-link-active">{{'menu.maintenance-contracts'|translate}}</a>
+          </li> -->
+          <li routerLinkActive="active" *ngIf="maintenanceContractSettings.length>0">
+            <a>
+              [{{'sidebar.maintenance-contracts' |translate}}]:
+            </a>
+
+          </li>
+          <li class="mx-3" *ngFor="let item of maintenanceContractSettings">
+            <a (click)="getContractInfo(item)" [routerLink]="['/admin/maintenance/maintenance-contracts-list']"
+              [queryParams]="{settingid:item.id}" routerLinkActive="router-link-active">{{getContractName(item)}}</a>
+          </li>
+        </ul>
+      </li>
+      <li routerLinkActive="active" class="list-unstyled">
+        <a href="#" data-blast="color" class="list-group-item list-group-item-action collapsed" data-toggle="collapse"
+          data-target="#Settings">
+          <!-- <img src="./assets/images/settings.png" alt="icon" class="d-none d-md-block" /> -->
+          <!-- <img src="./assets/images/settings_white.png" alt="icon" class="d-block d-md-none" /> -->
+          <i class="las la-cog d-none d-md-block "></i>
+          <span class="nav-set">{{'sidebar.settings'|translate}}
+            <i class="fa fa-angle-down" aria-hidden="true" data-blast="color"></i>
+          </span>
+          <!--     </span>
+                </span> -->
+        </a>
+        <ul class="sub-menu collapse" id="Settings" data-blast="color">
+          <li *ngIf="checkUserPermissionsByPageId(33)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/system-settings']" routerLinkActive="router-link-active">
+              {{'sidebar.system-settings'|translate}}</a>
+          </li>
+          <!---------------------------------------------------------------->
+          <li *ngIf="checkUserPermissionsByPageId(1017)" routerLinkActive="active">
+            <a [routerLink]="['/admin/accounting/acc-settings']" routerLinkActive="router-link-active">
+              {{'sidebar.acc-settings'|translate}}</a>
+          </li>
+          <!----------------------------------------------------------------->
+
+
+
+          <li *ngIf="checkUserPermissionsByPageId(66)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/dashboard-settings']" routerLinkActive="router-link-active">
+              {{'sidebar.dashboard-settings'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(64)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/company-information']" routerLinkActive="router-link-active">
+              {{'sidebar.company-information'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(64)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/jobs-titles']" routerLinkActive="router-link-active">
+              {{'sidebar.jobs-titles'|translate}}</a>
+          </li>
+
+          <!-- <li  routerLinkActive="active">
+              <a [routerLink]="['/admin/settings/contracts-types-list']" routerLinkActive="router-link-active">{{'sidebar.contracts-types'|translate}}</a>
+            </li> -->
+
+          <li *ngIf="checkUserPermissionsByPageId(6)" routerLinkActive="active">
+            <a [routerLink]="['/admin/definitions/floors-list']"
+              routerLinkActive="router-link-active">{{'sidebar.floors-list'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(36)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-unit-service']" routerLinkActive="router-link-active">
+              {{'sidebar.units-services'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(37)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-country']"
+              routerLinkActive="router-link-active">{{'sidebar.countries'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(38)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-region']"
+              routerLinkActive="router-link-active">{{'sidebar.regions'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(39)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-city']"
+              routerLinkActive="router-link-active">{{'sidebar.cities'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(40)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-district']"
+              routerLinkActive="router-link-active">{{'sidebar.districts'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(41)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-company-activity']"
+              routerLinkActive="router-link-active">{{'sidebar.company-activities'|translate}}
+            </a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(42)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-nationality']"
+              routerLinkActive="router-link-active">{{'sidebar.nationalities'|translate}}</a>
+          </li>
+          <!-- <li routerLinkActive="active">
+            <a href="#">{{'sidebar.clauses-new-contracts'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="#">{{'sidebar.taxes'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="#">{{'sidebar.variable-selectors'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="#">{{'sidebar.terms-contracts'|translate}} </a>
+          </li> -->
+          <li *ngIf="checkUserPermissionsByPageId(43)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/add-currency']"
+              routerLinkActive="router-link-active">{{'sidebar.currencies'|translate}}</a>
+          </li>
+          <!-- <li routerLinkActive="active">
+            <a href="#">{{'sidebar.realestate-market-settings'|translate}}</a>
+          </li> -->
+          <!-- <li routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/control-fields']"
+              routerLinkActive="router-link-active">{{'sidebar.control-fields'|translate}}</a>
+          </li> -->
+          <!--  <li routerLinkActive="active">
+            <a href="#">{{'sidebar.advertisement-management'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="#">{{'sidebar.lists-management'|translate}}</a>
+          </li> -->
+          <li *ngIf="checkUserPermissionsByPageId(44)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/notifications-management-settings']"
+              routerLinkActive="router-link-active">{{'sidebar.notifications-manager'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(45)" routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/notifications-configurations-list']"
+              routerLinkActive="router-link-active">{{'noifications-configs.notifications-page-title'|translate}}</a>
+          </li>
+
+          <!-- <li routerLinkActive="active">
+            <a href="#">{{'sidebar.search-parameters'|translate}}</a>
+          </li> -->
+          <!-- <li routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/menu-setting']" routerLinkActive="router-link-active">
+              {{'sidebar.menu-settings'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/screen-setting']" routerLinkActive="router-link-active">
+              {{'sidebar.screen-settings'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/admin/settings/site-info-setting']" routerLinkActive="router-link-active">
+              {{'sidebar.site-info-settings'|translate}}</a>
+          </li> -->
+
+        </ul>
+      </li>
+
+      <li routerLinkActive="active" class="list-unstyled">
+        <a href="#" data-blast="color" class="list-group-item list-group-item-action collapsed " data-toggle="collapse"
+          data-target="#Reports">
+          <i class="d-md-block d-none  la la-building-o"></i>
+          <span class="nav-unit"> {{'sidebar.reports'|translate}}
+            <i class="fa fa-angle-down" aria-hidden="true" data-blast="color"></i>
+          </span>
+        </a>
+        <ul class="sub-menu collapse" id="Reports" data-blast="color">
+          <li *ngIf="checkUserPermissionsByPageId(46)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/office-summary']" routerLinkActive="router-link-active">
+              {{'sidebar.office-summary-report'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(47)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/life-time-debt']" routerLinkActive="router-link-active">
+              {{'sidebar.life-time-debt-report'|translate}}
+            </a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(48)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/unit-status']" routerLinkActive="router-link-active">
+              {{'sidebar.units-status-report'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(49)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/units-expenses']" routerLinkActive="router-link-active">
+              {{'sidebar.units-expenses-report'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(50)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/unit-lease-account']"
+              routerLinkActive="router-link-active">{{'sidebar.account-unit-tenant-report'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(51)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/tenants-dues']" routerLinkActive="router-link-active">
+              {{'sidebar.tenants-dues-report'|translate}}</a>
+          </li>
+          
+
+
+          <li *ngIf="checkUserPermissionsByPageId(52)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/units-dues']"
+              routerLinkActive="router-link-active">{{'sidebar.units-dues-report'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(53)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/historical-unit']"
+              routerLinkActive="router-link-active">{{'sidebar.historical-movement-of-units-report'|translate}} </a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(54)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/units-detection']" routerLinkActive="router-link-active">
+              {{'sidebar.units-report'|translate}}</a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(55)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/rents-dues']"
+              routerLinkActive="router-link-active">{{'sidebar.rents-dues-report'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(56)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/contracts-detection']"
+              routerLinkActive="router-link-active">{{'sidebar.contracts-report'|translate}} </a>
+          </li>
+          <li *ngIf="checkUserPermissionsByPageId(57)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/vendors-commissions']"
+              routerLinkActive="router-link-active">{{'sidebar.vendors-commissions'|translate}}
+            </a>
+          </li>
+
+
+          <li *ngIf="checkUserPermissionsByPageId(58)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/electricity-consumption']" routerLinkActive="router-link-active">
+              {{'sidebar.monthly-electricity-consumption'|translate}}</a>
+          </li>
+
+          <li *ngIf="checkUserPermissionsByPageId(59)" routerLinkActive="active">
+            <a [routerLink]="['/admin/reports/water-consumption']" routerLinkActive="router-link-active">
+              {{'sidebar.monthly-water-consumption'|translate}}</a>
+          </li>
+
+
+
+        </ul>
+      </li>
+      <!-- <li routerLinkActive="active" class="list-unstyled">
+        <a [routerLink]="['/auciont']" routerLinkActive="router-link-active" data-blast="color"
+          class="list-group-item list-group-item-action collapsed" data-toggle="collapse" data-target="#auction">
+
+          <i class="las la-briefcase d-none d-md-block "></i>
+          <span class="nav-auction">{{'sidebar.auctions'|translate}}
+            <i class="fa fa-angle-down" aria-hidden="true" data-blast="color"></i>
+          </span>
+
+        </a>
+        <ul class="sub-menu collapse" id="auction" data-blast="color">
+          <li routerLinkActive="active">
+            <a [routerLink]="['/admin/auctions/real-estate-auction']" routerLinkActive="router-link-active">
+              {{'sidebar.realestate-auction'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">{{'sidebar.auction-system-options'|translate}}</a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a href="">{{'sidebar.auction-clients'|translate}}
+            </a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/admin/auctions/real-estate-auction']"
+              routerLinkActive="router-link-active">{{'sidebar.auctions'|translate}}</a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">{{'sidebar.auctions-fees'|translate}}
+            </a>
+          </li>
+          <li routerLinkActive="active">
+            <a href="">{{'sidebar.auction-receipt'|translate}}</a>
+          </li>
+        </ul>
+      </li> -->
+
+
+    </ul>
+  </div>
+</div>
+
+
+<!-- /#sidebar-wrapper -->

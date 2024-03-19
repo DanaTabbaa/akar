@@ -1,0 +1,543 @@
+.property-left-box {
+    margin-top: 16px;
+    margin-bottom: 55px;
+}
+
+.property-left-box .reset-heading {
+    font-family: 'Barlow';
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.56;
+    text-align: left;
+    color: #535353;
+}
+
+.property-left-box .filter-heading {
+    font-family: 'Barlow';
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.56;
+    text-align: left;
+    color: #535353;
+    position: relative;
+}
+
+.property-left-box .filter-heading::after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    background: #ff8484;
+    height: 7px;
+    width: 24px;
+    left: 0;
+}
+
+.property-grid-view {
+    box-shadow: 0 30px 40px 0 rgba(203, 203, 203, 0.3);
+    background: #fff;
+    padding: 20px;
+}
+
+.property-grid-view form {
+    padding-top: 15px;
+    margin-bottom: 27px;
+}
+
+.property-grid-view .icon-location {
+    border: 1px solid #C5C5C5;
+    height: 46px;
+    font-size: 15px;
+    font-family: "Barlow", sans-serif;
+    font-weight: 300;
+    border-radius: 8px;
+    width: 100%;
+    padding-left: 15px;
+    /* background-position: 361px 10px; */
+    background: url(../images/property/map.png) no-repeat;
+    background-position: 284px 11px;
+    text-align: left;
+}
+
+.property-grid-view .panel-default {
+    position: relative;
+}
+
+.property-grid-view .panel-default::after {
+    content: "";
+    height: 1px;
+    width: 70px;
+    background: rgba(203, 203, 203, 0.3);
+}
+
+.property-grid-view .panel-default .panel-heading {
+    height: 40px;
+}
+
+.property-grid-view .panel-default .panel-heading .panel-title a {
+    font-size: 15px;
+    color: #272424;
+    font-family: 'Barlow';
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.property-grid-view .panel-default .panel-heading .panel-title a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content: "\f068";
+    padding-right: 5px;
+    color: rgba(203, 203, 203, 0.4);
+}
+
+.property-grid-view .panel-default .panel-heading .panel-title a.collapsed:before {
+    float: right !important;
+    content: "\f067";
+}
+
+.property-grid-view .panel-default .panel-heading .panel-title a:hover,
+.property-grid-view .panel-default .panel-heading .panel-title a:active,
+.property-grid-view .panel-default .panel-heading .panel-title a:focus {
+    text-decoration: none;
+}
+
+.property-grid-view .panel-default .panel-collapse {
+    height: 250px;
+}
+
+.property-grid-view .panel-default .panel-body .budget-list {
+    margin-bottom: 0px;
+    margin-top: 28px;
+}
+
+.property-grid-view .panel-default .panel-body .budget-list li {
+    border-radius: 34px;
+    border: solid 1px #cfcfcf;
+    background-color: #ffffff;
+    padding: 11px 20px;
+    height: 36px;
+    width: 111px;
+    margin-right: 21px;
+    line-height: 14px;
+}
+
+.property-grid-view .panel-default .panel-body .type-property {
+    border-radius: 8px;
+    border: solid 1px #e6e6e6;
+    background-color: #ffffff;
+    padding: 18px 18px 0px 20px;
+}
+
+.property-grid-view .panel-default .panel-body .type-property ul li a {
+    font-family: 'Barlow';
+    font-size: 15px;
+    line-height: 2.2;
+    text-align: left;
+    color: #272424;
+    text-decoration: none;
+}
+
+.property-grid-view .panel-default .panel-body .bhk-box ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property-grid-view .panel-default .panel-body .bhk-box ul li {
+    opacity: 0.8;
+    font-family: 'Barlow';
+    font-size: 15px;
+    font-weight: 500;
+    padding: 4px 0px 4px 0px;
+    margin-bottom: 16px;
+    text-align: left;
+    width: 20%;
+    margin-right: 16px;
+    margin-top: 13px;
+    text-transform: lowercase;
+}
+
+.property-grid-view .panel-default .panel-body .bhk-box ul li.active {
+    border-radius: 17px;
+    background-color: #a98d4d;
+    color: #fff;
+    text-align: center;
+    padding: 4px 10px 4px 10px;
+}
+
+.property-grid-view .bottom-washroom-bbox {
+    margin-top: 45px;
+}
+
+.property-grid-view .bottom-washroom-bbox h3 {
+    font-family: 'Barlow';
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 12px;
+    text-align: left;
+    color: #272424;
+}
+
+.property-grid-view .bottom-washroom-bbox select {
+    width: 100%;
+    margin-top: 21px;
+    background-color: #ffffff !important;
+    color: #000 !important;
+    border: 1px solid #c5c5c5 !important;
+    padding: 15px 0px 13px 17px !important;
+    font-size: 14px;
+    margin-bottom: 24px;
+    border-radius: 8px !important;
+    height: 49px !important;
+}
+
+.property-listing-box {
+    margin-top: 80px;
+}
+
+.property-listing-box .listingright-box {
+    margin-bottom: 50px;
+}
+
+.property-listing-box .listingright-box .map-view-heading {
+    float: left;
+    width: 57%;
+    font-family: 'Barlow';
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left;
+    color: #707070;
+    margin-top: 16px;
+}
+
+.property-listing-box .listingright-box .listingright-box-inner {
+    float: right;
+    width: 40%;
+}
+
+.property-listing-box .listingright-box .listingright-box-inner .tab-card {
+    float: left;
+    width: 50%;
+}
+
+.property-listing-box .listingright-box .listingright-box-inner .tab-card .tab-card-header .card-header-tabs .nav-item {
+    border: 1px solid #ddd;
+    margin-right: 8px;
+    line-height: 26px;
+    border-radius: 5px;
+}
+
+.property-listing-box .listingright-box .listingright-box-inner .tab-card .tab-card-header .card-header-tabs .nav-item:last-child {
+    margin-right: 0px;
+}
+
+.property-listing-box .listingright-box .listingright-box-inner .tab-card .tab-card-header .card-header-tabs .nav-item a.active {
+    background: #a98d4d !important;
+    border-color: #a98d4d #a98d4d #a98d4d !important;
+}
+
+.property-listing-box .listingright-box .listingright-box-inner #select {
+    float: right;
+    width: 50%;
+    background-color: #ffffff !important;
+    color: #000 !important;
+    border: 1px solid #c5c5c5 !important;
+    padding: 1px 0px 6px 19px !important;
+    font-size: 14px;
+    border-radius: 8px !important;
+    height: 42px !important;
+    color: #535353;
+    font-size: 16px;
+    margin-top: 9px;
+}
+
+.property-listing-box .listingright-box .listingright-box-inner .clear-float-fix {
+    clear: both;
+}
+
+.property-listing-box .clear-float {
+    clear: both;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box {
+    display: flex;
+    border: 1px solid #ddd;
+    margin-top: 28px;
+    border-radius: 5px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-img {
+    width: 30%;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details {
+    padding-top: 13px;
+    width: 30%;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details h2 {
+    font-family: 'Barlow';
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    color: #323232;
+    margin-bottom: 9px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details p {
+    font-family: 'Barlow';
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.75;
+    letter-spacing: normal;
+    text-align: left;
+    color: #a5a5a5;
+    margin-top: 22px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details p .appar-bold {
+    color: #444444;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details ul li {
+    margin-right: 33px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details ul li .apartments-parts {
+    font-family: 'Barlow';
+    font-size: 15px;
+    line-height: 1.2;
+    text-align: left;
+    color: #464646;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details ul li .apartments-logo-img img {
+    width: 20px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .apartments-details ul li .apartments-logo-img span {
+    font-family: 'Barlow';
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #464646;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .contact-box {
+    width: 40%;
+    text-align: right;
+    padding-right: 13px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .contact-box .contact-heading {
+    font-family: 'Barlow';
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 0.59;
+    text-align: right;
+    color: #a98d4d;
+    margin-top: 17px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .contact-box .emi-info {
+    font-family: 'Barlow';
+    font-size: 15px;
+    line-height: 0.75;
+    text-align: right;
+    color: #ff8484;
+    margin-top: 33px;
+}
+
+.property-listing-box .property-listing-tabs .apartments-info-box .contact-box .btn-price {
+    padding: 10px 30px;
+    border-radius: 8px;
+    background-color: #ff8484;
+    font-family: 'Barlow';
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 108px;
+    color: #ffffff;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 22px;
+    padding: 8px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-img {
+    position: relative;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-img img {
+    width: 100%;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-img .btn-price {
+    padding: 10px 30px;
+    border-radius: 8px;
+    background-color: #ff8484;
+    font-family: 'Barlow';
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #ffffff;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 {
+    display: flex;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-box {
+    float: left;
+    width: 67%;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-box .app-h {
+    font-family: 'Barlow';
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.6;
+    letter-spacing: normal;
+    text-align: left;
+    color: #323232;
+    margin-bottom: 18px;
+    margin-top: 15px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-box .grid-apparment-name {
+    font-family: 'Barlow';
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.75;
+    letter-spacing: normal;
+    text-align: left;
+    color: #a5a5a5;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-box .grid-apparment-details {
+    font-family: 'Barlow';
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.73;
+    letter-spacing: normal;
+    text-align: left;
+    color: #a5a5a5;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-box .grid-apparment-details .appar-bold {
+    color: #707070;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-box .grid-apparment-status {
+    font-family: 'Barlow';
+    font-size: 13px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.73;
+    letter-spacing: normal;
+    text-align: left;
+    color: #a5a5a5;
+    margin-top: 15px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-box .grid-apparment-status .appar-bold {
+    color: #707070;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-right {
+    width: 32%;
+    float: left;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-right .contact-box {
+    text-align: right;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-right .contact-box .contact-heading {
+    font-family: 'Barlow';
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 0.59;
+    text-align: right;
+    color: #a98d4d;
+    margin-top: 17px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-right .contact-box .emi-info {
+    font-family: 'Barlow';
+    font-size: 15px;
+    line-height: 0.75;
+    text-align: right;
+    color: #ff8484;
+    margin-top: 20px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-details1 .grid-apparment-left-right .contact-box .btn-price {
+    padding: 10px 30px;
+    border-radius: 8px;
+    background-color: #ff8484;
+    font-family: 'Barlow';
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 90px;
+    color: #ffffff;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-list-view {
+    padding: 7px 7px 7px 0px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-list-view li .apartments-parts {
+    font-family: 'Barlow';
+    font-size: 13px;
+    line-height: 1.15;
+    margin-right: 35px;
+    text-align: left;
+    color: #464646;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-list-view li .apartments-logo-img img {
+    width: 20px;
+}
+
+.property-listing-box .property-listing-tabs .grid-apparment-list .grid-apparment-list-view li .apartments-logo-img .appartments-num {
+    font-family: 'Barlow';
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.15;
+    letter-spacing: normal;
+    text-align: left;
+    color: #464646;
+}
+
+.property-listing-box .mb-sapce {
+    margin-top: 95px;
+}
+
+.property-listing-box .mb-sapce img {
+    width: 100%;
+}

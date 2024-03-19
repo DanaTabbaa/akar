@@ -1,0 +1,840 @@
+<!-- Section  -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white ;font-size: 20px;"> {{'page-form.loading'|translate}} </p>
+</ngx-spinner>
+<section class="inner-page-wrapper inner-page-wrapper-building">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card m-0 mb-5">
+                    <div class="card-body">
+                        <form [formGroup]="ownerForm" id="OwnerFormSubmit" class="tabs-form">
+                            <div class="main-customer">
+                                <div class="wrapper-title">
+                                    <h3>{{'page-form.owner-information'|translate}}</h3>
+                                    <div class="row">
+                                        <div class="col gap-2 grid grid-cols-3 ">
+
+
+                                            <div class="">
+                                                <label for="registeration-type"
+                                                    class="label-name">*{{'page-form.registeration-type'|translate}}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group  popup">
+                                                    <ng-select class="custom" formControlName="registrationTypeId"
+                                                        [items]="regsiterTypes" bindLabel="name" bindValue="id"
+                                                        style="width:100%" (change)="onRegisterationTypeChange($event)">
+                                                    </ng-select>
+                                                    <div *ngIf="(f['registrationTypeId'].touched || f['registrationTypeId'].dirty ) && f['registrationTypeId'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['registrationTypeId'].errors && f['registrationTypeId'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}} </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="code"
+                                                    class="label-name">{{'page-form.owner-number'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control icon-user" name="code"
+                                                        formControlName="code">
+                                                    <div *ngIf="(f['code'].touched || f['code'].dirty ) && f['code'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span *ngIf="f['code'].errors && f['code'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="nameAr"
+                                                    class="label-name">{{'page-form.name-arabic'|translate}} <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control" name="nameAr"
+                                                        formControlName="nameAr">
+                                                    <div *ngIf="(f['nameAr'].touched || f['nameAr'].dirty ) && f['nameAr'].invalid"
+                                                        class="validation alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['nameAr'].errors && f['nameAr'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="nameEn"
+                                                    class="label-name">{{'page-form.name-latin'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control" name="nameEn"
+                                                        formControlName="nameEn">
+                                                    <div *ngIf="(f['nameEn'].touched || f['nameEn'].dirty ) && f['nameEn'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['nameEn'].errors && f['nameEn'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="phone"
+                                                    class="label-name">{{'page-form.phone-number'|translate}}</label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control" maxLength="20" name="phone"
+                                                        formControlName="phone">
+                                                    <div *ngIf="f['phone'].touched && f['phone'].invalid"
+                                                        class=" alert-danger validtion">
+                                                        <div *ngIf="f['phone'].errors && f['phone'].invalid"><i
+                                                                class="fa fa-close "></i>
+                                                            {{'validation-messages.invalid-phone'|translate}}
+                                                        </div>
+                                                        <div *ngIf="f['phone'].errors && f['phone'].errors['pattern']">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'validation-messages.phone-pattern'|translate}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="validation alert-success"
+                                                        *ngIf="f['phone'].touched && f['phone'].valid && f['phone'].dirty">
+                                                        <i class="fa fa-check"></i>
+                                                        {{'validation-messages.valid-phone'|translate}}
+                                                    </div>
+                                                    <div class="validtion alert-danger"
+                                                        *ngIf="(f['phone'].touched && f['phone'].errors) && f['phone'].errors['required']">
+                                                        <i class="fa fa-close "></i> {{'general.required'|translate}}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="mobile"
+                                                    class="label-name">{{'page-form.mobile-number'|translate}}</label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" maxLength="20" class="form-control" name="mobile"
+                                                        formControlName="mobile">
+                                                    <div *ngIf="f['mobile'].touched && f['mobile'].invalid"
+                                                        class=" alert-danger validtion">
+                                                        <div *ngIf="f['mobile'].errors && f['mobile'].invalid"><i
+                                                                class="fa fa-close "></i>
+                                                            {{'validation-messages.invalid-mobile'|translate}}
+                                                        </div>
+                                                        <div
+                                                            *ngIf="f['mobile'].errors && f['mobile'].errors['pattern']">
+                                                            <i class="fa fa-close "></i>
+                                                            {{'validation-messages.phone-pattern'|translate}}.
+                                                        </div>
+                                                    </div>
+                                                    <div class="validation alert-success"
+                                                        *ngIf="f['mobile'].touched && f['mobile'].valid && f['mobile'].dirty">
+                                                        <i class="fa fa-check"></i>
+                                                        {{'validation-messages.valid-mobile'|translate}}
+                                                    </div>
+                                                    <div class="validtion alert-danger"
+                                                        *ngIf="(f['mobile'].touched && f['mobile'].errors) && f['mobile'].errors['required']">
+                                                        <i class="fa fa-close "></i> {{'general.required'|translate}}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="fax" class="label-name">{{'page-form.fax'|translate}}
+                                                </label>
+                                                <div class="form-group input-group">
+                                                    <input type="text" maxLength="20" class="form-control" name="fax"
+                                                        formControlName="fax">
+                                                    <div *ngIf="f['fax'].touched && f['fax'].invalid"
+                                                        class=" alert-danger validtion">
+                                                        <div *ngIf="f['fax'].errors && f['fax'].invalid"><i
+                                                                class="fa fa-close "></i>
+                                                            {{'validation-messages.invalid-fax'|translate}}
+                                                        </div>
+                                                        <div *ngIf="f['fax'].errors && f['fax'].errors['pattern']"> <i
+                                                                class="fa fa-close "></i>
+                                                            {{'validation-messages.phone-pattern'|translate}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="validation alert-success"
+                                                        *ngIf="f['fax'].touched && f['fax'].valid && f['fax'].dirty"> <i
+                                                            class="fa fa-check"></i>
+                                                        {{'validation-messages.valid-fax'|translate}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" ">
+                                                <label for="email" class="label-name">{{'page-form.email'|translate}}
+                                                </label>
+                                                <div class="form-group input-group">
+                                                    <input type="email" class="form-control" name="email"
+                                                        formControlName="email"
+                                                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                                    <div class="validtion alert-danger"
+                                                        *ngIf="(f['email'].touched && f['email'].dirty) && f['email'].invalid">
+                                                        <i class="fa fa-close "></i>
+                                                        {{'validation-messages.invalid-email'|translate}}
+                                                    </div>
+                                                    <div *ngIf="f['email'].touched && f['email'].valid && f['email'].dirty"
+                                                        class="validtion alert-success">
+                                                        <i class="fa fa-check"></i>
+                                                        {{'validation-messages.valid-email'|translate}}
+                                                    </div>
+                                                    <div class="validtion alert-danger"
+                                                        *ngIf="(f['email'].touched && f['email'].errors) && f['email'].errors['required']">
+                                                        <i class="fa fa-close "></i> {{'general.required'|translate}}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" ">
+                                                <label for="nationalityId"
+                                                    class="label-name">{{'page-form.nationality'|translate}}</label>
+                                                <div class="input-group  popup">
+                                                    <ng-select formControlName="nationalityId" name="nationalityId"
+                                                        id="nationalityId" style="width:100%">
+                                                        <ng-option *ngFor="let item of nationalities;"
+                                                            [value]="item.id">
+                                                            {{lang=='ar'?item.nationalityNameAr:item.nationalityNameEn}}
+                                                        </ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+
+                                            <!-------------------------------------------->
+
+
+                                            <div class=" " *ngIf="ownerForm.value.registrationTypeId==2">
+                                                <label for="nameEn"
+                                                    class="label-name">{{'page-form.commercial-register-number'|translate}}<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group input-group">
+
+                                                    <input type="text" class="form-control"
+                                                        name="commercialRegisterNumber"
+                                                        formControlName="commercialRegisterNumber">
+                                                    <div *ngIf="(f['commercialRegisterNumber'].touched || f['commercialRegisterNumber'].dirty ) && f['commercialRegisterNumber'].invalid"
+                                                        class="alert alert-danger">
+                                                        <i class="fa fa-close "></i>
+                                                        <span
+                                                            *ngIf="f['commercialRegisterNumber'].errors && f['commercialRegisterNumber'].errors['required']">
+                                                            {{'validation-messages.required-field'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" " *ngIf="ownerForm.value.registrationTypeId==2">
+                                                <label for="commercialRegisterDate"
+                                                    class="label-name">{{'page-form.commercial-register-date'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <app-full-date name="commercialRegisterDate"
+                                                        [selectedDate]="commercialRegisterDate"
+                                                        (OnDateSelect)="getCommRegDate($event)">
+                                                    </app-full-date>
+                                                </div>
+                                            </div>
+
+                                            <div class=" " *ngIf="ownerForm.value.registrationTypeId==2">
+                                                <label for="commercialRegisterExpireDate"
+                                                    class="label-name">{{'page-form.commercial-register-expire-date'|translate}}
+                                                </label>
+                                                <div class="form-group">
+                                                    <app-full-date name="commercialRegisterExpireDate"
+                                                        [selectedDate]="commercialRegisterExpireDate"
+                                                        (OnDateSelect)="getCommRegEndDate($event)">
+                                                    </app-full-date>
+                                                </div>
+                                            </div>
+
+                                            <div class=" " *ngIf="ownerForm.value.registrationTypeId==2">
+                                                <label for="commercialRegisterPlace"
+                                                    class="label-name">{{'page-form.commercial-register-place'|translate}}</label>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control"
+                                                        name="commercialRegisterPlace"
+                                                        formControlName="commercialRegisterPlace">
+                                                </div>
+                                            </div>
+                                            <div class=" " *ngIf="ownerForm.value.registrationTypeId==2">
+                                                <label for="taxNumber"
+                                                    class="label-name">{{'page-form.tax-number'|translate}}</label>
+                                                <div class="form-group input-group">
+
+                                                    <input type="number" class="form-control" name="taxNumber"
+                                                        formControlName="taxNumber">
+                                                </div>
+                                            </div>
+                                            <!-------------------------------------------->
+
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class=" d-flex align-items-center">
+                                        <div class="form-group d-flex align-items-center gap-1">
+                                            <div class="example-button-container">
+                                                <button mat-mini-fab color="accent" (click)="openQuickModal()"
+                                                    aria-label="Example icon button with a plus one icon">
+                                                    <mat-icon>add</mat-icon>
+                                                </button>
+                                            </div>
+                                            <!-- <input type="checkbox" name="isAddPersonAuthorized"
+                                            (onChange)="onCheckIsAddPersonAuthorized()" formControlName="isAddPersonAuthorized"> -->
+
+                                            <label for="isAddPersonAuthorized"
+                                                class="label-name m-0">{{'page-form.isAdd-person-authorized'|translate}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- start tabs -->
+                                    <nav ngbNav #nav="ngbNav" [(activeId)]="activeTap" class="nav-tabs mt-3">
+
+                                        <!-- <li [ngbNavItem]="1" *ngIf="ownerForm.value.isAddResponsiblePerson">
+                                            <a ngbNavLink>{{'page-form.responsible-person-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="align-items-end col gap-2 grid grid-cols-3">
+                                                        <div class=" ">
+                                                            <label for="responsibleNameAr"
+                                                                class="label-name">{{'page-form.name-arabic'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="responsibleNameAr"
+                                                                    formControlName="responsibleNameAr">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="responsibleNameEn"
+                                                                class="label-name">{{'page-form.name-latin'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="responsibleNameEn"
+                                                                    formControlName="responsibleNameEn">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="respoMobile"
+                                                                class="label-name">{{'page-form.mobile-number'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="respoMobile" formControlName="respoMobile">
+                                                                <div *ngIf="f['respoMobile'].touched && f['respoMobile'].invalid"
+                                                                    class=" alert-danger validtion">
+                                                                    <div
+                                                                        *ngIf="f['respoMobile'].errors && f['respoMobile'].invalid">
+                                                                        <i class="fa fa-close "></i>
+                                                                        {{'validation-messages.invalid-mobile'|translate}}
+                                                                    </div>
+                                                                    <div
+                                                                        *ngIf="f['respoMobile'].errors && f['respoMobile'].errors['pattern']">
+                                                                        <i class="fa fa-close "></i>
+                                                                        {{'general.numbers-only'|translate}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="validation alert-success"
+                                                                    *ngIf="f['respoMobile'].touched && f['respoMobile'].valid && f['respoMobile'].dirty">
+                                                                    <i class="fa fa-check"></i>
+                                                                    {{'validation-messages.valid-mobile'|translate}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="respoIdentityNo"
+                                                                class="label-name">{{'page-form.identity-number'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="respoIdentityNo"
+                                                                    formControlName="respoIdentityNo">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for=""
+                                                                class="label-name">{{'page-form.identity-date'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <app-full-date name="respoIdentityDate" ngDefaultControl
+                                                                    formControlName="respoIdentityDate"
+                                                                    [selectedDate]="respoIdentityDate"
+                                                                    (OnDateSelect)="getRespoIdentityDate($event)">
+                                                                </app-full-date>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for=""
+                                                                class="label-name">{{'page-form.expiration-date-of-identity'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <app-full-date name="respoIdentityExpireDate"
+                                                                    [selectedDate]="respoIdentityExpireDate"
+                                                                    (OnDateSelect)="getRespoIdentityExpireDate($event)">
+                                                                </app-full-date>
+                                                                <div class="validation alert-danger"
+                                                                    *ngIf="isRespoIdentityExpireDateGreater">
+                                                                    <i class="fa fa-close"></i>
+                                                                    {{'validation-messages.max-expire-date'|translate}}
+                                                                </div>
+                                                                <div class="validation alert-success"
+                                                                    *ngIf="isRespoIdentityExpireDateGreater==false && onSelectRespoIdentityExpireDate==true">
+                                                                    <i class="fa fa-check"></i>
+                                                                    {{'validation-messages.valid-date'|translate}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="respoIdentityPlace"
+                                                                class="label-name">{{'page-form.identity-issuer'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="respoIdentityPlace"
+                                                                    formControlName="respoIdentityPlace">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="respoJob"
+                                                                class="label-name">{{'page-form.job-title'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control" name="respoJob"
+                                                                    formControlName="respoJob">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <li [ngbNavItem]="2" *ngIf="ownerForm.value.isAddPersonAuthorized">
+                                            <a ngbNavLink>{{'page-form.details-person-authorized-sign'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-3">
+                                                        <div class=" ">
+                                                            <label for="signNameAr"
+                                                                class="label-name">{{'page-form.name-arabic'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="signNameAr" formControlName="signNameAr">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="signNameEn"
+                                                                class="label-name">{{'page-form.name-latin'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="signNameEn" formControlName="signNameEn">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="signMobile"
+                                                                class="label-name">{{'page-form.phone-number'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="signMobile" formControlName="signMobile">
+                                                                <div *ngIf="f['signMobile'].touched && f['signMobile'].invalid"
+                                                                    class=" alert-danger validtion">
+                                                                    <div
+                                                                        *ngIf="f['signMobile'].errors && f['signMobile'].invalid">
+                                                                        <i class="fa fa-close "></i>
+                                                                        {{'validation-messages.invalid-mobile'|translate}}
+                                                                    </div>
+                                                                    <div
+                                                                        *ngIf="f['signMobile'].errors && f['signMobile'].errors['pattern']">
+                                                                        <i class="fa fa-close "></i>
+                                                                        {{'validation-messages.phone-pattern'|translate}}
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="validation alert-success"
+                                                                    *ngIf="f['signMobile'].touched && f['signMobile'].valid  && f['signMobile'].dirty">
+                                                                    <i class="fa fa-check"></i>
+                                                                    {{'validation-messages.valid-mobile'|translate}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="signatureNationalId"
+                                                                class="label-name">{{'page-form.identity-number'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="signatureNationalId"
+                                                                    formControlName="signatureNationalId">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for=""
+                                                                class="label-name">{{'page-form.identity-date'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <app-full-date name="signIdentityDate"
+                                                                    [selectedDate]="signIdentityDate"
+                                                                    (OnDateSelect)="getSignIdentityDate($event)">
+                                                                </app-full-date>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for=""
+                                                                class="label-name">{{'page-form.expiration-date-of-identity'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <app-full-date name="signatureIdentityEnd"
+                                                                    [selectedDate]="signatureIdentityEnd"
+                                                                    (OnDateSelect)="getSignatureIdentityEnd($event)">
+                                                                </app-full-date>
+                                                                <div class="validation alert-danger"
+                                                                    *ngIf="isSignatureIdentityEndGreater">
+                                                                    <i class="fa fa-close"></i>
+                                                                    {{'validation-messages.max-expire-date'|translate}}
+                                                                </div>
+                                                                <div class="validation alert-success"
+                                                                    *ngIf="isSignatureIdentityEndGreater==false && onSelectSignatureIdentityEnd==true">
+                                                                    <i class="fa fa-check"></i>
+                                                                    {{'validation-messages.valid-date'|translate}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="signatureIdentityPlace"
+                                                                class="label-name">{{'page-form.identity-issuer'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="signatureIdentityPlace"
+                                                                    formControlName="signatureIdentityPlace">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="delegationType"
+                                                                class="label-name">{{'page-form.delegation-type'|translate}}
+                                                            </label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select class="custom"
+                                                                    formControlName="delegationType"
+                                                                    [items]="delegationTypes" bindLabel="name"
+                                                                    bindValue="id" style="width:100%"></ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li> -->
+                                        
+                                        <!--       Integration Setting                -->
+                                        
+                                        <li ngbNavItem [hidden]="generalAccountIntegration && generalAccountIntegration.accIntegrationType !=0">
+                                            <a ngbNavLink>{{'general.integration-setttings'|translate}}</a>
+                                            <ng-template ngbNavContent>
+
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-3 ">
+                                                        <div class="">
+                                                            <label for="owner-integration-type"
+                                                                class="label-name">{{'general.integration-type'|translate}}</label>
+
+                                                            <div class="input-group  popup">
+                                                                <ng-select class="custom" [items]="accIntegrationTypes"
+                                                                [(ngModel)]="ownerIntegrationSetting.accIntegrationType" [ngModelOptions]="{standalone:true}"
+                                                                    bindLabel="name" bindValue="id" style="width:100%">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="owner-connection-type"
+                                                                class="label-name">{{'general.connection-type'|translate}}</label>
+
+                                                            <div class="input-group  popup">
+                                                                <ng-select class="custom" [items]="connectionTypes" [(ngModel)]="ownerIntegrationSetting.authType" [ngModelOptions]="{standalone:true}"
+                                                                    bindLabel="name" bindValue="id" style="width:100%">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="serverName"
+                                                                class="label-name">{{'general.serverName'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="serverName" [(ngModel)]="ownerIntegrationSetting.serverName"
+                                                                    [ngModelOptions]="{standalone:true}">
+
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="dbName"
+                                                                class="label-name">{{'general.dbName'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="dbName" [(ngModel)]="ownerIntegrationSetting.dbName"
+                                                                    [ngModelOptions]="{standalone:true}">
+
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="userName"
+                                                                class="label-name">{{'general.userName'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control" name="userName" [(ngModel)]="ownerIntegrationSetting.sqlUserName"
+                                                                [ngModelOptions]="{standalone:true}">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="userPassword"
+                                                                class="label-name">{{'general.sqlPassword'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <input type="password" class="form-control"
+                                                                    name="sqlPassword" [(ngModel)]="ownerIntegrationSetting.sqlPassword" [ngModelOptions]="{standalone:true}">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="" style="padding-top: 14px;">
+                                                            <button
+                                                                class="btn btn-success" (click)="checkConnection()">{{'general.check-connection'|translate}}</button> 
+                                                                &nbsp; <button
+                                                                class="btn btn-info" (click)="syncAccountData()">{{'general.sync-accounts'|translate}}</button>
+                                                        </div>
+                                                        
+
+                                                    </div>
+                                                </div>
+
+                                            </ng-template>
+                                        </li>
+                                        <li [ngbNavItem]="3" >
+                                            <a ngbNavLink>{{'general.default-accounts'|translate}}</a>
+                                            <ng-template ngbNavContent>
+
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-3 ">
+                                                        <div class="">
+                                                            <label for="owner-account"
+                                                                class="label-name">{{'general.owner-account'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="ownerAccountId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let account of ownerAccounts"
+                                                                        [value]="account.id">
+                                                                        {{lang=='ar'?
+                                                                        account.accArName:account.accEnName}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="insurance-account"
+                                                                class="label-name">{{'general.insurance-account'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="insuranceAccountId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let account of insuranceAccounts"
+                                                                        [value]="account.id">
+                                                                        {{lang=='ar'?
+                                                                        account.accArName:account.accEnName}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="tax-account"
+                                                                class="label-name">{{'general.tax-account'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="taxAccountId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let account of taxAccounts"
+                                                                        [value]="account.id">
+                                                                        {{lang=='ar'?
+                                                                        account.accArName:account.accEnName}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="services-account"
+                                                                class="label-name">{{'general.services-account'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="serviceAccountId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let account of serviceAccounts"
+                                                                        [value]="account.id">
+                                                                        {{lang=='ar'?
+                                                                        account.accArName:account.accEnName}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="deferred-account"
+                                                                class="label-name">{{'general.deferred-revenue-account'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="deferredRevenueAccountId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let account of deferredAccounts"
+                                                                        [value]="account.id">
+                                                                        {{lang=='ar'?
+                                                                        account.accArName:account.accEnName}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="tenants-account"
+                                                                class="label-name">{{'general.tenants-account'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="clientAccountId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let account of clientAccounts"
+                                                                        [value]="account.id">
+                                                                        {{lang=='ar'?
+                                                                        account.accArName:account.accEnName}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </ng-template>
+                                        </li>
+                                        
+                                       
+
+                                        <li ngbNavItem>
+                                            <a ngbNavLink>{{'page-form.address-information'|translate}}</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="row">
+                                                    <div class="col gap-2 grid grid-cols-3">
+                                                        <div class="">
+                                                            <label for="country"
+                                                                class="label-name">{{'page-form.country'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="addressCountryId"
+                                                                    style="width:100%"
+                                                                    (change)="onChangeCountry(ownerForm.value.addressCountryId)">
+                                                                    <ng-option *ngFor="let country of countries"
+                                                                        [value]="country.id">
+                                                                        {{lang=='ar'?
+                                                                        country.countryNameAr:country.countryNameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="region"
+                                                                class="label-name">{{'page-form.region'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="addressRegionId"
+                                                                    style="width:100%"
+                                                                    (change)="onChangeRegion(ownerForm.value.addressRegionId)">
+                                                                    <ng-option *ngFor="let region of regions"
+                                                                        [value]="region.id">{{lang=='ar'?
+                                                                        region.regionNameAr:region.regionNameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="city"
+                                                                class="label-name">{{'page-form.city'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="addressCityId"
+                                                                    style="width:100%"
+                                                                    (change)="onChangeCity(ownerForm.value.addressCityId)">
+                                                                    <ng-option *ngFor="let city of cities"
+                                                                        [value]="city.id">{{lang=='ar'?
+                                                                        city.cityNameAr:city.cityNameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="district"
+                                                                class="label-name">{{'page-form.district'|translate}}</label>
+                                                            <div class="input-group  popup">
+                                                                <ng-select formControlName="addressDistrictId"
+                                                                    style="width:100%">
+                                                                    <ng-option *ngFor="let district of districts"
+                                                                        [value]="district.id">
+                                                                        {{lang=='ar'?district.districtNameAr:district.districtNameEn}}
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="addressBlockNumber"
+                                                                class="label-name">{{'page-form.address-block-number'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="addressBlockNumber"
+                                                                    formControlName="addressBlockNumber">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="addressApartmentNumber"
+                                                                class="label-name">{{'page-form.address-apartment-number'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="addressApartmentNumber"
+                                                                    formControlName="addressApartmentNumber">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="addressPostalCode"
+                                                                class="label-name">{{'page-form.address-postal-code'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="addressPostalCode"
+                                                                    formControlName="addressPostalCode">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="addressAdditionalCODE"
+                                                                class="label-name">{{'page-form.address-additional-code'|translate}}</label>
+                                                            <div class="form-group input-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="addressAdditionalCODE"
+                                                                    formControlName="addressAdditionalCODE">
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="address"
+                                                                class="label-name">{{'page-form.address-details'|translate}}
+                                                            </label>
+                                                            <div class="form-group input-group">
+                                                                <textarea class="form-control" name="address"
+                                                                    formControlName="address">
+                                                                                                                                                                                                                                                                  </textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        
+                                    </nav>
+                                    <div [ngbNavOutlet]="nav" class=""></div>
+                                    <!-- end tabs -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

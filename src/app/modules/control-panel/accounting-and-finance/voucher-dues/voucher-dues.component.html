@@ -1,0 +1,282 @@
+<!-- <section class=" ">
+  <div class="container">
+      <app-tabulator [idColName]="'id'" [childRowData]="rentContractDues" [parentColName]="'groupId'" [divId]="'RentContractDues'" [columnSettings]="columnNames" [componentName]="'rentContractDues'"
+       [showExport]="false"    [direction]="direction" [sortByList]="sortByCols" [groupByList]="groupByCols" [panelId]="panelId" [searchFilters]="searchFilters" (onSearchTextChange)="onSearchRentContractDuesTextChange($event)" [groupType]="1" [path]="'RentContractDues'"></app-tabulator>
+  </div>
+</section> -->
+
+<div class="table-responsive vvvv">
+  <table class="table table-bordered text-center ">
+    <thead>
+      <th style="min-width: 50px !important;">#</th>
+      <th>{{'voucher-dues.contract-setting'|translate}}</th>
+      <th style="min-width: 100px !important;">{{'page-form.contract-number'|translate}}</th>
+      <th>{{'general.due-type'|translate}}</th>
+      <th>{{'voucher-dues.due-amount'|translate}}</th>
+      <th>{{'voucher-dues.due-initial-paid'|translate}}</th>
+      <th>{{'voucher-dues.due-recieved'|translate}}</th>
+      <th>{{'voucher-dues.due-paid'|translate}}</th>
+      <th>{{'voucher-dues.due-added-value'|translate}}</th>
+      <th>{{'voucher-dues.due-discount-value'|translate}}</th>
+      <th>{{'voucher-dues.payment'|translate}}</th>
+      <th>{{'voucher-dues.remain'|translate}}</th>
+      <th>{{'voucher-dues.notes'|translate}}</th>
+    </thead>
+    <!-- <tr *ngIf="voucherRentDuesDetails.length>0">
+      <td class="font-weight-bold" colspan="8">{{'voucher-dues.rent-contracts-dues'|translate}}</td>
+    </tr> -->
+     <tr *ngFor="let item of voucherRentDuesDetails; let i= index;">
+      <td style="min-width: 50px !important;">
+        {{i+1}}
+      </td>
+      <td *ngIf="lang=='en'">
+        {{item.contractEnName}}
+      </td>
+      <td *ngIf="lang=='ar'">
+        {{item.contractArName}}
+      </td>
+      <td style="min-width: 100px !important;">
+        {{item.contractCode}}
+      </td>
+      <td *ngIf="lang=='en'">
+        {{item.dueNameEn}}
+      </td>
+      <td *ngIf="lang=='ar'">
+        {{item.dueNameAr}}
+      </td>
+      <td>
+        
+        {{setDecimalNumber(item.dueAmount)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.paid)}}
+
+        
+      </td>
+      <td>
+        {{setDecimalNumber(item.recieveVoucherAmount)}}
+        
+      </td>
+      
+      <td>
+        {{setDecimalNumber(item.payVoucherAmount)}}
+
+        
+      </td>
+      <td>
+        {{setDecimalNumber(item.debitNoteVoucherAmount)}}
+
+        
+      </td>
+      <td>
+        {{setDecimalNumber(item.creditNoteVoucherAmount)}}
+
+        
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="voucherRentDuesDetails[i].amount" (change)="onAmountchange(i)">
+      </td>
+      <td>
+        {{ 
+          getRemain(i)
+        }}
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="voucherRentDuesDetails[i].notes" (change)="prepareVoucherDues();">
+      </td>
+
+    </tr> 
+    <!-- <tr *ngIf="salesBuyContractDues.length>0 && this.contractKindId==2">
+      <td class="font-weight-bold" colspan="8"> {{'voucher-dues.sales-contracts-dues'|translate}}</td>
+    </tr>
+    <tr *ngIf="salesBuyContractDues.length>0 && this.contractKindId==3">
+      <td class="font-weight-bold" colspan="8">{{'voucher-dues.buy-contracts-dues'|translate}}</td>
+    </tr> -->
+
+    <!-- <tr *ngFor="let item of pagedSalesBuyContractsItems; let i= index;">
+      <td>
+        {{i+1}}
+      </td>
+      <td *ngIf="lang=='en'">
+        {{item.contractSettingNameEn}}
+      </td>
+      <td *ngIf="lang=='ar'">
+        {{item.contractSettingNameAr}}
+      </td>
+      <td>
+        {{item.contractNumber}}
+      </td>
+      <td *ngIf="lang=='en'">
+        {{item.dueTypeNameEn}}
+      </td>
+      <td *ngIf="lang=='ar'">
+        {{item.dueTypeNameAr}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.dueAmount)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.received)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.paid)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.debitNote)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.creditNote)}}
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="voucherRentDuesDetails[i].amount" (ngModelChange)="onAmountchange()">
+      </td>
+      <td>
+        {{setDecimalNumber(item.dueAmount -item.received + item.paid + item.debitNote - item.creditNote)}}
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="voucherRentDuesDetails[i].notes">
+      </td>
+
+    </tr> -->
+
+    <!-- <tr *ngIf="maintenanceContractDues.length>0">
+      <td class="font-weight-bold" colspan="8">{{'voucher-dues.maintenance-contracts-dues'|translate}}</td>
+    </tr> -->
+
+    <!-- <tr *ngFor="let item of pagedMaintenanceContractsItems; let i= index;">
+
+      <td>
+        {{i+1}}
+      </td>
+      <td *ngIf="lang=='en'">
+        {{item.contractSettingNameEn}}
+      </td>
+      <td *ngIf="lang=='ar'">
+        {{item.contractSettingNameAr}}
+      </td>
+      <td>
+        {{item.contractId}}
+      </td>
+      <td *ngIf="lang=='en'">
+        {{item.dueTypeNameEn}}
+      </td>
+      <td *ngIf="lang=='ar'">
+        {{item.dueTypeNameAr}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.dueAmount)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.received)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.paid)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.debitNote)}}
+      </td>
+      <td>
+        {{setDecimalNumber(item.creditNote)}}
+      </td>
+
+
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="voucherDues[i].amount" (ngModelChange)="onAmountchange()">
+      </td>
+      <td>
+        {{setDecimalNumber(item.dueAmount -item.received + item.paid + item.debitNote - item.creditNote)}}
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="voucherDues[i].notes">
+      </td>
+
+    </tr> -->
+
+
+  </table>
+  <!-- Pagination -->
+  <!-- class="pagination is-right" role="navigation" aria-label="pagination" -->
+  <!-- <nav *ngIf="voucherRentDuesDetails.length>0" class="pagination-voucher">
+
+    <a class="pagination-previous" (click)="setPage(1)" [class.disabled]="pagination.currentPage === 1">
+      {{'general.first'|translate}}
+    </a>
+    <a class="pagination-previous" (click)="setPage(pagination.currentPage - 1)"
+      [class.disabled]="pagination.currentPage === 1">
+      {{'general.previous'|translate}}
+    </a>
+    <a class="pagination-next" (click)="setPage(pagination.currentPage + 1)"
+      [class.disabled]="pagination.currentPage === pagination.totalPages">
+      {{'general.next'|translate}}
+    </a>
+    <a class="pagination-next" (click)="setPage(pagination.totalPages)"
+      [class.disabled]="pagination.currentPage === pagination.totalPages">
+      {{'general.last'|translate}}
+    </a>
+
+    <ul *ngIf="pagination.pages && pagination.pages.length" class="pagination-list">
+      <li *ngFor="let page of pagination.pages">
+        <a class="pagination-link" [class.is-current]="pagination.currentPage === page" aria-label="Goto page 1"
+          (click)="setPage(page)">{{ page }}</a>
+      </li>
+    </ul>
+
+  </nav> -->
+
+  <!-- <nav *ngIf="salesBuyContractDues.length>0" class="pagination-voucher">
+
+    <a class="pagination-previous" (click)="setSalesBuyContractsPage(1)"
+      [class.disabled]="pagination.currentPage === 1">
+      {{'general.first'|translate}}
+    </a>
+    <a class="pagination-previous" (click)="setSalesBuyContractsPage(pagination.currentPage - 1)"
+      [class.disabled]="pagination.currentPage === 1">
+      {{'general.previous'|translate}}
+    </a>
+    <a class="pagination-next" (click)="setSalesBuyContractsPage(pagination.currentPage + 1)"
+      [class.disabled]="pagination.currentPage === pagination.totalPages">
+      {{'general.next'|translate}}
+    </a>
+    <a class="pagination-next" (click)="setSalesBuyContractsPage(pagination.totalPages)"
+      [class.disabled]="pagination.currentPage === pagination.totalPages">
+      {{'general.last'|translate}}
+    </a>
+
+    <ul *ngIf="pagination.pages && pagination.pages.length" class="pagination-list">
+      <li *ngFor="let page of pagination.pages">
+        <a class="pagination-link" [class.is-current]="pagination.currentPage === page" aria-label="Goto page 1"
+          (click)="setSalesBuyContractsPage(page)">{{ page }}</a>
+      </li>
+    </ul>
+
+  </nav> -->
+
+  <!-- <nav *ngIf="maintenanceContractDues.length>0" class="pagination-voucher">
+
+    <a class="pagination-previous" (click)="setMaintenanceContractsPage(1)"
+      [class.disabled]="pagination.currentPage === 1">
+      {{'general.first'|translate}}
+    </a>
+    <a class="pagination-previous" (click)="setMaintenanceContractsPage(pagination.currentPage - 1)"
+      [class.disabled]="pagination.currentPage === 1">
+      {{'general.previous'|translate}}
+    </a>
+    <a class="pagination-next" (click)="setMaintenanceContractsPage(pagination.currentPage + 1)"
+      [class.disabled]="pagination.currentPage === pagination.totalPages">
+      {{'general.next'|translate}}
+    </a>
+    <a class="pagination-next" (click)="setMaintenanceContractsPage(pagination.totalPages)"
+      [class.disabled]="pagination.currentPage === pagination.totalPages">
+      {{'general.last'|translate}}
+    </a>
+
+    <ul *ngIf="pagination.pages && pagination.pages.length" class="pagination-list">
+      <li *ngFor="let page of pagination.pages">
+        <a class="pagination-link" [class.is-current]="pagination.currentPage === page" aria-label="Goto page 1"
+          (click)="setMaintenanceContractsPage(page)">{{ page }}</a>
+      </li>
+    </ul>
+
+  </nav> -->
+
+</div>

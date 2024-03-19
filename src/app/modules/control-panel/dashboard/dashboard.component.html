@@ -1,0 +1,336 @@
+<section class="inner-page-wrapper">
+  <div [class.headerSubAr]="lang=='ar'" class="header-sub ">
+    <span class="header-name header-name-container">{{'sidebar.dashboard'|translate}}</span>
+  </div>
+  <div class="container-fluid">
+    <div class="d-flex flex-wrap gap-2 dashboard">
+      <app-metrics></app-metrics>
+
+      <app-graph class="graph-container"></app-graph>
+
+      <app-tenants-notification [showExpiryOfPersonIdentity]="showExpiryOfPersonIdentity"
+        [notificationPeriodForExpiryOfPersonIdentity]="notificationPeriodForExpiryOfPersonIdentity"
+        class="tenants-notification"></app-tenants-notification>
+
+      <app-price-offers-notification [showExpiryPriceOffersOfRent]="showExpiryPriceOffersOfRent"
+        [notificationPeriodForExpiryPriceOffersOfRent]="notificationPeriodForExpiryPriceOffersOfRent"
+        [showExpiryPriceOffersOfSales]="showExpiryPriceOffersOfSales"
+        [notificationPeriodForExpiryPriceOffersOfSales]="notificationPeriodForExpiryPriceOffersOfSales"
+        class="offers-notification"></app-price-offers-notification>
+
+      <app-units-notification [showUnderContractRentalUnits]="showUnderContractRentalUnits"
+        class="units-notification"></app-units-notification>
+
+      <app-rent-contracts-notification [isEndRentContractNotification]="isEndRentContractNotification"
+        [showGenerateEntryNotificationForRentContracts]="showGenerateEntryNotificationForRentContracts"
+        [endRentContractNotificationPeriod]="endRentContractNotificationPeriod"
+        [showDailyDuesForRentContracts]="showDailyDuesForRentContracts"
+        [notificationPeriodForRentContracts]="notificationPeriodForRentContracts"
+        [generateDetailsDueEntryForRentContracts]="generateDetailsDueEntryForRentContracts"
+        class="units-notification"></app-rent-contracts-notification>
+
+      <app-sales-buy-contracts-notification [showDailyDuesForSalesContracts]="showDailyDuesForSalesContracts"
+        [showDailyDuesForBuyContracts]="showDailyDuesForBuyContracts"
+        [showGenerateEntryNotificationForSalesContracts]="showGenerateEntryNotificationForSalesContracts"
+        [showGenerateEntryNotificationForBuyContracts]="showGenerateEntryNotificationForBuyContracts"
+        [notificationPeriodForSalesContracts]="notificationPeriodForSalesContracts"
+        [notificationPeriodForBuyContracts]="notificationPeriodForBuyContracts"
+        class="units-notification"></app-sales-buy-contracts-notification>
+
+      <app-maintenance-contracts-notification
+        [showGenerateEntryNotificationForMaintenanceContracts]="showGenerateEntryNotificationForMaintenanceContracts"
+        [showDailyDuesForMaintenanceContracts]="showDailyDuesForMaintenanceContracts"
+        [notificationPeriodForMaintenanceContracts]="notificationPeriodForMaintenanceContracts"
+        class="units-notification"></app-maintenance-contracts-notification>
+
+      <!-- <div class="row">
+      <div class="col-md-12">
+        <div class="all">
+          <div class="tab-table p-0">
+            <div>
+              <ul class="reserv">
+                <li class="reserv-head">Reservations</li>
+                <li class="view" data-blast="color">view all</li>
+              </ul>
+            </div>
+            <div>
+              <nav class="nav-mob">
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link table-tab active btn-primary text-white" id="nav-home-tab"
+                    data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+                    aria-selected="true">Rental</a>
+                  <a class="nav-item nav-link btn-primary text-white" id="nav-profile-tab" data-toggle="tab"
+                    href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Purchase</a>
+                </div>
+              </nav>
+            </div>
+
+          </div>
+
+          <section id="tabs" class="project-tab">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="scrollable scroll-tab">
+                  <div>
+                    <table class="table">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">The name of the tenant</th>
+                          <th scope="col">Unit name</th>
+                          <th scope="col">Booking Date</th>
+                          <th scope="col">Payment Method</th>
+                          <th scope="col">Duration</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="names-table">
+                          <td scope="row">1</td>
+                          <td>John Doe</td>
+                          <td>Office 301</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>1 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">2</td>
+                          <td>Emmalee Mclain</td>
+                          <td>Office 308</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>1 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">3</td>
+                          <td>Gracelyn Mason</td>
+                          <td>Office 501</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>1 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">4</td>
+                          <td>Ramon Bateman</td>
+                          <td>Office 322</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>1 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">5</td>
+                          <td>Hector Lovett </td>
+                          <td>Office 413</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>1 Year</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="scrollable scroll-tab">
+                  <div>
+                    <table class="table" class="collapse show" id="collapseExample">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">The name of the tenant</th>
+                          <th scope="col">Unit name</th>
+                          <th scope="col">Booking Date</th>
+                          <th scope="col">Selling Price</th>
+                          <th scope="col">Payment Method</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="names-table">
+                          <td scope="row">1</td>
+                          <td>John Doe</td>
+                          <td>Office 301</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>10 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">2</td>
+                          <td>Emmalee Mclain</td>
+                          <td>Office 308</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>10 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">3</td>
+                          <td>Gracelyn Mason</td>
+                          <td>Office 501</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>10 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">4</td>
+                          <td>Ramon Bateman</td>
+                          <td>Office 322</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>10 Year</td>
+                        </tr>
+                        <tr class="names-table">
+                          <td scope="row">5</td>
+                          <td>Hector Lovett </td>
+                          <td>Office 413</td>
+                          <td>28 Feb 2020</td>
+                          <td>Online</td>
+                          <td>10 Year</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div> -->
+      <!-- <div class="row mt-5">
+      <div class="col-md-12">
+        <div class="reserv-tables">
+          <ul class="reserv">
+            <li class="reserv-head">Daily Benefits</li>
+            <li class="view" data-blast="color">view all</li>
+          </ul>
+          <div class="daily-benefit">
+            <div class="scrollable  scroll-tab">
+              <div>
+                <table class="table daily-table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Tax Rate</th>
+                      <th scope="col">The Tax Amount</th>
+                      <th scope="col">Amount After Tax</th>
+                      <th scope="col">Real Debtor</th>
+                      <th scope="col">Discount Value</th>
+                      <th scope="col">Deserved Amount</th>
+                      <th scope="col">Due Date</th>
+                      <th scope="col">Paid Up</th>
+                      <th scope="col">Residual</th>
+                      <th scope="col">Unit Name</th>
+                      <th scope="col">Entitlement Clause</th>
+                      <th scope="col">Due Date</th>
+                      <th scope="col">Paid Up</th>
+                      <th scope="col">Residual</th>
+                      <th scope="col">Unit Name</th>
+                      <th scope="col">Entitlement Clause</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td scope="row">0.27</td>
+                      <td>5 %</td>
+                      <td>$ 25</td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 301</td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 301</td>
+                      <td>$ 25 </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">0.27</td>
+                      <td>5 %</td>
+                      <td>$ 25</td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 302</td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 301</td>
+                      <td>$ 25 </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">0.27</td>
+                      <td>5 %</td>
+                      <td>$ 25</td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 601</td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 301</td>
+                      <td>$ 25 </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">0.27</td>
+                      <td>5 %</td>
+                      <td>$ 25</td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 301</td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 301</td>
+                      <td>$ 25 </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">0.27</td>
+                      <td>5 %</td>
+                      <td>$ 25</td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 30</td>
+                      <td>$ 25 </td>
+                      <td>2020-08-25</td>
+                      <td>$ 25 </td>
+                      <td>0.27 </td>
+                      <td>Office 301</td>
+                      <td>$ 25 </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    </div>
+  </div>
+</section>
+<app-color-pallet></app-color-pallet>

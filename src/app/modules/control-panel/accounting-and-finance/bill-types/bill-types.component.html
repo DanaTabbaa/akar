@@ -1,0 +1,234 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}} ... </p>
+</ngx-spinner>
+
+<!-- Section  -->
+<section class="inner-page-wrapper inner-page-wrapper-building">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="billTypesForm" id="entryTypesForm" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+                  <h3>{{'bill-type.bill-types'|translate}}</h3>
+                  <div class="row">
+                    <div class="col gap-2 grid grid-cols-2">
+
+                      <div class=" ">
+                        <label for="contractArName" class="label-name">{{'bill-type.name'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="billTypeNameAr"
+                            formControlName="billTypeNameAr">
+                          <div
+                            *ngIf="(f['billTypeNameAr'].touched || f['billTypeNameAr'].dirty ) && f['billTypeNameAr'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['billTypeNameAr'].errors && f['billTypeNameAr'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class=" ">
+                        <label for="entryNameEn" class="label-name">{{'bill-type.latinName'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="form-group input-group">
+                          <input type="text" class="form-control icon-user" name="billTypeNameEn"
+                            formControlName="billTypeNameEn">
+                          <div
+                            *ngIf="(f['billTypeNameEn'].touched || f['billTypeNameEn'].dirty ) && f['billTypeNameEn'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['billTypeNameEn'].errors && f['billTypeNameEn'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+
+
+                        </div>
+                      </div>
+
+                      <div class="">
+                        <label for="billTypeKindId" class="label-name">{{'bill-type.bill-kind'|translate}} <span
+                            class="text-danger">*</span></label>
+                        <div class="input-group  popup">
+                          <ng-select class="custom" [(ngModel)]="billTypeKindId" (change)="getFilterContractSettings()"
+                            formControlName="billTypeKindId" [items]="billKinds"
+                            [bindLabel]="lang=='ar'?'nameAr':'nameEn'" bindValue="id" style="width:100%">
+                          </ng-select>
+
+                          <div
+                            *ngIf="(f['billTypeKindId'].touched || f['billTypeKindId'].dirty ) && f['billTypeKindId'].invalid"
+                            class="alert alert-danger">
+                            <i class="fa fa-close "></i>
+                            <span *ngIf="f['billTypeKindId'].errors && f['billTypeKindId'].errors['required']">
+                              {{'general.required'|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <form>
+                      <hr>
+                      <div class="wrapper-title">
+                        <h3> {{'entry-type.settings'|translate}} </h3>
+                      </div>
+                      <!-- <button type="button"
+                        class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                        aria-controls="collapseExample6">
+                        {{'entry-type.settings'|translate}}
+                      </button> -->
+                      <!-- //#collapse="ngbCollapse" [(ngbCollapse)]="collapse1" -->
+                      <div>
+                        <div class="col gap-2 grid grid-cols-2  py-2 ">
+
+                          <div class="d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center gap-1 popup">
+
+                              <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="isGenerateEntry"
+                                name="isGenerateEntry" #generateEntry>
+                              <label for="isGenerateEntryByDue" class="label-name m-0">
+                                {{'entry-type.generate-entry'|translate}}</label>
+
+
+                            </div>
+                          </div>
+
+                          <!-- <br> -->
+                          <div class="d-flex align-items-center" *ngShow="false">
+                            <div class="form-group d-flex align-items-center gap-1 popup input-group ">
+
+                              <input type="checkbox" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="isRelatedToContract" name="isRelatedToContract" #relatedToContract>
+                              <label for="relateToContract" class="label-name m-0">
+                                {{'entry-type.relate-to-contract'|translate}}</label>
+
+
+                            </div>
+
+                          </div>
+                          <!--
+                                              <div class="">
+                                                <label for="contractTypeId" class="label-name">
+                                                  {{'entry-type.contract-type'|translate}}
+                                                  <span class="text-danger">*</span></label>
+                                                <div class="input-group  popup">
+                                                  <ng-select class="custom" [items]="contractSettings" [bindLabel]="'contractArName'"
+                                                    [multiple]="true" [(ngModel)]="selectedContractTypes"
+                                                    [ngModelOptions]="{standalone:true}" style="width:100%">
+                                                  </ng-select>
+
+
+
+                                                </div>
+                                              </div> -->
+
+                          <div class="">
+                            <label for="contractTypeId" class="label-name">
+                              {{'entry-type.contract-type'|translate}}
+                              <span class="text-danger">*</span></label>
+                            <div class="input-group  popup">
+                              <p-multiSelect [options]="filterContractSettings" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="selectedContractTypes" [virtualScroll]="true"
+                                optionLabel="{{lang=='ar'?'contractArName':'contractEnName'}}" id="contractTypes"
+                                name="contractTypeIds" class="w-100" defaultLabel="{{'general.select'|translate}}">
+                              </p-multiSelect>
+                            </div>
+                          </div>
+
+
+
+
+
+                          <!-- <div class="d-flex align-items-center">
+                                                                            <div
+                                                                                class="form-group d-flex align-items-center gap-1 popup input-group ">
+
+                                                                                <input type="checkbox">
+                                                                                <label for="showValueDistribution"
+                                                                                    class="label-name m-0">Show Value Distribution</label>
+
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div
+                                                                                class="form-group d-flex align-items-center gap-1 popup input-group ">
+
+                                                                                <input type="checkbox">
+                                                                                <label for="distributeValueOnDues"
+                                                                                    class="label-name m-0">Distribute Value on Dues</label>
+
+
+                                                                            </div>
+
+                                                                        </div> -->
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                  <hr>
+                  <div class="page-permissions">
+                    <div class="wrapper-title">
+                      <h3> {{'permissions.billTypeUserPermissions'|translate}}</h3>
+                    </div>
+                    <!-- <hr>
+                    <button type="button"
+                      class="btn-collapse btn btn-block btn-primary justify-content-start text-start"
+                      aria-controls="collapseExample6">
+
+                    </button>
+                    <hr> -->
+                    <!-- //#collapse="ngbCollapse" [(ngbCollapse)]="collapse1" -->
+                    <div class="row">
+                      <div class="col-md-3 col-6 ">
+                        <div *ngFor="let user of subUsers; let i= index;" class="userscontract">
+                          <div>
+                            <input type="checkbox" [ngModelOptions]="{standalone: true}"
+                              [(ngModel)]="user.isUserChecked" (change)="onCheckUserChange($event,user.userId)"
+                              [attr.checked]="user.isUserChecked? 'checked' : null" id="{{user.userId}}_checkbox">
+
+                            <label for="{{user.userName}}"></label>
+                            <span> {{user.userName|lowercase}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-9 col-6">
+                        <div *ngFor="let userItem of subUsersList; let i= index;" class="permission-users">
+                          <div class="d-inline-flex px-2"
+                            *ngFor=" let permission of userItem?.permissionJson | keyvalue">
+                            <input type="checkbox" [attr.checked]="permission.value ? 'checked' : null"
+                              (change)="onCheckboxChange($event,userItem?.permissionJson,permission.key,userItem.userId)"
+                              id="{{permission+'_'+userItem.userId}}" value="{{permission.value}}">
+                            <label for="{{permission.key}}"></label>
+                            <span class="mx-1"> {{('pagePermission.'+permission.key)|translate}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                    </div>
+
+
+
+
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- hgfd -->

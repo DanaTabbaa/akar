@@ -1,0 +1,197 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white ;font-size: 20px;"> {{'general.loading'|translate}}... </p>
+</ngx-spinner>
+
+<section class="inner-page-wrapper inner-page-wrapper-building">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card m-0 mb-5">
+          <div class="card-body">
+            <form [formGroup]="purchaseOrderForm" id="purchaseOrderFormSubmit" class="tabs-form">
+              <div class="main-customer">
+                <div class="wrapper-title">
+
+                  <!-- start tabs -->
+                  <nav ngbNav #nav="ngbNav" class="nav-tabs mt-3">
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'purchase-orders.purchase-order-info' | translate}}</a>
+                      <ng-template ngbNavContent>
+                        <div class="row">
+                          <div class="col gap-2 grid grid-cols-3 ">
+                            <div class=" " *ngIf="showPurchaseOrder">
+                              <label for="id" class="label-name">
+                                {{'general.order-id'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="id" formControlName="id">
+
+                              </div>
+                            </div>
+
+                            <div class=" ">
+                              <label for="date" class="label-name">{{'general.order-date'|translate}}
+                              </label>
+                              <div class="form-group">
+                                <app-full-date name="date" [selectedDate]="date" (OnDateSelect)="getOrderDate($event)">
+                                </app-full-date>
+                              </div>
+                            </div>
+
+                            <div class="">
+                              <label for="ownerId" class="label-name">{{'general.owner'|translate}}
+                                <span class="text-danger">*</span>
+                              </label>
+                              <div class="input-group  popup">
+                                <ng-select formControlName="ownerId" style="width:100%">
+                                  <ng-option *ngFor="let owner of owners" [value]="owner.id">
+                                    {{lang=='ar'?owner.nameAr:owner.nameEn}}
+                                  </ng-option>
+                                </ng-select>
+                                <div *ngIf="(pr['ownerId'].touched || pr['ownerId'].dirty ) && pr['ownerId'].invalid"
+                                  class="alert alert-danger">
+                                  <i class="fa fa-close "></i>
+                                  <span *ngIf="pr['ownerId'].errors && pr['ownerId'].errors['required']">
+                                    {{'general.required'|translate}}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+
+                    <li ngbNavItem>
+                      <a ngbNavLink>{{'purchase-orders.purchase-order-details'|translate}}</a>
+                      <ng-template ngbNavContent>
+                        <!-- <div class="row"> -->
+                        <form id="purchaseOrdersDetailsFormSubmit">
+                          <div class="table-responsive">
+                            <table class="table table-bordered table-responsive0 text-center"
+                              style="overflow-y: scroll !important;height: 200px;">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th scope="col" style="width: 150px;">
+                                    {{'general.product-category'|translate}}<span class="text-danger">*</span></th>
+
+                                  <th scope="col" style="width: 150px;">
+                                    {{'general.product'|translate}} <span class="text-danger">*</span></th>
+                                  <th scope="col">
+                                    {{'general.quantity'|translate}}<span class="text-danger">*</span>
+                                  </th>
+
+                                  <th scope="col" colspan="1">
+                                    {{'general.actions'|translate}}
+                                  </th>
+                                </tr>
+                              </thead>
+
+                              <tr *ngFor="let item of purchaseOrdersDetails; let i= index;">
+                                <td>
+                                  {{i+1}}
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                    [ngModelOptions]="{standalone: true}" placeholder="{{'general.search'|translate}}"
+                                    (keydown.Enter)="openProductCategorySearchDialog(i)"
+                                    (ngModelChange)="onChangeProductCatgeory(purchaseOrdersDetails[i].productCategoryId)"
+                                    [(ngModel)]="purchaseOrdersDetails[i].productCategoryNameAr">
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                    [ngModelOptions]="{standalone: true}" placeholder="{{'general.search'|translate}}"
+                                    (keydown.Enter)="openProductSearchDialog(i)"
+                                    [(ngModel)]="purchaseOrdersDetails[i].productNameAr">
+                                </td>
+                                <td>
+                                  <div class="form-group input-group">
+
+                                    <input type="number" step="0.01" [ngModelOptions]="{standalone: true}"
+                                      class="form-control" name="quantity"
+                                      [(ngModel)]="purchaseOrdersDetails[i].quantity">
+
+
+                                  </div>
+                                </td>
+
+
+
+                                <td>
+                                  <button class="btn btn-danger p-3" (click)="deleteItem(i)" type="button">
+
+                                    <i class="las la-trash-alt"></i>
+                                  </button>
+                                  <button class="btn btn-danger p-3" (click)="editItem(item)" type="button">
+
+                                    <i class="fas fa-edit"></i>
+                                  </button>
+                                </td>
+
+
+
+
+
+                              </tr>
+                              <tr>
+
+                                <td>{{purchaseOrdersDetails.length +1}}</td>
+                                <td>
+                                  <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                    [ngModelOptions]="{standalone: true}" placeholder="{{'general.search'|translate}}"
+                                    [(ngModel)]="selectedPurchaseOrdersDetails.productCategoryNameAr"
+                                    (change)="onChangeProductCatgeory()"
+                                    (keydown.Enter)="openProductCategorySearchDialog(-1)">
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" placeholder="{{'general.search'|translate}}"
+                                    [ngModelOptions]="{standalone: true}" placeholder="{{'general.search'|translate}}"
+                                    (keydown.Enter)="openProductSearchDialog(-1)"
+                                    [(ngModel)]="selectedPurchaseOrdersDetails.productNameAr">
+                                </td>
+                                <td>
+                                  <div class="form-group input-group">
+
+                                    <input type="number" step="0.01" class="form-control"
+                                      [ngModelOptions]="{standalone: true}" name="quantity"
+                                      [(ngModel)]="selectedPurchaseOrdersDetails.quantity">
+
+
+                                  </div>
+                                </td>
+                                <td>
+                                  <button class="btn btn-primary px-3" (click)="addProduct()" type="button">
+
+                                    <i class="las la-plus"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            </table>
+
+
+                          </div>
+
+
+                        </form>
+
+
+                        <!-- </div> -->
+                        <!-- </div> -->
+                      </ng-template>
+                    </li>
+
+
+
+                  </nav>
+                  <div [ngbNavOutlet]="nav" class=""></div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section  -->
